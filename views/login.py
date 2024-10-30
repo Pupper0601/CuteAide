@@ -37,6 +37,7 @@ class Ui_MainWindow(object):
 "	\n"
 "	\n"
 "	background-color: rgb(255, 255, 255);\n"
+"	border: 1px solid rbg(0,0,0);\n"
 "}")
         self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setSpacing(0)
@@ -50,9 +51,9 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
         self.widget_2.setSizePolicy(sizePolicy)
         self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
-        self.horizontalLayout_2.setSpacing(0)
+        self.horizontalLayout_2.setSpacing(1)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(1, 1, 1, 1)
         self.label = QLabel(self.widget_2)
         self.label.setObjectName(u"label")
         self.label.setStyleSheet(u"#label{\n"
