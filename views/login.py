@@ -34,7 +34,9 @@ class Ui_MainWindow(object):
         self.widget.setMaximumSize(QSize(600, 400))
         self.widget.setStyleSheet(u"#widget{\n"
 "	border-radius: 20px;\n"
-"backdrop-filter: blur(20px);\n"
+"	\n"
+"	\n"
+"	background-color: rgb(255, 255, 255);\n"
 "}")
         self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setSpacing(0)
@@ -159,8 +161,8 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setStyleSheet(u"#pushButton{\n"
 "	border: none;\n"
-"	font: 700 24pt \"Yuanti SC\";\n"
 "	letter-spacing: 3px;\n"
+"	font: 700 20pt \"\u65b0\u5b8b\u4f53\";\n"
 "\n"
 "}")
 
@@ -207,7 +209,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName(u"label_2")
         self.label_2.setStyleSheet(u"#label_2{\n"
 "	border: none;\n"
-"	font: 700 24pt \"Yuanti SC\";\n"
+"	font: 700 16pt \"Yuanti SC\";\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -221,13 +223,13 @@ class Ui_MainWindow(object):
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
         self.lineEdit.setSizePolicy(sizePolicy3)
-        self.lineEdit.setMinimumSize(QSize(186, 30))
+        self.lineEdit.setMinimumSize(QSize(186, 25))
         self.lineEdit.setMaximumSize(QSize(186, 16777215))
         self.lineEdit.setStyleSheet(u"QLineEdit{\n"
-"	font-size: 23px;\n"
-"	font: 13pt \"Yuanti SC\";\n"
+"	font-size: 14px;\n"
+"	font: 9pt \"Yuanti SC\";\n"
 "	background:rgba(253,253,253,1);\n"
-"	border:3px solid rgb(0, 0, 0);\n"
+"	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "	padding-left: 5px;\n"
 "	padding-right: 5px;\n"
@@ -267,7 +269,7 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setStyleSheet(u"#label_3{\n"
 "border: none;\n"
-"	font: 700 24pt \"Yuanti SC\";\n"
+"	font: 700 16pt \"Yuanti SC\";\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -276,13 +278,13 @@ class Ui_MainWindow(object):
 
         self.lineEdit_2 = QLineEdit(self.frame_8)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
-        self.lineEdit_2.setMinimumSize(QSize(186, 30))
+        self.lineEdit_2.setMinimumSize(QSize(186, 25))
         self.lineEdit_2.setMaximumSize(QSize(186, 16777215))
         self.lineEdit_2.setStyleSheet(u"QLineEdit{\n"
 "	font-size: 23px;\n"
-"	font: 13pt \"Yuanti SC\";\n"
+"	font: 9pt \"Yuanti SC\";\n"
 "	background:rgba(253,253,253,1);\n"
-"	border:3px solid rgb(0, 0, 0);\n"
+"	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "padding-left: 5px;\n"
 "	padding-right: 5px;\n"
@@ -310,9 +312,7 @@ class Ui_MainWindow(object):
         self.frame_11.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_11)
-#ifndef Q_OS_MAC
-        self.horizontalLayout_8.setSpacing(-1)
-#endif
+        self.horizontalLayout_8.setSpacing(6)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.horizontalLayout_8.setContentsMargins(12, 12, 12, 12)
         self.horizontalSpacer_13 = QSpacerItem(1, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -323,7 +323,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setStyleSheet(u"#label_5{\n"
 "border: none;\n"
-"	font: 700 24pt \"Yuanti SC\";\n"
+"	font: 700 16pt \"Yuanti SC\";\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -332,13 +332,13 @@ class Ui_MainWindow(object):
 
         self.lineEdit_3 = QLineEdit(self.frame_11)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
-        self.lineEdit_3.setMinimumSize(QSize(186, 30))
+        self.lineEdit_3.setMinimumSize(QSize(186, 25))
         self.lineEdit_3.setMaximumSize(QSize(186, 16777215))
         self.lineEdit_3.setStyleSheet(u"QLineEdit{\n"
 "	font-size: 23px;\n"
-"	font: 13pt \"Yuanti SC\";\n"
+"	font: 9pt \"Yuanti SC\";\n"
 "	background:rgba(253,253,253,1);\n"
-"	border:3px solid rgb(0, 0, 0);\n"
+"	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "padding-left: 5px;\n"
 "	padding-right: 5px;\n"
