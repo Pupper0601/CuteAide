@@ -410,7 +410,7 @@ QPushButton:pressed{
                 <property name="styleSheet">
                  <string notr="true">#label_2{
 	border: none;
-	font: 700 16pt &quot;Yuanti SC&quot;;
+	font: 700 16pt &quot;新宋体&quot;;
 	letter-spacing: 2px;
 
 }</string>
@@ -443,12 +443,13 @@ QPushButton:pressed{
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
 	font-size: 14px;
-	font: 9pt &quot;Yuanti SC&quot;;
+	font: 12pt &quot;Yuanti SC&quot;;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
 	padding-left: 5px;
 	padding-right: 5px;
+	letter-spacing: 2px;
 }
 
 QLineEdit:focus{
@@ -526,7 +527,7 @@ QLineEdit:focus{
                 <property name="styleSheet">
                  <string notr="true">#label_3{
 border: none;
-	font: 700 16pt &quot;Yuanti SC&quot;;
+	font: 700 16pt &quot;新宋体&quot;;
 	letter-spacing: 2px;
 
 }</string>
@@ -553,17 +554,21 @@ border: none;
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
 	font-size: 23px;
-	font: 9pt &quot;Yuanti SC&quot;;
+	font: 12pt &quot;Yuanti SC&quot;;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
 padding-left: 5px;
 	padding-right: 5px;
+letter-spacing: 3px;
 }
 
 QLineEdit:focus{
 	border:3px solid rgb(44,169,225);
 }</string>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
                 </property>
                 <property name="dragEnabled">
                  <bool>false</bool>
@@ -639,7 +644,7 @@ QLineEdit:focus{
                 <property name="styleSheet">
                  <string notr="true">#label_5{
 border: none;
-	font: 700 16pt &quot;Yuanti SC&quot;;
+	font: 700 16pt &quot;新宋体&quot;;
 	letter-spacing: 2px;
 
 }</string>
@@ -666,12 +671,13 @@ border: none;
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
 	font-size: 23px;
-	font: 9pt &quot;Yuanti SC&quot;;
+	font: 12pt &quot;Yuanti SC&quot;;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
 padding-left: 5px;
 	padding-right: 5px;
+letter-spacing: 2px;
 }
 
 QLineEdit:focus{
@@ -754,7 +760,7 @@ QLineEdit:focus{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#login_button{
-	font: 700 24pt &quot;Yuanti SC&quot;;
+	font: 700 24pt &quot;新宋体&quot;;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 8px;
@@ -849,7 +855,7 @@ QLineEdit:focus{
 	
 	color: rgb(189, 151, 93);
 	letter-spacing: 2px;
-	font: 12pt &quot;Yuanti SC&quot;;
+	font: 12pt &quot;新宋体&quot;;
 }</string>
              </property>
              <property name="text">

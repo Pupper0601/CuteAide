@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>resource/images/logo.gif</file>
     <file>resource/images/login_bg.png</file>
   </qresource>
 </RCC>
