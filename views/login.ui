@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
-    <height>486</height>
+    <width>631</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
+      <x>10</x>
+      <y>20</y>
       <width>600</width>
       <height>400</height>
      </rect>
@@ -70,19 +70,19 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
         <property name="spacing">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="leftMargin">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="topMargin">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
-         <number>1</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label">
@@ -199,19 +199,27 @@
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
-	background:rgb(104,202,93);
-	border: 1px solid rgba(113,17,15,50);
 	border-radius:10px;
 }
 
 QPushButton:hover{
-	background-color:rgb(139,29,31);
+	background-color:rgb(4, 51, 255);
 }
 
 </string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resource.qrc">
+               <normaloff>:/icon/resource/icon/minimize.png</normaloff>:/icon/resource/icon/minimize.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -231,21 +239,26 @@ QPushButton:hover{
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
-	background:rgb(234,108,100);
-	border: 1px solid rgba(113,17,15,50);
 	border-radius:10px;
 }
 
 QPushButton:hover{
-	background-color:rgb(139,29,31);
+	background-color:rgb(4, 51, 255);
 }
-
-QPushButton:pressed{
-	background-color:rgb(232,59,35);
-}</string>
+</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resource.qrc">
+               <normaloff>:/icon/resource/icon/close.png</normaloff>:/icon/resource/icon/close.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -312,7 +325,7 @@ QPushButton:pressed{
               <string notr="true">#pushButton{
 	border: none;
 	letter-spacing: 3px;
-	font: 700 20pt &quot;新宋体&quot;;
+	font: 700 20pt 
 
 }</string>
              </property>
@@ -410,7 +423,7 @@ QPushButton:pressed{
                 <property name="styleSheet">
                  <string notr="true">#label_2{
 	border: none;
-	font: 700 16pt &quot;新宋体&quot;;
+	font: 700 16pt;
 	letter-spacing: 2px;
 
 }</string>
@@ -442,8 +455,7 @@ QPushButton:pressed{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-	font-size: 14px;
-	font: 12pt &quot;Yuanti SC&quot;;
+	font: 12pt;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
@@ -527,7 +539,7 @@ QLineEdit:focus{
                 <property name="styleSheet">
                  <string notr="true">#label_3{
 border: none;
-	font: 700 16pt &quot;新宋体&quot;;
+	font: 700 16pt;
 	letter-spacing: 2px;
 
 }</string>
@@ -553,8 +565,7 @@ border: none;
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-	font-size: 23px;
-	font: 12pt &quot;Yuanti SC&quot;;
+	font: 12pt;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
@@ -644,7 +655,7 @@ QLineEdit:focus{
                 <property name="styleSheet">
                  <string notr="true">#label_5{
 border: none;
-	font: 700 16pt &quot;新宋体&quot;;
+	font: 700 16pt;
 	letter-spacing: 2px;
 
 }</string>
@@ -670,8 +681,7 @@ border: none;
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-	font-size: 23px;
-	font: 12pt &quot;Yuanti SC&quot;;
+	font: 12pt;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
@@ -760,7 +770,7 @@ QLineEdit:focus{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#login_button{
-	font: 700 24pt &quot;新宋体&quot;;
+	font: 700 24pt;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 8px;
@@ -775,8 +785,7 @@ QLineEdit:focus{
 }
 
 #login_button:pressed{
-	padding-top:8px;
-	padding-left: 8px;
+	padding:8px;
 }</string>
                 </property>
                 <property name="text">
@@ -904,8 +913,8 @@ QLineEdit:focus{
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>602</x>
-     <y>63</y>
+     <x>597</x>
+     <y>50</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -920,8 +929,8 @@ QLineEdit:focus{
    <slot>showMinimized()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>567</x>
-     <y>65</y>
+     <x>563</x>
+     <y>50</y>
     </hint>
     <hint type="destinationlabel">
      <x>502</x>

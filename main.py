@@ -1,15 +1,13 @@
 import sys
 
-from PySide6.QtWidgets import QApplication,QMainWindow,QWidget,QGridLayout,QFileDialog,QMessageBox
-from PySide6.QtCore import Qt,QThread,Signal
-from PySide6.QtCore import QPropertyAnimation, QEasingCurve, QEvent, QTimer,QTime
-from PySide6.QtGui import QIcon,QPainter,QBrush,QColor,QCursor,QPixmap,QImage,QConicalGradient,QPen,QFont
-from PySide6 import QtCore,QtWidgets
-
-# from views.login_win import Ui_MainWindow
-
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QCursor
+from PySide6.QtWidgets import QApplication, QMainWindow
 
 from views.login import Ui_MainWindow
+
+
+# from views.login_win import Ui_MainWindow
 
 
 class LoginMainWin(QMainWindow):
@@ -22,22 +20,23 @@ class LoginMainWin(QMainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.show()
 
-    #窗口拖动
-    ##############################################################################
-    def mousePressEvent(self,event):
-        if event.button() == Qt.LeftButton and self.isMaximized() == False:
-            self.mm_flag = True
-            self.m_Position = event.globalPos() - self.pos()
-            event.accept()
-            self.setCursor(QCursor(Qt.OpenHandCursor))
-    def mouseMoveEvent(self,mouseMove):
-        if Qt.LeftButton and self.mm_flag:
-            self.move(mouseMove.globalPos()-self.m_Position)
-            mouseMove.accept()
-    def mouseReleaseEvent(self,mouse_event):
-        self.mm_flag = False
-        self.setCursor(QCursor(Qt.ArrowCursor))
-    ##############################################################################
+        #-----------------移动功能---------------------
+
+        def mousePressEvent(self, event):  # 鼠标左键按下时获取鼠标坐标
+            if event.button() == Qt.LeftButton:
+                self._move_drag = True
+                self.cursor_win_pos = event.globalPosition() - self.pos()
+                event.accept()
+
+        def mouseMoveEvent(self, event):  # 鼠标在按下左键的情况下移动时,根据坐标移动界面
+            # 移动事件
+            if Qt.LeftButton and self._move_drag:
+                m_Point = event.globalPosition() - self.cursor_win_pos
+                self.move(m_Point.x(), m_Point.y())
+                event.accept()
+
+        def mouseReleaseEvent(self, event):  # 鼠标按键释放时,取消移动
+            self._move_drag = False
 
 
 if __name__ == '__main__':

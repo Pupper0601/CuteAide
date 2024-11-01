@@ -3,4 +3,19 @@
     <file>resource/images/logo.gif</file>
     <file>resource/images/login_bg.png</file>
   </qresource>
+  <qresource prefix="icon">
+    <file>resource/icon/minimize.png</file>
+    <file>resource/icon/close.png</file>
+    <file>resource/icon/Tips.png</file>
+    <file>resource/icon/floating.png</file>
+    <file>resource/icon/export.png</file>
+    <file>resource/icon/import.png</file>
+    <file>resource/icon/time.png</file>
+    <file>resource/icon/keyboard.png</file>
+    <file>resource/icon/mouse.png</file>
+    <file>resource/icon/now.png</file>
+    <file>resource/icon/stop.png</file>
+    <file>resource/icon/start.png</file>
+    <file>resource/icon/versrion.png</file>
+  </qresource>
 </RCC>

@@ -24,12 +24,12 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(658, 486)
+        MainWindow.resize(631, 435)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.widget = QWidget(self.centralwidget)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(20, 40, 600, 400))
+        self.widget.setGeometry(QRect(10, 20, 600, 400))
         self.widget.setMinimumSize(QSize(600, 400))
         self.widget.setMaximumSize(QSize(600, 400))
         self.widget.setStyleSheet(u"#widget{\n"
@@ -51,9 +51,9 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
         self.widget_2.setSizePolicy(sizePolicy)
         self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
-        self.horizontalLayout_2.setSpacing(1)
+        self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(1, 1, 1, 1)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.label = QLabel(self.widget_2)
         self.label.setObjectName(u"label")
         self.label.setStyleSheet(u"#label{\n"
@@ -104,16 +104,18 @@ class Ui_MainWindow(object):
         self.pushButton_2.setMinimumSize(QSize(20, 20))
         self.pushButton_2.setMaximumSize(QSize(20, 20))
         self.pushButton_2.setStyleSheet(u"QPushButton{\n"
-"	background:rgb(104,202,93);\n"
-"	border: 1px solid rgba(113,17,15,50);\n"
 "	border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
-"	background-color:rgb(139,29,31);\n"
+"	background-color:rgb(4, 51, 255);\n"
 "}\n"
 "\n"
 "")
+        icon = QIcon()
+        icon.addFile(u":/icon/resource/icon/minimize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_2.setIcon(icon)
+        self.pushButton_2.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_9.addWidget(self.pushButton_2)
 
@@ -122,18 +124,17 @@ class Ui_MainWindow(object):
         self.pushButton_3.setMinimumSize(QSize(20, 20))
         self.pushButton_3.setMaximumSize(QSize(20, 20))
         self.pushButton_3.setStyleSheet(u"QPushButton{\n"
-"	background:rgb(234,108,100);\n"
-"	border: 1px solid rgba(113,17,15,50);\n"
 "	border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
-"	background-color:rgb(139,29,31);\n"
+"	background-color:rgb(4, 51, 255);\n"
 "}\n"
-"\n"
-"QPushButton:pressed{\n"
-"	background-color:rgb(232,59,35);\n"
-"}")
+"")
+        icon1 = QIcon()
+        icon1.addFile(u":/icon/resource/icon/close.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_3.setIcon(icon1)
+        self.pushButton_3.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_9.addWidget(self.pushButton_3)
 
@@ -163,7 +164,7 @@ class Ui_MainWindow(object):
         self.pushButton.setStyleSheet(u"#pushButton{\n"
 "	border: none;\n"
 "	letter-spacing: 3px;\n"
-"	font: 700 20pt \"\u65b0\u5b8b\u4f53\";\n"
+"	font: 700 20pt \n"
 "\n"
 "}")
 
@@ -210,7 +211,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName(u"label_2")
         self.label_2.setStyleSheet(u"#label_2{\n"
 "	border: none;\n"
-"	font: 700 16pt \"Yuanti SC\";\n"
+"	font: 700 16pt;\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -227,13 +228,13 @@ class Ui_MainWindow(object):
         self.lineEdit.setMinimumSize(QSize(186, 25))
         self.lineEdit.setMaximumSize(QSize(186, 16777215))
         self.lineEdit.setStyleSheet(u"QLineEdit{\n"
-"	font-size: 14px;\n"
-"	font: 9pt \"Yuanti SC\";\n"
+"	font: 12pt;\n"
 "	background:rgba(253,253,253,1);\n"
 "	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "	padding-left: 5px;\n"
 "	padding-right: 5px;\n"
+"	letter-spacing: 2px;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
@@ -270,7 +271,7 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setStyleSheet(u"#label_3{\n"
 "border: none;\n"
-"	font: 700 16pt \"Yuanti SC\";\n"
+"	font: 700 16pt;\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -282,19 +283,21 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setMinimumSize(QSize(186, 25))
         self.lineEdit_2.setMaximumSize(QSize(186, 16777215))
         self.lineEdit_2.setStyleSheet(u"QLineEdit{\n"
-"	font-size: 23px;\n"
-"	font: 9pt \"Yuanti SC\";\n"
+"	font: 12pt;\n"
 "	background:rgba(253,253,253,1);\n"
 "	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "padding-left: 5px;\n"
 "	padding-right: 5px;\n"
+"letter-spacing: 3px;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
 "	border:3px solid rgb(44,169,225);\n"
 "}")
+        self.lineEdit_2.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
         self.lineEdit_2.setDragEnabled(False)
+        self.lineEdit_2.setClearButtonEnabled(False)
 
         self.horizontalLayout_5.addWidget(self.lineEdit_2)
 
@@ -324,7 +327,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setStyleSheet(u"#label_5{\n"
 "border: none;\n"
-"	font: 700 16pt \"Yuanti SC\";\n"
+"	font: 700 16pt;\n"
 "	letter-spacing: 2px;\n"
 "\n"
 "}")
@@ -336,13 +339,13 @@ class Ui_MainWindow(object):
         self.lineEdit_3.setMinimumSize(QSize(186, 25))
         self.lineEdit_3.setMaximumSize(QSize(186, 16777215))
         self.lineEdit_3.setStyleSheet(u"QLineEdit{\n"
-"	font-size: 23px;\n"
-"	font: 9pt \"Yuanti SC\";\n"
+"	font: 12pt;\n"
 "	background:rgba(253,253,253,1);\n"
 "	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "padding-left: 5px;\n"
 "	padding-right: 5px;\n"
+"letter-spacing: 2px;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
@@ -378,7 +381,7 @@ class Ui_MainWindow(object):
         self.login_button.setMinimumSize(QSize(260, 0))
         self.login_button.setMaximumSize(QSize(260, 16777215))
         self.login_button.setStyleSheet(u"#login_button{\n"
-"	font: 700 24pt \"Yuanti SC\";\n"
+"	font: 700 24pt;\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -393,8 +396,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#login_button:pressed{\n"
-"	padding-top:8px;\n"
-"	padding-left: 8px;\n"
+"	padding:8px;\n"
 "}")
 
         self.horizontalLayout_6.addWidget(self.login_button)
@@ -432,7 +434,7 @@ class Ui_MainWindow(object):
 "	\n"
 "	color: rgb(189, 151, 93);\n"
 "	letter-spacing: 2px;\n"
-"	font: 12pt \"Yuanti SC\";\n"
+"	font: 12pt \"\u65b0\u5b8b\u4f53\";\n"
 "}")
         self.label_4.setScaledContents(False)
         self.label_4.setWordWrap(False)
