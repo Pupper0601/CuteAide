@@ -1277,7 +1277,7 @@ QPushButton:hover{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#pushButton_2{
-	font: 700 24pt &quot;新宋体&quot;;
+	font: 700 24pt ;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 10px;

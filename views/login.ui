@@ -325,12 +325,12 @@ QPushButton:hover{
               <string notr="true">#pushButton{
 	border: none;
 	letter-spacing: 3px;
-	font: 700 20pt 
+	font: 700 24pt 
 
 }</string>
              </property>
              <property name="text">
-              <string>登录/注册</string>
+              <string>CuteAide</string>
              </property>
             </widget>
            </item>
@@ -716,6 +716,61 @@ QLineEdit:focus{
             </widget>
            </item>
            <item>
+            <widget class="QFrame" name="frame">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">#frame{
+	border: none;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>218</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBox">
+                <property name="text">
+                 <string>记录账号</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QFrame" name="frame_9">
              <property name="maximumSize">
               <size>
@@ -864,12 +919,11 @@ QLineEdit:focus{
 	
 	color: rgb(189, 151, 93);
 	letter-spacing: 2px;
-	font: 12pt &quot;新宋体&quot;;
+	font: 12pt ;
 }</string>
              </property>
              <property name="text">
-              <string>提示: 注册和登录会同时进行. 
-       如果没有注册会直接注册! </string>
+              <string>提示: 目前没啥用, 直接点击登录即可.</string>
              </property>
              <property name="scaledContents">
               <bool>false</bool>

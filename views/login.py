@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         self.pushButton.setStyleSheet(u"#pushButton{\n"
 "	border: none;\n"
 "	letter-spacing: 3px;\n"
-"	font: 700 20pt \n"
+"	font: 700 24pt \n"
 "\n"
 "}")
 
@@ -361,6 +361,31 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.frame_11)
 
+        self.frame = QFrame(self.frame_6)
+        self.frame.setObjectName(u"frame")
+        self.frame.setMaximumSize(QSize(16777215, 30))
+        self.frame.setStyleSheet(u"#frame{\n"
+"	border: none;\n"
+"}")
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame)
+        self.horizontalLayout_10.setSpacing(0)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalSpacer_6 = QSpacerItem(218, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_10.addItem(self.horizontalSpacer_6)
+
+        self.checkBox = QCheckBox(self.frame)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setChecked(True)
+
+        self.horizontalLayout_10.addWidget(self.checkBox)
+
+
+        self.verticalLayout_2.addWidget(self.frame)
+
         self.frame_9 = QFrame(self.frame_6)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setMaximumSize(QSize(16777215, 16777215))
@@ -434,7 +459,7 @@ class Ui_MainWindow(object):
 "	\n"
 "	color: rgb(189, 151, 93);\n"
 "	letter-spacing: 2px;\n"
-"	font: 12pt \"\u65b0\u5b8b\u4f53\";\n"
+"	font: 12pt ;\n"
 "}")
         self.label_4.setScaledContents(False)
         self.label_4.setWordWrap(False)
@@ -465,7 +490,7 @@ class Ui_MainWindow(object):
         self.label.setText("")
         self.pushButton_2.setText("")
         self.pushButton_3.setText("")
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u767b\u5f55/\u6ce8\u518c", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"CuteAide", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u8d26\u53f7:", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u7528\u6237\u540d", None))
@@ -473,8 +498,8 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u5bc6\u7801", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u90ae\u7bb1:", None))
         self.lineEdit_3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u90ae\u7bb1", None))
+        self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u8bb0\u5f55\u8d26\u53f7", None))
         self.login_button.setText(QCoreApplication.translate("MainWindow", u"\u767b\u5f55/\u6ce8\u518c", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u793a: \u6ce8\u518c\u548c\u767b\u5f55\u4f1a\u540c\u65f6\u8fdb\u884c. \n"
-"       \u5982\u679c\u6ca1\u6709\u6ce8\u518c\u4f1a\u76f4\u63a5\u6ce8\u518c! ", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u793a: \u76ee\u524d\u6ca1\u5565\u7528, \u76f4\u63a5\u70b9\u51fb\u767b\u5f55\u5373\u53ef.", None))
     # retranslateUi
 

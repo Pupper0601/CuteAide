@@ -578,7 +578,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setSizePolicy(sizePolicy9)
         self.pushButton_2.setMinimumSize(QSize(0, 46))
         self.pushButton_2.setStyleSheet(u"#pushButton_2{\n"
-"	font: 700 24pt \"\u65b0\u5b8b\u4f53\";\n"
+"	font: 700 24pt ;\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 10px;\n"
