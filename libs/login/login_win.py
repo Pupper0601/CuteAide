@@ -18,6 +18,14 @@ class LoginMainWin(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
+    def login_flow(self):
+        login_data = {}
+        login_data['username'] = self.login_ui.lineEdit.text().strip()
+        login_data['password'] = self.login_ui.lineEdit_2.text().strip()
+        login_data['email'] = self.login_ui.lineEdit_3.text().strip()
+        login_data['check_box'] = self.login_ui.checkBox.isChecked()
+        return True
+
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):

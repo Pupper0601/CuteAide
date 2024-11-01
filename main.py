@@ -10,11 +10,16 @@ class MainWin(QMainWindow):
         super().__init__()
         self.login_win = LoginMainWin()
         self.login_win.show()
+        self.init_slot()
+
+    def init_slot(self):
+        self.login_win.login_ui.login_button.clicked.connect(self.show_home)
 
     def show_home(self):
-        self.home_win = HomeMainWin()
-        self.home_win.show()
-        self.login_win.close()
+        if self.login_win.login_flow():
+            self.home_win = HomeMainWin()
+            self.home_win.show()
+            self.login_win.close()
 
 
 

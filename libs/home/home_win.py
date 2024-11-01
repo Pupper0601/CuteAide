@@ -18,6 +18,8 @@ class HomeMainWin(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
+
+
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton and not self.isMaximized():
