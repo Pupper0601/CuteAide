@@ -133,9 +133,7 @@ class Ui_MainWindow(object):
         self.frame_17.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_17.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.frame_17)
-#ifndef Q_OS_MAC
-        self.horizontalLayout_6.setSpacing(-1)
-#endif
+        self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.horizontalLayout_6.setContentsMargins(12, 10, 12, 12)
         self.horizontalSpacer_5 = QSpacerItem(104, 11, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -326,7 +324,7 @@ class Ui_MainWindow(object):
         sizePolicy8.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
         self.label_2.setSizePolicy(sizePolicy8)
         self.label_2.setStyleSheet(u"#label_2{\n"
-"	font: 700 18pt;\n"
+"	font: 700 16pt;\n"
 "	color: rgb(124, 233, 209)\n"
 "}")
         self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -371,7 +369,7 @@ class Ui_MainWindow(object):
         sizePolicy8.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy8)
         self.label_4.setStyleSheet(u"#label_4{\n"
-"	font: 700 18pt;\n"
+"	font: 700 16pt;\n"
 "	color: rgb(255, 68, 63)\n"
 "}")
         self.label_4.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -578,12 +576,12 @@ class Ui_MainWindow(object):
         self.pushButton_2.setSizePolicy(sizePolicy9)
         self.pushButton_2.setMinimumSize(QSize(0, 46))
         self.pushButton_2.setStyleSheet(u"#pushButton_2{\n"
-"	font: 700 24pt ;\n"
+"	font: 700 20pt ;\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 10px;\n"
 "	border: 3px solid rgb(71,157,168);\n"
-"	letter-spacing: 2px;\n"
+"	letter-spacing: 1px;\n"
 "\n"
 "}\n"
 "\n"
@@ -644,7 +642,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7 = QVBoxLayout(self.widget_3)
         self.verticalLayout_7.setSpacing(3)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.verticalLayout_7.setContentsMargins(5, 8, 2, 8)
+        self.verticalLayout_7.setContentsMargins(5, 8, 5, 8)
         self.frame_3 = QFrame(self.widget_3)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setStyleSheet(u"#frame_3{\n"
@@ -673,7 +671,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.horizontalLayout_11.setContentsMargins(5, 0, 5, 0)
-        self.horizontalSpacer_8 = QSpacerItem(35, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_8 = QSpacerItem(10, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_11.addItem(self.horizontalSpacer_8)
 
@@ -687,9 +685,9 @@ class Ui_MainWindow(object):
         self.pushButton.setMinimumSize(QSize(200, 0))
         self.pushButton.setStyleSheet(u"#pushButton{\n"
 "	border: none;\n"
-"	font: 500 14pt rgb(255, 255, 255);\n"
+"	font: 500 12pt rgb(255, 255, 255);\n"
 "	color: rgb(255, 255, 255);\n"
-"	letter-spacing: 3px;\n"
+"	letter-spacing: 2px;\n"
 "}")
         icon9 = QIcon()
         icon9.addFile(u":/icon/resource/icon/now.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -698,7 +696,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_11.addWidget(self.pushButton)
 
-        self.horizontalSpacer_13 = QSpacerItem(35, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_13 = QSpacerItem(10, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_11.addItem(self.horizontalSpacer_13)
 
@@ -860,9 +858,9 @@ class Ui_MainWindow(object):
         self.pushButton_6.setMinimumSize(QSize(200, 0))
         self.pushButton_6.setStyleSheet(u"#pushButton_6{\n"
 "	border: none;\n"
-"	font: 500 14pt rgb(255, 255, 255);\n"
+"	font: 500 12pt rgb(255, 255, 255);\n"
 "	color: rgb(255, 255, 255);\n"
-"	letter-spacing: 3px;\n"
+"	letter-spacing: 2px;\n"
 "}")
         self.pushButton_6.setIconSize(QSize(20, 20))
 
@@ -1063,7 +1061,7 @@ class Ui_MainWindow(object):
         sizePolicy9.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
         self.pushButton_7.setSizePolicy(sizePolicy9)
         self.pushButton_7.setStyleSheet(u"#pushButton_7{\n"
-"	font: 700 16pt \"\u65b0\u5b8b\u4f53\";\n"
+"	font: 700 14pt;\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -1092,7 +1090,7 @@ class Ui_MainWindow(object):
         sizePolicy9.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
         self.pushButton_8.setSizePolicy(sizePolicy9)
         self.pushButton_8.setStyleSheet(u"#pushButton_8{\n"
-"	font: 700 16pt \"\u65b0\u5b8b\u4f53\";\n"
+"	font: 700 14pt ;\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -1148,7 +1146,7 @@ class Ui_MainWindow(object):
         self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u" \u72b6\u6001:", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"\u7b49\u5f85\u6253\u5f00\u80cc\u5305\u8bc6\u522b", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u7cfb\u7edf\u5206\u8fa8\u7387:", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"1920*1080", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u672a\u8bc6\u522b", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u" \u9002\u914d\u72b6\u6001:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u672a\u9002\u914d", None))
         self.radioButton.setText(QCoreApplication.translate("MainWindow", u" \u5de6\u952e\u538b\u62a2", None))
@@ -1157,24 +1155,24 @@ class Ui_MainWindow(object):
         self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u" Ctrl \u952e\u4e0b\u8e72", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u624b\u96f7\u5012\u8ba1\u65f6", None))
         self.checkBox_2.setText(QCoreApplication.translate("MainWindow", u"\u663e\u793a\u60ac\u6d6e\u7a97", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"  \u5f00\u59cb\u8bc6\u522b\u538b\u62a2", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u" \u5f00\u59cb\u8bc6\u522b\u538b\u67aa", None))
         self.textBrowser.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700; color:#aa7942;\">\u4f5c\u8005</span><span style=\" font-weight:700;\">: </span><span style=\" font-weight:700; color:#ff2600;\">Pupper </span><span style=\" font-weight:700;\">   </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700; color:#aa7942"
-                        ";\">\u5ba2\u670d QQ \u7fa4</span><span style=\" font-weight:700;\">: </span><span style=\" font-weight:700; color:#0433ff;\">497884449</span></p></body></html>", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"  >>>\u6b66\u5668 1 \u914d\u7f6e<<<", None))
+"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#aa7942;\">\u4f5c\u8005</span><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700;\">: </span><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#ff2600;\">Pupper </span><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weig"
+                        "ht:700;\">   </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#aa7942;\">\u5ba2\u670d QQ \u7fa4</span><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700;\">: </span><span style=\" font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#0433ff;\">497884449</span></p></body></html>", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u" >>>\u6b66\u5668 1 \u914d\u7f6e<<<", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"AWM", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u500d\u955c", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u53e3", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u63e1\u628a", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u6258", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"  >>>\u6b66\u5668 2 \u914d\u7f6e<<<", None))
+        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u" >>>\u6b66\u5668 2 \u914d\u7f6e<<<", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"AWM", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u500d\u955c", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u53e3", None))

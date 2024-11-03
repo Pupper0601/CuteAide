@@ -919,7 +919,7 @@ QLineEdit:focus{
 	
 	color: rgb(189, 151, 93);
 	letter-spacing: 2px;
-	font: 12pt ;
+	font: 9pt ;
 }</string>
              </property>
              <property name="text">

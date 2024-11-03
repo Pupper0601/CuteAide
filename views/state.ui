@@ -44,7 +44,7 @@
 }
 QPushButton{
 	color: rgb(255, 38, 0);
-	font: 700 14pt;
+	font: 700 10pt;
 }
 Line{
 	border: 1px solid rgb(255, 255, 255);
@@ -122,6 +122,14 @@ Line{
             <horstretch>1</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+            <kerning>false</kerning>
+           </font>
           </property>
           <property name="styleSheet">
            <string notr="true">#pushButton{

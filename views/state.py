@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton{\n"
 "	color: rgb(255, 38, 0);\n"
-"	font: 700 14pt;\n"
+"	font: 700 10pt;\n"
 "}\n"
 "Line{\n"
 "	border: 1px solid rgb(255, 255, 255);\n"
@@ -75,6 +75,12 @@ class Ui_MainWindow(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
         self.pushButton.setSizePolicy(sizePolicy1)
+        font = QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setKerning(False)
+        self.pushButton.setFont(font)
         self.pushButton.setStyleSheet(u"#pushButton{\n"
 "	border: none;\n"
 "}")

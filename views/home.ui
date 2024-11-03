@@ -257,7 +257,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <property name="spacing">
-            <number>-1</number>
+            <number>6</number>
            </property>
            <property name="leftMargin">
             <number>12</number>
@@ -667,12 +667,12 @@ QPushButton:hover{
                    </property>
                    <property name="styleSheet">
                     <string notr="true">#label_2{
-	font: 700 18pt;
+	font: 700 16pt;
 	color: rgb(124, 233, 209)
 }</string>
                    </property>
                    <property name="text">
-                    <string>1920*1080</string>
+                    <string>未识别</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -775,7 +775,7 @@ QPushButton:hover{
                    </property>
                    <property name="styleSheet">
                     <string notr="true">#label_4{
-	font: 700 18pt;
+	font: 700 16pt;
 	color: rgb(255, 68, 63)
 }</string>
                    </property>
@@ -1277,12 +1277,12 @@ QPushButton:hover{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#pushButton_2{
-	font: 700 24pt ;
+	font: 700 20pt ;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 10px;
 	border: 3px solid rgb(71,157,168);
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 
 }
 
@@ -1293,7 +1293,7 @@ QPushButton:hover{
 </string>
                 </property>
                 <property name="text">
-                 <string>  开始识别压抢</string>
+                 <string> 开始识别压枪</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resource.qrc">
@@ -1386,9 +1386,9 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700; color:#aa7942;&quot;&gt;作者&lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot; font-weight:700; color:#ff2600;&quot;&gt;Pupper &lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700; color:#aa7942;&quot;&gt;客服 QQ 群&lt;/span&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot; font-weight:700; color:#0433ff;&quot;&gt;497884449&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#aa7942;&quot;&gt;作者&lt;/span&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#ff2600;&quot;&gt;Pupper &lt;/span&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700;&quot;&gt;   &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#aa7942;&quot;&gt;客服 QQ 群&lt;/span&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:8pt; font-weight:700; color:#0433ff;&quot;&gt;497884449&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -1417,7 +1417,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
             <number>8</number>
            </property>
            <property name="rightMargin">
-            <number>2</number>
+            <number>5</number>
            </property>
            <property name="bottomMargin">
             <number>8</number>
@@ -1497,7 +1497,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>35</width>
+                     <width>10</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -1520,13 +1520,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="styleSheet">
                     <string notr="true">#pushButton{
 	border: none;
-	font: 500 14pt rgb(255, 255, 255);
+	font: 500 12pt rgb(255, 255, 255);
 	color: rgb(255, 255, 255);
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 }</string>
                    </property>
                    <property name="text">
-                    <string>  &gt;&gt;&gt;武器 1 配置&lt;&lt;&lt;</string>
+                    <string> &gt;&gt;&gt;武器 1 配置&lt;&lt;&lt;</string>
                    </property>
                    <property name="icon">
                     <iconset resource="../resource.qrc">
@@ -1547,7 +1547,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>35</width>
+                     <width>10</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -1908,13 +1908,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="styleSheet">
                     <string notr="true">#pushButton_6{
 	border: none;
-	font: 500 14pt rgb(255, 255, 255);
+	font: 500 12pt rgb(255, 255, 255);
 	color: rgb(255, 255, 255);
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 }</string>
                    </property>
                    <property name="text">
-                    <string>  &gt;&gt;&gt;武器 2 配置&lt;&lt;&lt;</string>
+                    <string> &gt;&gt;&gt;武器 2 配置&lt;&lt;&lt;</string>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -2400,7 +2400,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="styleSheet">
                     <string notr="true">#pushButton_7{
-	font: 700 16pt &quot;新宋体&quot;;
+	font: 700 14pt;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 8px;
@@ -2447,7 +2447,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="styleSheet">
                     <string notr="true">#pushButton_8{
-	font: 700 16pt &quot;新宋体&quot;;
+	font: 700 14pt ;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 8px;

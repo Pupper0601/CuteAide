@@ -14,6 +14,8 @@ class LoginMainWin(QMainWindow):
         super().__init__()
         self.login_ui = login_ui()
         self.login_ui.setupUi(self)
+        self.setWindowTitle("CuteAide")
+
         #隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
