@@ -5,9 +5,9 @@
 
 from pathlib import Path
 
-
 def project_path() -> str:
-    return str(Path(__file__)).split('CuteAide')[0]+'CuteAide'
+    obj_path = str(Path(__file__)).split('CuteAide')[0]+'CuteAide'
+    return obj_path
 
 def path_conn(file_name: str) -> str:
     return project_path() + file_name

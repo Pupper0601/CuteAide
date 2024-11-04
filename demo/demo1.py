@@ -12,11 +12,13 @@ def take_screenshots(regions, save_paths ):
 
 # 定义多个区域和保存路径
 regions = [
-    [1370, 96, 70, 27],
+    [1375,98,50,12],
+    [1375,324,50,12],
 ]
 
 save_paths = [
-    "X2.png",
+    "1.png",
+    "2.png",
 ]
 
 # 截取并保存截图
