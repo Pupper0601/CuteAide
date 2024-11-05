@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-import os
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -15,7 +14,7 @@ from skimage.metrics import structural_similarity as ssim
 
 def preprocess_image(image):
     # 高斯模糊去噪
-    blurred_image = cv2.GaussianBlur(image, (3, 3), 0)
+    blurred_image = cv2.GaussianBlur(image, (5, 5), 0)
     return blurred_image
 
 def adaptive_binarize_image(image, block_size=5, C=2):
@@ -70,38 +69,10 @@ def compare_images(source_img, timp_img, win_size=3):
     hist2 = cv2.normalize(hist2, hist2).flatten()
     hist_similarity = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
 
-    ss = float(round(np.mean(ssim_scores), 2))
-    hs = round(hist_similarity, 2)
-
-    if ss >0.5 and hs > 0.9:
-        return [source_img.split('/')[-1][:-4], ss, hs]
+    if round(np.mean(ssim_scores), 2) > 0.5 and round(hist_similarity, 2) > 0.9:
+        return source_img[:-4]
     else:
         return "none"
-
-def current_equipment(source_path, temp_img):
-    gun_data = []
-
-    content = os.listdir(source_path)
-    for each in content:
-        abs_source_path = source_path+each
-        mod_name = compare_images(abs_source_path, temp_img)
-        if mod_name != 'none':
-            gun_data.append(mod_name)
-
-    print(gun_data)
-
-    if len(gun_data) > 0:
-        gun_nane = 'nane'
-        ss = 0
-        hs = 0
-        for i in gun_data:
-            if i[1] >= ss and i[2] >= hs:
-                gun_nane = i[0]
-                ss = i[1]
-                hs = i[2]
-        return gun_nane
-
-
 
 
 
