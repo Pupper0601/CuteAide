@@ -8,7 +8,7 @@ def current_equipment(temp_img, source_path):
     mod_name = 'none'  #当前配枪
     gun1_distance = 11  #武器识别的汉明距离阈值
 
-    source_path = '../../basic_data/1920_1080/weapons/' #预先截取的图片路径
+    source_path = '../../basic/1920_1080/weapons/'  #预先截取的图片路径
     temp_img = '../6.png' #当前武器图片路径
 
     content = os.listdir(source_path)

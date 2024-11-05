@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Author : Pupper
-# @Email  : pupper.cheng@gmail.com
+# #!/usr/bin/env python3
+# # -*- coding: utf-8 -*-
+# # @Author : Pupper
+# # @Email  : pupper.cheng@gmail.com
 
 import os
 import cv2
 import pyautogui
 
-from image_comparison import current_equipment
+from comparison import current_equipment
 from tools.paths import project_path
 
 
@@ -55,7 +55,7 @@ folder_paths = [
     "../basic_data/1920_1080/stocks",
 ]
 
-take_screenshots(regions, screenshot_paths)
+# take_screenshots(regions, screenshot_paths)
 
 print(current_equipment(project_path() + "/basic_data/1920_1080/weapons/", project_path() + "/temps/gun_1.png"))
 print(current_equipment(project_path() + "/basic_data/1920_1080/scopes/", project_path() + "/temps/scope_1.png"))

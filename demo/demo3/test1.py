@@ -1,84 +1,54 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Author : Pupper
-# @Email  : pupper.cheng@gmail.com
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Author : Pupper
-# @Email  : pupper.cheng@gmail.com
-
 import cv2
 import numpy as np
-from skimage.metrics import structural_similarity as ssim
 
-def preprocess_image(image):
-    # 高斯模糊去噪
-    blurred_image = cv2.GaussianBlur(image, (5, 5), 0)
-    return blurred_image
+def are_images_similar(image1_path, image2_path, similarity_threshold=0.15):
+    """
+    判断两张图片是否相似
 
-def adaptive_binarize_image(image, block_size=5, C=2):
-    # 应用自适应二值化
-    binary_image = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, block_size, C)
-    # 保存二值化后的图片
-    # cv2.imwrite(save_path, binary_image)
-    return binary_image
+    :param image1_path: 第一张图片的路径
+    :param image2_path: 第二张图片的路径
+    :param similarity_threshold: 相似度阈值，用于判断两张图片是否相似
+    :return: 如果相似则返回True，否则返回False
+    """
+    # 读取两张彩色图片
+    img1 = cv2.imread(image1_path)
+    img2 = cv2.imread(image2_path)
 
-def pyramid_image(image, levels=3):
-    # 构建图像金字塔
-    pyramid = [image]
-    for i in range(1, levels):
-        image = cv2.pyrDown(image)
-        pyramid.append(image)
-    return pyramid
+    # 检查图片是否读取成功
+    if img1 is None or img2 is None:
+        raise ValueError("无法读取图片，请检查路径是否正确")
 
-def compare_images(source_img, timp_img, win_size=3):
-    # 读取图片
-    image1 = cv2.imread(source_img, cv2.IMREAD_GRAYSCALE)
-    image2 = cv2.imread(timp_img, cv2.IMREAD_GRAYSCALE)
+    # 初始化SIFT特征提取器
+    sift = cv2.SIFT_create()
 
-    # 预处理图像
-    image1 = preprocess_image(image1)
-    image2 = preprocess_image(image2)
+    # 检测关键点和描述符
+    keypoints1, descriptors1 = sift.detectAndCompute(img1, None)
+    keypoints2, descriptors2 = sift.detectAndCompute(img2, None)
 
-    # 应用自适应二值化
-    image1 = adaptive_binarize_image(image1)
-    image2 = adaptive_binarize_image(image2)
+    # 如果没有找到关键点或描述符，则认为图片不相似
+    if len(keypoints1) == 0 or len(keypoints2) == 0:
+        return False
 
-    # 调整图片大小
-    image1 = cv2.resize(image1, (image2.shape[1], image2.shape[0]))
+    # 使用FLANN匹配器进行特征匹配
+    index_params = dict(algorithm=1, trees=5)
+    search_params = dict(checks=50)
+    flann = cv2.FlannBasedMatcher(index_params, search_params)
+    matches = flann.knnMatch(descriptors1, descriptors2, k=2)
 
-    # 构建图像金字
-    pyramid1 = pyramid_image(image1)
-    pyramid2 = pyramid_image(image2)
+    # 使用Lowe的比率测试来筛选好的匹配点
+    good_matches = []
+    for m, n in matches:
+        if m.distance < 0.75 * n.distance:
+            good_matches.append(m)
 
-    # 计算每一层的 SSIM
-    ssim_scores = []
-    for img1, img2 in zip(pyramid1, pyramid2):
-        img1 = cv2.resize(img1, (img2.shape[1], img2.shape[0]))
-        ssim_score, _ = ssim(img1, img2, full=True,win_size=win_size)
-        ssim_scores.append(ssim_score)
-
-    # 计算 SSIM
-    # ssim_score, _ = ssim(image1, image2, full=True)
-
-    # 计算直方图相似度
-    hist1 = cv2.calcHist([image1], [0], None, [256], [0, 256])
-    hist2 = cv2.calcHist([image2], [0], None, [256], [0, 256])
-    hist1 = cv2.normalize(hist1, hist1).flatten()
-    hist2 = cv2.normalize(hist2, hist2).flatten()
-    hist_similarity = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
-
-    if round(np.mean(ssim_scores), 2) > 0.5 and round(hist_similarity, 2) > 0.9:
-        return source_img[:-4]
+    # 判断两张图片是否相似
+    if len(good_matches) > similarity_threshold * min(len(keypoints1), len(keypoints2)):
+        return True
     else:
-        return "none"
+        return False
 
-
-
-if __name__ == '__main__':
-    # 示例用法
-    image_path1 = 'X6.png'
-    image_path2 = 'scope_2.png'
-    hist_similarity = compare_images(image_path1, image_path2,)
-    print(f'图片相似度 (SSIM): {hist_similarity}')
+# 示例调用
+image1_path = '1.png'
+image2_path = '2.png'
+similarity = are_images_similar(image1_path, image2_path)
+print(f"两张图片是否相似: {similarity}")

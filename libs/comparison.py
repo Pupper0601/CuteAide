@@ -102,9 +102,6 @@ def current_equipment(source_path, temp_img):
         return gun_nane
 
 
-
-
-
 if __name__ == '__main__':
     # 示例用法
     image_path1 = 'X6.png'
