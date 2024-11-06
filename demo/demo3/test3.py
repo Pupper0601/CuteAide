@@ -4,6 +4,6 @@
 # @Email  : pupper.cheng@gmail.com
 
 
-from tools.paths import PROJECT_PATH
+a = 'F:\Object\GitHub\CuteAide\basic\1920_1080\weapons\M416\muzzle_1.png'
 
-print(PROJECT_PATH)
+print(a.split('\\|/')[-1].split('.')[0])

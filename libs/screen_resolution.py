@@ -18,6 +18,7 @@ class MONITORINFO(ctypes.Structure):
 resolution = None
 
 def get_monitor_info():
+    # 获取显示器信息，如果只有一个显示器，则返回该显示器的分辨率，如果有多个显示器，则返回主显示器的分辨率
     global resolution
     monitors = []
     if resolution is None:

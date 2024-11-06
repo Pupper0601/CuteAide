@@ -3,11 +3,7 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 import os
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Author : Pupper
-# @Email  : pupper.cheng@gmail.com
+import re
 
 import cv2
 import numpy as np
@@ -33,10 +29,10 @@ def pyramid_image(image, levels=3):
         pyramid.append(image)
     return pyramid
 
-def compare_images(source_img, timp_img, win_size=3):
+def compare_images(source_img, temp_img, win_size=3):
     # 读取图片
     image1 = cv2.imread(source_img, cv2.IMREAD_GRAYSCALE)
-    image2 = cv2.imread(timp_img, cv2.IMREAD_GRAYSCALE)
+    image2 = cv2.imread(temp_img, cv2.IMREAD_GRAYSCALE)
 
     # 预处理图像
     image1 = preprocess_image(image1)
@@ -74,21 +70,24 @@ def compare_images(source_img, timp_img, win_size=3):
     hs = round(hist_similarity, 2)
 
     if ss >0.5 and hs > 0.9:
-        return [source_img.split('/')[-1][:-4], ss, hs]
+        return [source_img.split('\\')[-1][:-4], ss, hs]
     else:
         return "none"
 
 def current_equipment(source_path, temp_img):
     gun_data = []
 
-    content = os.listdir(source_path)
-    for each in content:
-        abs_source_path = source_path+each
-        mod_name = compare_images(abs_source_path, temp_img)
+    # content = os.listdir(source_path)
+    # for each in content:
+    #     abs_source_path = source_path+each
+    #     mod_name = compare_images(abs_source_path, temp_img)
+    #     if mod_name != 'none':
+    #         gun_data.append(mod_name)
+
+    for key, value in source_path.items():
+        mod_name = compare_images(value, temp_img)
         if mod_name != 'none':
             gun_data.append(mod_name)
-
-    print(gun_data)
 
     if len(gun_data) > 0:
         gun_nane = 'nane'
