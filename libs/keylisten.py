@@ -3,8 +3,6 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
-import time
-
 from threading import Thread, Event
 from PySide6.QtCore import QThread, Signal
 from pynput import keyboard

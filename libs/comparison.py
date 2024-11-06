@@ -72,25 +72,17 @@ def compare_images(source_img, temp_img, win_size=3):
     if ss >0.5 and hs > 0.9:
         return [source_img.split('\\')[-1][:-4], ss, hs]
     else:
-        return "none"
+        return ['NONE', ss, hs]
 
 def current_equipment(source_path, temp_img):
     gun_data = []
 
-    # content = os.listdir(source_path)
-    # for each in content:
-    #     abs_source_path = source_path+each
-    #     mod_name = compare_images(abs_source_path, temp_img)
-    #     if mod_name != 'none':
-    #         gun_data.append(mod_name)
-
     for key, value in source_path.items():
         mod_name = compare_images(value, temp_img)
-        if mod_name != 'none':
-            gun_data.append(mod_name)
+        gun_data.append(mod_name)
 
     if len(gun_data) > 0:
-        gun_nane = 'nane'
+        gun_nane = 'NONE'
         ss = 0
         hs = 0
         for i in gun_data:
