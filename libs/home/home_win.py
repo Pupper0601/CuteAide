@@ -120,8 +120,12 @@ class HomeMainWin(QMainWindow):
             self.ui.pushButton.setIcon(QIcon())
             self.ui.pushButton_6.setIcon(QIcon(path_conn("/resource/icon/now.png")))
 
-
-
+    def posture_key(self, key):
+        # 判断当前选中的姿势
+        if self.ui.radioButton_3.isChecked():   # C 键 下蹲
+            self.state_win.update_posture(key)
+        elif self.ui.radioButton_4.isChecked(): # ctrl 键 下蹲
+            self.state_win.update_posture(key)
 
 
     # ----------- 窗口拖动 -----------

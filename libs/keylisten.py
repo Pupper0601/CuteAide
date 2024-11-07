@@ -42,6 +42,12 @@ class KeyListen(QThread):
             elif key.char in ['1', '2']:
                 self.parent.update_state_win(key.char)
                 self.parent.update_current_gun(key.char)
+            elif key.char in ['z', 'c']:
+                self.parent.posture_key(key.char)
+            elif key == Key.space:  # 监听到按键 '空格'
+                self.parent.posture_key('space')
+            elif key == Key.ctrl_l or key == Key.ctrl_r:  # 监听到按键 'ctrl'
+                self.parent.posture_key('ctrl')
 
         except AttributeError:
             pass

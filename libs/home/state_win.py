@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QMainWindow
 from views.state import Ui_MainWindow as state_ui
@@ -19,6 +20,7 @@ class StateMainWin(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Tool) # 窗口置顶, 无任务栏图标
         self.setAttribute(Qt.WA_TranslucentBackground)  # 设置窗口透明
         self.move_to_top_center()
+        self.posture = 0
 
     def move_to_top_center(self):
         screen_geometry = QApplication.primaryScreen().geometry()  # 获取屏幕大小
@@ -43,6 +45,26 @@ class StateMainWin(QMainWindow):
         self.ui.pushButton_5.setText(gun.get("grip"))
         self.ui.pushButton_6.setText(gun.get("stock"))
 
+    def update_posture(self, key):
+        # 更新姿势
+        posture = self.ui.pushButton_12.text()
+        if key == "c":
+            if posture == "蹲姿":
+                self.ui.pushButton_12.setText("站姿")
+            else:
+                self.ui.pushButton_12.setText("蹲姿")
+        elif key == "ctrl":
+            if posture == "蹲姿":
+                self.ui.pushButton_12.setText("站姿")
+            else:
+                self.ui.pushButton_12.setText("蹲姿")
+        elif key == "z":
+            if posture == "卧姿":
+                self.ui.pushButton_12.setText("站姿")
+            else:
+                self.ui.pushButton_12.setText("卧姿")
+        elif key == "space":
+            self.ui.pushButton_12.setText("站姿")
 
 
 
