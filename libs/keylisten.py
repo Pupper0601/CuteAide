@@ -41,6 +41,7 @@ class KeyListen(QThread):
                 self.stop_event.set()
             elif key.char in ['1', '2']:
                 self.parent.update_state_win(key.char)
+                self.parent.update_current_gun(key.char)
 
         except AttributeError:
             pass

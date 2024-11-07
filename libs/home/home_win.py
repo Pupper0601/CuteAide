@@ -105,11 +105,20 @@ class HomeMainWin(QMainWindow):
         self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip']}")
         self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock']}")
 
-        self.state_win.update_gun(self.gun_info, "1")
+        self.state_win.update_gun(self.gun_info)
 
     def update_state_win(self, gun_key):
         # 更新 state_win 窗口
         self.state_win.update_gun(self.gun_info, gun_key)
+
+    def update_current_gun(self, gun_key):
+        # 更新当前枪械
+        if gun_key == "1":
+            self.ui.pushButton.setIcon(QIcon(path_conn("/resource/icon/now.png")))
+            self.ui.pushButton_6.setIcon(QIcon())
+        elif gun_key == "2":
+            self.ui.pushButton.setIcon(QIcon())
+            self.ui.pushButton_6.setIcon(QIcon(path_conn("/resource/icon/now.png")))
 
 
 

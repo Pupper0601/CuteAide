@@ -28,13 +28,15 @@ class StateMainWin(QMainWindow):
         frame_geometry.moveTop(-80)  # 将窗口移动到屏幕顶部
         self.move(frame_geometry.topLeft())
 
-    def update_gun(self, gun_info, gun_key):
+    def update_gun(self, gun_info, gun_key=0):
         num = self.ui.pushButton_11.text()
-        if gun_key == "1":
-            gun = gun_info.get("gun_1")
+        if gun_key == 0:
+            gun = gun_info.get(f"gun_{num}")
+            self.ui.pushButton_11.setText(num)
         else:
-            gun = gun_info.get("gun_2")
-        self.ui.pushButton_11.setText(gun_key)
+            gun = gun_info.get(f"gun_{gun_key}")
+            self.ui.pushButton_11.setText(gun_key)
+
         self.ui.pushButton_2.setText(gun.get("weapon"))
         self.ui.pushButton_3.setText(gun.get("scope"))
         self.ui.pushButton_4.setText(gun.get("muzzle"))
