@@ -32,10 +32,9 @@ class ImageCache:
             self._read_shoot()
             self._read_poses()
             self._read_equip()
-        logger.info('图片缓存初始化完成')
+        logger.info('源图缓存初始化完成')
 
     def _read_images(self, category):
-        logger.info(f'读取{category}图片')
         # 读取指定类别的图片
         category_path = self.basic_path / category  #   获取文件夹路径
         image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff'}

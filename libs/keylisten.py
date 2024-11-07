@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+from threading import Event
 
-from threading import Thread, Event
+from libs.thread_pool import global_thread_pool
 from PySide6.QtCore import QThread, Signal
 from pynput import keyboard
 from pynput.keyboard import Key
-from libs.screenshot import GetGunInfo
+from libs.screenshot import GetGunInfo, get_inventory
 
 from tools.log import logger
 
@@ -19,9 +20,8 @@ class KeyListen(QThread):
         super(KeyListen, self).__init__(parent)
         self.listener = None
         self.stop_event = Event()
-        self.task_thread = None
         self.parent = parent  # 保存父对象
-        self.first_tab_pressed = False  # 标记是否第一次按下 tab 键
+
 
     def run(self):
         self.listener = keyboard.Listener(on_press=self.on_press)
@@ -32,38 +32,31 @@ class KeyListen(QThread):
     def on_press(self, key):
         try:
             if key == Key.tab:  # 监听到按键 'tab'
-                self.key_pressed.emit('tab')
-                if not self.first_tab_pressed:
-                    self.first_tab_pressed = True
-                    self.parent.mouse_listener.enable_gun_info = True
-                    self.execute_gun_info()
-                else:
-                    self.execute_gun_info()
-                    self.first_tab_pressed = False
-                    self.parent.mouse_listener.enable_gun_info = False
-                    self.stop_event.set()
+                self.key_pressed.emit('tab')  # 发送信号
+                global_thread_pool.submit(self.check_inventory_and_execute)
             elif key == Key.esc:  # 监听到按键 'esc'
                 self.key_pressed.emit('esc')
-                self.execute_gun_info()
                 self.parent.mouse_listener.enable_gun_info = False
                 self.stop_event.set()
+
         except AttributeError:
             pass
 
+    def check_inventory_and_execute(self):
+        if get_inventory():  # 如果当前为背包状态
+            self.execute_gun_info()
+            self.parent.mouse_listener.enable_gun_info = True  # 控制鼠标点击识别
+        else:
+            logger.info("当前不是背包状态")
+            self.parent.mouse_listener.enable_gun_info = False
+            self.stop_event.set()
+
     def execute_gun_info(self):
+        global_thread_pool.submit(self._execute_gun_info_task)   # 提交任务
+
+    def _execute_gun_info_task(self):
         gun_info_listener = GetGunInfo(self.parent)  # 获取装备信息, 传递父对象
         gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)
-
-    def handle_delayed_task(self, key):
-        # 处理延迟任务
-        def task():
-            while not self.stop_event.is_set():
-                gun_info_listener = GetGunInfo(self.parent)    # 获取装备信息, 传递父对象
-                gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)  # 连接信号
-            self.stop_event.clear()
-
-        self.task_thread = Thread(target=task)
-        self.task_thread.start()
 
     def stop_listener(self):
         if self.listener:

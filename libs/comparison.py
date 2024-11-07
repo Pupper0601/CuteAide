@@ -9,6 +9,9 @@ import cv2
 import numpy as np
 from skimage.metrics import structural_similarity as ssim
 
+from tools.log import logger
+
+
 def preprocess_image(image):
     # 高斯模糊去噪
     blurred_image = cv2.GaussianBlur(image, (3, 3), 0)
@@ -72,17 +75,17 @@ def compare_images(source_img, temp_img, win_size=3):
     if ss >0.5 and hs > 0.9:
         return [source_img.split('\\')[-1][:-4], ss, hs]
     else:
-        return ['NONE', ss, hs]
+        return None
 
 def current_equipment(source_path, temp_img):
     gun_data = []
 
     for key, value in source_path.items():
         mod_name = compare_images(value, temp_img)
-        gun_data.append(mod_name)
-
+        if mod_name is not None:
+            gun_data.append(mod_name)
     if len(gun_data) > 0:
-        gun_nane = 'NONE'
+        gun_nane = ''
         ss = 0
         hs = 0
         for i in gun_data:
@@ -91,6 +94,8 @@ def current_equipment(source_path, temp_img):
                 ss = i[1]
                 hs = i[2]
         return gun_nane
+    else:
+        return 'NONE'
 
 
 if __name__ == '__main__':
