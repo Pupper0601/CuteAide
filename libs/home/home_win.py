@@ -29,6 +29,7 @@ class HomeMainWin(QMainWindow):
         #隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
+        self.state_win = StateMainWin()  # 初始化 state_win
         self.key_listener = None
         self.mouse_listener = None
         self.gun_info = None  # 存储枪械信息
@@ -48,10 +49,8 @@ class HomeMainWin(QMainWindow):
 
     # 显示悬浮窗窗口
     def state_show(self):
-        self.child_win_state = StateMainWin()
-        self.state_win = StateMainWin()
         if self.ui.checkBox_2.isChecked():
-            self.child_win_state.show()
+            self.state_win.show()
         else:
             self.state_win.close()
 
@@ -105,6 +104,14 @@ class HomeMainWin(QMainWindow):
         self.ui.label_13.setText(f"{self.gun_info['gun_2']['muzzle']}")
         self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip']}")
         self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock']}")
+
+        self.state_win.update_gun(self.gun_info, "1")
+
+    def update_state_win(self, gun_key):
+        # 更新 state_win 窗口
+        self.state_win.update_gun(self.gun_info, gun_key)
+
+
 
 
 

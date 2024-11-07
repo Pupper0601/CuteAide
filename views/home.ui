@@ -1619,7 +1619,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 }</string>
                    </property>
                    <property name="text">
-                    <string>AWM</string>
+                    <string>无武器</string>
                    </property>
                   </widget>
                  </item>
@@ -2003,7 +2003,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 }</string>
                    </property>
                    <property name="text">
-                    <string>AWM</string>
+                    <string>无武器</string>
                    </property>
                   </widget>
                  </item>

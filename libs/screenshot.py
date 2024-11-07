@@ -3,7 +3,7 @@
 # # @Author : Pupper
 # # @Email  : pupper.cheng@gmail.com
 import threading
-from concurrent.futures import ThreadPoolExecutor
+
 from libs.thread_pool import global_thread_pool
 
 import pyautogui
@@ -30,11 +30,12 @@ def get_inventory():
         cache = ImageCache.source_data
         inventory_place = cache["config"]["regions"]["inventory"]
         temp_path= take_screenshots(inventory_place, "inventory.png")
+        logger.info("背包验证图截取完成")
 
         name = compare_images(cache["inventory"]["ku"], temp_path)  # 比较背包信息
 
         if name is not None:
-            logger.info(f"当前为背包状态: {name}")
+            logger.info(f"当前为背包打开状态")
             state = True
 
     future = global_thread_pool.submit(task)
@@ -53,7 +54,7 @@ def gun_screenshots():
         key = futures[future]
         paths_dict[key] = future.result()
 
-    logger.info("截图完成")
+    logger.info("装备获取图截取完成")
     return paths_dict
 
 
@@ -62,19 +63,19 @@ class GetGunInfo(QObject):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.gun_cache = ImageCache.source_data
         self.parent = parent
         self.temp_images = gun_screenshots()
-        self.gun_cache = ImageCache.source_data
         self.gun_1 = {}
         self.gun_2 = {}
+        logger.info("开始获取武器信息")
         self.get_gun_1()
         self.get_gun_2()
+        logger.info("武器信息获取完成")
         logger.info(self.gun_1)
         logger.info(self.gun_2)
         self.emit_gun_info()  # 发送信号
         self.parent.update_gun_info(self.gun_1, self.gun_2)  # 调用 update_gun_info 方法
-        logger.info("获取装备信息完成")
-
 
     def get_gun_1(self):
         # 获取武器1的装备信息

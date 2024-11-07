@@ -263,7 +263,7 @@ Line{
 }</string>
           </property>
           <property name="text">
-           <string> 武器名</string>
+           <string>无武器</string>
           </property>
          </widget>
         </item>
@@ -294,7 +294,7 @@ Line{
 }</string>
           </property>
           <property name="text">
-           <string>倍镜</string>
+           <string>无倍镜</string>
           </property>
          </widget>
         </item>

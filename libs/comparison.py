@@ -84,18 +84,19 @@ def current_equipment(source_path, temp_img):
         mod_name = compare_images(value, temp_img)
         if mod_name is not None:
             gun_data.append(mod_name)
-    if len(gun_data) > 0:
-        gun_nane = ''
-        ss = 0
-        hs = 0
-        for i in gun_data:
-            if i[1] >= ss and i[2] >= hs:
-                gun_nane = i[0]
-                ss = i[1]
-                hs = i[2]
-        return gun_nane
-    else:
-        return 'NONE'
+    if len(gun_data) == 0:
+        gun_data.append([temp_img.split('/')[-1].split('_')[0]+ "_none", 1.0, 1.0])
+
+    gun_nane = ''
+    ss = 0
+    hs = 0
+    for i in gun_data:
+        if i[1] >= ss and i[2] >= hs:
+            gun_nane = i[0]
+            ss = i[1]
+            hs = i[2]
+    return gun_nane
+
 
 
 if __name__ == '__main__':
