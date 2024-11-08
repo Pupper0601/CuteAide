@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from threading import Thread, Event
 from pynput import mouse
 
-from libs.screenshot import GetGunInfo
+from libs.screenshot import GetGunInfo, get_inventory
 from tools.log import logger
 from pynput.mouse import Button
 
@@ -27,9 +27,15 @@ class MouseListen(Thread):
         logger.info("监听鼠标线程启动")
 
     def on_click(self, x,y, button, pressed):
-        if pressed and self.enable_gun_info:
+        if not pressed and self.enable_gun_info:
+            self.parent.update_way("识别中......")
             if button == Button.left or button == Button.right:
-                global_thread_pool.submit(self.execute_gun_info)
+                if get_inventory(): # 如果当前为背包状态
+                    global_thread_pool.submit(self.execute_gun_info)
+                else:
+                    logger.info("当前不是背包状态, 无法获取装备信息")
+                    logger.info("当前不是背包状态")
+                    self.parent.update_way("等待打开背包识别")
 
     def execute_gun_info(self):
         global_thread_pool.submit(self._execute_gun_info_task)

@@ -10,7 +10,6 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 
 from libs.home.state_win import StateMainWin
 from libs.mouselisten import MouseListen
-from libs.screenshot import GetGunInfo
 from tools.log import logger
 from views.home import Ui_MainWindow as home_ui
 
@@ -40,12 +39,20 @@ class HomeMainWin(QMainWindow):
         self.resolution()
         self.ui.checkBox_2.stateChanged.connect(self.state_show)
         self.ui.pushButton_2.clicked.connect(self.start_gun)
+        self.ui.radioButton_3.clicked.connect(self.update_squat)
+        self.ui.radioButton_4.clicked.connect(self.update_squat)
+        self.ui.radioButton.clicked.connect(self.update_mouse_gun)
+        self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
 
     # 设置屏幕分辨率
     def resolution(self):
         _info = resolution()
         self.ui.label_2.setText(f"{_info['resolution']}")
         self.ui.label_4.setText(_info['state'])
+
+    # 更新识别状态
+    def update_way(self, text):
+        self.ui.pushButton_10.setText(text)
 
     # 显示悬浮窗窗口
     def state_show(self):
@@ -88,6 +95,7 @@ class HomeMainWin(QMainWindow):
                 self.mouse_listener.stop_listener()
                 self.mouse_listener = None
 
+
     def update_gun_info(self, gun_1, gun_2):
         # 更新枪械信息
         self.gun_info = {"gun_1": gun_1, "gun_2": gun_2}
@@ -107,9 +115,10 @@ class HomeMainWin(QMainWindow):
 
         self.update_state_win(0)
         logger.info("枪械信息更新完成")
+        self.update_way("识别完成")
+
 
     def update_state_win(self, gun_key):
-        logger.info("开始更新 state_win 窗口")
         # 更新 state_win 窗口
         self.state_win.update_gun(self.gun_info, gun_key)
         logger.info("state_win 窗口更新完成")
@@ -134,6 +143,24 @@ class HomeMainWin(QMainWindow):
             if key != "c":
                 self.state_win.update_posture(key)
                 logger.info(f"当前按键为: {key}")
+
+    def update_squat(self):
+        # 更新下蹲状态
+        if self.ui.radioButton_3.isChecked():
+            self.ui.radioButton_4.setIcon(QIcon())
+            self.ui.radioButton_3.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
+        elif self.ui.radioButton_4.isChecked():
+            self.ui.radioButton_3.setIcon(QIcon())
+            self.ui.radioButton_4.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
+
+    def update_mouse_gun(self):
+        # 更新左右键压枪状态
+        if self.ui.radioButton.isChecked():
+            self.ui.radioButton_2.setIcon(QIcon())
+            self.ui.radioButton.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
+        elif self.ui.radioButton_2.isChecked():
+            self.ui.radioButton.setIcon(QIcon())
+            self.ui.radioButton_2.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
 
 
     # ----------- 窗口拖动 -----------

@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-from threading import Event
+from threading import Event, Thread
 
 from libs.thread_pool import global_thread_pool
-from PySide6.QtCore import QThread, Signal
+from PySide6.QtCore import QObject, QThread, Signal
 from pynput import keyboard
 from pynput.keyboard import Key
 from libs.screenshot import GetGunInfo, get_inventory
@@ -13,11 +13,12 @@ from libs.screenshot import GetGunInfo, get_inventory
 from tools.log import logger
 
 
-class KeyListen(QThread):
+class KeyListen(Thread, QObject):
     key_pressed = Signal(str)  # 定义信号
 
     def __init__(self, parent=None):
-        super(KeyListen, self).__init__(parent)
+        Thread.__init__(self)
+        QObject.__init__(self)
         self.listener = None
         self.stop_event = Event()
         self.parent = parent  # 保存父对象
@@ -31,7 +32,7 @@ class KeyListen(QThread):
     def on_pressed(self, keys):
         # 监听按键
         keys = str(keys.name if isinstance(keys, Key) else keys.char)
-        logger.info(f"按键 {keys} 被按下")  # 添加日志记录
+        logger.debug(f"按键 {keys} 被按下")  # 添加日志记录
         try:
             if keys == "tab":  # 监听到按键 'tab'
                 self.key_pressed.emit('tab')  # 发送信号
@@ -53,22 +54,15 @@ class KeyListen(QThread):
         except AttributeError:
             pass
 
-    # def on_key_release(self, key):
-    #     Keys = str(key.name if isinstance(key, Key) else key.char)
-    #     if Keys == "ctrl_l":
-    #         self.PC.Current_posture = "None"
-    #         self.keyInfo.emit('p', (self.PC.Current_posture,))
-    #     elif Keys == "shift":
-    #         self.PC.on_shift_released()
-    #         self.keyInfo.emit('e', (self.PC.Current_firearms,))
-
     def check_inventory_and_execute(self):
         # 检查当前是否为背包状态
         if get_inventory():  # 如果当前为背包状态
+            self.parent.update_way("识别中......")
             self.execute_gun_info()
             self.parent.mouse_listener.enable_gun_info = True  # 控制鼠标点击识别
         else:
             logger.info("当前不是背包状态")
+            self.parent.update_way("等待打开背包识别")
             self.parent.mouse_listener.enable_gun_info = False
             self.stop_event.set()
 
