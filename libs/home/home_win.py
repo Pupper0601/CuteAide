@@ -105,11 +105,14 @@ class HomeMainWin(QMainWindow):
         self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip']}")
         self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock']}")
 
-        self.state_win.update_gun(self.gun_info)
+        self.update_state_win(0)
+        logger.info("枪械信息更新完成")
 
     def update_state_win(self, gun_key):
+        logger.info("开始更新 state_win 窗口")
         # 更新 state_win 窗口
         self.state_win.update_gun(self.gun_info, gun_key)
+        logger.info("state_win 窗口更新完成")
 
     def update_current_gun(self, gun_key):
         # 更新当前枪械
@@ -122,10 +125,15 @@ class HomeMainWin(QMainWindow):
 
     def posture_key(self, key):
         # 判断当前选中的姿势
+        logger.info(f"当前选中的姿势为: {key}")
         if self.ui.radioButton_3.isChecked():   # C 键 下蹲
-            self.state_win.update_posture(key)
+            if key != "ctrl":
+                self.state_win.update_posture(key)
+                logger.info(f"当前按键为: {key}")
         elif self.ui.radioButton_4.isChecked(): # ctrl 键 下蹲
-            self.state_win.update_posture(key)
+            if key != "c":
+                self.state_win.update_posture(key)
+                logger.info(f"当前按键为: {key}")
 
 
     # ----------- 窗口拖动 -----------

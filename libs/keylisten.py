@@ -24,33 +24,43 @@ class KeyListen(QThread):
 
 
     def run(self):
-        self.listener = keyboard.Listener(on_press=self.on_press)
+        self.listener = keyboard.Listener(on_press=self.on_pressed)
         self.listener.start()
         logger.info("监听键盘线程启动")
-        self.listener.join()
 
-    def on_press(self, key):
+    def on_pressed(self, keys):
         # 监听按键
+        keys = str(keys.name if isinstance(keys, Key) else keys.char)
+        logger.info(f"按键 {keys} 被按下")  # 添加日志记录
         try:
-            if key == Key.tab:  # 监听到按键 'tab'
+            if keys == "tab":  # 监听到按键 'tab'
                 self.key_pressed.emit('tab')  # 发送信号
                 global_thread_pool.submit(self.check_inventory_and_execute)
-            elif key == Key.esc:  # 监听到按键 'esc'
+            elif keys == "esc":  # 监听到按键 'esc'
                 self.key_pressed.emit('esc')
                 self.parent.mouse_listener.enable_gun_info = False
                 self.stop_event.set()
-            elif key.char in ['1', '2']:
-                self.parent.update_state_win(key.char)
-                self.parent.update_current_gun(key.char)
-            elif key.char in ['z', 'c']:
-                self.parent.posture_key(key.char)
-            elif key == Key.space:  # 监听到按键 '空格'
+            elif keys in ['1', '2']:
+                self.parent.update_state_win(keys)
+                self.parent.update_current_gun(keys)
+            elif keys in ['z', 'c']:
+                self.parent.posture_key(keys)
+            elif keys == "space":  # 监听到按键 '空格'
                 self.parent.posture_key('space')
-            elif key == Key.ctrl_l or key == Key.ctrl_r:  # 监听到按键 'ctrl'
+            elif keys == "ctrl_l":  # 监听到按键 'ctrl'
                 self.parent.posture_key('ctrl')
 
         except AttributeError:
             pass
+
+    # def on_key_release(self, key):
+    #     Keys = str(key.name if isinstance(key, Key) else key.char)
+    #     if Keys == "ctrl_l":
+    #         self.PC.Current_posture = "None"
+    #         self.keyInfo.emit('p', (self.PC.Current_posture,))
+    #     elif Keys == "shift":
+    #         self.PC.on_shift_released()
+    #         self.keyInfo.emit('e', (self.PC.Current_firearms,))
 
     def check_inventory_and_execute(self):
         # 检查当前是否为背包状态

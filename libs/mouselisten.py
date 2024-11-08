@@ -25,7 +25,6 @@ class MouseListen(Thread):
         self.listener = mouse.Listener(on_click=self.on_click)  # 监听鼠标点击
         self.listener.start()
         logger.info("监听鼠标线程启动")
-        self.listener.join()
 
     def on_click(self, x,y, button, pressed):
         if pressed and self.enable_gun_info:

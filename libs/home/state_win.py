@@ -5,6 +5,8 @@
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QMainWindow
+
+from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 from PySide6.QtWidgets import QApplication, QMainWindow
 
@@ -38,12 +40,13 @@ class StateMainWin(QMainWindow):
         else:
             gun = gun_info.get(f"gun_{gun_key}")
             self.ui.pushButton_11.setText(gun_key)
-
+        logger.info(f"更新 state_win 窗口枪械信息: {gun}")
         self.ui.pushButton_2.setText(gun.get("weapon"))
         self.ui.pushButton_3.setText(gun.get("scope"))
         self.ui.pushButton_4.setText(gun.get("muzzle"))
         self.ui.pushButton_5.setText(gun.get("grip"))
         self.ui.pushButton_6.setText(gun.get("stock"))
+        logger.info(f"更新 state_win 窗口枪械信息完成")
 
     def update_posture(self, key):
         # 更新姿势
