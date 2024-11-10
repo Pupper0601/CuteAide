@@ -30,41 +30,20 @@ def singleton_class_decorator(cls):
 @singleton_class_decorator
 class Logger:
     def __init__(self):
+        self.clear_log_file()
         self.logger_add()
 
-    def get_project_path(self, project_path=None):
-        if project_path is None:
-            # 当前项目文件的，绝对真实路径
-            # 路径，一个点代表当前目录，两个点代表当前目录的上级目录
-            project_path = paths()
-        # 返回当前项目路径
-        return project_path
+    @staticmethod
+    def clear_log_file():
+        log_file_path = paths() + "./logs.log"
+        with open(log_file_path, 'w', encoding='utf-8') as log_file:
+            log_file.truncate(0)
 
-    def get_log_path(self):
-        # 项目目录
-        project_path = self.get_project_path()
-        # 项目日志目录
-        creat_time = time.strftime("%Y-%m-%d", time.localtime())
-        logs_file_path = Path(project_path).joinpath('logs', creat_time)
-        if logs_file_path.exists():
-            logs_path = logs_file_path
-        else:
-            try:
-                logs_file_path.mkdir(parents=True)
-            except Exception as e:
-                print(f"创建文件报错: {e}")
-            logs_path = logs_file_path
-        # 日志文件名
-        project_log_filename = '{}.log'.format(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime()) )
-        # 日志文件路径
-        project_log_path = Path(logs_path).joinpath(logs_path, project_log_filename)
-        # 返回日志路径
-        return project_log_path
-
-    def logger_add(self):
+    @staticmethod
+    def logger_add():
         loguru.logger.add(
             # 水槽，分流器，可以用来输入路径
-            sink=self.get_log_path(),
+            sink= paths() + "./logs.log",
             # 日志创建周期
             rotation='00:00',
             # 保存

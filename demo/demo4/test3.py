@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-import os
-import re
+
 import threading
 
 import cv2
@@ -33,8 +32,10 @@ def pyramid_image(image, levels=3):
         pyramid.append(image)
     return pyramid
 
+#  读取文件夹下所有图片
 def compare_images(source_img, temp_img, win_size=3):
-    # 读取图片
+
+    # 读取图片 [[85 90 90 ... 95 96 91]...[87 89 87 ... 85 91 92]]
     image1 = cv2.imread(source_img, cv2.IMREAD_GRAYSCALE)
     image2 = cv2.imread(temp_img, cv2.IMREAD_GRAYSCALE)
 
@@ -60,9 +61,6 @@ def compare_images(source_img, temp_img, win_size=3):
         ssim_score, _ = ssim(img1, img2, full=True,win_size=win_size)
         ssim_scores.append(ssim_score)
 
-    # 计算 SSIM
-    # ssim_score, _ = ssim(image1, image2, full=True)
-
     # 计算直方图相似度
     hist1 = cv2.calcHist([image1], [0], None, [256], [0, 256])
     hist2 = cv2.calcHist([image2], [0], None, [256], [0, 256])
@@ -80,6 +78,7 @@ def compare_images(source_img, temp_img, win_size=3):
 
 #   读取文件夹下所有图片
 def current_equipment(source_path, temp_img):
+    logger.info(f"当前线程为: {threading.current_thread().getName()}")
     gun_data = []
 
     #  遍历文件夹下所有图片
@@ -105,7 +104,7 @@ def current_equipment(source_path, temp_img):
 
 if __name__ == '__main__':
     # 示例用法
-    image_path1 = 'X6.png'
-    image_path2 = 'scope_2.png'
+    image_path1 = '6-1.png'
+    image_path2 = '2.png'
     hist_similarity = compare_images(image_path1, image_path2,)
     print(f'图片相似度 (SSIM): {hist_similarity}')

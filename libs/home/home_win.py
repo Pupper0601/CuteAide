@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+
 import sys
 
 from PySide6.QtCore import Qt
@@ -16,7 +17,6 @@ from views.home import Ui_MainWindow as home_ui
 from tools.paths import path_conn
 from .resolution_state import resolution
 from libs.keylisten import KeyListen
-
 
 
 class HomeMainWin(QMainWindow):

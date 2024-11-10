@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import time
 from threading import Event, Thread
 
 from libs.thread_pool import global_thread_pool
@@ -36,7 +37,7 @@ class KeyListen(Thread, QObject):
         try:
             if keys == "tab":  # 监听到按键 'tab'
                 self.key_pressed.emit('tab')  # 发送信号
-                global_thread_pool.submit(self.check_inventory_and_execute)
+                global_thread_pool.submit(self.check_inventory_and_execute) # 提交任务, 检查背包状态
             elif keys == "esc":  # 监听到按键 'esc'
                 self.key_pressed.emit('esc')
                 self.parent.mouse_listener.enable_gun_info = False
@@ -70,8 +71,10 @@ class KeyListen(Thread, QObject):
         global_thread_pool.submit(self._execute_gun_info_task)   # 提交任务
 
     def _execute_gun_info_task(self):
+        start_time= time.time()
         gun_info_listener = GetGunInfo(self.parent)  # 获取装备信息, 传递父对象
         gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)  # 连接信号
+        logger.info(f"键盘方法获取装备耗时: {time.time() - start_time}")
 
     def stop_listener(self):
         if self.listener:

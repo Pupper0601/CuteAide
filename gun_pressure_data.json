@@ -1,241 +1,194 @@
 {
-  "glubol_default": {
-    "global_shift": 1.0,
-    "global_scopes": {
-      "hongdian": 1.0,
-      "quanxi": 1.0,
+  "none": {
+    "posture": {
+      "zhan": 1.0,
+      "dun": 0.75,
+      "pa": 0.5
+    },
+    "scopes": {
+      "hongdian": 0.55,
+      "quanxi": 0.55,
+      "x2": 1.0,
+      "x3": 1.44,
+      "x4": 2.0,
+      "x6": 1.45
+    },
+    "muzzle":{
+      "buchang": 0.78,
+      "xiaoyan": 0.86,
+      "zhituiqi": 0.87
+    },
+    "grip": {
+      "banjie": 0.83,
+      "chuizhi": 0.87,
+      "muzhi": 0.83,
+      "qingxin": 0.78,
+      "zhijiao": 0.83,
+      "jiguang": 0.85
+    },
+    "stock": {
+      "zhanshu": 0.78,
+      "zhedie": 0.83,
+      "zhongxing": 0.86
+    },
+    "car": {
+      "car": 1.0
+    }
+  },
+  "AKM": {
+    "posture": {
+      "zhan": 1.0,
+      "dun": 0.75,
+      "pa": 0.47
+    },
+    "scopes": {
+      "hongdian": 0.55,
+      "quanxi": 0.55,
+      "x2": 1.0,
+      "x3": 1.44,
+      "x4": 2.0,
+      "x6": 1.45
+    },
+    "muzzle":{
+      "buchang": 0.76,
+      "xiaoyin": 0.85,
+      "zhituiqi": 0.86
+    },
+    "car": {
+      "car": 1.5
+    }
+  },
+  "m762": {
+    "posture": {
+      "zhan": 1.0,
+      "dun": 0.83,
+      "pa": 0.58
+    },
+    "scopes": {
+      "hongdian": 0.55,
+      "quanxi": 0.55,
+      "x2": 1.0,
+      "x3": 1.44,
+      "x4": 2.0,
+      "x6": 1.44
+    },
+    "muzzle":{
+      "buchang": 0.79,
+      "xiaoyan": 0.85,
+      "zhituiqi": 0.87
+    },
+    "grip": {
+      "banjie": 0.82,
+      "chuizhi": 0.87,
+      "muzhi": 0.81,
+      "qingxin": 0.78,
+      "zhijiao": 0.83,
+      "jiguang": 0.87
+    },
+    "car": {
+      "car": 1.0
+    },
+    "ballistic": [18,29,17,39,21,41,21,45,25,49,25,49,25,49,29,57,30,59,30,59,30,59,30,59,30,59,30,59,30,59,30,59,30,
+      59,30,59,30,59,30,59]
+  },
+  "m416": {
+    "posture": {
+      "zhan": 1.0,
+      "dun": 0.75,
+      "pa": 0.5
+    },
+    "scopes": {
+      "hongdian": 0.55,
+      "quanxi": 0.55,
+      "x2": 1.0,
+      "x3": 1.44,
+      "x4": 2.0,
+      "x6": 1.45
+    },
+    "muzzle":{
+      "buchang": 0.79,
+      "xiaoyan": 0.86,
+      "zhituiqi": 0.88
+    },
+    "grip": {
+      "banjie": 0.83,
+      "chuizhi": 0.87,
+      "muzhi": 0.83,
+      "qingxin": 0.78,
+      "zhijiao": 0.8,
+      "jiguang": 0.88
+    },
+    "stock": {
+      "zhanshu": 0.8,
+      "zhongxing": 0.86
+    },
+    "car": {
+      "car": 1.0
+    }
+  },
+  "sks": {
+    "posture": {
+      "zhan": 1.0,
+      "dun": 1.0,
+      "pa": 0.75
+    },
+    "scopes": {
+      "hongdian": 2.5,
+      "quanxi": 2.5,
       "x2": 1.0,
       "x3": 1.0,
       "x4": 1.0,
-      "x6": 1.0,
-      "x8": 1.0
+      "x6": 1.0
     },
-    "global_gun": {
-      "AKM": 1.0,
-      "M762": 1.0,
-      "G36C": 1.0,
-      "M416": 1.0,
-      "M16A4": 1.0,
-      "SCARL": 1.0,
-      "MK47": 1.0,
-      "QBZ": 1.0,
-      "AUG": 1.0,
-      "GROZA": 1.0,
-      "ACE32": 1.0,
-      "K2": 1.0,
-      "FAMAS": 1.0,
-      "ZDZT": 1.0,
-      "MINI14": 1.0,
-      "SKS": 1.0,
-      "VSS": 1.0,
-      "QBU": 1.0,
-      "MK14": 1.0,
-      "MK12": 1.0,
-      "DLGNF": 1.0,
-      "PP19": 1.0,
-      "TMX": 1.0,
-      "UMP": 1.0,
-      "UZI": 1.0,
-      "VECTOR": 1.0,
-      "MP5K": 1.0,
-      "P90": 1.0,
-      "JS9": 1.0,
-      "MP9": 1.0,
-      "DP28": 1.0,
-      "M249": 1.0,
-      "MG3": 1.0
+    "muzzle":{
+      "buchang": 0.9,
+      "xiaoyan": 0.9,
+      "zhituiqi": 0.85
+    },
+    "grip": {
+      "banjie": 0.83,
+      "chuizhi": 0.87,
+      "muzhi": 0.83,
+      "qingxin": 0.79,
+      "zhijiao": 0.83,
+      "jiguang": 0.85
+    },
+    "stock": {
+      "tosaiban": 0.86
+    },
+    "car": {
+      "car": 1.5
     }
   },
-  "gun_part": {
-    "none": {
-      "posture": {
-        "zhan": 1.0,
-        "dun": 0.75,
-        "pa": 0.5
-      },
-      "scopes": {
-        "hongdian": 0.55,
-        "quanxi": 0.55,
-        "x2": 1.0,
-        "x3": 1.44,
-        "x4": 2.0,
-        "x6": 1.45
-      },
-      "muzzle":{
-        "buchang": 0.78,
-        "xiaoyan": 0.86,
-        "zhituiqi": 0.87
-      },
-      "grip": {
-        "banjie": 0.83,
-        "chuizhi": 0.87,
-        "muzhi": 0.83,
-        "qingxin": 0.78,
-        "zhijiao": 0.83,
-        "jiguang": 0.85
-      },
-      "stock": {
-        "zhanshu": 0.78,
-        "zhedie": 0.83,
-        "zhongxing": 0.86
-      },
-      "car": {
-        "car": 1.0
-      }
+  "mini14": {
+    "posture": {
+      "zhan": 1.05,
+      "dun": 1.05,
+      "pa": 0.72
     },
-    "AKM": {
-      "posture": {
-        "zhan": 1.0,
-        "dun": 0.75,
-        "pa": 0.47
-      },
-      "scopes": {
-        "hongdian": 0.55,
-        "quanxi": 0.55,
-        "x2": 1.0,
-        "x3": 1.44,
-        "x4": 2.0,
-        "x6": 1.45
-      },
-      "muzzle":{
-        "buchang": 0.76,
-        "xiaoyin": 0.85,
-        "zhituiqi": 0.86
-      },
-      "car": {
-        "car": 1.5
-      }
+    "scopes": {
+      "hongdian": 1.5,
+      "quanxi": 1.5,
+      "x2": 1.0,
+      "x3": 1.0,
+      "x4": 1.16,
+      "x6": 1.16
     },
-    "m762": {
-      "posture": {
-        "zhan": 1.0,
-        "dun": 0.83,
-        "pa": 0.58
-      },
-      "scopes": {
-        "hongdian": 0.55,
-        "quanxi": 0.55,
-        "x2": 1.0,
-        "x3": 1.44,
-        "x4": 2.0,
-        "x6": 1.44
-      },
-      "muzzle":{
-        "buchang": 0.79,
-        "xiaoyan": 0.85,
-        "zhituiqi": 0.87
-      },
-      "grip": {
-        "banjie": 0.82,
-        "chuizhi": 0.87,
-        "muzhi": 0.81,
-        "qingxin": 0.78,
-        "zhijiao": 0.83,
-        "jiguang": 0.87
-      },
-      "car": {
-        "car": 1.0
-      }
+    "muzzle":{
+      "buchang": 0.9,
+      "xiaoyan": 0.94,
+      "zhituiqi": 0.85
     },
-    "m416": {
-      "posture": {
-        "zhan": 1.0,
-        "dun": 0.75,
-        "pa": 0.5
-      },
-      "scopes": {
-        "hongdian": 0.55,
-        "quanxi": 0.55,
-        "x2": 1.0,
-        "x3": 1.44,
-        "x4": 2.0,
-        "x6": 1.45
-      },
-      "muzzle":{
-        "buchang": 0.79,
-        "xiaoyan": 0.86,
-        "zhituiqi": 0.88
-      },
-      "grip": {
-        "banjie": 0.83,
-        "chuizhi": 0.87,
-        "muzhi": 0.83,
-        "qingxin": 0.78,
-        "zhijiao": 0.8,
-        "jiguang": 0.88
-      },
-      "stock": {
-        "zhanshu": 0.8,
-        "zhongxing": 0.86
-      },
-      "car": {
-        "car": 1.0
-      }
+    "grip": {
+      "banjie": 0.83,
+      "chuizhi": 0.87,
+      "muzhi": 0.83,
+      "qingxin": 0.79,
+      "zhijiao": 0.83,
+      "jiguang": 0.83
     },
-    "sks": {
-      "posture": {
-        "zhan": 1.0,
-        "dun": 1.0,
-        "pa": 0.75
-      },
-      "scopes": {
-        "hongdian": 2.5,
-        "quanxi": 2.5,
-        "x2": 1.0,
-        "x3": 1.0,
-        "x4": 1.0,
-        "x6": 1.0
-      },
-      "muzzle":{
-        "buchang": 0.9,
-        "xiaoyan": 0.9,
-        "zhituiqi": 0.85
-      },
-      "grip": {
-        "banjie": 0.83,
-        "chuizhi": 0.87,
-        "muzhi": 0.83,
-        "qingxin": 0.79,
-        "zhijiao": 0.83,
-        "jiguang": 0.85
-      },
-      "stock": {
-        "tosaiban": 0.86
-      },
-      "car": {
-        "car": 1.5
-      }
-    },
-    "mini14": {
-      "posture": {
-        "zhan": 1.05,
-        "dun": 1.05,
-        "pa": 0.72
-      },
-      "scopes": {
-        "hongdian": 1.5,
-        "quanxi": 1.5,
-        "x2": 1.0,
-        "x3": 1.0,
-        "x4": 1.16,
-        "x6": 1.16
-      },
-      "muzzle":{
-        "buchang": 0.9,
-        "xiaoyan": 0.94,
-        "zhituiqi": 0.85
-      },
-      "grip": {
-        "banjie": 0.83,
-        "chuizhi": 0.87,
-        "muzhi": 0.83,
-        "qingxin": 0.79,
-        "zhijiao": 0.83,
-        "jiguang": 0.83
-      },
-      "car": {
-        "car": 1.0
-      }
+    "car": {
+      "car": 1.0
     }
   }
 }

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import time
 
 from libs.thread_pool import global_thread_pool
 from concurrent.futures import ThreadPoolExecutor
@@ -27,22 +28,24 @@ class MouseListen(Thread):
         logger.info("监听鼠标线程启动")
 
     def on_click(self, x,y, button, pressed):
-        if not pressed and self.enable_gun_info:
+        if  pressed and self.enable_gun_info:
             self.parent.update_way("识别中......")
             if button == Button.left or button == Button.right:
                 if get_inventory(): # 如果当前为背包状态
-                    global_thread_pool.submit(self.execute_gun_info)
+                    self.execute_gun_info()
                 else:
                     logger.info("当前不是背包状态, 无法获取装备信息")
                     logger.info("当前不是背包状态")
                     self.parent.update_way("等待打开背包识别")
 
     def execute_gun_info(self):
-        global_thread_pool.submit(self._execute_gun_info_task)
+        self._execute_gun_info_task()
 
     def _execute_gun_info_task(self):
+        start_time = time.time()
         gun_info_listener = GetGunInfo(self.parent)  # 获取装备信息, 传递父对象
         gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)
+        logger.info(f"鼠标方法获取装备耗时: {time.time() - start_time}")
 
     def stop_listener(self):
         if self.listener:
