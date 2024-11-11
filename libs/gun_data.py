@@ -6,7 +6,10 @@
 
 global_recoil = 1   # 全局后坐力
 
+global_lshift = 1   # 全局左右移动
+
 alone_factor = {    # 单独武器基础影响因子
+    "weapon_none": 1.0,
      "AKM": 1.0,
      "M762": 1.0,
      "G36C": 1.0,
@@ -44,31 +47,31 @@ alone_factor = {    # 单独武器基础影响因子
 
 component_factor = {    # 配件影响因子
     "weapon_none": {
-        "poses":{       # 姿势
+        "pose":{       # 姿势
             "stand": 1, # 站
             "squat": 0.75,  # 蹲
             "crawl":0.5,    # 爬
         },
-        "muzzles": {     # 枪口
+        "muzzle": {     # 枪口
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "zhituiqi" :0.87,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.78,
             "muzhi": 0.83,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
             "x4": 2,
             "x6": 1.45,
         },
-        "stocks": {
+        "stock": {
             "zhanshu": 1,
             "zhongxing": 0.86,
             "zhedie": 0.86,
@@ -78,18 +81,18 @@ component_factor = {    # 配件影响因子
         },
     },
     "AKM": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.75,
             "crawl": 0.47,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.85,
             "buchang-b" : 0.76,
             "zhituiqi"  : 0.86,
         },
-        "scopes" : {
-            "reddot": 0.55,
+        "scope" : {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
             "x3"    : 1.44,
@@ -101,25 +104,25 @@ component_factor = {    # 配件影响因子
         },
     },
     "M762": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.83,
             "crawl": 0.58,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b": 0.85,
             "buchang-b": 0.79,
             "zhituiqi": 0.87,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.82,
             "qingxin": 0.78,
             "muzhi": 0.81,
             "jiguang": 0.87,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
@@ -131,25 +134,25 @@ component_factor = {    # 配件影响因子
         },
     },
     "G36C": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
             "zhituiqi"  : 0.87,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.79,
             "qingxin" : 0.78,
             "muzhi": 0.76,
             "jiguang": 0.79,
         },
-        "scopes" : {
-            "reddot": 0.55,
+        "scope" : {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
             "x3"    : 1.44,
@@ -161,32 +164,32 @@ component_factor = {    # 配件影响因子
         },
     },
     "M416": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.79,
             "zhituiqi"  : 0.88,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.78,
             "muzhi": 0.8,
             "jiguang": 0.88,
         },
-        "scopes" : {
-            "reddot": 0.55,
+        "scope" : {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
             "x3"    : 1.44,
             "x4"    : 2,
             "x6"    : 1.45,
         },
-        "stocks" : {
+        "stock" : {
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -195,25 +198,25 @@ component_factor = {    # 配件影响因子
         },
     },
     "M16A4": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.78,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.83,
             "buchang-b" : 0.74,
             "zhituiqi"  : 0.84,
         },
-        "scopes" : {
-            "reddot": 1,
+        "scope" : {
+            "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1.8,
             "x3"    : 2.6,
             "x4"    : 3.6,
             "x6"    : 2.6,
         },
-        "stocks" : {
+        "stock" : {
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -222,25 +225,25 @@ component_factor = {    # 配件影响因子
         },
     },
     "SCARL": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
             "zhituiqi"  : 0.87,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.84,
             "qingxin" : 0.78,
             "muzhi": 0.8,
             "jiguang": 0.82
         },
-        "scopes" : {
-            "reddot": 0.5,
+        "scope" : {
+            "hongdian": 0.5,
             "quanxi": 0.5,
             "x2"    : 1,
             "x3"    : 1.44,
@@ -252,31 +255,31 @@ component_factor = {    # 配件影响因子
         },
     },
     "MK47": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.78,
             "crawl": 0.53,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.84,
             "buchang-b" : 0.75,
             "zhituiqi"  : 0.84,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.78,
             "muzhi": 0.83,
         },
-        "scopes" : {
-            "reddot": 1,
+        "scope" : {
+            "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1.8,
             "x3"    : 2.6,
             "x4"    : 3.6,
             "x6"    : 2.6,
         },
-        "stocks" : {
+        "stock" : {
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -285,25 +288,25 @@ component_factor = {    # 配件影响因子
         },
     },
     "QBZ": {
-        "poses"  : {
+        "pose"  : {
             "stand": 0.92,
             "squat" : 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.88,
             "buchang-b" : 0.8,
             "zhituiqi"  : 0.88,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.815,
             "qingxin" : 0.78,
             "muzhi": 0.83,
             "jiguang": 0.79,
         },
-        "scopes" : {
-            "reddot": 0.55,
+        "scope" : {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
             "x3"    : 1.44,
@@ -315,24 +318,24 @@ component_factor = {    # 配件影响因子
         },
     },
     "AUG": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.8,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b": 0.84,
             "buchang-b": 0.78,
             "zhituiqi": 0.86,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.84,
             "qingxin": 0.78,
             "muzhi": 0.81,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
@@ -344,19 +347,19 @@ component_factor = {    # 配件影响因子
         },
     },
     "GROZA": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.7,
             "crawl": 0.47,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
             "xx"  : 1,
             "zhituiqi"  : 0.87,
         },
-        "scopes" : {
-            "reddot": 0.55,
+        "scope" : {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
             "x3"    : 1.44,
@@ -368,32 +371,32 @@ component_factor = {    # 配件影响因子
         },
     },
     "ACE32": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "zhituiqi": 0.87,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.78,
             "muzhi": 0.8,
             "jiguang": 0.86,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
             "x4": 2,
             "x6": 1.45,
         },
-        "stocks": {
+        "stock": {
             "zhanshu": 1,
             "zhongxing": 0.86,
         },
@@ -402,19 +405,19 @@ component_factor = {    # 配件影响因子
         },
     },
     "K2": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "xx": 1,
             "zhituiqi": 0.87,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
@@ -426,18 +429,18 @@ component_factor = {    # 配件影响因子
         },
     },
     "FAMAS": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.75,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b": 0.86,
             "buchang-b": 0.8,
             "zhituiqi": 0.83,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
             "x3": 1.44,
@@ -449,12 +452,12 @@ component_factor = {    # 配件影响因子
         },
     },
     "ZDZT": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.77,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -462,8 +465,8 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
 
         },
-        "scopes" : {
-            "reddot": 2.5,
+        "scope" : {
+            "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -471,7 +474,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 0.9,
             "x8"    : 1,
         },
-        "stocks" : {
+        "stock" : {
             "tosaiban": 0.86,
         },
         "car"    : {
@@ -480,20 +483,20 @@ component_factor = {    # 配件影响因子
 
     },
     "MINI14": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1.05,
             "squat" : 0.72,
             "crawl": 1.05,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 1.5,
+        "scope" : {
+            "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -507,20 +510,20 @@ component_factor = {    # 配件影响因子
 
     },
     "SKS": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.75,
             "crawl": 1,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 2.5,
+        "scope" : {
+            "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -528,13 +531,13 @@ component_factor = {    # 配件影响因子
             "x6"    : 1,
             "x8"    : 1.1,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.79,
             "muzhi": 0.83,
         },
-        "stocks" : {
+        "stock" : {
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -544,12 +547,12 @@ component_factor = {    # 配件影响因子
 
     },
     "VSS": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 1,
             "crawl": 1,
         },
-        "stocks" : {
+        "stock" : {
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -558,20 +561,20 @@ component_factor = {    # 配件影响因子
 
     },
     "QBU": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.78,
             "crawl": 0.86,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 1.5,
+        "scope" : {
+            "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -585,20 +588,20 @@ component_factor = {    # 配件影响因子
 
     },
     "MK14": {
-        "poses"  : {
+        "pose"  : {
             "stand": 0.95,
             "squat" : 0.77,
             "crawl": 0.7,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 1,
+        "scope" : {
+            "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1,
             "x3"    : 1,
@@ -606,7 +609,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 1,
             "x8"    : 1.2,
         },
-        "stocks" : {
+        "stock" : {
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -615,21 +618,21 @@ component_factor = {    # 配件影响因子
 
     },
     "MK12": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.78,
             "crawl": 0.7,
         },
 
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 1.5,
+        "scope" : {
+            "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -637,7 +640,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 1,
             "x8"    : 1,
         },
-        "grips"  : {
+        "grip"  : {
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.79,
@@ -649,20 +652,20 @@ component_factor = {    # 配件影响因子
 
     },
     "DLGNF": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1.3,
             "squat" : 0.84,
             "crawl": 0.86,
         },
-        "muzzles": {
+        "muzzle": {
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
             "buchang-j" : 0.9,
             "zhituiqi"  : 0.85,
         },
-        "scopes" : {
-            "reddot": 2.5,
+        "scope" : {
+            "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
             "x3"    : 1,
@@ -670,7 +673,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 1,
             "x8"    : 1.4,
         },
-        "stocks" : {
+        "stock" : {
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -679,17 +682,17 @@ component_factor = {    # 配件影响因子
 
     },
     "PP19": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.77,
             "crawl": 0.7,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
-        "scopes": {
-            "reddot": 0.51,
+        "scope": {
+            "hongdian": 0.51,
             "quanxi": 0.51,
             "x2": 1,
             "x3": 1.44,
@@ -701,16 +704,16 @@ component_factor = {    # 配件影响因子
         },
     },
     "TMX": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.7,
             "crawl": 0.62,
         },
-        "grips": {
+        "grip": {
             "qingxin": 0.78	,
         },
-        "scopes": {
-            "reddot": 0.51,
+        "scope": {
+            "hongdian": 0.51,
             "quanxi": 0.51,
         },
         "car": {
@@ -718,24 +721,24 @@ component_factor = {    # 配件影响因子
         },
     },
     "UMP": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.74,
             "crawl": 0.7,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.79,
             "muzhi": 0.83,
             "jiguang": 0.83,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
             "x3": 1.44,
@@ -747,20 +750,20 @@ component_factor = {    # 配件影响因子
         },
     },
     "UZI": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.73,
             "crawl": 0.6,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.68,
             "xiaoyan-c": 0.88,
         },
-        "scopes": {
-            "reddot": 0.51,
+        "scope": {
+            "hongdian": 0.51,
             "quanxi": 0.51,
         },
-        "stocks": {
+        "stock": {
             "zhedie": 1,
         },
         "car": {
@@ -768,29 +771,29 @@ component_factor = {    # 配件影响因子
         },
     },
     "VECTOR": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.75,
             "crawl": 0.64,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
-        "grips": {
+        "grip": {
             "banjie": 0.83,
             "qingxin": 0.79,
             "jiguang": 0.83,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
             "x3": 1.44,
             "x4": 2,
             "x6": 1.45,
         },
-        "stocks": {
+        "stock": {
             "zhongxing": 1,
             "zhanshu": 1,
         },
@@ -799,30 +802,30 @@ component_factor = {    # 配件影响因子
         },
     },
     "MP5K": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.67,
             "crawl": 0.53,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.6,
             "xiaoyan-c": 0.82,
         },
-        "grips": {
+        "grip": {
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.75,
             "muzhi": 0.83,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
             "x3": 1.44,
             "x4": 2,
             "x6": 1.45,
         },
-        "stocks": {
+        "stock": {
             "zhongxing": 1,
             "zhanshu": 1,
         },
@@ -831,7 +834,7 @@ component_factor = {    # 配件影响因子
         },
     },
     "P90": {
-        "poses"  : {
+        "pose"  : {
             "stand": 1,
             "squat" : 0.77,
             "crawl": 0.67,
@@ -841,17 +844,17 @@ component_factor = {    # 配件影响因子
         },
     },
     "JS9": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.73,
             "crawl": 0.5,
         },
-        "muzzles": {
+        "muzzle": {
             "buchang-c": 0.58,
             "xiaoyan-c": 0.82,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
             "x3": 1.44,
@@ -863,16 +866,16 @@ component_factor = {    # 配件影响因子
         },
     },
     "MP9": {
-        "poses": {
+        "pose": {
             "stand": 1,
             "squat": 0.73,
             "crawl": 0.63,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
         },
-        "stocks": {
+        "stock": {
             "zhedie": 1,
         },
         "car": {
@@ -880,20 +883,20 @@ component_factor = {    # 配件影响因子
         },
    },
     "M249": {
-        "poses": {
+        "pose": {
             "stand": 1.28,
             "squat": 0.73,
             "crawl": 0.3,
         },
-        "scopes": {
-            "reddot": 0.55,
+        "scope": {
+            "hongdian": 0.55,
             "quanxi": 0.55,
 	        "x2": 1,
             "x3": 1.44,
             "x4": 2,
             "x6": 1.45,
         },
-        "stocks": {
+        "stock": {
 			"zhanshu": 1,
 			"zhongxing": 1,
         },
@@ -902,13 +905,13 @@ component_factor = {    # 配件影响因子
         },
     },
 	"MG3": {
-        "poses": {
+        "pose": {
             "stand": 3,
             "squat": 1.78,
             "crawl": 0.65,
         },
-        "scopes": {
-            "reddot": 0.52,
+        "scope": {
+            "hongdian": 0.52,
             "quanxi": 0.52,
 			"x2": 1,
             "x3": 1.44,
@@ -1042,4 +1045,41 @@ guns_trajectory = {
     "MG3": {
         "default":[11,1,1,5,3,5,3,5,3,5,2,3,2,3,1,3,2,3,2,3,2,3,2,3,2,1,1,1,1,1,1,1,1,1,3,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2]
         },
+}
+
+weapon_intervals = {
+    "weapon_none": 86,
+    "AKM": 102,
+    "M762": 86,
+    "G36C": 87,
+    "M416": 87,
+    "M16A4": 78,
+    "SCARL": 87,
+    "MK47": 76,
+    "QBZ": 87,
+    "AUG": 84,
+    "GROZA": 80,
+    "ACE32": 89,
+    "K2": 87,
+    "FAMAS": 67,
+    "ZDZT": 108,
+    "MINI14": 108,
+    "SKS": 108,
+    "VSS": 108,
+    "QBU": 108,
+    "MK14": 108,
+    "MK12": 108,
+    "DLGNF": 108,
+    "PP19": 84,
+    "TMX": 80,
+    "UMP": 88,
+    "UZI": 48,
+    "VECTOR": 54,
+    "MP5K": 66,
+    "P90": 60,
+    "JS9": 66,
+    "MP9": 60,
+    "DP28": 66,
+    "M249": 75,
+    "MG3": 61
 }

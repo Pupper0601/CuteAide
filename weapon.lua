@@ -19,6 +19,7 @@ local global_scope_multipliers = {
     x6 = 1,
     x8 = 1,
 }
+
 --单个枪械系数（尤其是连狙需要调）
 local base_coefficients = {
     Berry = 1,
@@ -54,9 +55,6 @@ local base_coefficients = {
     M249 = 1.0,
     MG3 = 1.0,
 }
-
-
-
 
 local attachment_multipliers = {
  None = {
@@ -1312,9 +1310,6 @@ local attachment_multipliers = {
         },
     },
 }
-
-
-
 
 local recoil_patterns = {
     Berry = {
@@ -3026,44 +3021,6 @@ SLR = {
 }
 
 
-local weapon_intervals = {
-  None = 86,
-    Berry = 86,
-    AUG = 84,
-    AKM = 102,
-    M416 = 87,
-    ACE32 = 89,
-    G36C = 87,
-    SCAR = 87,
-    QBZ = 87,
-    K2 = 87,
-    M16 = 78,
-    MK47 = 76,
-    GROZA = 80,
-    FAMAS = 67,
-    PP19 = 84,
-    TOM = 80,
-    UMP = 88,
-    UZI = 48,
-    VECTOR = 54,
-    MP5 = 66,
-    P90 = 60,
-    JS9 = 66,
-    MP9 = 60,
-    DP28 = 66,
-    M249 = 75,
-    MG3 = 61,
-    MINI = 108,
-    SLR = 108,
-    SKS = 108,
-    MK12 = 108,
-    QBU = 108,
-    DLG = 108,
-    VSS = 108,
-    MK14 = 108,
-}
-
-
 local decimal_cache = 0 -- 用于缓存小数部分，以便在下一次调用时使用
 
 -- 以下是向上取整并缓存小数部分的函数
@@ -3122,7 +3079,7 @@ local function is_authorized()  -- 是否授权, 用于检查是否加载了weap
         OutputLogMessage("Error loading weapon.lua: %s\n", chunk)   -- 输出错误信息
         return false    -- 返回false
     end -- 如果加载成功, 则返回true
-    return type(muzzle) == "string" and muzzle == "None"    -- 返回muzzle是否是字符串且等于"None"
+        return type(muzzle) == "string" and muzzle == "None"    -- 返回muzzle是否是字符串且等于"None"
 end -- 函数结束
 
 -- 以下是压枪函数

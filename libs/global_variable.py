@@ -11,6 +11,8 @@ THREAD_POOL = ThreadPoolExecutor()
 
 CACHE = ImageCache().source_data
 
+POSE = "stand"
+
 TRANSLATE = {
   "weapon_none": "无武器",
   "stock_none": "无枪托",
