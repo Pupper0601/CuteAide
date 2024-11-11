@@ -96,26 +96,27 @@ class HomeMainWin(QMainWindow):
                 self.mouse_listener = None
 
 
-    def update_gun_info(self, gun_1, gun_2):
+    def update_gun_info(self, gun_info):
         # 更新枪械信息
-        self.gun_info = {"gun_1": gun_1, "gun_2": gun_2}
-        # 在这里添加显示枪械信息的代码，例如更新UI组件
-        logger.info(f"接收到的枪械信息: {self.gun_info}")
-        self.ui.label_6.setText(f"{self.gun_info['gun_1']['weapon']}")
-        self.ui.label_7.setText(f"{self.gun_info['gun_1']['scope']}")
-        self.ui.label_8.setText(f"{self.gun_info['gun_1']['muzzle']}")
-        self.ui.label_10.setText(f"{self.gun_info['gun_1']['grip']}")
-        self.ui.label_9.setText(f"{self.gun_info['gun_1']['stock']}")
+        self.gun_info = gun_info
+        if len(self.gun_info) > 0:
+            # 在这里添加显示枪械信息的代码，例如更新UI组件
+            logger.info(f"接收到的枪械信息: {self.gun_info}")
+            self.ui.label_6.setText(f"{self.gun_info['gun_1']['weapon'][0]}")
+            self.ui.label_7.setText(f"{self.gun_info['gun_1']['scope'][0]}")
+            self.ui.label_8.setText(f"{self.gun_info['gun_1']['muzzle'][0]}")
+            self.ui.label_10.setText(f"{self.gun_info['gun_1']['grip'][0]}")
+            self.ui.label_9.setText(f"{self.gun_info['gun_1']['stock'][0]}")
 
-        self.ui.label_11.setText(f"{self.gun_info['gun_2']['weapon']}")
-        self.ui.label_12.setText(f"{self.gun_info['gun_2']['scope']}")
-        self.ui.label_13.setText(f"{self.gun_info['gun_2']['muzzle']}")
-        self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip']}")
-        self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock']}")
+            self.ui.label_11.setText(f"{self.gun_info['gun_2']['weapon'][0]}")
+            self.ui.label_12.setText(f"{self.gun_info['gun_2']['scope'][0]}")
+            self.ui.label_13.setText(f"{self.gun_info['gun_2']['muzzle'][0]}")
+            self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip'][0]}")
+            self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock'][0]}")
 
-        self.update_state_win(0)
-        logger.info("枪械信息更新完成")
-        self.update_way("识别完成")
+            self.update_state_win(0)
+            logger.info("枪械信息更新完成")
+            self.update_way("识别完成")
 
 
     def update_state_win(self, gun_key):

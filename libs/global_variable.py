@@ -3,17 +3,13 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
-from libs.cache import ImageCache, source_data
+from libs.cache import ImageCache
 from concurrent.futures import ThreadPoolExecutor
 
 # 创建一个全局的线程池
 THREAD_POOL = ThreadPoolExecutor()
 
-if not source_data:
-    ImageCache()
-    CACHE = source_data
-else:
-    CACHE = source_data
+CACHE = ImageCache().source_data
 
 TRANSLATE = {
   "weapon_none": "无武器",

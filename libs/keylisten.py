@@ -5,11 +5,12 @@
 import time
 from threading import Event, Thread
 
-from libs.thread_pool import global_thread_pool
-from PySide6.QtCore import QObject, QThread, Signal
+from PySide6.QtCore import QObject, Signal
 from pynput import keyboard
 from pynput.keyboard import Key
-from libs.screenshot import GetGunInfo, get_inventory
+
+from libs.gun_info import GunInfo
+from tools.active_window import get_active_window_info
 
 from tools.log import logger
 
@@ -33,11 +34,12 @@ class KeyListen(Thread, QObject):
     def on_pressed(self, keys):
         # 监听按键
         keys = str(keys.name if isinstance(keys, Key) else keys.char)
-        logger.debug(f"按键 {keys} 被按下")  # 添加日志记录
-        try:
+        active_window = get_active_window_info()
+        if "PUBG" in active_window["window_title"]:
             if keys == "tab":  # 监听到按键 'tab'
                 self.key_pressed.emit('tab')  # 发送信号
-                global_thread_pool.submit(self.check_inventory_and_execute) # 提交任务, 检查背包状态
+                self.parent.update_gun_info(GunInfo().gun_info)
+                self.parent.mouse_listener.enable_gun_info = True
             elif keys == "esc":  # 监听到按键 'esc'
                 self.key_pressed.emit('esc')
                 self.parent.mouse_listener.enable_gun_info = False
@@ -51,32 +53,13 @@ class KeyListen(Thread, QObject):
                 self.parent.posture_key('space')
             elif keys == "ctrl_l":  # 监听到按键 'ctrl'
                 self.parent.posture_key('ctrl')
-
-        except AttributeError:
-            pass
-
-    def check_inventory_and_execute(self):
-        # 检查当前是否为背包状态
-        if get_inventory():  # 如果当前为背包状态
-            self.parent.update_way("识别中......")
-            self.execute_gun_info()
-            self.parent.mouse_listener.enable_gun_info = True  # 控制鼠标点击识别
         else:
-            logger.info("当前不是背包状态")
-            self.parent.update_way("等待打开背包识别")
             self.parent.mouse_listener.enable_gun_info = False
-            self.stop_event.set()
+            self.parent.update_way("当前不在游戏中")
 
-    def execute_gun_info(self):
-        global_thread_pool.submit(self._execute_gun_info_task)   # 提交任务
-
-    def _execute_gun_info_task(self):
-        start_time= time.time()
-        gun_info_listener = GetGunInfo(self.parent)  # 获取装备信息, 传递父对象
-        gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)  # 连接信号
-        logger.info(f"键盘方法获取装备耗时: {time.time() - start_time}")
 
     def stop_listener(self):
         if self.listener:
             self.listener.stop()
             logger.info("监听键盘线程停止")
+

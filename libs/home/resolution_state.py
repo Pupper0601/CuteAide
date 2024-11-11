@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from libs.screen_resolution import get_monitor_info
+from libs.monitor import get_monitor_info
 from tools.paths import path_conn
 
 

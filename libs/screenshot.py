@@ -53,4 +53,4 @@ def gun_screenshots():
 if __name__ == '__main__':
     # 示例用法
     screen_capture([0, 0, 100, 100], "test.png")
-    # print(gun_screenshots())
+    print(gun_screenshots())

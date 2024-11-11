@@ -4,12 +4,12 @@
 # @Email  : pupper.cheng@gmail.com
 import time
 
-from libs.thread_pool import global_thread_pool
-from concurrent.futures import ThreadPoolExecutor
 from threading import Thread, Event
 from pynput import mouse
+from libs.global_variable import THREAD_POOL
 
-from libs.screenshot import GetGunInfo, get_inventory
+from libs.gun_info import GunInfo
+from tools.active_window import get_active_window_info
 from tools.log import logger
 from pynput.mouse import Button
 
@@ -28,24 +28,19 @@ class MouseListen(Thread):
         logger.info("监听鼠标线程启动")
 
     def on_click(self, x,y, button, pressed):
-        if  pressed and self.enable_gun_info:
-            self.parent.update_way("识别中......")
-            if button == Button.left or button == Button.right:
-                if get_inventory(): # 如果当前为背包状态
-                    self.execute_gun_info()
-                else:
-                    logger.info("当前不是背包状态, 无法获取装备信息")
-                    logger.info("当前不是背包状态")
-                    self.parent.update_way("等待打开背包识别")
+        active_window = get_active_window_info()
+        if "PUBG" in active_window["window_title"]:
+            if pressed and self.enable_gun_info:
+                self.parent.update_way("识别中......")
+                if button == Button.left or button == Button.right:
+                    THREAD_POOL.submit(self.update_gun_info)
+                    self.parent.update_way("识别完成")
+        else:
+            self.enable_gun_info = False
+            self.parent.update_way("当前不在游戏中")
 
-    def execute_gun_info(self):
-        self._execute_gun_info_task()
-
-    def _execute_gun_info_task(self):
-        start_time = time.time()
-        gun_info_listener = GetGunInfo(self.parent)  # 获取装备信息, 传递父对象
-        gun_info_listener.gun_info_signal.connect(self.parent.update_gun_info)
-        logger.info(f"鼠标方法获取装备耗时: {time.time() - start_time}")
+    def update_gun_info(self):
+        self.parent.update_gun_info(GunInfo().gun_info)
 
     def stop_listener(self):
         if self.listener:
