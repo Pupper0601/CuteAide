@@ -6,6 +6,7 @@
 from PySide6.QtCore import Qt
 
 from libs import global_variable
+from libs.pressure import Pressure
 from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -54,12 +55,14 @@ class StateMainWin(QMainWindow):
             self.ui.pushButton_11.setText(gun_key)
             global_variable.fire_weapon = gun_key
         logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
+        global_variable.current_weapon_information = _gun_info
         if _gun_info is not None:
             self.ui.pushButton_2.setText(_gun_info["weapon"][0])
             self.ui.pushButton_3.setText(_gun_info["scope"][0])
             self.ui.pushButton_4.setText(_gun_info["muzzle"][0])
             self.ui.pushButton_5.setText(_gun_info["grip"][0])
             self.ui.pushButton_6.setText(_gun_info["stock"][0])
+            Pressure()
 
     def update_posture(self, key):
         # 更新姿势

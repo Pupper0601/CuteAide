@@ -11,6 +11,7 @@ from pynput.keyboard import Key
 
 from libs import global_variable
 from libs.gun_info import GetGunInfo
+from libs.pressure import Pressure
 from tools.active_window import get_active_window_info
 
 from tools.log import logger
@@ -53,52 +54,41 @@ class KeyListen(Thread, QObject):
                 global_variable.enable_mouse_recognition = False
                 global_variable.enable_key_recognition = True
             elif keys in ["1", "!"]:
-                if len(global_variable.weapon_information) > 0:
-                    if global_variable.weapon_information["gun_1"]["weapon"][1] != "weapon_none":
-                        self.parent.state_win.update_state_gun_info(keys)
-                        self.parent.update_home_current_gun(keys)
-                        global_variable.shooting_state = "fired"
-                        self.parent.state_win.update_state_shooting_state()
-                    elif global_variable.weapon_information["gun_2"]["weapon"][1] != "weapon_none":
-                        self.parent.state_win.update_state_gun_info("2")
-                        self.parent.update_home_current_gun("2")
-                        global_variable.shooting_state = "fired"
-                        self.parent.state_win.update_state_shooting_state()
-                    global_variable.missile_stop_gun_5 = False
+                self._update_weapon_state("gun_1", "gun_2", keys)
             elif keys in ["2", "@"]:
-                if len(global_variable.weapon_information) > 0:
-                    if global_variable.weapon_information["gun_2"]["weapon"][1] != "weapon_none":
-                        self.parent.state_win.update_state_gun_info(keys)
-                        self.parent.update_home_current_gun(keys)
-                        global_variable.shooting_state = "fired"
-                        self.parent.state_win.update_state_shooting_state()
-                    elif global_variable.weapon_information["gun_1"]["weapon"][1] != "weapon_none":
-                        self.parent.state_win.update_state_gun_info("1")
-                        self.parent.update_home_current_gun("1")
-                        global_variable.shooting_state = "fired"
-                        self.parent.state_win.update_state_shooting_state()
-                    global_variable.missile_stop_gun_5 = False
+                self._update_weapon_state("gun_2", "gun_1", keys)
             elif keys in ["3","4","#","$",]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-            elif keys in ["x","X"]:
-                if global_variable.missile_stop_gun_5:
-                    global_variable.shooting_state = "stop"
-                    self.parent.state_win.update_state_shooting_state()
-                elif not global_variable.missile_stop_gun_x:
-                    global_variable.shooting_state = "stop"
-                    self.parent.state_win.update_state_shooting_state()
-                    global_variable.missile_stop_gun_x = True
-                elif global_variable.missile_stop_gun_x:
-                    global_variable.shooting_state = "fired"
-                    self.parent.state_win.update_state_shooting_state()
-                    global_variable.missile_stop_gun_x = False
+                Pressure()
+            elif keys in ["x", "X"]:
+                global_variable.shooting_state = "stop" if not global_variable.missile_stop_gun_x or global_variable.missile_stop_gun_5 else "fired"
+                self.parent.state_win.update_state_shooting_state()
+                global_variable.missile_stop_gun_x = not global_variable.missile_stop_gun_x
+                Pressure()
             elif keys in ["5", "%"]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
                 global_variable.missile_stop_gun_5 = True
+                Pressure()
             elif keys in ['z',"Z", 'c',"C", 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
+                Pressure()
+
+    def _update_weapon_state(self, primary_gun, secondary_gun, keys):
+        if len(global_variable.weapon_information) > 0:
+            if global_variable.weapon_information[primary_gun]["weapon"][1] != "weapon_none":
+                self.parent.state_win.update_state_gun_info(keys)
+                self.parent.update_home_current_gun(keys)
+                global_variable.shooting_state = "fired"
+                self.parent.state_win.update_state_shooting_state()
+            elif global_variable.weapon_information[secondary_gun]["weapon"][1] != "weapon_none":
+                self.parent.state_win.update_state_gun_info("2" if primary_gun == "gun_1" else "1")
+                self.parent.update_home_current_gun("2" if primary_gun == "gun_1" else "1")
+                global_variable.shooting_state = "fired"
+                self.parent.state_win.update_state_shooting_state()
+            global_variable.missile_stop_gun_5 = False
+            Pressure()
 
 
     def stop_listener(self):

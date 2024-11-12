@@ -11,16 +11,16 @@ THREAD_POOL = ThreadPoolExecutor()
 
 CACHE = ImageCache().source_data
 
-POSE = "stand"
-
 enable_mouse_recognition = False
 enable_key_recognition = True
-weapon_information = {}
-posture_state_button = "c"
-posture_state = "stand"
+weapon_information = {} # 武器信息
+posture_state_button = "c"  # 默认切换姿势键
 
-fire_weapon = "1"   # 默认开火键
+posture_state = "stand" # 默认站立
+fire_weapon = "1"   # 默认开火武器
 shooting_state = "fired"    # 默认射击状态
+current_weapon_information = {} # 当前武器信息
+
 missile_stop_gun_x = False  # x收枪
 missile_stop_gun_5 = False  # 投掷物收枪
 

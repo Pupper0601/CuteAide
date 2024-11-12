@@ -6,7 +6,7 @@
 
 global_recoil = 1   # 全局后坐力
 
-global_lshift = 1   # 全局左右移动
+global_lshift = 1   # 全局屏息系数
 
 alone_factor = {    # 单独武器基础影响因子
     "weapon_none": 1.0,
@@ -925,7 +925,7 @@ component_factor = {    # 配件影响因子
     }
 }
 
-guns_trajectory = {
+guns_trajectory = { # 弹道
     "weapon_none": {
         "default": [16, 13, 11, 23, 14, 33, 17, 33, 18, 37, 19, 37, 19, 37, 21, 41, 21, 41, 21, 41, 21, 41, 21, 43, 22,
                     43, 22, 43, 22, 45, 23, 45, 23, 45, 23, 45, 23, 45, 23, 45, 23]
