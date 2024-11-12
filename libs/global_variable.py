@@ -16,6 +16,7 @@ enable_key_recognition = True
 weapon_information = {} # 武器信息
 posture_state_button = "c"  # 默认切换姿势键
 
+in_car = 0  # 默认不在车上
 posture_state = "stand" # 默认站立
 fire_weapon = "1"   # 默认开火武器
 shooting_state = "fired"    # 默认射击状态

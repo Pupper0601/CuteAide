@@ -10,15 +10,15 @@ from tools.paths import path_conn
 
 
 class Pressure:
-    def __init__(self):
-        # self.s = weapon_info
+    def __init__(self, weapon_info):
+        self.s = weapon_info
         THREAD_POOL.submit(self.write_dict_to_lua_file())
 
-    @staticmethod
-    def get_component_factor():
+    # @staticmethod
+    def get_component_factor(self):
         _factor_data = {}
-        current_weapon_info = global_variable.current_weapon_information
-        # current_weapon_info = self.s
+        # current_weapon_info = global_variable.current_weapon_information
+        current_weapon_info = self.s
         if current_weapon_info:
             _weapon_name = current_weapon_info["weapon"][1]
 
@@ -48,6 +48,9 @@ class Pressure:
                 _factor_data["stock"] = 1.0
                 _factor_data["car"] = 1.0
                 global_variable.shooting_state = "stop"
+
+            # 获取是否上车
+            _factor_data["in_car"] = global_variable.in_car
 
             # 获取当前武器弹道
             if _weapon_name in guns_trajectory.keys():
@@ -84,11 +87,11 @@ class Pressure:
         with open(paths, 'w', encoding='utf-8') as file:
             for key, value in self.get_component_factor().items():
                 if isinstance(value, str):
-                    file.write(f"{key} = '{value}',\n")
+                    file.write(f"{key} = '{value}'\n")
                 elif isinstance(value, list):
-                    file.write(f"{key} = {{{', '.join(map(str, value))}}},\n")
+                    file.write(f"{key} = {{{', '.join(map(str, value))}}}\n")
                 else:
-                    file.write(f"{key} = {value},\n")
+                    file.write(f"{key} = {value}\n")
 
 
 if __name__ == '__main__':
