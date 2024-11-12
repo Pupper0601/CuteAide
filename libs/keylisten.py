@@ -39,6 +39,7 @@ class KeyListen(Thread, QObject):
         if True:
             if keys == "tab":  # 监听到按键 'tab'
                 if global_variable.enable_key_recognition:
+                    time.sleep(0.5) # 等待0.5秒, 等待背包打开
                     GetGunInfo()  # 更新枪械信息
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     global_variable.enable_mouse_recognition = False    # 关闭鼠标识别
@@ -51,7 +52,7 @@ class KeyListen(Thread, QObject):
             elif keys == "esc":  # 监听到按键 'esc'
                 global_variable.enable_mouse_recognition = False
                 global_variable.enable_key_recognition = True
-            elif keys == "1":
+            elif keys in ["1", "!"]:
                 if len(global_variable.weapon_information) > 0:
                     if global_variable.weapon_information["gun_1"]["weapon"][1] != "weapon_none":
                         self.parent.state_win.update_state_gun_info(keys)
@@ -63,7 +64,8 @@ class KeyListen(Thread, QObject):
                         self.parent.update_home_current_gun("2")
                         global_variable.shooting_state = "fired"
                         self.parent.state_win.update_state_shooting_state()
-            elif keys == "2":
+                    global_variable.missile_stop_gun_5 = False
+            elif keys in ["2", "@"]:
                 if len(global_variable.weapon_information) > 0:
                     if global_variable.weapon_information["gun_2"]["weapon"][1] != "weapon_none":
                         self.parent.state_win.update_state_gun_info(keys)
@@ -75,19 +77,27 @@ class KeyListen(Thread, QObject):
                         self.parent.update_home_current_gun("1")
                         global_variable.shooting_state = "fired"
                         self.parent.state_win.update_state_shooting_state()
-            elif keys == "c":
-                if keys == global_variable.posture_state_button == "c":
-                    self.parent.state_win.update_posture(keys)
-            elif keys == "ctrl_l":
-                if global_variable.posture_state_button == "ctrl":
-                    self.parent.state_win.update_posture(keys)
-            elif keys in ["3","4","x"]:
+                    global_variable.missile_stop_gun_5 = False
+            elif keys in ["3","4","#","$",]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-            elif keys == "5":
+            elif keys in ["x","X"]:
+                if global_variable.missile_stop_gun_5:
+                    global_variable.shooting_state = "stop"
+                    self.parent.state_win.update_state_shooting_state()
+                elif not global_variable.missile_stop_gun_x:
+                    global_variable.shooting_state = "stop"
+                    self.parent.state_win.update_state_shooting_state()
+                    global_variable.missile_stop_gun_x = True
+                elif global_variable.missile_stop_gun_x:
+                    global_variable.shooting_state = "fired"
+                    self.parent.state_win.update_state_shooting_state()
+                    global_variable.missile_stop_gun_x = False
+            elif keys in ["5", "%"]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-            elif keys in ['z', 'c', 'ctrl_l', 'space']:
+                global_variable.missile_stop_gun_5 = True
+            elif keys in ['z',"Z", 'c',"C", 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
 
 

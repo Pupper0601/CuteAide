@@ -19,8 +19,10 @@ weapon_information = {}
 posture_state_button = "c"
 posture_state = "stand"
 
-fire_weapon = "1"
-shooting_state = "fired"
+fire_weapon = "1"   # 默认开火键
+shooting_state = "fired"    # 默认射击状态
+missile_stop_gun_x = False  # x收枪
+missile_stop_gun_5 = False  # 投掷物收枪
 
 TRANSLATE = {
   "weapon_none": "无武器",
