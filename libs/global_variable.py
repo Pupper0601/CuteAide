@@ -13,6 +13,15 @@ CACHE = ImageCache().source_data
 
 POSE = "stand"
 
+enable_mouse_recognition = False
+enable_key_recognition = True
+weapon_information = {}
+posture_state_button = "c"
+posture_state = "stand"
+
+fire_weapon = "1"
+shooting_state = "fired"
+
 TRANSLATE = {
   "weapon_none": "无武器",
   "stock_none": "无枪托",

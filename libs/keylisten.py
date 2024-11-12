@@ -9,14 +9,14 @@ from PySide6.QtCore import QObject, Signal
 from pynput import keyboard
 from pynput.keyboard import Key
 
-from libs.gun_info import GunInfo
+from libs import global_variable
+from libs.gun_info import GetGunInfo
 from tools.active_window import get_active_window_info
 
 from tools.log import logger
 
 
 class KeyListen(Thread, QObject):
-    key_pressed = Signal(str)  # 定义信号
 
     def __init__(self, parent=None):
         Thread.__init__(self)
@@ -35,27 +35,60 @@ class KeyListen(Thread, QObject):
         # 监听按键
         keys = str(keys.name if isinstance(keys, Key) else keys.char)
         active_window = get_active_window_info()
-        if "PUBG" in active_window["window_title"]:
+        # if "PUBG" in active_window["window_title"]:
+        if True:
             if keys == "tab":  # 监听到按键 'tab'
-                self.key_pressed.emit('tab')  # 发送信号
-                self.parent.update_gun_info(GunInfo().gun_info)
-                self.parent.mouse_listener.enable_gun_info = True
+                if global_variable.enable_key_recognition:
+                    GetGunInfo()  # 更新枪械信息
+                    self.parent.update_home_gun_info(global_variable.weapon_information)
+                    global_variable.enable_mouse_recognition = False    # 关闭鼠标识别
+                    global_variable.enable_key_recognition = False
+                else:
+                    GetGunInfo()  # 更新枪械信息
+                    self.parent.update_home_gun_info(global_variable.weapon_information)
+                    global_variable.enable_key_recognition = True
+                    global_variable.enable_mouse_recognition = False
             elif keys == "esc":  # 监听到按键 'esc'
-                self.key_pressed.emit('esc')
-                self.parent.mouse_listener.enable_gun_info = False
-                self.stop_event.set()
-            elif keys in ['1', '2']:
-                self.parent.update_state_win(keys)
-                self.parent.update_current_gun(keys)
-            elif keys in ['z', 'c']:
-                self.parent.posture_key(keys)
-            elif keys == "space":  # 监听到按键 '空格'
-                self.parent.posture_key('space')
-            elif keys == "ctrl_l":  # 监听到按键 'ctrl'
-                self.parent.posture_key('ctrl')
-        else:
-            self.parent.mouse_listener.enable_gun_info = False
-            self.parent.update_way("当前不在游戏中")
+                global_variable.enable_mouse_recognition = False
+                global_variable.enable_key_recognition = True
+            elif keys == "1":
+                if len(global_variable.weapon_information) > 0:
+                    if global_variable.weapon_information["gun_1"]["weapon"][1] != "weapon_none":
+                        self.parent.state_win.update_state_gun_info(keys)
+                        self.parent.update_home_current_gun(keys)
+                        global_variable.shooting_state = "fired"
+                        self.parent.state_win.update_state_shooting_state()
+                    elif global_variable.weapon_information["gun_2"]["weapon"][1] != "weapon_none":
+                        self.parent.state_win.update_state_gun_info("2")
+                        self.parent.update_home_current_gun("2")
+                        global_variable.shooting_state = "fired"
+                        self.parent.state_win.update_state_shooting_state()
+            elif keys == "2":
+                if len(global_variable.weapon_information) > 0:
+                    if global_variable.weapon_information["gun_2"]["weapon"][1] != "weapon_none":
+                        self.parent.state_win.update_state_gun_info(keys)
+                        self.parent.update_home_current_gun(keys)
+                        global_variable.shooting_state = "fired"
+                        self.parent.state_win.update_state_shooting_state()
+                    elif global_variable.weapon_information["gun_1"]["weapon"][1] != "weapon_none":
+                        self.parent.state_win.update_state_gun_info("1")
+                        self.parent.update_home_current_gun("1")
+                        global_variable.shooting_state = "fired"
+                        self.parent.state_win.update_state_shooting_state()
+            elif keys == "c":
+                if keys == global_variable.posture_state_button == "c":
+                    self.parent.state_win.update_posture(keys)
+            elif keys == "ctrl_l":
+                if global_variable.posture_state_button == "ctrl":
+                    self.parent.state_win.update_posture(keys)
+            elif keys in ["3","4","x"]:
+                global_variable.shooting_state = "stop"
+                self.parent.state_win.update_state_shooting_state()
+            elif keys == "5":
+                global_variable.shooting_state = "stop"
+                self.parent.state_win.update_state_shooting_state()
+            elif keys in ['z', 'c', 'ctrl_l', 'space']:
+                self.parent.state_win.update_posture(keys)
 
 
     def stop_listener(self):

@@ -5,6 +5,7 @@
 
 import pyautogui
 
+from libs import global_variable
 from libs.global_variable import CACHE, THREAD_POOL
 from libs.handle_image import ContrastImage
 from tools.paths import project_path
@@ -22,12 +23,11 @@ def get_inventory():
     # 获取背包信息的屏幕截图
     inventory_place = CACHE["config"]["regions"]["inventory"]
     temp_path= screen_capture(inventory_place, "inventory.png")
-    logger.info("背包验证图截取完成")
 
     res = ContrastImage("inventory", CACHE["inventory"]["ku"], temp_path).result  # 比较背包信息
 
     if len(res) > 0:
-        logger.info(f"当前为背包打开状态")
+        logger.info(f"当前背包 ---> 打开状态")
         return True
     logger.info(f"当前不是背包界面, 无法识别")
     return False
@@ -38,16 +38,16 @@ def gun_screenshots():
     paths_dict = {}
     gun_sites = CACHE["config"]  # 获取装备信息
 
-    if not get_inventory():
-        logger.info("当前未打开背包")
+    if get_inventory(): # 如果是背包界面
+
+        for key, value in gun_sites['regions'].items():
+            if key not in ["inventory", "car", "pose"]:
+                paths_dict[key] = screen_capture(value, key + ".png")
+
+        logger.info("装备获取图截取完成")
+        return paths_dict   # {文件名: 路径, ...}
+    else:
         return paths_dict
-
-    for key, value in gun_sites['regions'].items():
-        if key not in ["inven tory", "car", "pose"]:
-            paths_dict[key] = screen_capture(value, key + ".png")
-
-    logger.info("装备获取图截取完成")
-    return paths_dict   # {文件名: 路径, ...}
 
 
 if __name__ == '__main__':

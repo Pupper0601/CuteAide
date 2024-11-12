@@ -9,6 +9,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QCursor, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow
 
+from libs import global_variable
 from libs.home.state_win import StateMainWin
 from libs.mouselisten import MouseListen
 from tools.log import logger
@@ -31,7 +32,6 @@ class HomeMainWin(QMainWindow):
         self.state_win = StateMainWin()  # 初始化 state_win
         self.key_listener = None
         self.mouse_listener = None
-        self.gun_info = None  # 存储枪械信息
         self.init_slot()
 
     # 初始化槽函数
@@ -39,8 +39,8 @@ class HomeMainWin(QMainWindow):
         self.resolution()
         self.ui.checkBox_2.stateChanged.connect(self.state_show)
         self.ui.pushButton_2.clicked.connect(self.start_gun)
-        self.ui.radioButton_3.clicked.connect(self.update_squat)
-        self.ui.radioButton_4.clicked.connect(self.update_squat)
+        self.ui.radioButton_3.clicked.connect(self.update_posture_buttons)
+        self.ui.radioButton_4.clicked.connect(self.update_posture_buttons)
         self.ui.radioButton.clicked.connect(self.update_mouse_gun)
         self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
 
@@ -96,35 +96,30 @@ class HomeMainWin(QMainWindow):
                 self.mouse_listener = None
 
 
-    def update_gun_info(self, gun_info):
+    def update_home_gun_info(self, _gun_info):
         # 更新枪械信息
-        self.gun_info = gun_info
-        if len(self.gun_info) > 0:
+        if len(_gun_info) > 0:
             # 在这里添加显示枪械信息的代码，例如更新UI组件
-            logger.info(f"接收到的枪械信息: {self.gun_info}")
-            self.ui.label_6.setText(f"{self.gun_info['gun_1']['weapon'][0]}")
-            self.ui.label_7.setText(f"{self.gun_info['gun_1']['scope'][0]}")
-            self.ui.label_8.setText(f"{self.gun_info['gun_1']['muzzle'][0]}")
-            self.ui.label_10.setText(f"{self.gun_info['gun_1']['grip'][0]}")
-            self.ui.label_9.setText(f"{self.gun_info['gun_1']['stock'][0]}")
+            logger.info(f"接收到的枪械信息: {_gun_info}")
+            self.ui.label_6.setText(f"{_gun_info['gun_1']['weapon'][0]}")
+            self.ui.label_7.setText(f"{_gun_info['gun_1']['scope'][0]}")
+            self.ui.label_8.setText(f"{_gun_info['gun_1']['muzzle'][0]}")
+            self.ui.label_10.setText(f"{_gun_info['gun_1']['grip'][0]}")
+            self.ui.label_9.setText(f"{_gun_info['gun_1']['stock'][0]}")
 
-            self.ui.label_11.setText(f"{self.gun_info['gun_2']['weapon'][0]}")
-            self.ui.label_12.setText(f"{self.gun_info['gun_2']['scope'][0]}")
-            self.ui.label_13.setText(f"{self.gun_info['gun_2']['muzzle'][0]}")
-            self.ui.label_14.setText(f"{self.gun_info['gun_2']['grip'][0]}")
-            self.ui.label_15.setText(f"{self.gun_info['gun_2']['stock'][0]}")
+            self.ui.label_11.setText(f"{_gun_info['gun_2']['weapon'][0]}")
+            self.ui.label_12.setText(f"{_gun_info['gun_2']['scope'][0]}")
+            self.ui.label_13.setText(f"{_gun_info['gun_2']['muzzle'][0]}")
+            self.ui.label_14.setText(f"{_gun_info['gun_2']['grip'][0]}")
+            self.ui.label_15.setText(f"{_gun_info['gun_2']['stock'][0]}")
 
-            self.update_state_win(0)
+            self.state_win.update_state_gun_info()
             logger.info("枪械信息更新完成")
             self.update_way("识别完成")
+        else:
+            logger.info("未识别到枪械信息, 请重新识别")
 
-
-    def update_state_win(self, gun_key):
-        # 更新 state_win 窗口
-        self.state_win.update_gun(self.gun_info, gun_key)
-        logger.info("state_win 窗口更新完成")
-
-    def update_current_gun(self, gun_key):
+    def update_home_current_gun(self, gun_key):
         # 更新当前枪械
         if gun_key == "1":
             self.ui.pushButton.setIcon(QIcon(path_conn("/resource/icon/now.png")))
@@ -133,24 +128,14 @@ class HomeMainWin(QMainWindow):
             self.ui.pushButton.setIcon(QIcon())
             self.ui.pushButton_6.setIcon(QIcon(path_conn("/resource/icon/now.png")))
 
-    def posture_key(self, key):
+    def update_posture_buttons(self):
         # 判断当前选中的姿势
-        logger.info(f"当前选中的姿势为: {key}")
         if self.ui.radioButton_3.isChecked():   # C 键 下蹲
-            if key != "ctrl":
-                self.state_win.update_posture(key)
-                logger.info(f"当前按键为: {key}")
-        elif self.ui.radioButton_4.isChecked(): # ctrl 键 下蹲
-            if key != "c":
-                self.state_win.update_posture(key)
-                logger.info(f"当前按键为: {key}")
-
-    def update_squat(self):
-        # 更新下蹲状态
-        if self.ui.radioButton_3.isChecked():
+            global_variable.posture_state_button = "c"
             self.ui.radioButton_4.setIcon(QIcon())
             self.ui.radioButton_3.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
-        elif self.ui.radioButton_4.isChecked():
+        elif self.ui.radioButton_4.isChecked(): # ctrl 键 下蹲
+            global_variable.posture_state_button = "ctrl"
             self.ui.radioButton_3.setIcon(QIcon())
             self.ui.radioButton_4.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
 

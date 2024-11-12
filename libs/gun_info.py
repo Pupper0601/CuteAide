@@ -3,18 +3,19 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
+from libs import global_variable
 from libs.global_variable import CACHE, THREAD_POOL, TRANSLATE
 from libs.handle_image import current_equipment
 from libs.screenshot import gun_screenshots
 
 
 
-class GunInfo:
+class GetGunInfo:
     def __init__(self):
-        self.gun_info = {}
         self.get_gun()
 
-    def get_gun(self):
+    @staticmethod
+    def get_gun():
         temp_lists = gun_screenshots()
         gun_1 = {}
         gun_2 = {}
@@ -51,8 +52,7 @@ class GunInfo:
             for key, value in gun_2.items():
                 gun_2[key] = [TRANSLATE[value], value]
 
-            self.gun_info["gun_1"] = gun_1
-            self.gun_info["gun_2"] = gun_2
+            global_variable.weapon_information = {"gun_1": gun_1, "gun_2": gun_2}
 
         # {'gun_1': {'weapon': ['自动装填步枪', 'ZDZT'], 'scope': ['6倍镜', 'x6'], 'muzzle': ['无枪口', 'muzzle_none'],
         #            'grip'  : ['无握把', 'grip_none'], 'stock': ['托腮板', 'tosaiban']},

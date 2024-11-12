@@ -5,6 +5,7 @@
 
 from PySide6.QtCore import Qt
 
+from libs import global_variable
 from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -31,42 +32,71 @@ class StateMainWin(QMainWindow):
         frame_geometry.moveTop(-80)  # 将窗口移动到屏幕顶部
         self.move(frame_geometry.topLeft())
 
-    def update_gun(self, gun_info, gun_key=0):
-        num = self.ui.pushButton_11.text()
+    def update_state_gun_info(self, gun_key=0):
+        _num = self.ui.pushButton_11.text()
+        _guns = global_variable.weapon_information
+        _gun_info = None
+
         if gun_key == 0:
-            gun = gun_info.get(f"gun_{num}")
-            self.ui.pushButton_11.setText(num)
+            gun_key = "1" if _num == "1" else "2"
+            if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
+                _gun_info = _guns[f"gun_{gun_key}"]
+                self.ui.pushButton_11.setText(gun_key)
+                global_variable.fire_weapon = gun_key
+            else:
+                other_gun_key = "2" if gun_key == "1" else "1"
+                if _guns[f"gun_{other_gun_key}"]["weapon"][1] != "weapon_none":
+                    _gun_info = _guns[f"gun_{other_gun_key}"]
+                    self.ui.pushButton_11.setText(other_gun_key)
+                    global_variable.fire_weapon = gun_key
         else:
-            gun = gun_info.get(f"gun_{gun_key}")
+            _gun_info = _guns.get(f"gun_{gun_key}")
             self.ui.pushButton_11.setText(gun_key)
-        logger.info(f"更新 state_win 窗口枪械信息: {gun}")
-        self.ui.pushButton_2.setText(gun["weapon"][0])
-        self.ui.pushButton_3.setText(gun["scope"][0])
-        self.ui.pushButton_4.setText(gun["muzzle"][0])
-        self.ui.pushButton_5.setText(gun["grip"][0])
-        self.ui.pushButton_6.setText(gun["stock"][0])
-        logger.info(f"更新 state_win 窗口枪械信息完成")
+            global_variable.fire_weapon = gun_key
+        logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
+        if _gun_info is not None:
+            self.ui.pushButton_2.setText(_gun_info["weapon"][0])
+            self.ui.pushButton_3.setText(_gun_info["scope"][0])
+            self.ui.pushButton_4.setText(_gun_info["muzzle"][0])
+            self.ui.pushButton_5.setText(_gun_info["grip"][0])
+            self.ui.pushButton_6.setText(_gun_info["stock"][0])
 
     def update_posture(self, key):
         # 更新姿势
         posture = self.ui.pushButton_12.text()
-        if key == "c":
+        if global_variable.posture_state_button == "c" and key == "c":
             if posture == "蹲姿":
                 self.ui.pushButton_12.setText("站姿")
+                global_variable.posture_state = "stand"
             else:
                 self.ui.pushButton_12.setText("蹲姿")
-        elif key == "ctrl":
+                global_variable.posture_state = "squat"
+        elif global_variable.posture_state_button == "ctrl" and key == "ctrl":
             if posture == "蹲姿":
                 self.ui.pushButton_12.setText("站姿")
+                global_variable.posture_state = "stand"
             else:
                 self.ui.pushButton_12.setText("蹲姿")
+                global_variable.posture_state = "squat"
         elif key == "z":
             if posture == "卧姿":
                 self.ui.pushButton_12.setText("站姿")
+                global_variable.posture_state = "stand"
             else:
                 self.ui.pushButton_12.setText("卧姿")
+                global_variable.posture_state = "crawl"
         elif key == "space":
             self.ui.pushButton_12.setText("站姿")
+            global_variable.posture_state = "stand"
+
+    def update_state_shooting_state(self):
+        # 更新射击状态
+        _state = global_variable.shooting_state
+        logger.info(f"更新 state_win 窗口射击状态: {_state}")
+        if _state == "fired":
+            self.ui.pushButton_9.setText("压枪")
+        else:
+            self.ui.pushButton_9.setText("暂停")
 
 
 
