@@ -49,6 +49,18 @@ def gun_screenshots():
     else:
         return paths_dict
 
+def get_car():
+    # 获取车辆信息的屏幕截图
+    car_place = CACHE["config"]["regions"]["car"]
+    temp_path = screen_capture(car_place, "car.png")
+
+    res = ContrastImage("car", CACHE["car"]["car"], temp_path).result  # 比较车辆信息
+
+    if len(res) > 0:
+        global_variable.in_car = "yes"
+    else:
+        global_variable.in_car = "no"
+
 
 if __name__ == '__main__':
     # 示例用法

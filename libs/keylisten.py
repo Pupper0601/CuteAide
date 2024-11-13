@@ -12,6 +12,7 @@ from pynput.keyboard import Key
 from libs import global_variable
 from libs.gun_info import GetGunInfo
 from libs.pressure import Pressure
+from libs.screenshot import get_car
 from tools.active_window import get_active_window_info
 
 from tools.log import logger
@@ -73,6 +74,9 @@ class KeyListen(Thread, QObject):
                 Pressure()
             elif keys in ['z',"Z", 'c',"C", 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
+                Pressure()
+            elif keys in ['F', 'f']:
+                get_car()
                 Pressure()
 
     def _update_weapon_state(self, primary_gun, secondary_gun, keys):

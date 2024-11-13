@@ -81,6 +81,10 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                 for _,recoil_data in ipairs(_trajectory) do
                     if recoil_data[1] == _number_bullets then
                         total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
+
+                        local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
+                        OutputLogMessage(output)
+
                         local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
                         MoveMouseRelative(0, adjusted_recoil)
 
@@ -97,6 +101,10 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                         if recoil_data[1] == _number_bullets then
                             total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)
                             local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
+
+                            local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
+                            OutputLogMessage(output)
+
                             MoveMouseRelative(0, adjusted_recoil)
 
                             PressAndReleaseKey("F8")
@@ -123,6 +131,10 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                 for _,recoil_data in ipairs(_trajectory) do
                     if recoil_data[1] == _number_bullets then
                         total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
+
+                        local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
+                        OutputLogMessage(output)
+
                         local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
                         MoveMouseRelative(0, adjusted_recoil)
                         if not IsMouseButtonPressed(1) then
@@ -138,6 +150,10 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                         if recoil_data[1] == _number_bullets then
                             total_coefficient = calculate_influencing_factor()
                             local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
+
+                            local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
+                            OutputLogMessage(output)
+
                             MoveMouseRelative(0, adjusted_recoil)
                             if not IsMouseButtonPressed(1) then
                                 break
@@ -158,8 +174,8 @@ function read_weapon_from_file()
     end
     dofile(file_address)
 
-    local output = string.format("weapon = '%s'\nscope = %.2f\nmuzzle = %.2f\ngrip = %.2f\nstock = %.2f\ncar = %.2f\nposture_state = %d\nin_car = '%s'\nguns_trajectory = %s\nweapon_intervals = %d\nshooting_state = '%s'\nopening_method = '%s'\ncontinuous_clicks = '%s'\nalone_factor = %.2f\nglobal_lshift = %d\nglobal_recoil = %d",
-    weapon, scope, muzzle, grip, stock, car, posture_state, in_car, table.concat(guns_trajectory, ", "), weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil)
+    local output = string.format("weapon = '%s'\nscope = %.2f\nmuzzle = %.2f\ngrip = %.2f\nstock = %.2f\ncar = %.2f\nposture_state = %d\nin_car = '%s'\nweapon_intervals = %d\nshooting_state = '%s'\nopening_method = '%s'\ncontinuous_clicks = '%s'\nalone_factor = %.2f\nglobal_lshift = %d\nglobal_recoil = %d",
+    weapon, scope, muzzle, grip, stock, car, posture_state, in_car, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil)
 
     OutputLogMessage(output)
 

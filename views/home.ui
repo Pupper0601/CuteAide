@@ -905,7 +905,7 @@ QPushButton:hover{
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string> 左键压抢</string>
+                    <string>单击开镜</string>
                    </property>
                    <property name="icon">
                     <iconset resource="../resource.qrc">
@@ -944,7 +944,7 @@ QPushButton:hover{
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>左键+右键</string>
+                    <string>长按开镜</string>
                    </property>
                   </widget>
                  </item>
@@ -2219,30 +2219,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <number>0</number>
               </property>
               <property name="leftMargin">
-               <number>0</number>
+               <number>2</number>
               </property>
               <property name="topMargin">
-               <number>0</number>
+               <number>2</number>
               </property>
               <property name="rightMargin">
-               <number>0</number>
+               <number>2</number>
               </property>
               <property name="bottomMargin">
-               <number>0</number>
+               <number>2</number>
               </property>
               <item>
-               <widget class="QFrame" name="frame_22">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">#frame_22{
-	border: none;
-}</string>
-                </property>
+               <widget class="QFrame" name="frame_23">
                 <property name="frameShape">
                  <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
@@ -2250,88 +2239,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_19">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <spacer name="horizontalSpacer_38">
-                   <property name="orientation">
-                    <enum>Qt::Orientation::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>5</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>1</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>选择压抢文件</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignmentFlag::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_39">
-                   <property name="orientation">
-                    <enum>Qt::Orientation::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>3</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBox">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                     <horstretch>2</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>数据 1</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string> 数据 2</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string> 数据 3</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
                  <item>
                   <spacer name="horizontalSpacer_40">
                    <property name="orientation">
@@ -2339,88 +2246,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>5</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="frame_23">
-                <property name="styleSheet">
-                 <string notr="true">#frame_23{
-	border: none;
-}</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::Shape::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Shadow::Raised</enum>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_20">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <spacer name="horizontalSpacer_43">
-                   <property name="orientation">
-                    <enum>Qt::Orientation::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>5</width>
+                     <width>86</width>
                      <height>20</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_7">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                     <horstretch>1</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">#pushButton_7{
-	font: 700 14pt;
-	background-color: rgb(71,157,168);
-	color: rgb(255,255,255);
-	border-radius: 8px;
-	border: 3px solid rgb(71,157,168);
-	letter-spacing: 2px;
-
-}
-
-#pushButton_7:hover{
-	background-color: rgb(255,255,255);
-	color: rgb(0,0,0);
-}
-</string>
-                   </property>
+                  <widget class="QCheckBox" name="checkBox_3">
                    <property name="text">
-                    <string> 数据导入</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../resource.qrc">
-                     <normaloff>:/icon/resource/icon/import.png</normaloff>:/icon/resource/icon/import.png</iconset>
+                    <string>开启连点</string>
                    </property>
                   </widget>
                  </item>
@@ -2431,53 +2266,52 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>5</width>
+                     <width>85</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_25">
+                <property name="frameShape">
+                 <enum>QFrame::Shape::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Shadow::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_20">
+                 <item>
+                  <spacer name="horizontalSpacer_38">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>93</width>
                      <height>20</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_8">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                     <horstretch>1</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">#pushButton_8{
-	font: 700 14pt ;
-	background-color: rgb(71,157,168);
-	color: rgb(255,255,255);
-	border-radius: 8px;
-	border: 3px solid rgb(71,157,168);
-	letter-spacing: 2px;
-
-}
-
-#pushButton_8:hover{
-	background-color: rgb(255,255,255);
-	color: rgb(0,0,0);
-}</string>
-                   </property>
+                  <widget class="QLabel" name="label_5">
                    <property name="text">
-                    <string> 数据导出</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../resource.qrc">
-                     <normaloff>:/icon/resource/icon/export.png</normaloff>:/icon/resource/icon/export.png</iconset>
+                    <string>预留功能区</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_42">
+                  <spacer name="horizontalSpacer_39">
                    <property name="orientation">
                     <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>5</width>
+                     <width>92</width>
                      <height>20</height>
                     </size>
                    </property>

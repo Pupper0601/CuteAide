@@ -10,15 +10,15 @@ from tools.paths import path_conn
 
 
 class Pressure:
-    def __init__(self, weapon_info):
-        self.s = weapon_info
+    def __init__(self):
+        # self.s = weapon_info
         THREAD_POOL.submit(self.write_dict_to_lua_file())
 
-    # @staticmethod
-    def get_component_factor(self):
+    @staticmethod
+    def get_component_factor():
         _factor_data = {}
-        # current_weapon_info = global_variable.current_weapon_information
-        current_weapon_info = self.s
+        current_weapon_info = global_variable.current_weapon_information
+        # current_weapon_info = self.s
         if current_weapon_info:
             _weapon_name = current_weapon_info["weapon"][1]
 

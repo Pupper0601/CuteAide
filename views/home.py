@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
-    QHBoxLayout, QLabel, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QTextBrowser,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
+    QLabel, QMainWindow, QPushButton, QRadioButton,
+    QSizePolicy, QSpacerItem, QTextBrowser, QVBoxLayout,
+    QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
@@ -992,129 +992,50 @@ class Ui_MainWindow(object):
         self.verticalLayout_8 = QVBoxLayout(self.frame_7)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.frame_22 = QFrame(self.frame_7)
-        self.frame_22.setObjectName(u"frame_22")
-        self.frame_22.setMaximumSize(QSize(16777215, 40))
-        self.frame_22.setStyleSheet(u"#frame_22{\n"
-"	border: none;\n"
-"}")
-        self.frame_22.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_22.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_19 = QHBoxLayout(self.frame_22)
-        self.horizontalLayout_19.setSpacing(0)
+        self.verticalLayout_8.setContentsMargins(2, 2, 2, 2)
+        self.frame_23 = QFrame(self.frame_7)
+        self.frame_23.setObjectName(u"frame_23")
+        self.frame_23.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_19 = QHBoxLayout(self.frame_23)
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
-        self.horizontalLayout_19.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_38 = QSpacerItem(5, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_38)
-
-        self.label_5 = QLabel(self.frame_22)
-        self.label_5.setObjectName(u"label_5")
-        sizePolicy8.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
-        self.label_5.setSizePolicy(sizePolicy8)
-        self.label_5.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_19.addWidget(self.label_5)
-
-        self.horizontalSpacer_39 = QSpacerItem(3, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_39)
-
-        self.comboBox = QComboBox(self.frame_22)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-        sizePolicy14 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy14.setHorizontalStretch(2)
-        sizePolicy14.setVerticalStretch(0)
-        sizePolicy14.setHeightForWidth(self.comboBox.sizePolicy().hasHeightForWidth())
-        self.comboBox.setSizePolicy(sizePolicy14)
-
-        self.horizontalLayout_19.addWidget(self.comboBox)
-
-        self.horizontalSpacer_40 = QSpacerItem(5, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_40 = QSpacerItem(86, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_19.addItem(self.horizontalSpacer_40)
 
+        self.checkBox_3 = QCheckBox(self.frame_23)
+        self.checkBox_3.setObjectName(u"checkBox_3")
 
-        self.verticalLayout_8.addWidget(self.frame_22)
+        self.horizontalLayout_19.addWidget(self.checkBox_3)
 
-        self.frame_23 = QFrame(self.frame_7)
-        self.frame_23.setObjectName(u"frame_23")
-        self.frame_23.setStyleSheet(u"#frame_23{\n"
-"	border: none;\n"
-"}")
-        self.frame_23.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_23.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_20 = QHBoxLayout(self.frame_23)
-        self.horizontalLayout_20.setSpacing(0)
-        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.horizontalLayout_20.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_43 = QSpacerItem(5, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_41 = QSpacerItem(85, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_20.addItem(self.horizontalSpacer_43)
-
-        self.pushButton_7 = QPushButton(self.frame_23)
-        self.pushButton_7.setObjectName(u"pushButton_7")
-        sizePolicy9.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
-        self.pushButton_7.setSizePolicy(sizePolicy9)
-        self.pushButton_7.setStyleSheet(u"#pushButton_7{\n"
-"	font: 700 14pt;\n"
-"	background-color: rgb(71,157,168);\n"
-"	color: rgb(255,255,255);\n"
-"	border-radius: 8px;\n"
-"	border: 3px solid rgb(71,157,168);\n"
-"	letter-spacing: 2px;\n"
-"\n"
-"}\n"
-"\n"
-"#pushButton_7:hover{\n"
-"	background-color: rgb(255,255,255);\n"
-"	color: rgb(0,0,0);\n"
-"}\n"
-"")
-        icon10 = QIcon()
-        icon10.addFile(u":/icon/resource/icon/import.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_7.setIcon(icon10)
-
-        self.horizontalLayout_20.addWidget(self.pushButton_7)
-
-        self.horizontalSpacer_41 = QSpacerItem(5, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_20.addItem(self.horizontalSpacer_41)
-
-        self.pushButton_8 = QPushButton(self.frame_23)
-        self.pushButton_8.setObjectName(u"pushButton_8")
-        sizePolicy9.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
-        self.pushButton_8.setSizePolicy(sizePolicy9)
-        self.pushButton_8.setStyleSheet(u"#pushButton_8{\n"
-"	font: 700 14pt ;\n"
-"	background-color: rgb(71,157,168);\n"
-"	color: rgb(255,255,255);\n"
-"	border-radius: 8px;\n"
-"	border: 3px solid rgb(71,157,168);\n"
-"	letter-spacing: 2px;\n"
-"\n"
-"}\n"
-"\n"
-"#pushButton_8:hover{\n"
-"	background-color: rgb(255,255,255);\n"
-"	color: rgb(0,0,0);\n"
-"}")
-        icon11 = QIcon()
-        icon11.addFile(u":/icon/resource/icon/export.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_8.setIcon(icon11)
-
-        self.horizontalLayout_20.addWidget(self.pushButton_8)
-
-        self.horizontalSpacer_42 = QSpacerItem(5, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_20.addItem(self.horizontalSpacer_42)
+        self.horizontalLayout_19.addItem(self.horizontalSpacer_41)
 
 
         self.verticalLayout_8.addWidget(self.frame_23)
+
+        self.frame_25 = QFrame(self.frame_7)
+        self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_25.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_20 = QHBoxLayout(self.frame_25)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.horizontalSpacer_38 = QSpacerItem(93, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_20.addItem(self.horizontalSpacer_38)
+
+        self.label_5 = QLabel(self.frame_25)
+        self.label_5.setObjectName(u"label_5")
+
+        self.horizontalLayout_20.addWidget(self.label_5)
+
+        self.horizontalSpacer_39 = QSpacerItem(92, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_20.addItem(self.horizontalSpacer_39)
+
+
+        self.verticalLayout_8.addWidget(self.frame_25)
 
 
         self.verticalLayout_7.addWidget(self.frame_7)
@@ -1149,8 +1070,8 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u672a\u8bc6\u522b", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u" \u9002\u914d\u72b6\u6001:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u672a\u9002\u914d", None))
-        self.radioButton.setText(QCoreApplication.translate("MainWindow", u" \u5de6\u952e\u538b\u62a2", None))
-        self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"\u5de6\u952e+\u53f3\u952e", None))
+        self.radioButton.setText(QCoreApplication.translate("MainWindow", u"\u5355\u51fb\u5f00\u955c", None))
+        self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"\u957f\u6309\u5f00\u955c", None))
         self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u" C \u952e\u4e0b\u8e72", None))
         self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u" Ctrl \u952e\u4e0b\u8e72", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u624b\u96f7\u5012\u8ba1\u65f6", None))
@@ -1178,12 +1099,7 @@ class Ui_MainWindow(object):
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u53e3", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u63e1\u628a", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u6258", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u538b\u62a2\u6587\u4ef6", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u6570\u636e 1", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u" \u6570\u636e 2", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u" \u6570\u636e 3", None))
-
-        self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u" \u6570\u636e\u5bfc\u5165", None))
-        self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u" \u6570\u636e\u5bfc\u51fa", None))
+        self.checkBox_3.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u8fde\u70b9", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u9884\u7559\u529f\u80fd\u533a", None))
     # retranslateUi
 
