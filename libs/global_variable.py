@@ -16,12 +16,14 @@ enable_key_recognition = True
 weapon_information = {} # 武器信息
 posture_state_button = "c"  # 默认切换姿势键
 
-in_car = 0  # 默认不在车上
+in_car = "no"  # 是否在车上, no为不在车上, yes为在车上
 posture_state = "stand" # 默认站立
-fire_weapon = "1"   # 默认开火武器
 shooting_state = "fired"    # 默认射击状态
-current_weapon_information = {} # 当前武器信息
+opening_method = "click"  # 默认开镜方式, 长按为 "long_press"
+continuous_clicks = "close"  # 默认连点, close为关闭, open为开启
 
+current_weapon_information = {} # 当前武器信息
+fire_weapon = "1"   # 默认开火武器
 missile_stop_gun_x = False  # x收枪
 missile_stop_gun_5 = False  # 投掷物收枪
 

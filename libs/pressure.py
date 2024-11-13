@@ -67,6 +67,12 @@ class Pressure:
             # 获取武器射击状态
             _factor_data["shooting_state"] = global_variable.shooting_state
 
+            # 开镜方式
+            _factor_data["opening_method"] = global_variable.opening_method
+
+            # 连点开关
+            _factor_data["continuous_clicks"] = global_variable.continuous_clicks
+
             # 获取当前武器基础系数
             if _weapon_name in alone_factor.keys():
                 _factor_data["alone_factor"] = alone_factor[_weapon_name]
