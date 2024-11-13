@@ -89,7 +89,9 @@ class Pressure:
                 if isinstance(value, str):
                     file.write(f"{key} = '{value}'\n")
                 elif isinstance(value, list):
-                    file.write(f"{key} = {{{', '.join(map(str, value))}}}\n")
+                    if key == "guns_trajectory":
+                        formatted_list = ", ".join([f"{{{i + 1}, {v}}}" for i, v in enumerate(value)])
+                        file.write(f"{key} = {{{formatted_list}}}\n")
                 else:
                     file.write(f"{key} = {value}\n")
 
