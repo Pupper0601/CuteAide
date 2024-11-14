@@ -6,7 +6,6 @@ from libs import global_variable
 from libs.global_variable import THREAD_POOL
 from libs.gun_data import *
 from tools.log import logger
-from tools.paths import path_conn
 
 
 class Pressure:
@@ -18,6 +17,7 @@ class Pressure:
     def get_component_factor():
         _factor_data = {}
         current_weapon_info = global_variable.current_weapon_information
+        logger.info(f"信息为: {current_weapon_info}")
         # current_weapon_info = self.s
         if current_weapon_info:
             _weapon_name = current_weapon_info["weapon"][1]
@@ -41,13 +41,6 @@ class Pressure:
                 _factor_data["car"] = _factors["car"]["car"]
                 # 获取当前姿态
                 _factor_data["posture_state"] = _factors["pose"][global_variable.posture_state]
-            else:
-                _factor_data["scope"] = 1.0
-                _factor_data["muzzle"] = 1.0
-                _factor_data["grip"] = 1.0
-                _factor_data["stock"] = 1.0
-                _factor_data["car"] = 1.0
-                global_variable.shooting_state = "stop"
 
             # 获取是否上车
             _factor_data["in_car"] = global_variable.in_car
@@ -70,9 +63,6 @@ class Pressure:
             # 开镜方式
             _factor_data["opening_method"] = global_variable.opening_method
 
-            # 连点开关
-            _factor_data["continuous_clicks"] = global_variable.continuous_clicks
-
             # 获取当前武器基础系数
             if _weapon_name in alone_factor.keys():
                 _factor_data["alone_factor"] = alone_factor[_weapon_name]
@@ -84,6 +74,8 @@ class Pressure:
 
             # 获取全局后坐力系数
             _factor_data["global_recoil"] = global_recoil
+
+            logger.info(f"当前武器信息为: {_factor_data}")
 
             return _factor_data
 

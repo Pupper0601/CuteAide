@@ -93,7 +93,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.47,
         },
         "muzzle": {
-            "muzzle_none": 1,
+            "muzzle_none": 1.0,
             "xiaoyan-b" : 0.85,
             "buchang-b" : 0.76,
             "zhituiqi"  : 0.86,

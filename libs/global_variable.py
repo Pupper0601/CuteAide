@@ -6,26 +6,146 @@
 from libs.cache import ImageCache
 from concurrent.futures import ThreadPoolExecutor
 
+
+
 # 创建一个全局的线程池
 THREAD_POOL = ThreadPoolExecutor()
 
 CACHE = ImageCache().source_data
 
-enable_mouse_recognition = False
-enable_key_recognition = True
-weapon_information = {} # 武器信息
-posture_state_button = "c"  # 默认切换姿势键
+# enable_mouse_recognition = False
+# enable_key_recognition = True
+# weapon_information = {} # 武器信息
+# posture_state_button = "c"  # 默认切换姿势键
+#
+# in_car = "no"  # 是否在车上, no为不在车上, yes为在车上
+# posture_state = "stand" # 默认站立
+# shooting_state = "fired"    # 默认射击状态
+# opening_method = "click"  # 默认开镜方式, 长按为 "long_press"
+#
+# current_weapon_information = {} # 当前武器信息
+# fire_weapon = "1"   # 默认开火武器
 
-in_car = "no"  # 是否在车上, no为不在车上, yes为在车上
-posture_state = "stand" # 默认站立
-shooting_state = "fired"    # 默认射击状态
-opening_method = "click"  # 默认开镜方式, 长按为 "long_press"
-continuous_clicks = "close"  # 默认连点, close为关闭, open为开启
 
-current_weapon_information = {} # 当前武器信息
-fire_weapon = "1"   # 默认开火武器
-missile_stop_gun_x = False  # x收枪
-missile_stop_gun_5 = False  # 投掷物收枪
+class GlobalVariable:
+    def __init__(self):
+        self._enable_mouse_recognition = False
+        self._enable_key_recognition = True
+        self._weapon_information = {}
+        self._posture_state_button = "c"
+        self._in_car = "no"
+        self._posture_state = "stand"
+        self._shooting_state = "fired"
+        self._opening_method = "click"
+        self._continuous_clicks = "close"
+        self._current_weapon_information = {}
+        self._fire_weapon = "1"
+
+    @property
+    def enable_mouse_recognition(self):
+        return self._enable_mouse_recognition
+
+    @enable_mouse_recognition.setter
+    def enable_mouse_recognition(self, value):
+        self._enable_mouse_recognition = value
+
+    @property
+    def enable_key_recognition(self):
+        return self._enable_key_recognition
+
+    @enable_key_recognition.setter
+    def enable_key_recognition(self, value):
+        self._enable_key_recognition = value
+
+    @property
+    def weapon_information(self):
+        return self._weapon_information
+
+    @weapon_information.setter
+    def weapon_information(self, value):
+        self._weapon_information = value
+
+    @property
+    def posture_state_button(self):
+        return self._posture_state_button
+
+    @posture_state_button.setter
+    def posture_state_button(self, value):
+        self._enable_key_recognition = value
+
+    @property
+    def in_car(self):
+        return self._in_car
+
+    @in_car.setter
+    def in_car(self, value):
+        self._in_car = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def posture_state(self):
+        return self._posture_state
+
+    @posture_state.setter
+    def posture_state(self, value):
+        self._posture_state = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def shooting_state(self):
+        return self._shooting_state
+
+    @shooting_state.setter
+    def shooting_state(self, value):
+        self._shooting_state = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def opening_method(self):
+        return self._opening_method
+
+    @opening_method.setter
+    def opening_method(self, value):
+        self._opening_method = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def continuous_clicks(self):
+        return self._continuous_clicks
+
+    @continuous_clicks.setter
+    def continuous_clicks(self, value):
+        self.continuous_clicks = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def current_weapon_information(self):
+        return self._current_weapon_information
+
+    @current_weapon_information.setter
+    def current_weapon_information(self, value):
+        self._current_weapon_information = value
+        from libs.pressure import Pressure
+        Pressure()
+
+    @property
+    def fire_weapon(self):
+        return self._fire_weapon
+
+    @fire_weapon.setter
+    def fire_weapon(self, value):
+        self._fire_weapon = value
+
+    # 为其他变量添加类似的属性和setter方法
+
+global_variable = GlobalVariable()
+
+
 
 TRANSLATE = {
   "weapon_none": "无武器",

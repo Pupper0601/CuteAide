@@ -6,7 +6,6 @@
 from PySide6.QtCore import Qt
 
 from libs import global_variable
-from libs.pressure import Pressure
 from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -62,7 +61,6 @@ class StateMainWin(QMainWindow):
             self.ui.pushButton_4.setText(_gun_info["muzzle"][0])
             self.ui.pushButton_5.setText(_gun_info["grip"][0])
             self.ui.pushButton_6.setText(_gun_info["stock"][0])
-            Pressure()
 
     def update_posture(self, key):
         # 更新姿势

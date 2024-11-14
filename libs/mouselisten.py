@@ -37,11 +37,6 @@ class MouseListen(Thread):
                     GetGunInfo()
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     self.parent.update_way("识别完成")
-        else:
-            global_variable.shooting_state = "stop"
-            self.parent.state_win.update_state_shooting_state()
-
-
 
     def stop_listener(self):
         if self.listener:

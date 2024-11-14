@@ -24,4 +24,5 @@ def get_active_window_info():
     if "PUBG" in _active_window["window_title"]:
         return True
     else:
+        global_variable.shooting_state = "stop"
         return False

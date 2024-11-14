@@ -12,7 +12,6 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from libs import global_variable
 from libs.home.state_win import StateMainWin
 from libs.mouselisten import MouseListen
-from libs.pressure import Pressure
 from tools.log import logger
 from views.home import Ui_MainWindow as home_ui
 
@@ -146,12 +145,10 @@ class HomeMainWin(QMainWindow):
             self.ui.radioButton_2.setIcon(QIcon())
             self.ui.radioButton.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
             global_variable.opening_method = "click"
-            Pressure()
         elif self.ui.radioButton_2.isChecked():
             self.ui.radioButton.setIcon(QIcon())
             self.ui.radioButton_2.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
             global_variable.opening_method = "long_press"
-            Pressure()
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):

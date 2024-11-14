@@ -26,16 +26,6 @@ local function is_authorized()
         return true
 end
 
--- 读取文件
-function read_file()
-    if not is_authorized() then
-        return  nil
-    end
-    _config = dofile(file_address)
-    OutputLogMessage("读取文件成功: %s\n", _config.weapon)
-
-end
-
 -- 计算后坐力
 function calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,
                                       global_lshift,global_recoil)
@@ -72,7 +62,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
     local _number_bullets = 0   -- 子弹数
 
     local _special_weapon = {MK47=true, M16A4=true, MINI14=true, SKS=true, MK12=true, ZDZT=true,QBU=true}  -- 特殊武器
-    OutputLogMessage("当前武器: %s\n", weapon)
+    OutputLogMessage("当前武器: %s ,  --->>  影响因子为: %.2f\n", weapon, total_coefficient)
     if _special_weapon[weapon] then
         while IsMouseButtonPressed(1) do
             local current_click_time = GetRunningTime() -- 当前点击时间
@@ -220,6 +210,8 @@ auto_pick = function()   -- 自动拾取
     Sleep(1)
     PressAndReleaseKey("tab")
 end
+
+local enable_mouse_events = true
 
 function g1_down() if enable_mouse_events then g1___ = true event_handing("mouse_button_down", 1, "mouse") end end
 function g1_up() if enable_mouse_events then g1___ = false event_handing("mouse_button_up", 1, "mouse") end end
