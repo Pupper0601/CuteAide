@@ -55,17 +55,20 @@ component_factor = {    # 配件影响因子
             "crawl":0.5,    # 爬
         },
         "muzzle": {     # 枪口
+            "muzzle_none": 1,
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "zhituiqi" :0.87,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.78,
             "muzhi": 0.83,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -74,6 +77,7 @@ component_factor = {    # 配件影响因子
             "x6": 1.45,
         },
         "stock": {
+            "stock_none": 1,
             "zhanshu": 1,
             "zhongxing": 0.86,
             "zhedie": 0.86,
@@ -89,11 +93,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.47,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.85,
             "buchang-b" : 0.76,
             "zhituiqi"  : 0.86,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
@@ -112,11 +118,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.58,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b": 0.85,
             "buchang-b": 0.79,
             "zhituiqi": 0.87,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.82,
             "qingxin": 0.78,
@@ -124,6 +132,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.87,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -142,11 +151,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
             "zhituiqi"  : 0.87,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.79,
             "qingxin" : 0.78,
@@ -154,6 +165,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.79,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
@@ -172,11 +184,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.79,
             "zhituiqi"  : 0.88,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.78,
@@ -184,6 +198,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.88,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
@@ -192,6 +207,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 1.45,
         },
         "stock" : {
+            "stock_none": 1,
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -206,11 +222,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.83,
             "buchang-b" : 0.74,
             "zhituiqi"  : 0.84,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1.8,
@@ -219,6 +237,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 2.6,
         },
         "stock" : {
+            "stock_none": 1,
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -233,11 +252,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
             "zhituiqi"  : 0.87,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.84,
             "qingxin" : 0.78,
@@ -245,6 +266,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.82
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.5,
             "quanxi": 0.5,
             "x2"    : 1,
@@ -263,17 +285,20 @@ component_factor = {    # 配件影响因子
             "crawl": 0.53,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.84,
             "buchang-b" : 0.75,
             "zhituiqi"  : 0.84,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.78,
             "muzhi": 0.83,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1.8,
@@ -282,6 +307,7 @@ component_factor = {    # 配件影响因子
             "x6"    : 2.6,
         },
         "stock" : {
+            "stock_none": 1,
             "zhanshu": 1,
             "zhongxing" : 0.86,
         },
@@ -296,11 +322,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.88,
             "buchang-b" : 0.8,
             "zhituiqi"  : 0.88,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.815,
             "qingxin" : 0.78,
@@ -308,6 +336,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.79,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
@@ -326,17 +355,20 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b": 0.84,
             "buchang-b": 0.78,
             "zhituiqi": 0.86,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.84,
             "qingxin": 0.78,
             "muzhi": 0.81,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -355,12 +387,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.47,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.86,
             "buchang-b" : 0.78,
-            "xx"  : 1,
             "zhituiqi"  : 0.87,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2"    : 1,
@@ -379,11 +412,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "zhituiqi": 0.87,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.78,
@@ -391,6 +426,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.86,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -399,6 +435,7 @@ component_factor = {    # 配件影响因子
             "x6": 1.45,
         },
         "stock": {
+            "stock_none": 1,
             "zhanshu": 1,
             "zhongxing": 0.86,
         },
@@ -413,12 +450,14 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b": 0.86,
             "buchang-b": 0.78,
             "xx": 1,
             "zhituiqi": 0.87,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -437,11 +476,13 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b": 0.86,
             "buchang-b": 0.8,
             "zhituiqi": 0.83,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
             "x2": 1,
@@ -460,6 +501,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -468,6 +510,7 @@ component_factor = {    # 配件影响因子
 
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
@@ -477,6 +520,7 @@ component_factor = {    # 配件影响因子
             "x8"    : 1,
         },
         "stock" : {
+            "stock_none": 1,
             "tosaiban": 0.86,
         },
         "car"    : {
@@ -491,6 +535,7 @@ component_factor = {    # 配件影响因子
             "crawl": 1.05,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -498,6 +543,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
@@ -518,6 +564,7 @@ component_factor = {    # 配件影响因子
             "crawl": 1,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -525,6 +572,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
@@ -534,12 +582,14 @@ component_factor = {    # 配件影响因子
             "x8"    : 1.1,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.79,
             "muzhi": 0.83,
         },
         "stock" : {
+            "stock_none": 1,
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -555,6 +605,7 @@ component_factor = {    # 配件影响因子
             "crawl": 1,
         },
         "stock" : {
+            "stock_none": 1,
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -569,6 +620,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.86,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -576,6 +628,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
@@ -596,6 +649,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.7,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -603,6 +657,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1,
             "quanxi": 1,
             "x2"    : 1,
@@ -612,6 +667,7 @@ component_factor = {    # 配件影响因子
             "x8"    : 1.2,
         },
         "stock" : {
+            "stock_none": 1,
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -627,6 +683,7 @@ component_factor = {    # 配件影响因子
         },
 
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -634,6 +691,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 1.5,
             "quanxi": 1.5,
             "x2"    : 1,
@@ -643,6 +701,7 @@ component_factor = {    # 配件影响因子
             "x8"    : 1,
         },
         "grip"  : {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie"  : 0.83,
             "qingxin" : 0.79,
@@ -660,6 +719,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.86,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "xiaoyan-b" : 0.94,
             "xiaoyan-j" : 0.94,
             "buchang-b" : 0.9,
@@ -667,6 +727,7 @@ component_factor = {    # 配件影响因子
             "zhituiqi"  : 0.85,
         },
         "scope" : {
+            "scope_none": 1,
             "hongdian": 2.5,
             "quanxi": 2.5,
             "x2"    : 1,
@@ -676,6 +737,7 @@ component_factor = {    # 配件影响因子
             "x8"    : 1.4,
         },
         "stock" : {
+            "stock_none": 1,
             "tosaiban" : 0.86,
         },
         "car"    : {
@@ -690,10 +752,12 @@ component_factor = {    # 配件影响因子
             "crawl": 0.7,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.51,
             "quanxi": 0.51,
             "x2": 1,
@@ -712,9 +776,11 @@ component_factor = {    # 配件影响因子
             "crawl": 0.62,
         },
         "grip": {
+            "grip_none": 1,
             "qingxin": 0.78	,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.51,
             "quanxi": 0.51,
         },
@@ -729,10 +795,12 @@ component_factor = {    # 配件影响因子
             "crawl": 0.7,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.79,
@@ -740,6 +808,7 @@ component_factor = {    # 配件影响因子
             "jiguang": 0.83,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
@@ -758,14 +827,17 @@ component_factor = {    # 配件影响因子
             "crawl": 0.6,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.68,
             "xiaoyan-c": 0.88,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.51,
             "quanxi": 0.51,
         },
         "stock": {
+            "stock_none": 1,
             "zhedie": 1,
         },
         "car": {
@@ -779,15 +851,18 @@ component_factor = {    # 配件影响因子
             "crawl": 0.64,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.8,
             "xiaoyan-c": 0.9,
         },
         "grip": {
+            "grip_none": 1,
             "banjie": 0.83,
             "qingxin": 0.79,
             "jiguang": 0.83,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
@@ -796,6 +871,7 @@ component_factor = {    # 配件影响因子
             "x6": 1.45,
         },
         "stock": {
+            "stock_none": 1,
             "zhongxing": 1,
             "zhanshu": 1,
         },
@@ -810,16 +886,19 @@ component_factor = {    # 配件影响因子
             "crawl": 0.53,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.6,
             "xiaoyan-c": 0.82,
         },
         "grip": {
+            "grip_none": 1,
             "zhijiao": 1,
             "banjie": 0.83,
             "qingxin": 0.75,
             "muzhi": 0.83,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
@@ -828,6 +907,7 @@ component_factor = {    # 配件影响因子
             "x6": 1.45,
         },
         "stock": {
+            "stock_none": 1,
             "zhongxing": 1,
             "zhanshu": 1,
         },
@@ -852,10 +932,12 @@ component_factor = {    # 配件影响因子
             "crawl": 0.5,
         },
         "muzzle": {
+            "muzzle_none": 1,
             "buchang-c": 0.58,
             "xiaoyan-c": 0.82,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
             "x2": 1,
@@ -874,10 +956,12 @@ component_factor = {    # 配件影响因子
             "crawl": 0.63,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
         },
         "stock": {
+            "stock_none": 1,
             "zhedie": 1,
         },
         "car": {
@@ -891,6 +975,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.3,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.55,
             "quanxi": 0.55,
 	        "x2": 1,
@@ -899,6 +984,7 @@ component_factor = {    # 配件影响因子
             "x6": 1.45,
         },
         "stock": {
+            "stock_none":1,
 			"zhanshu": 1,
 			"zhongxing": 1,
         },
@@ -913,6 +999,7 @@ component_factor = {    # 配件影响因子
             "crawl": 0.65,
         },
         "scope": {
+            "scope_none": 1,
             "hongdian": 0.52,
             "quanxi": 0.52,
 			"x2": 1,

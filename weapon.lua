@@ -72,7 +72,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
     local _number_bullets = 0   -- 子弹数
 
     local _special_weapon = {MK47=true, M16A4=true, MINI14=true, SKS=true, MK12=true, ZDZT=true,QBU=true}  -- 特殊武器
-
+    OutputLogMessage("当前武器: %s\n", weapon)
     if _special_weapon[weapon] then
         while IsMouseButtonPressed(1) do
             local current_click_time = GetRunningTime() -- 当前点击时间
