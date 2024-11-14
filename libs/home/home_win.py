@@ -9,7 +9,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QCursor, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from libs import global_variable
+from libs.global_variable import global_variable
 from libs.home.state_win import StateMainWin
 from libs.mouselisten import MouseListen
 from tools.log import logger

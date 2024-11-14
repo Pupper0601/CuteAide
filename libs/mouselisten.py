@@ -7,8 +7,7 @@ import time
 from threading import Thread, Event
 from pynput import mouse
 
-from libs import global_variable
-from libs.global_variable import THREAD_POOL
+from libs.global_variable import global_variable
 
 from libs.gun_info import GetGunInfo
 from tools.active_window import get_active_window_info

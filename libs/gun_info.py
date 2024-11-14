@@ -3,7 +3,7 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
-from libs import global_variable
+from libs.global_variable import global_variable
 from libs.global_variable import CACHE, THREAD_POOL, TRANSLATE
 from libs.handle_image import current_equipment
 from libs.screenshot import gun_screenshots

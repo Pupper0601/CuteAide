@@ -5,7 +5,7 @@
 
 from PySide6.QtCore import Qt
 
-from libs import global_variable
+from libs.global_variable import global_variable
 from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -36,25 +36,27 @@ class StateMainWin(QMainWindow):
         _num = self.ui.pushButton_11.text()
         _guns = global_variable.weapon_information
         _gun_info = None
+        _gun_key= 0
 
         if gun_key == 0:
             gun_key = "1" if _num == "1" else "2"
             if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
                 _gun_info = _guns[f"gun_{gun_key}"]
                 self.ui.pushButton_11.setText(gun_key)
-                global_variable.fire_weapon = gun_key
+                _gun_key = gun_key
             else:
                 other_gun_key = "2" if gun_key == "1" else "1"
                 if _guns[f"gun_{other_gun_key}"]["weapon"][1] != "weapon_none":
                     _gun_info = _guns[f"gun_{other_gun_key}"]
                     self.ui.pushButton_11.setText(other_gun_key)
-                    global_variable.fire_weapon = gun_key
+                    _gun_key = gun_key
         else:
             _gun_info = _guns.get(f"gun_{gun_key}")
             self.ui.pushButton_11.setText(gun_key)
-            global_variable.fire_weapon = gun_key
+            _gun_key = gun_key
         logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
         global_variable.current_weapon_information = _gun_info
+        global_variable.fire_weapon = _gun_key
         if _gun_info is not None:
             self.ui.pushButton_2.setText(_gun_info["weapon"][0])
             self.ui.pushButton_3.setText(_gun_info["scope"][0])
@@ -65,30 +67,20 @@ class StateMainWin(QMainWindow):
     def update_posture(self, key):
         # 更新姿势
         posture = self.ui.pushButton_12.text()
-        if global_variable.posture_state_button == "c" and key == "c":
-            if posture == "蹲姿":
-                self.ui.pushButton_12.setText("站姿")
-                global_variable.posture_state = "stand"
+        posture_map = {
+            "c"    : ("蹲姿", "站姿", "squat", "stand"),
+            "ctrl" : ("蹲姿", "站姿", "squat", "stand"),
+            "z"    : ("卧姿", "站姿", "crawl", "stand"),
+            "space": ("站姿", "站姿", "stand", "stand")
+        }
+
+        if key in posture_map and global_variable.posture_state_button == key:
+            if posture == posture_map[key][0]:
+                self.ui.pushButton_12.setText(posture_map[key][1])
+                global_variable.posture_state = posture_map[key][3]
             else:
-                self.ui.pushButton_12.setText("蹲姿")
-                global_variable.posture_state = "squat"
-        elif global_variable.posture_state_button == "ctrl" and key == "ctrl":
-            if posture == "蹲姿":
-                self.ui.pushButton_12.setText("站姿")
-                global_variable.posture_state = "stand"
-            else:
-                self.ui.pushButton_12.setText("蹲姿")
-                global_variable.posture_state = "squat"
-        elif key == "z":
-            if posture == "卧姿":
-                self.ui.pushButton_12.setText("站姿")
-                global_variable.posture_state = "stand"
-            else:
-                self.ui.pushButton_12.setText("卧姿")
-                global_variable.posture_state = "crawl"
-        elif key == "space":
-            self.ui.pushButton_12.setText("站姿")
-            global_variable.posture_state = "stand"
+                self.ui.pushButton_12.setText(posture_map[key][0])
+                global_variable.posture_state = posture_map[key][2]
 
     def update_state_shooting_state(self):
         # 更新射击状态

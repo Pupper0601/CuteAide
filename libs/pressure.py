@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-from libs import global_variable
+from libs.global_variable import global_variable
 from libs.global_variable import THREAD_POOL
 from libs.gun_data import *
 from tools.log import logger
@@ -25,19 +25,17 @@ class Pressure:
             # 获取当前武器名称
             _factor_data["weapon"] = _weapon_name
 
-            # 获取当前武器配件系数
+            # 获取当前武器配件系数    {'weapon': ['AKM', 'AKM'], 'scope': ['红点瞄准镜', 'hongdian'], 'muzzle': ['后座补偿器', 'buchang-b'], 'grip': ['无握把', 'grip_none'], 'stock': ['无枪托', 'stock_none']}
             if _weapon_name in component_factor.keys():
                 _factors = component_factor[_weapon_name]
+
                 for key, value in current_weapon_info.items():  # 'scope',  ['红点瞄准镜', 'hongdian']
-                    if key in _factors.keys():
-                        for k, v in _factors[key].items():
-                            if value[1] in _factors[key].keys():
-                                if k == value[1]:
-                                    _factor_data[key] = v
-                            else:
-                                _factor_data[key] = 1.0
-                    elif key != "weapon":
-                        _factor_data[key] = 1.0
+                    if key != "weapon":
+                        try:
+                            _factor_data[key] == _factors[key][value[1]]
+                        except KeyError:
+                            _factor_data[key] = 1.0
+
                 _factor_data["car"] = _factors["car"]["car"]
                 # 获取当前姿态
                 _factor_data["posture_state"] = _factors["pose"][global_variable.posture_state]

@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import threading
 
 from libs.cache import ImageCache
 from concurrent.futures import ThreadPoolExecutor
-
-
 
 # 创建一个全局的线程池
 THREAD_POOL = ThreadPoolExecutor()
@@ -26,9 +25,24 @@ CACHE = ImageCache().source_data
 # current_weapon_information = {} # 当前武器信息
 # fire_weapon = "1"   # 默认开火武器
 
-
-class GlobalVariable:
+class Observable:
     def __init__(self):
+        self._observers = []
+        self._last_notify_time = 0
+        self._notify_lock = threading.Lock()
+
+    def add_observer(self, observer):
+        self._observers.append(observer)
+
+    def notify_observers(self):
+        for observer in self._observers:
+            observer.update()
+        from libs.pressure import Pressure
+        Pressure()
+
+class GlobalVariable(Observable):
+    def __init__(self):
+        super().__init__()
         self._enable_mouse_recognition = False
         self._enable_key_recognition = True
         self._weapon_information = {}
@@ -48,6 +62,7 @@ class GlobalVariable:
     @enable_mouse_recognition.setter
     def enable_mouse_recognition(self, value):
         self._enable_mouse_recognition = value
+        self.notify_observers()
 
     @property
     def enable_key_recognition(self):
@@ -56,6 +71,7 @@ class GlobalVariable:
     @enable_key_recognition.setter
     def enable_key_recognition(self, value):
         self._enable_key_recognition = value
+        self.notify_observers()
 
     @property
     def weapon_information(self):
@@ -64,6 +80,7 @@ class GlobalVariable:
     @weapon_information.setter
     def weapon_information(self, value):
         self._weapon_information = value
+        self.notify_observers()
 
     @property
     def posture_state_button(self):
@@ -80,8 +97,7 @@ class GlobalVariable:
     @in_car.setter
     def in_car(self, value):
         self._in_car = value
-        from libs.pressure import Pressure
-        Pressure()
+        self.notify_observers()
 
     @property
     def posture_state(self):
@@ -90,8 +106,7 @@ class GlobalVariable:
     @posture_state.setter
     def posture_state(self, value):
         self._posture_state = value
-        from libs.pressure import Pressure
-        Pressure()
+        self.notify_observers()
 
     @property
     def shooting_state(self):
@@ -100,8 +115,7 @@ class GlobalVariable:
     @shooting_state.setter
     def shooting_state(self, value):
         self._shooting_state = value
-        from libs.pressure import Pressure
-        Pressure()
+        self.notify_observers()
 
     @property
     def opening_method(self):
@@ -110,18 +124,7 @@ class GlobalVariable:
     @opening_method.setter
     def opening_method(self, value):
         self._opening_method = value
-        from libs.pressure import Pressure
-        Pressure()
-
-    @property
-    def continuous_clicks(self):
-        return self._continuous_clicks
-
-    @continuous_clicks.setter
-    def continuous_clicks(self, value):
-        self.continuous_clicks = value
-        from libs.pressure import Pressure
-        Pressure()
+        self.notify_observers()
 
     @property
     def current_weapon_information(self):
@@ -130,8 +133,7 @@ class GlobalVariable:
     @current_weapon_information.setter
     def current_weapon_information(self, value):
         self._current_weapon_information = value
-        from libs.pressure import Pressure
-        Pressure()
+        self.notify_observers()
 
     @property
     def fire_weapon(self):
@@ -140,8 +142,6 @@ class GlobalVariable:
     @fire_weapon.setter
     def fire_weapon(self, value):
         self._fire_weapon = value
-
-    # 为其他变量添加类似的属性和setter方法
 
 global_variable = GlobalVariable()
 
