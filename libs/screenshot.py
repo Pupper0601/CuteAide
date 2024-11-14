@@ -44,9 +44,10 @@ def gun_screenshots():
             if key not in ["inventory", "car", "pose"]:
                 paths_dict[key] = screen_capture(value, key + ".png")
 
-        logger.info("装备获取图截取完成")
+        logger.info("装备获取图截取 ---> 完成")
         return paths_dict   # {文件名: 路径, ...}
     else:
+        logger.info("装备获取图截取 ---> 失败")
         return paths_dict
 
 def get_car():

@@ -993,28 +993,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(2, 2, 2, 2)
-        self.frame_23 = QFrame(self.frame_7)
-        self.frame_23.setObjectName(u"frame_23")
-        self.frame_23.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_23.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_19 = QHBoxLayout(self.frame_23)
-        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
-        self.horizontalSpacer_40 = QSpacerItem(86, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_40)
-
-        self.checkBox_3 = QCheckBox(self.frame_23)
-        self.checkBox_3.setObjectName(u"checkBox_3")
-
-        self.horizontalLayout_19.addWidget(self.checkBox_3)
-
-        self.horizontalSpacer_41 = QSpacerItem(85, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_41)
-
-
-        self.verticalLayout_8.addWidget(self.frame_23)
-
         self.frame_25 = QFrame(self.frame_7)
         self.frame_25.setObjectName(u"frame_25")
         self.frame_25.setFrameShape(QFrame.Shape.StyledPanel)
@@ -1099,7 +1077,6 @@ class Ui_MainWindow(object):
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u53e3", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u63e1\u628a", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u67aa\u6258", None))
-        self.checkBox_3.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u8fde\u70b9", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u9884\u7559\u529f\u80fd\u533a", None))
     # retranslateUi
 

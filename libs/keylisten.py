@@ -36,12 +36,11 @@ class KeyListen(Thread, QObject):
     def on_pressed(self, keys):
         # 监听按键
         keys = str(keys.name if isinstance(keys, Key) else keys.char)
-        active_window = get_active_window_info()
-        # if "PUBG" in active_window["window_title"]:
-        if True:
+        if get_active_window_info():
+        # if True:
             if keys == "tab":  # 监听到按键 'tab'
                 if global_variable.enable_key_recognition:
-                    time.sleep(0.5) # 等待0.5秒, 等待背包打开
+                    time.sleep(0.3) # 等待0.5秒, 等待背包打开
                     GetGunInfo()  # 更新枪械信息
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     global_variable.enable_mouse_recognition = False    # 关闭鼠标识别
@@ -54,6 +53,8 @@ class KeyListen(Thread, QObject):
             elif keys == "esc":  # 监听到按键 'esc'
                 global_variable.enable_mouse_recognition = False
                 global_variable.enable_key_recognition = True
+                global_variable.shooting_state = "stop"
+                self.parent.state_win.update_state_shooting_state()
             elif keys in ["1", "!"]:
                 self._update_weapon_state("gun_1", "gun_2", keys)
             elif keys in ["2", "@"]:
@@ -61,23 +62,23 @@ class KeyListen(Thread, QObject):
             elif keys in ["3","4","#","$",]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-                Pressure()
             elif keys in ["x", "X"]:
                 global_variable.shooting_state = "stop" if not global_variable.missile_stop_gun_x or global_variable.missile_stop_gun_5 else "fired"
                 self.parent.state_win.update_state_shooting_state()
                 global_variable.missile_stop_gun_x = not global_variable.missile_stop_gun_x
-                Pressure()
             elif keys in ["5", "%"]:
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
                 global_variable.missile_stop_gun_5 = True
-                Pressure()
             elif keys in ['z',"Z", 'c',"C", 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
-                Pressure()
             elif keys in ['F', 'f']:
                 get_car()
-                Pressure()
+            Pressure()
+        else:
+            global_variable.shooting_state = "stop"
+            self.parent.state_win.update_state_shooting_state()
+            Pressure()
 
     def _update_weapon_state(self, primary_gun, secondary_gun, keys):
         if len(global_variable.weapon_information) > 0:
@@ -92,7 +93,6 @@ class KeyListen(Thread, QObject):
                 global_variable.shooting_state = "fired"
                 self.parent.state_win.update_state_shooting_state()
             global_variable.missile_stop_gun_5 = False
-            Pressure()
 
 
     def stop_listener(self):

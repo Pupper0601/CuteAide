@@ -8,6 +8,7 @@ global_recoil = 1   # 全局后坐力
 
 global_lshift = 1   # 全局屏息系数
 
+# 武器基础影响因子
 alone_factor = {    # 单独武器基础影响因子
     "weapon_none": 1.0,
      "AKM": 1.0,
@@ -45,6 +46,7 @@ alone_factor = {    # 单独武器基础影响因子
      "MG3": 1.0
 }
 
+# 配件影响因子
 component_factor = {    # 配件影响因子
     "weapon_none": {
         "pose":{       # 姿势
@@ -925,6 +927,7 @@ component_factor = {    # 配件影响因子
     }
 }
 
+# 弹道
 guns_trajectory = { # 弹道
     "weapon_none": {
         "default": [16, 13, 11, 23, 14, 33, 17, 33, 18, 37, 19, 37, 19, 37, 21, 41, 21, 41, 21, 41, 21, 41, 21, 43, 22,
@@ -1047,6 +1050,7 @@ guns_trajectory = { # 弹道
         },
 }
 
+# 枪械射速
 weapon_intervals = {
     "weapon_none": 86,
     "AKM": 102,

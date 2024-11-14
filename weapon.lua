@@ -2,6 +2,7 @@ EnablePrimaryMouseButtonEvents(true)
 
 local file_address = "F:/Object/GitHub/CuteAide/output.lua"
 
+
 local decimal_cache = 0 -- 用于缓存小数部分，以便在下一次调用时使用
 
 -- 以下是向上取整并缓存小数部分的函数
@@ -49,7 +50,6 @@ function calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_s
     return calculation_results
 end
 
-
 local start_shooting_time = 0 -- 开始射击时间
 
 -- 开始压枪
@@ -60,10 +60,15 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
         return
     end
 
+    if weapon == nil or weapon == "weapon_none" then
+        OutputLogMessage("请先读取武器参数或当前武器为 weapon_none \n")
+        return
+    end
+
     local _trajectory = guns_trajectory -- 枪械轨迹
     local _intervals = weapon_intervals  -- 武器间隔
-    local total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,
-                                      global_lshift,global_recoil)    -- 总系数
+    local total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)    -- 总系数
+
     local _number_bullets = 0   -- 子弹数
 
     local _special_weapon = {MK47=true, M16A4=true, MINI14=true, SKS=true, MK12=true, ZDZT=true,QBU=true}  -- 特殊武器
@@ -78,41 +83,40 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
             end
 
             if opening_method == "click" then   -- 点击开镜
-                for _,recoil_data in ipairs(_trajectory) do
-                    if recoil_data[1] == _number_bullets then
-                        total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
-
-                        local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
-                        OutputLogMessage(output)
-
-                        local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-                        MoveMouseRelative(0, adjusted_recoil)
-
-                        PressAndReleaseKey("F8")
-                        if not IsMouseButtonPressed(1) then
-                            break
-                        end
-                        break
-                    end
-                end
-            elseif opening_method == "long_press" then  -- 长按开镜
-                if IsMouseButtonPressed(3) or IsMouseButtonPressed(4) then
+                if continuous_clicks == "open" then
+                    enable_mouse_events = false  -- 禁用鼠标事件
                     for _,recoil_data in ipairs(_trajectory) do
                         if recoil_data[1] == _number_bullets then
-                            total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)
+                            total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
+
                             local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-
-                            local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
-                            OutputLogMessage(output)
-
                             MoveMouseRelative(0, adjusted_recoil)
-
-                            PressAndReleaseKey("F8")
                             if not IsMouseButtonPressed(1) then
                                 break
                             end
                             break
                         end
+                    end
+                    enable_mouse_events = true  -- 启用鼠标事件
+                end
+            elseif opening_method == "long_press" then  -- 长按开镜
+                if IsMouseButtonPressed(3) or IsMouseButtonPressed(4) then
+                    if continuous_clicks == "open" then
+                        enable_mouse_events = false  -- 禁用鼠标事件
+                        for _,recoil_data in ipairs(_trajectory) do
+                            if recoil_data[1] == _number_bullets then
+                                total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)
+                                local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
+
+                                MoveMouseRelative(0, adjusted_recoil)
+
+                                if not IsMouseButtonPressed(1) then
+                                    break
+                                end
+                                break
+                            end
+                        end
+                        enable_mouse_events = true  -- 启用鼠标事件
                     end
                 end
             end
@@ -132,9 +136,6 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                     if recoil_data[1] == _number_bullets then
                         total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
 
-                        local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
-                        OutputLogMessage(output)
-
                         local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
                         MoveMouseRelative(0, adjusted_recoil)
                         if not IsMouseButtonPressed(1) then
@@ -143,6 +144,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                         break
                     end
                 end
+                Sleep(1)
 
             elseif opening_method == "long_press" then  -- 长按开镜
                 if IsMouseButtonPressed(3) or IsMouseButtonPressed(4) then
@@ -150,9 +152,6 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                         if recoil_data[1] == _number_bullets then
                             total_coefficient = calculate_influencing_factor()
                             local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-
-                            local output = string.format("压枪影响因子 ---> total_coefficient = %.2f\n", total_coefficient)
-                            OutputLogMessage(output)
 
                             MoveMouseRelative(0, adjusted_recoil)
                             if not IsMouseButtonPressed(1) then
@@ -168,16 +167,15 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
     end
 end
 
+-- 从文件中读取武器
 function read_weapon_from_file()
     if not is_authorized() then
         return
     end
+    local weapon_name = nil
     dofile(file_address)
+    weapon_name = weapon
 
-    local output = string.format("weapon = '%s'\nscope = %.2f\nmuzzle = %.2f\ngrip = %.2f\nstock = %.2f\ncar = %.2f\nposture_state = %d\nin_car = '%s'\nweapon_intervals = %d\nshooting_state = '%s'\nopening_method = '%s'\ncontinuous_clicks = '%s'\nalone_factor = %.2f\nglobal_lshift = %d\nglobal_recoil = %d",
-    weapon, scope, muzzle, grip, stock, car, posture_state, in_car, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil)
-
-    OutputLogMessage(output)
 
     return weapon_name, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil
 end
@@ -223,17 +221,16 @@ auto_pick = function()   -- 自动拾取
     PressAndReleaseKey("tab")
 end
 
-function g1_down() g1___ = true event_handing("mouse_button_down",1,"mouse") end
-function g1_up() g1___ = false event_handing("mouse_button_up",1,"mouse") end
-function g2_down() g2___ = true event_handing("mouse_button_down",2,"mouse") end
-function g2_up() g2___ = false event_handing("mouse_button_up",2,"mouse") end
-function g3_down() g3___ = true event_handing("mouse_button_down",3,"mouse") end
-function g3_up() g3___ = false event_handing("mouse_button_up",3,"mouse") end
-function g4_down() g4___ = true event_handing("m ouse_button_down",4,"mouse") end
-function g4_up() g4___ = false event_handing("mouse_button_up",4,"mouse") end
-function g5_down() g5___ = true event_handing("mouse_button_down",5,"mouse") end
-function g5_up() g5___ = false event_handing("mouse_button_up",5,"mouse") end
-
+function g1_down() if enable_mouse_events then g1___ = true event_handing("mouse_button_down", 1, "mouse") end end
+function g1_up() if enable_mouse_events then g1___ = false event_handing("mouse_button_up", 1, "mouse") end end
+function g2_down() if enable_mouse_events then g2___ = true event_handing("mouse_button_down", 2, "mouse") end end
+function g2_up() if enable_mouse_events then g2___ = false event_handing("mouse_button_up", 2, "mouse") end end
+function g3_down() if enable_mouse_events then g3___ = true event_handing("mouse_button_down", 3, "mouse") end end
+function g3_up() if enable_mouse_events then g3___ = false event_handing("mouse_button_up", 3, "mouse") end end
+function g4_down() if enable_mouse_events then g4___ = true event_handing("mouse_button_down", 4, "mouse") end end
+function g4_up() if enable_mouse_events then g4___ = false event_handing("mouse_button_up", 4, "mouse") end end
+function g5_down() if enable_mouse_events then g5___ = true event_handing("mouse_button_down", 5, "mouse") end end
+function g5_up() if enable_mouse_events then g5___ = false event_handing("mouse_button_up", 5, "mouse") end end
 
 while true do
   while IsMouseButtonPressed(1) and not g1___ do g1_down() break Sleep(1) end
@@ -246,5 +243,5 @@ while true do
   while not IsMouseButtonPressed(4) and g4___ do g4_up() break Sleep(1)end
   while IsMouseButtonPressed(5) and not g5___ do g5_down() break Sleep(1) end
   while not IsMouseButtonPressed(5) and g5___ do g5_up() break Sleep(1)end
-  Sleep(1)
+  Sleep(10)
 end

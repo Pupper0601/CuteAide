@@ -29,15 +29,18 @@ class MouseListen(Thread):
         logger.info("监听鼠标线程启动")
 
     def on_click(self, x,y, button, pressed):
-        active_window = get_active_window_info()
-        # if "PUBG" in active_window["window_title"]:
-        if True:
+        if get_active_window_info():
+        # if True:
             if pressed and global_variable.enable_mouse_recognition:
                 self.parent.update_way("识别中......")
                 if button == Button.left or button == Button.right:
                     GetGunInfo()
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     self.parent.update_way("识别完成")
+        else:
+            global_variable.shooting_state = "stop"
+            self.parent.state_win.update_state_shooting_state()
+
 
 
     def stop_listener(self):

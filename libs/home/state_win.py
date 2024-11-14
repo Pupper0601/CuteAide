@@ -95,7 +95,6 @@ class StateMainWin(QMainWindow):
     def update_state_shooting_state(self):
         # 更新射击状态
         _state = global_variable.shooting_state
-        logger.info(f"更新 state_win 窗口射击状态: {_state}")
         if _state == "fired":
             self.ui.pushButton_9.setText("压枪")
         else:

@@ -44,7 +44,6 @@ class HomeMainWin(QMainWindow):
         self.ui.radioButton_4.clicked.connect(self.update_posture_buttons)
         self.ui.radioButton.clicked.connect(self.update_mouse_gun)
         self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
-        self.ui.checkBox_3.clicked.connect(self.update_continuous_clicks)
 
     # 设置屏幕分辨率
     def resolution(self):
@@ -153,16 +152,6 @@ class HomeMainWin(QMainWindow):
             self.ui.radioButton_2.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
             global_variable.opening_method = "long_press"
             Pressure()
-
-    def update_continuous_clicks(self):
-        # 更新连点开关
-        if self.ui.checkBox.isChecked():
-            global_variable.continuous_clicks = "open"
-            Pressure()
-        else:
-            global_variable.continuous_clicks = "close"
-            Pressure()
-
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):

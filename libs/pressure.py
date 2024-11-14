@@ -85,21 +85,22 @@ class Pressure:
             # 获取全局后坐力系数
             _factor_data["global_recoil"] = global_recoil
 
-            logger.info(f"当前武器系数: {_factor_data}")
             return _factor_data
 
     def write_dict_to_lua_file(self):
-        paths = path_conn('/output.lua')
+        paths = "F:\Object\GitHub\CuteAide\output.lua"
         with open(paths, 'w', encoding='utf-8') as file:
-            for key, value in self.get_component_factor().items():
-                if isinstance(value, str):
-                    file.write(f"{key} = '{value}'\n")
-                elif isinstance(value, list):
-                    if key == "guns_trajectory":
-                        formatted_list = ", ".join([f"{{{i + 1}, {v}}}" for i, v in enumerate(value)])
-                        file.write(f"{key} = {{{formatted_list}}}\n")
-                else:
-                    file.write(f"{key} = {value}\n")
+            _gun_info = self.get_component_factor()
+            if _gun_info is not None:
+                for key, value in self.get_component_factor().items():
+                    if isinstance(value, str):
+                        file.write(f"{key} = '{value}'\n")
+                    elif isinstance(value, list):
+                        if key == "guns_trajectory":
+                            formatted_list = ", ".join([f"{{{i + 1}, {v}}}" for i, v in enumerate(value)])
+                            file.write(f"{key} = {{{formatted_list}}}\n")
+                    else:
+                        file.write(f"{key} = {value}\n")
 
 
 if __name__ == '__main__':
