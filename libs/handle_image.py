@@ -86,7 +86,7 @@ class ContrastImage:
         return round(_hist, 2)
 
 # 遍历图片对比
-def current_equipment(category, temp_image):
+def current_equipment(name,category, temp_image):
     gun_data = []
 
     # 遍历文件夹下所有图片
@@ -96,7 +96,7 @@ def current_equipment(category, temp_image):
             gun_data.append(mod_name)
 
     if not gun_data:
-        gun_data.append([temp_image.split('/')[-1].split('_')[0] + "_none", 1.0, 1.0])
+        gun_data.append([name + "_none", 1.0, 1.0])
 
     gun_name, ss, hs = '', 0, 0
     for name, ssim_score, hist_score in gun_data:

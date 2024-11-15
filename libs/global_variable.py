@@ -30,15 +30,24 @@ class Observable:
         self._observers = []
         self._last_notify_time = 0
         self._notify_lock = threading.Lock()
+        self._timer = None
 
     def add_observer(self, observer):
         self._observers.append(observer)
 
     def notify_observers(self):
-        for observer in self._observers:
-            observer.update()
-        from libs.pressure import Pressure
-        Pressure()
+        with self._notify_lock:
+            if self._timer:
+                self._timer.cancel()
+            self._timer = threading.Timer(0.5, self._execute_notify)
+            self._timer.start()
+
+    def _execute_notify(self):
+        with self._notify_lock:
+            for observer in self._observers:
+                observer.update()
+            from libs.pressure import Pressure
+            Pressure()
 
 class GlobalVariable(Observable):
     def __init__(self):

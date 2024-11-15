@@ -2,7 +2,6 @@ EnablePrimaryMouseButtonEvents(true)
 
 local file_address = "F:/Object/GitHub/CuteAide/output.lua"
 
-
 local decimal_cache = 0 -- 用于缓存小数部分，以便在下一次调用时使用
 
 -- 以下是向上取整并缓存小数部分的函数
@@ -28,8 +27,9 @@ end
 
 -- 计算后坐力
 function calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,
-                                      global_lshift,global_recoil)
-    calculation_results = scope * muzzle * grip * stock * posture_state * alone_factor * global_recoil
+                                      global_lshift,global_recoil, global_vertical, global_magnifying_power)
+    calculation_results = scope * muzzle * grip * stock * posture_state * alone_factor *
+            global_recoil*global_vertical*global_magnifying_power
     if in_car == "yes" then   -- 在车上
         calculation_results = calculation_results * car
     end
@@ -45,7 +45,7 @@ local start_shooting_time = 0 -- 开始射击时间
 -- 开始压枪
 function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in_car, guns_trajectory,
                        weapon_intervals,shooting_state,opening_method,continuous_clicks,alone_factor, global_lshift,
-                       global_recoil)
+                       global_recoil, global_vertical, global_magnifying_power)
     if not is_authorized() then
         return
     end
@@ -57,7 +57,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
 
     local _trajectory = guns_trajectory -- 枪械轨迹
     local _intervals = weapon_intervals  -- 武器间隔
-    local total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)    -- 总系数
+    local total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil, global_vertical, global_magnifying_power)    -- 总系数
 
     local _number_bullets = 0   -- 子弹数
 
@@ -77,7 +77,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                     enable_mouse_events = false  -- 禁用鼠标事件
                     for _,recoil_data in ipairs(_trajectory) do
                         if recoil_data[1] == _number_bullets then
-                            total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
+                            total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil, global_vertical, global_magnifying_power)
 
                             local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
                             MoveMouseRelative(0, adjusted_recoil)
@@ -95,7 +95,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
                         enable_mouse_events = false  -- 禁用鼠标事件
                         for _,recoil_data in ipairs(_trajectory) do
                             if recoil_data[1] == _number_bullets then
-                                total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil)
+                                total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil, global_vertical, global_magnifying_power)
                                 local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
 
                                 MoveMouseRelative(0, adjusted_recoil)
@@ -124,7 +124,7 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
             if opening_method == "click" then   -- 点击开镜
                 for _,recoil_data in ipairs(_trajectory) do
                     if recoil_data[1] == _number_bullets then
-                        total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil)
+                        total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil, global_vertical, global_magnifying_power)
 
                         local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
                         MoveMouseRelative(0, adjusted_recoil)
@@ -166,7 +166,8 @@ function read_weapon_from_file()
     dofile(file_address)
     weapon_name = weapon
     OutputLogMessage("当前武器: %s, 倍镜: %.2f, 枪口: %.2f, 握把: %.2f, 枪托: %.2f\n", weapon_name, scope, muzzle, grip, stock)
-    return weapon_name, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil
+    return weapon_name, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals,
+    shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil,global_vertical, global_magnifying_power
 end
 
 
@@ -175,8 +176,11 @@ function event_handing(event, key)
     if event == "mouse_button_down" then
         if key == 1 then
             start_shooting_time = GetRunningTime()
-            local weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil = read_weapon_from_file()
-            pressure_grab(weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil)
+            local weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals,
+            shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil, global_vertical, global_magnifying_power = read_weapon_from_file()
+            pressure_grab(weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory,
+                    weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift,
+                    global_recoil, global_vertical, global_magnifying_power)
         elseif key == 2 then
             OutputLogMessage("右键按下\n")
         end

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import os
 
-from PySide6.QtGui import QCursor, Qt
+from PySide6.QtGui import QCursor, QFont, QFontDatabase, Qt
 from PySide6.QtWidgets import QMainWindow
 
 from views.login import Ui_MainWindow as login_ui

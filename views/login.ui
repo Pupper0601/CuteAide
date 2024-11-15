@@ -825,7 +825,7 @@ QLineEdit:focus{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#login_button{
-	font: 700 24pt;
+	font: 700 24pt &quot;YouSheShaYuFeiTeJianKangTi&quot;;
 	background-color: rgb(71,157,168);
 	color: rgb(255,255,255);
 	border-radius: 8px;

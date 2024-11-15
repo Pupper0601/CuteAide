@@ -78,6 +78,12 @@ class Pressure:
             # 获取全局后坐力系数
             _factor_data["global_recoil"] = global_recoil
 
+            # 获取垂直后坐力
+            _factor_data["global_vertical"] = global_vertical
+
+            # 获取倍镜倍率
+            _factor_data["global_magnifying_power"] = global_magnifying_power[current_weapon_info["scope"][1]]
+
             logger.info(f"当前武器信息为: {_factor_data}")
 
             return _factor_data

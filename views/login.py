@@ -406,7 +406,7 @@ class Ui_MainWindow(object):
         self.login_button.setMinimumSize(QSize(260, 0))
         self.login_button.setMaximumSize(QSize(260, 16777215))
         self.login_button.setStyleSheet(u"#login_button{\n"
-"	font: 700 24pt;\n"
+"	font: 700 24pt \"YouSheShaYuFeiTeJianKangTi\";\n"
 "	background-color: rgb(71,157,168);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -459,7 +459,7 @@ class Ui_MainWindow(object):
 "	\n"
 "	color: rgb(189, 151, 93);\n"
 "	letter-spacing: 2px;\n"
-"	font: 12pt ;\n"
+"	font: 9pt ;\n"
 "}")
         self.label_4.setScaledContents(False)
         self.label_4.setWordWrap(False)

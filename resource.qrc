@@ -3,6 +3,9 @@
     <file>resource/images/logo.gif</file>
     <file>resource/images/login_bg.png</file>
   </qresource>
+  <qresource prefix="ttf">
+    <file>resource/ttf/YouSheYuFeiTeJianKangTi-2.ttf</file>
+  </qresource>
   <qresource prefix="icon">
     <file>resource/icon/minimize.png</file>
     <file>resource/icon/close.png</file>

@@ -19,16 +19,26 @@ class GetGunInfo:
         gun_2 = {}
         _position = CACHE["config"]["regions"]
         futures = {
-            "weapon_1": THREAD_POOL.submit(current_equipment, CACHE["weapons"], screen_capture(_position["weapon_1"])),
-            "scope_1" : THREAD_POOL.submit(current_equipment, CACHE["scopes"], screen_capture(_position["scope_1"])),
-            "muzzle_1": THREAD_POOL.submit(current_equipment, CACHE["muzzles"], screen_capture(_position["muzzle_1"])),
-            "grip_1"  : THREAD_POOL.submit(current_equipment, CACHE["grips"], screen_capture(_position["grip_1"])),
-            "stock_1" : THREAD_POOL.submit(current_equipment, CACHE["stocks"], screen_capture(_position["stock_1"])),
-            "weapon_2": THREAD_POOL.submit(current_equipment, CACHE["weapons"], screen_capture(_position["weapon_2"])),
-            "scope_2" : THREAD_POOL.submit(current_equipment, CACHE["scopes"], screen_capture(_position["scope_2"])),
-            "muzzle_2": THREAD_POOL.submit(current_equipment, CACHE["muzzles"], screen_capture(_position["muzzle_2"])),
-            "grip_2"  : THREAD_POOL.submit(current_equipment, CACHE["grips"], screen_capture(_position["grip_2"])),
-            "stock_2" : THREAD_POOL.submit(current_equipment, CACHE["stocks"], screen_capture(_position["stock_2"]))
+            "weapon_1": THREAD_POOL.submit(current_equipment,"weapon", CACHE["weapons"], screen_capture(_position[
+                                                                                                             "weapon_1"])),
+            "scope_1" : THREAD_POOL.submit(current_equipment,"scope", CACHE["scopes"], screen_capture(_position[
+                                                                                                                    "scope_1"])),
+            "muzzle_1": THREAD_POOL.submit(current_equipment,"muzzle", CACHE["muzzles"], screen_capture(_position[
+                                                                                                             "muzzle_1"])),
+            "grip_1"  : THREAD_POOL.submit(current_equipment,"grip", CACHE["grips"], screen_capture(_position[
+                                                                                                           "grip_1"])),
+            "stock_1" : THREAD_POOL.submit(current_equipment,"stock", CACHE["stocks"], screen_capture(_position[
+                                                                                                            "stock_1"])),
+            "weapon_2": THREAD_POOL.submit(current_equipment,"weapon", CACHE["weapons"], screen_capture(_position[
+                                                                                                             "weapon_2"])),
+            "scope_2" : THREAD_POOL.submit(current_equipment,"scope", CACHE["scopes"], screen_capture(_position[
+        "scope_2"])),
+            "muzzle_2": THREAD_POOL.submit(current_equipment,"muzzle", CACHE["muzzles"], screen_capture(_position[
+    "muzzle_2"])),
+            "grip_2"  : THREAD_POOL.submit(current_equipment,"grip", CACHE["grips"], screen_capture(_position[
+                                                                                                           "grip_2"])),
+            "stock_2" : THREAD_POOL.submit(current_equipment,"stock", CACHE["stocks"], screen_capture(_position[
+                                                                                                            "stock_2"]))
         }
 
         results = {key: future.result() for key, future in futures.items()}

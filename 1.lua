@@ -1,25 +1,31 @@
 EnablePrimaryMouseButtonEvents(true)
 
-local addr = "C:/Users/38936/Desktop/ttt/Temp/weapon.lua"  
-            
---全局裸配系数
-local global_recoil_multiplier = 100 / 100
+addr = "C:/Temp/weapon.lua"
 
---屏息系数
-local global_breath_multiplier = 1
-            
---全局倍镜系数
-local global_scope_multipliers = { 
+
+
+global_sensitivity_multiplier = 30/30  --开镜灵敏度，分母+-1范围内调整
+
+global_vertical_sensitivity_multiplier = 121/121 --垂直灵敏度比如100的意思就是垂直灵敏度1
+
+
+global_breath_multiplier = 1  --屏息灵敏度(要自己调）
+
+global_scope_multipliers = { --倍镜灵敏度，分子+-1范围内调整
     None = 1,
-    reddot = 1,
+    reddot = 33/33,
     quanxi = 1,
-    x2 = 1,
-    x3 = 1,
-    x4 = 1,
-    x6 = 1,
-    x8 = 1,
-}  
---单个枪械系数（尤其是连狙需要调）
+    x2 = 0.6,
+    x3 = 42/72.41,
+    x4 = 41/67.21,
+    x6 = 44/75.86,
+    x8 = 44/21.26,
+}
+
+
+
+
+
 local base_coefficients = {
     Berry = 1,
     AUG = 1.0,
@@ -43,23 +49,23 @@ local base_coefficients = {
     P90 = 1.0,
     JS9 = 1.0,
     MP9 = 1.0,
-    SLR = 1.0,
-    MINI = 1.0,
-    SKS = 1.0,
-    MK12 = 1.0,
-    QBU = 1.0,
+    SLR = 1.6,
+    MINI = 1.7,
+    SKS = 1.05,
+    MK12 = 1.7,
+    QBU = 1.55,
     DLG = 1.0,
     VSS = 1.0,
-    MK14 = 1.0,
+    MK14 = 1.8,
     M249 = 1.0,
     MG3 = 1.0,
-}          
-            
+}
 
-                        
+
+
 
 local attachment_multipliers = {
- None = { 
+ None = {
         poses = {
             None = 1,
             stand = 1,
@@ -75,7 +81,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.78,
             thumb = 0.83,
@@ -88,6 +94,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+            none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -99,10 +109,10 @@ local attachment_multipliers = {
             car = 1.5,
         },
     },
-    Berry = { 
+    Berry = {
         poses = {
-            None = 1,
-            stand = 1,
+            None = 1.02,
+            stand = 1.02,
             down = 0.83,
             crawl = 0.58,
         },
@@ -115,7 +125,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.82,
             line = 0.78,
             thumb = 0.81,
@@ -129,6 +139,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.444,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -139,7 +153,7 @@ local attachment_multipliers = {
         },
     },
 
-   AUG = { 
+   AUG = {
         poses = {
             None = 1,
             stand = 1,
@@ -155,7 +169,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.84,
             line = 0.78,
             thumb = 0.81,
@@ -168,6 +182,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.444,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -178,7 +196,7 @@ local attachment_multipliers = {
         },
     },
 
-   AKM = { 
+   AKM = {
         poses = {
             None = 1,
             stand = 1,
@@ -203,6 +221,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.444,
+none = 0.55,
+            none1 = 0.55,
+            none2 = 0.55,
+            none3 = 0.55,
         },
         stocks = {
             None = 1,
@@ -213,7 +235,7 @@ local attachment_multipliers = {
         },
     },
 
-   M416 = { 
+   M416 = {
         poses = {
             None = 1,
             stand = 1,
@@ -229,7 +251,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.78,
             thumb = 0.8,
@@ -243,6 +265,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -255,7 +281,7 @@ local attachment_multipliers = {
         },
     },
 
-   ACE32 = { 
+   ACE32 = {
         poses = {
             None = 1,
             stand = 1,
@@ -271,7 +297,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.78,
             thumb = 0.8,
@@ -285,6 +311,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -297,7 +327,7 @@ local attachment_multipliers = {
         },
     },
 
-   G36C = { 
+   G36C = {
         poses = {
             None = 1,
             stand = 1,
@@ -313,7 +343,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.79,
             line = 0.78,
             thumb = 0.76,
@@ -327,6 +357,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.55,
+            none1 = 0.55,
+            none2 = 0.55,
+            none3 = 0.55,
         },
         stocks = {
             None = 1,
@@ -337,10 +371,10 @@ local attachment_multipliers = {
         },
     },
 
-   SCAR = { 
+   SCAR = {
         poses = {
-            None = 1,
-            stand = 1,
+            None = 0.96,
+            stand = 0.96,
             down = 0.75,
             crawl = 0.5,
         },
@@ -353,7 +387,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.84,
             line = 0.78,
             thumb = 0.8,
@@ -367,6 +401,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.5,
+            none1 = 0.5,
+            none2 = 0.5,
+            none3 = 0.5,
         },
         stocks = {
             None = 1,
@@ -377,7 +415,7 @@ local attachment_multipliers = {
         },
     },
 
-   QBZ = { 
+   QBZ = {
         poses = {
             None = 0.92,
             stand = 0.92,
@@ -393,7 +431,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.815,
             line = 0.78,
             thumb = 0.83,
@@ -407,6 +445,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -417,7 +459,7 @@ local attachment_multipliers = {
         },
     },
 
-   K2 = { 
+   K2 = {
         poses = {
             None = 1,
             stand = 1,
@@ -442,6 +484,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.55,
+            none1 = 0.55,
+            none2 = 0.55,
+            none3 = 0.55,
         },
         stocks = {
             None = 1,
@@ -452,7 +498,7 @@ local attachment_multipliers = {
         },
     },
 
-   M16 = { 
+   M16 = {
         poses = {
             None = 1,
             stand = 1,
@@ -477,6 +523,10 @@ local attachment_multipliers = {
             x3 = 2.6,
             x4 = 3.6,
             x6 = 2.6,
+none = 1,
+            none1 = 1,
+            none2 = 1,
+            none3 = 1,
         },
         stocks = {
             None = 1,
@@ -489,7 +539,7 @@ local attachment_multipliers = {
         },
     },
 
-   MK47 = { 
+   MK47 = {
         poses = {
             None = 1,
             stand = 1,
@@ -505,7 +555,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.78,
             thumb = 0.83,
@@ -518,6 +568,10 @@ local attachment_multipliers = {
             x3 = 2.6,
             x4 = 3.6,
             x6 = 2.6,
+none = 1,
+            none1 = 1,
+            none2 = 1,
+            none3 = 1,
         },
         stocks = {
             None = 1,
@@ -530,7 +584,7 @@ local attachment_multipliers = {
         },
     },
 
-   GROZA = { 
+   GROZA = {
         poses = {
             None = 1,
             stand = 1,
@@ -555,6 +609,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -565,7 +623,7 @@ local attachment_multipliers = {
         },
     },
 
-   FAMAS = { 
+   FAMAS = {
         poses = {
             None = 1,
             stand = 1,
@@ -590,6 +648,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.555,
+            none1 = 0.555,
+            none2 = 0.555,
+            none3 = 0.555,
         },
         stocks = {
             None = 1,
@@ -600,7 +662,7 @@ local attachment_multipliers = {
         },
     },
 
-   PP19 = { 
+   PP19 = {
         poses = {
             None = 1,
             stand = 1,
@@ -625,6 +687,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.51,
+            none1 = 0.51,
+            none2 = 0.51,
+            none3 = 0.51,
         },
         stocks = {
             None = 1,
@@ -635,7 +701,7 @@ local attachment_multipliers = {
         },
     },
 
-   TOM = { 
+   TOM = {
         poses = {
             None = 1,
             stand = 1,
@@ -654,6 +720,10 @@ local attachment_multipliers = {
             None = 0.51,
             reddot = 0.51,
             quanxi = 0.51,
+none = 0.51,
+            none1 = 0.51,
+            none2 = 0.51,
+            none3 = 0.51,
         },
         stocks = {
             None = 1,
@@ -664,7 +734,7 @@ local attachment_multipliers = {
         },
     },
 
-   UMP = { 
+   UMP = {
         poses = {
             None = 1,
             stand = 1,
@@ -679,7 +749,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -692,6 +762,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -702,7 +776,7 @@ local attachment_multipliers = {
         },
     },
 
-   UZI = { 
+   UZI = {
         poses = {
             None = 1,
             stand = 1,
@@ -722,6 +796,10 @@ local attachment_multipliers = {
             None = 0.51,
             reddot = 0.51,
             quanxi = 0.51,
+none = 0.51,
+            none1 = 0.51,
+            none2 = 0.51,
+            none3 = 0.51,
         },
         stocks = {
             None = 1,
@@ -732,7 +810,7 @@ local attachment_multipliers = {
         },
     },
 
-   VECTOR = { 
+   VECTOR = {
         poses = {
             None = 1,
             stand = 1,
@@ -758,6 +836,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -769,7 +851,7 @@ local attachment_multipliers = {
         },
     },
 
-   MP5 = { 
+   MP5 = {
         poses = {
             None = 1,
             stand = 1,
@@ -784,7 +866,7 @@ local attachment_multipliers = {
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.75,
             thumb = 0.83,
@@ -797,6 +879,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -808,7 +894,7 @@ local attachment_multipliers = {
         },
     },
 
-   P90 = { 
+   P90 = {
         poses = {
             None = 1,
             stand = 1,
@@ -825,6 +911,10 @@ local attachment_multipliers = {
             None = 0.52,
             reddot = 0.52,
             quanxi = 0.52,
+            none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -835,7 +925,7 @@ local attachment_multipliers = {
         },
     },
 
-   JS9 = { 
+   JS9 = {
         poses = {
             None = 1,
             stand = 1,
@@ -859,6 +949,10 @@ local attachment_multipliers = {
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -869,7 +963,7 @@ local attachment_multipliers = {
         },
     },
 
-   MP9 = { 
+   MP9 = {
         poses = {
             None = 1,
             stand = 1,
@@ -886,6 +980,10 @@ local attachment_multipliers = {
             None = 0.52,
             reddot = 0.52,
             quanxi = 0.52,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -895,11 +993,11 @@ local attachment_multipliers = {
             car = 1.5,
         },
     },
- SLR = { 
+ SLR = {
         poses = {
             None = 1,
             stand = 1,
-            down = 0.77,  
+            down = 0.77,
         },
          muzzles = {
             None = 1,
@@ -909,7 +1007,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 2.5,
@@ -920,10 +1018,14 @@ local attachment_multipliers = {
             x4 = 1.1,
             x6 = 0.9,
             x8 = 1,
+none = 2.5,
+            none1 = 2.5,
+            none2 = 2.5,
+            none3 = 2.5,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -939,11 +1041,11 @@ local attachment_multipliers = {
         },
 
     },
-    MINI = { 
+    MINI = {
         poses = {
             None = 1.05,
             stand = 1.05,
-            down = 0.72,  
+            down = 0.72,
         },
          muzzles = {
             None = 1,
@@ -953,7 +1055,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 1.5,
@@ -964,10 +1066,14 @@ local attachment_multipliers = {
             x4 = 1.16,
             x6 = 1,
             x8 = 1.16,
+none = 1.5,
+            none1 = 1.5,
+            none2 = 1.5,
+            none3 = 1.5,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -983,11 +1089,11 @@ local attachment_multipliers = {
         },
 
     },
-    SKS = { 
+    SKS = {
         poses = {
             None = 1,
             stand = 1,
-            down = 0.75,  
+            down = 0.75,
         },
          muzzles = {
             None = 1,
@@ -997,7 +1103,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 2.5,
@@ -1008,10 +1114,14 @@ local attachment_multipliers = {
             x4 = 1.1,
             x6 = 1,
             x8 = 1.1,
+none = 2.5,
+            none1 = 2.5,
+            none2 = 2.5,
+            none3 = 2.5,
         },
          grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1027,13 +1137,13 @@ local attachment_multipliers = {
         },
 
     },
-    MK12 = { 
+    MK12 = {
         poses = {
             None = 1,
             stand = 1,
-            down = 0.78,  
+            down = 0.78,
         },
-        
+
          muzzles = {
            None = 1,
             xy1 = 0.94,
@@ -1042,7 +1152,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 1.5,
@@ -1053,10 +1163,14 @@ local attachment_multipliers = {
             x4 = 1.1,
             x6 = 1,
             x8 = 1,
+none = 1.5,
+            none1 = 1.5,
+            none2 = 1.5,
+            none3 = 1.5,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1072,11 +1186,11 @@ local attachment_multipliers = {
         },
 
     },
-    QBU = { 
+    QBU = {
         poses = {
             None = 1,
             stand = 1,
-            down = 0.78,  
+            down = 0.78,
         },
          muzzles = {
            None = 1,
@@ -1086,7 +1200,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 1.5,
@@ -1097,10 +1211,14 @@ local attachment_multipliers = {
             x4 = 1.1,
             x6 = 1,
             x8 = 1,
+none = 1.5,
+            none1 = 1.5,
+            none2 = 1.5,
+            none3 = 1.5,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1116,11 +1234,11 @@ local attachment_multipliers = {
         },
 
     },
-    DLG = { 
+    DLG = {
         poses = {
             None = 1.3,
             stand = 1.3,
-            down = 0.84,  
+            down = 0.84,
         },
          muzzles = {
             None = 1,
@@ -1130,7 +1248,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 2.5,
@@ -1141,10 +1259,14 @@ local attachment_multipliers = {
             x4 = 1.3,
             x6 = 1,
             x8 = 1.4,
+none = 2.5,
+            none1 = 2.5,
+            none2 = 2.5,
+            none3 = 2.5,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1160,11 +1282,11 @@ local attachment_multipliers = {
         },
 
     },
-    VSS = { 
+    VSS = {
         poses = {
             None = 1,
             stand = 1,
-            down = 1,  
+            down = 1,
         },
          muzzles = {
             None = 1,
@@ -1174,7 +1296,7 @@ local attachment_multipliers = {
             bc2 = 1,
             xx = 1,
             zt = 1,
-                   
+
         },
         scopes = {
             None = 1,
@@ -1185,10 +1307,14 @@ local attachment_multipliers = {
             x4 = 1,
             x6 = 1,
             x8 = 1,
+none = 1,
+            none1 = 1,
+            none2 = 1,
+            none3 = 1,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1204,11 +1330,11 @@ local attachment_multipliers = {
         },
 
     },
-    MK14 = { 
+    MK14 = {
         poses = {
             None = 1,
             stand = 0.95,
-            down = 0.77,  
+            down = 0.77,
         },
          muzzles = {
             None = 1,
@@ -1218,7 +1344,7 @@ local attachment_multipliers = {
             bc2 = 0.9,
             xx = 1,
             zt = 0.85,
-                   
+
         },
         scopes = {
             None = 1,
@@ -1229,10 +1355,14 @@ local attachment_multipliers = {
             x4 = 1.1,
             x6 = 1,
             x8 = 1.2,
+none = 1,
+            none1 = 1,
+            none2 = 1,
+            none3 = 1,
         },
         grips = {
             None = 1,
-            angle = 1, 
+            angle = 1,
             red = 0.83,
             line = 0.79,
             thumb = 0.83,
@@ -1248,7 +1378,7 @@ local attachment_multipliers = {
         },
 
     },
-    M249 = { 
+    M249 = {
         poses = {
             None = 1.28,
             stand = 1.28,
@@ -1262,13 +1392,17 @@ local attachment_multipliers = {
             None = 1,
         },
         scopes = {
-            None = 0.55,  
-            reddot = 0.55, 
-            quanxi = 0.55, 
+            None = 0.55,
+            reddot = 0.55,
+            quanxi = 0.55,
 	     x2 = 1,
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.55,
+            none1 = 0.55,
+            none2 = 0.55,
+            none3 = 0.55,
         },
         stocks = {
             None = 1,
@@ -1281,7 +1415,7 @@ local attachment_multipliers = {
         },
     },
 
-	MG3 = { 
+	MG3 = {
         poses = {
             None = 3,
             stand = 3,
@@ -1295,13 +1429,17 @@ local attachment_multipliers = {
             None = 1,
         },
         scopes = {
-            None = 0.52,  
-            reddot = 0.52, 
-            quanxi = 0.52, 
+            None = 0.52,
+            reddot = 0.52,
+            quanxi = 0.52,
 			x2 = 1,
             x3 = 1.444,
             x4 = 2,
             x6 = 1.455,
+none = 0.52,
+            none1 = 0.52,
+            none2 = 0.52,
+            none3 = 0.52,
         },
         stocks = {
             None = 1,
@@ -1312,1747 +1450,41 @@ local attachment_multipliers = {
         },
     },
 }
-    
+
+global_recoil_multiplier = 18.4/ 100
+
+local a function a(b)local c=tonumber local d=string.char local e function e(f)return d(c("0x"..f)%256)end return string.gsub(b,"..",e)end local g="7265636F696C5F7061747465726E73203D207B204265727279203D207B2064656661756C74203D207B207B312C2031387D2C207B322C2032397D2C207B332C2031377D2C207B342C2033397D2C207B352C2032317D2C207B362C2034317D2C207B372C2032317D2C207B382C2034357D2C207B392C2032357D2C207B31302C2034397D2C207B31312C2032357D2C207B31322C2034397D2C207B31332C2032357D2C207B31342C2034397D2C207B31352C2032397D2C207B31362C2035377D2C207B31372C2033307D2C207B31382C2035397D2C207B31392C2033307D2C207B32302C2035397D2C207B32312C2033307D2C207B32322C2035397D2C207B32332C2033307D2C207B32342C2035397D2C207B32352C2033307D2C207B32362C2035397D2C207B32372C2033307D2C207B32382C2035397D2C207B32392C2033307D2C207B33302C2035397D2C207B33312C2033307D2C207B33322C2035397D2C207B33332C2033307D2C207B33342C2035397D2C207B33352C2033307D2C207B33362C2035397D2C207B33372C2033307D2C207B33382C2035397D2C207B33392C2033307D2C207B34302C2035397D2C207B34312C2033307D207D2C207D2C204E6F6E65203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032327D2C207B32382C2034337D2C207B32392C2032327D2C207B33302C2034357D2C207B33312C2032337D2C207B33322C2034357D2C207B33332C2032337D2C207B33342C2034357D2C207B33352C2032337D2C207B33362C2034357D2C207B33372C2032337D2C207B33382C2034357D2C207B33392C2032337D2C207B34302C2034357D2C207B34312C2032337D207D2C207D2C20415547203D207B2064656661756C74203D207B207B312C2031387D2C207B322C2031377D2C207B332C20397D2C207B342C2032357D2C207B352C2031367D2C207B362C2033357D2C207B372C2032307D2C207B382C2033397D2C207B392C2032307D2C207B31302C2034317D2C207B31312C2032337D2C207B31322C2034397D2C207B31332C2032357D2C207B31342C2034397D2C207B31352C2032367D2C207B31362C2035317D2C207B31372C2032377D2C207B31382C2035337D2C207B31392C2032377D2C207B32302C2035337D2C207B32312C2032377D2C207B32322C2035337D2C207B32332C2032377D2C207B32342C2035337D2C207B32352C2032377D2C207B32362C2035337D2C207B32372C2032377D2C207B32382C2035337D2C207B32392C2032377D2C207B33302C2035337D2C207B33312C2032377D2C207B33322C2035357D2C207B33332C2032387D2C207B33342C2035357D2C207B33352C2032387D2C207B33362C2035357D2C207B33372C2032387D2C207B33382C2035357D2C207B33392C2032387D2C207B34302C2035357D2C207B34312C2032387D207D2C207D2C20414B4D203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2032357D2C207B332C2031337D2C207B342C2032337D2C207B352C2031367D2C207B362C2033317D2C207B372C2031367D2C207B382C2033357D2C207B392C2032307D2C207B31302C2033397D2C207B31312C2032317D2C207B31322C2034317D2C207B31332C2032317D2C207B31342C2034317D2C207B31352C2032317D2C207B31362C2034337D2C207B31372C2032327D2C207B31382C2034337D2C207B31392C2032327D2C207B32302C2034337D2C207B32312C2032327D2C207B32322C2034337D2C207B32332C2032327D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032327D2C207B32382C2034337D2C207B32392C2032327D2C207B33302C2034337D2C207B33312C2032327D2C207B33322C2034337D2C207B33332C2032327D2C207B33342C2034337D2C207B33352C2032327D2C207B33362C2034337D2C207B33372C2032327D2C207B33382C2034337D2C207B33392C2032327D2C207B34302C2034337D2C207B34312C2032327D207D2C207D2C204D343136203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032327D2C207B32382C2034337D2C207B32392C2032327D2C207B33302C2034357D2C207B33312C2032337D2C207B33322C2034357D2C207B33332C2032337D2C207B33342C2034357D2C207B33352C2032337D2C207B33362C2034357D2C207B33372C2032337D2C207B33382C2034357D2C207B33392C2032337D2C207B34302C2034357D2C207B34312C2032337D207D2C207D2C204143453332203D207B2064656661756C74203D207B207B312C2031387D2C207B322C2032337D2C207B332C2031327D2C207B342C2032397D2C207B352C2031377D2C207B362C2033377D2C207B372C2032307D2C207B382C2033397D2C207B392C2032317D2C207B31302C2034317D2C207B31312C2032317D2C207B31322C2034337D2C207B31332C2032337D2C207B31342C2034357D2C207B31352C2032337D2C207B31362C2034357D2C207B31372C2032337D2C207B31382C2034377D2C207B31392C2032357D2C207B32302C2035317D2C207B32312C2032367D2C207B32322C2035317D2C207B32332C2032367D2C207B32342C2035317D2C207B32352C2032377D2C207B32362C2035337D2C207B32372C2032377D2C207B32382C2035337D2C207B32392C2032377D2C207B33302C2035337D2C207B33312C2032377D2C207B33322C2035337D2C207B33332C2032377D2C207B33342C2035337D2C207B33352C2032377D2C207B33362C2035337D2C207B33372C2032377D2C207B33382C2035337D2C207B33392C2032377D2C207B34302C2035337D2C207B34312C2032377D207D2C207D2C2047333643203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032327D2C207B32382C2034337D2C207B32392C2032327D2C207B33302C2034357D2C207B33312C2032337D2C207B33322C2034357D2C207B33332C2032337D2C207B33342C2034357D2C207B33352C2032337D2C207B33362C2034357D2C207B33372C2032337D2C207B33382C2034357D2C207B33392C2032337D2C207B34302C2034357D2C207D2C207D2C2053434152203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034317D2C207B32352C2032317D2C207B32362C2034317D2C207B32372C2032317D2C207B32382C2034317D2C207B32392C2032317D2C207B33302C2034317D2C207B33312C2032317D2C207B33322C2034317D2C207B33332C2032317D2C207B33342C2034317D2C207B33352C2032317D2C207B33362C2034317D2C207B33372C2032317D2C207B33382C2034317D2C207B33392C2032317D2C207B34302C2034317D2C207B34312C2032317D207D2C207D2C2051425A203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032327D2C207B32382C2034337D2C207B32392C2032327D2C207B33302C2034357D2C207B33312C2032337D2C207B33322C2034357D2C207B33332C2032337D2C207B33342C2034357D2C207B33352C2032337D2C207B33362C2034357D2C207B33372C2032337D2C207B33382C2034357D2C207B33392C2032337D2C207B34302C2034357D2C207B34312C2032337D207D2C207D2C204B32203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031337D2C207B332C2031317D2C207B342C2032337D2C207B352C2031347D2C207B362C2033337D2C207B372C2031377D2C207B382C2033337D2C207B392C2031387D2C207B31302C2033377D2C207B31312C2031397D2C207B31322C2033377D2C207B31332C2031397D2C207B31342C2033377D2C207B31352C2032317D2C207B31362C2034317D2C207B31372C2032317D2C207B31382C2034317D2C207B31392C2032317D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034317D2C207B32352C2032317D2C207B32362C2034317D2C207B32372C2032317D2C207B32382C2034317D2C207B32392C2032317D2C207B33302C2034317D2C207B33312C2032317D2C207B33322C2034317D2C207B33332C2032317D2C207B33342C2034317D2C207B33352C2032317D2C207B33362C2034317D2C207B33372C2032317D2C207B33382C2034317D2C207B33392C2032317D2C207B34302C2034317D2C207B34312C2032317D207D2C207D2C204D3136203D207B2064656661756C74203D207B207B312C20367D2C207B322C2031317D2C207B332C20377D2C207B342C2031337D2C207B352C20387D2C207B362C2032337D2C207B372C2031327D2C207B382C2032337D2C207B392C2031327D2C207B31302C2032337D2C207B31312C2031327D2C207B31322C2032337D2C207B31332C2031327D2C207B31342C2032337D2C207B31352C2031327D2C207B31362C2032337D2C207B31372C2031327D2C207B31382C2032337D2C207B31392C2031327D2C207B32302C2032337D2C207B32312C2031327D2C207B32322C2032337D2C207B32332C2031327D2C207B32342C2032337D2C207B32352C2031327D2C207B32362C2032337D2C207B32372C2031327D2C207B32382C2032337D2C207B32392C2032337D2C207B33302C2032317D2C207B33312C2031317D2C207B33322C2032317D2C207B33332C2031317D2C207B33342C2032317D2C207B33352C2032337D2C207B33362C2032337D2C207B33372C2031327D2C207B33382C2032337D2C207B33392C2031327D2C207B34302C2032337D2C207B34312C2031327D2C207B34322C2032337D207D2C207D2C204D4B3437203D207B2064656661756C74203D207B207B312C20367D2C207B322C2031317D2C207B332C20397D2C207B342C2031377D2C207B352C2031307D2C207B362C2032377D2C207B372C2031347D2C207B382C2032377D2C207B392C2031347D2C207B31302C2032377D2C207B31312C2031347D2C207B31322C2032377D2C207B31332C2031347D2C207B31342C2032377D2C207B31352C2031347D2C207B31362C2032377D2C207B31372C2031347D2C207B31382C2032377D2C207B31392C2031347D2C207B32302C2032377D2C207B32312C2031347D2C207B32322C2032377D2C207B32332C2031347D2C207B32342C2032377D2C207B32352C2031347D2C207B32362C2032377D2C207B32372C2031347D2C207B32382C2032377D2C207B32392C2031347D2C207B33302C2032377D2C207B33312C2031347D2C207B33322C2032377D207D2C207D2C2047524F5A41203D207B2064656661756C74203D207B207B312C2031367D2C207B322C2031357D2C207B332C2031337D2C207B342C2032377D2C207B352C2031347D2C207B362C2032377D2C207B372C2031347D2C207B382C2032377D2C207B392C2031347D2C207B31302C2032397D2C207B31312C2031357D2C207B31322C2033317D2C207B31332C2031367D2C207B31342C2033337D2C207B31352C2031387D2C207B31362C2033397D2C207B31372C2032307D2C207B31382C2033397D2C207B31392C2032307D2C207B32302C2034317D2C207B32312C2032317D2C207B32322C2034317D2C207B32332C2032317D2C207B32342C2034317D2C207B32352C2032317D2C207B32362C2034317D2C207B32372C2032317D2C207B32382C2034317D2C207B32392C2032317D2C207B33302C2034327D2C207B33312C2032312E357D2C207B33322C2034327D2C207B33332C2032312E357D2C207B33342C2034327D2C207B33352C2032312E357D2C207B33362C2034327D2C207B33372C2032312E357D2C207B33382C2034327D2C207B33392C2032312E357D2C207B34302C2034327D2C207B34312C2032312E357D207D2C207D2C2046414D4153203D207B2064656661756C74203D207B207B312C2031387D2C207B322C2031317D2C207B332C20397D2C207B342C2031377D2C207B352C2031307D2C207B362C2032377D2C207B372C2031377D2C207B382C2033357D2C207B392C2031397D2C207B31302C2033397D2C207B31312C2032317D2C207B31322C2034317D2C207B31332C2032317D2C207B31342C2034317D2C207B31352C2032327D2C207B31362C2034337D2C207B31372C2032327D2C207B31382C2034337D2C207B31392C2032327D2C207B32302C2034337D2C207B32312C2032337D2C207B32322C2034357D2C207B32332C2032337D2C207B32342C2034357D2C207B32352C2032337D2C207B32362C2034357D2C207B32372C2032337D2C207B32382C2034357D2C207B32392C2032337D2C207B33302C2034357D2C207B33312C2032337D2C207B33322C2034357D2C207B33332C2032337D2C207B33342C2034357D2C207B33352C2032337D2C207B33362C2034357D2C207B33372C2032337D2C207B33382C2034357D2C207B33392C2032337D2C207B34302C2034357D2C207B34312C2032337D207D2C207D2C2050503139203D207B2064656661756C74203D207B207B312C20377D2C207B322C2031337D2C207B332C20387D2C207B342C2031377D2C207B352C2031307D2C207B362C2032317D2C207B372C2031327D2C207B382C2032337D2C207B392C2031327D2C207B31302C2032337D2C207B31312C2031327D2C207B31322C2032307D2C207B31332C2031302E357D2C207B31342C2032307D2C207B31352C2031302E357D2C207B31362C2032307D2C207B31372C2031302E357D2C207B31382C2032307D2C207B31392C2031302E357D2C207B32302C2032307D2C207B32312C2031302E357D2C207B32322C2032307D2C207B32332C2031302E357D2C207B32342C2032307D2C207B32352C2031302E357D2C207B32362C2032307D2C207B32372C2031302E357D2C207B32382C2032307D2C207B32392C2031302E357D2C207B33302C2032307D2C207B33312C2031302E357D2C207B33322C2032307D2C207B33332C2031302E357D2C207B33342C2032307D2C207B33352C2031302E357D2C207B33362C2032307D2C207B33372C2031302E357D2C207B33382C2032307D2C207B33392C2031302E357D2C207B34302C2032307D2C207B34312C2031302E357D2C207B34322C2032307D2C207B34332C2031302E357D2C207B34342C2032307D2C207B34352C2031302E357D2C207B34362C2032307D2C207B34372C2031302E357D2C207B34382C2032307D2C207B34392C2031302E357D2C207B35302C2032307D2C207B35312C2031302E357D2C207B35322C2032307D2C207B35332C2031302E357D207D2C207D2C20544F4D203D207B2064656661756C74203D207B207B312C20387D2C207B322C2031357D2C207B332C20397D2C207B342C2032317D2C207B352C2031327D2C207B362C2032337D2C207B372C2031337D2C207B382C2032357D2C207B392C2031347D2C207B31302C2032397D2C207B31312C2031367D2C207B31322C2034337D2C207B31332C2032327D2C207B31342C2034337D2C207B31352C2032327D2C207B31362C2034337D2C207B31372C2032327D2C207B31382C2034337D2C207B31392C2032327D2C207B32302C2034337D2C207B32312C2032327D2C207B32322C2034337D2C207B32332C2032327D2C207B32342C2034337D2C207B32352C2032327D2C207B32362C2034337D2C207B32372C2032307D2C207B32382C2033397D2C207B32392C2032307D2C207B33302C2033397D2C207B33312C2032307D2C207B33322C2033397D2C207B33332C2032307D2C207B33342C2033397D2C207B33352C2032307D2C207B33362C2033397D2C207B33372C2032307D2C207B33382C2033397D2C207B33392C2032307D2C207B34302C2033397D2C207B34312C2032307D2C207B34322C2033397D2C207B34332C2032307D2C207B34342C2033397D2C207B34352C2032307D2C207B34362C2033397D2C207B34372C2032307D2C207B34382C2033397D2C207B34392C2032307D2C207B35302C2033397D207D2C207D2C20554D50203D207B2064656661756C74203D207B207B312C20397D2C207B322C2031377D2C207B332C2031307D2C207B342C2032317D2C207B352C2031327D2C207B362C2032357D2C207B372C2031337D2C207B382C2032357D2C207B392C2031347D2C207B31302C2032377D2C207B31312C2031347D2C207B31322C2032387D2C207B31332C2031342E357D2C207B31342C2032387D2C207B31352C2031342E357D2C207B31362C2032387D2C207B31372C2031342E357D2C207B31382C2032387D2C207B31392C2031342E357D2C207B32302C2032387D2C207B32312C2031342E357D2C207B32322C2032387D2C207B32332C2031342E357D2C207B32342C2032387D2C207B32352C2031342E357D2C207B32362C2032387D2C207B32372C2031342E357D2C207B32382C2032387D2C207B32392C2031342E357D2C207B33302C2032387D2C207B33312C2031342E357D2C207B33322C2032387D2C207B33332C2031342E357D2C207B33342C2032387D2C207B33352C2031342E357D207D2C207D2C20555A49203D207B2064656661756C74203D207B207B312C20377D2C207B322C2031337D2C207B332C20387D2C207B342C2031357D2C207B352C20397D2C207B362C2031397D2C207B372C2031317D2C207B382C2032337D2C207B392C2031337D2C207B31302C2032377D2C207B31312C2031347D2C207B31322C2034307D2C207B31332C2032302E357D2C207B31342C2034307D2C207B31352C2032302E357D2C207B31362C2034307D2C207B31372C2032302E357D2C207B31382C2034307D2C207B31392C2032302E357D2C207B32302C2034347D2C207B32312C2032322E357D2C207B32322C2034347D2C207B32332C2032322E357D2C207B32342C2034347D2C207B32352C2032322E357D2C207B32362C2034347D2C207B32372C2032322E357D2C207B32382C2034367D2C207B32392C2032332E357D2C207B33302C2034367D2C207B33312C2032332E357D2C207B33322C2034367D2C207B33332C2032332E357D2C207B33342C2034367D2C207B33352C2032332E357D207D2C207D2C20564543544F52203D207B2064656661756C74203D207B207B20312C203131207D2C207B20322C203139207D2C207B20332C203131207D2C207B20342C203233207D2C207B20352C203133207D2C207B20362C203237207D2C207B20372C203135207D2C207B20382C203331207D2C207B20392C203137207D2C207B31302C203333207D2C207B31312C203139207D2C207B31322C203430207D2C207B31332C2032322E35207D2C207B31342C203438207D2C207B31352C2032372E35207D2C207B31362C203534207D2C207B31372C2032372E35207D2C207B31382C203534207D2C207B31392C2032372E35207D2C207B32302C203534207D2C207B32312C2032372E35207D2C207B32322C203534207D2C207B32332C2032372E35207D2C207B32342C203534207D2C207B32352C2032372E35207D2C207B32362C203534207D2C207B32372C2032372E35207D2C207B32382C203534207D2C207B32392C2032372E35207D2C207B33302C203534207D2C207B33312C2032372E35207D2C207B33322C203534207D2C207B33332C2032372E35207D207D2C207D2C204D5035203D207B2064656661756C74203D207B207B20312C203136207D2C207B20322C203137207D2C207B20332C2039207D2C207B20342C203233207D2C207B20352C203134207D2C207B20362C203239207D2C207B20372C203136207D2C207B20382C203333207D2C207B20392C203138207D2C207B31302C203337207D2C207B31312C203139207D2C207B31322C203337207D2C207B31332C203139207D2C207B31342C203338207D2C207B31352C2031392E35207D2C207B31362C203338207D2C207B31372C2031392E35207D2C207B31382C203338207D2C207B31392C2031392E35207D2C207B32302C203338207D2C207B32312C2031392E35207D2C207B32322C203338207D2C207B32332C2031392E35207D2C207B32342C203338207D2C207B32352C2031392E35207D2C207B32362C203338207D2C207B32372C2031392E35207D2C207B32382C203338207D2C207B32392C2031392E35207D2C207B33302C203338207D2C207B33312C203230207D2C207B33322C203339207D2C207B33332C203230207D2C207B33342C203339207D2C207B33352C203230207D2C207B33362C203339207D2C207B33372C203230207D2C207B33382C203339207D2C207B33392C203230207D2C207B34302C203339207D207D2C207D2C20503930203D207B2064656661756C74203D207B207B20312C2038207D2C207B20322C203135207D2C207B20332C2039207D2C207B20342C203231207D2C207B20352C203132207D2C207B20362C203233207D2C207B20372C203133207D2C207B20382C203235207D2C207B20392C203133207D2C207B31302C203233207D2C207B31312C203134207D2C207B31322C203237207D2C207B31332C203135207D2C207B31342C203239207D2C207B31352C203132207D2C207B31362C2031372E32207D2C207B31372C20392E31207D2C207B31382C2031372E32207D2C207B31392C20392E31207D2C207B32302C2031372E32207D2C207B32312C20392E31207D2C207B32322C2031372E32207D2C207B32332C20392E31207D2C207B32342C2031372E32207D2C207B32352C20392E31207D2C207B32362C2031372E32207D2C207B32372C20392E31207D2C207B32382C2031372E32207D2C207B32392C20392E31207D2C207B33302C2031372E32207D2C207B33312C20392E31207D2C207B33322C2031372E32207D2C207B33332C20392E31207D2C207B33342C2031372E32207D2C207B33352C20392E31207D2C207B33362C2031372E32207D2C207B33372C20392E31207D2C207B33382C2031372E32207D2C207B33392C20392E31207D2C207B34302C2031372E32207D2C207B34312C20392E31207D2C207B34322C2031372E32207D2C207B34332C20392E31207D2C207B34342C2031372E32207D2C207B34352C20392E31207D2C207B34362C2031372E32207D2C207B34372C20392E31207D2C207B34382C2031372E32207D2C207B34392C20392E31207D2C207B35302C2031372E32207D207D2C207D2C204A5339203D207B2064656661756C74203D207B207B20312C203130207D2C207B20322C203133207D2C207B20332C2037207D2C207B20342C203139207D2C207B20352C203132207D2C207B20362C203235207D2C207B20372C203133207D2C207B20382C203235207D2C207B20392C203133207D2C207B31302C203235207D2C207B31312C203133207D2C207B31322C203235207D2C207B31332C203135207D2C207B31342C203336207D2C207B31352C2031382E35207D2C207B31362C203336207D2C207B31372C2031382E35207D2C207B31382C203336207D2C207B31392C2031382E35207D2C207B32302C203336207D2C207B32312C2031382E35207D2C207B32322C203336207D2C207B32332C2031382E35207D2C207B32342C203336207D2C207B32352C2031382E35207D2C207B32362C203336207D2C207B32372C2031382E35207D2C207B32382C203336207D2C207B32392C2031382E35207D2C207B33302C203336207D2C207B33312C2031382E35207D2C207B33322C203336207D2C207B33332C2031382E35207D2C207B33342C203336207D2C207B33352C2031382E35207D2C207B33362C203336207D2C207B33372C2031382E35207D2C207B33382C203336207D2C207B33392C2031382E35207D2C207B34302C203336207D207D2C207D2C204D5039203D207B2064656661756C74203D207B207B312C2037207D2C207B322C203133207D2C207B332C2038207D2C207B342C203135207D2C207B352C2039207D2C207B362C203139207D2C207B372C203131207D2C207B382C203233207D2C207B392C203132207D2C207B31302C203233207D2C207B31312C203132207D2C207B31322C203234207D2C207B31332C2031322E357D2C207B31342C203234207D2C207B31352C2031322E357D2C207B31362C203234207D2C207B31372C2031322E357D2C207B31382C203232207D2C207B31392C20382E35207D2C207B32302C203136207D2C207B32312C20372E35207D2C207B32322C203134207D2C207B32332C20372E35207D2C207B32342C203134207D2C207B32352C20372E35207D2C207B32362C203134207D2C207B32372C20372E35207D2C207B32382C203134207D2C207B32392C20372E35207D2C207B33302C203134207D2C207B33312C20372E35207D2C207B33322C203134207D2C207B33332C20372E35207D2C207B33342C203134207D2C207B33352C20372E35207D207D2C207D2C204D323439203D207B2064656661756C74203D207B207B20312C203135207D2C207B20322C2039207D2C207B20332C2034207D2C207B20342C203135207D2C207B20352C2039207D2C207B20362C203139207D2C207B20372C203130207D2C207B20382C203233207D2C207B20392C203132207D2C207B31302C203139207D2C207B31312C203130207D2C207B31322C203139207D2C207B31332C2038207D2C207B31342C203133207D2C207B31352C2038207D2C207B31362C203135207D2C207B31372C2037207D2C207B31382C203133207D2C207B31392C2037207D2C207B32302C203133207D2C207B32312C2037207D2C207B32322C203133207D2C207B32332C2037207D2C207B32342C203133207D2C207B32352C2037207D2C207B32362C203133207D2C207B32372C2037207D2C207B32382C203133207D2C207B32392C2037207D2C207B33302C203133207D2C207B33312C2037207D2C207B33322C203133207D2C207B33332C2037207D2C207B33342C203133207D2C207B33352C2037207D2C207B33362C203133207D2C207B33372C2037207D2C207B33382C203133207D2C207B33392C2037207D2C207B34302C203133207D2C207B34312C2037207D2C207B34322C203133207D2C207B34332C2037207D2C207B34342C203133207D2C207B34352C2037207D2C207B34362C203133207D2C207B34372C2037207D2C207B34382C203133207D2C207B34392C2037207D2C207B35302C203133207D2C207B35312C2037207D2C207B35322C203133207D2C207B35332C2037207D2C207B35342C203133207D2C207B35352C2037207D2C207B35362C203133207D2C207B35372C2037207D2C207B35382C203133207D2C207B35392C2037207D2C207B36302C203133207D2C207B36312C2037207D2C207B36322C203133207D2C207B36332C2037207D2C207B36342C203133207D2C207B36352C2037207D2C207B36362C203133207D2C207B36372C2037207D2C207B36382C203133207D2C207B36392C2037207D2C207B37302C203133207D2C207B37312C2037207D2C207B37322C203133207D2C207B37332C2037207D2C207B37342C203133207D2C207B37352C2037207D2C207B37362C203133207D2C207B37372C2037207D2C207B37382C203133207D2C207B37392C2037207D2C207B38302C203133207D2C207B38312C2037207D2C207B38322C203133207D2C207B38332C2037207D2C207B38342C203133207D2C207B38352C2037207D2C207B38362C203133207D2C207B38372C2037207D2C207B38382C203133207D2C207B38392C2037207D2C207B39302C203133207D2C207B39312C2037207D2C207B39322C203133207D2C207B39332C2037207D2C207B39342C203133207D2C207B39352C2037207D2C207B39362C203133207D2C207B39372C2037207D2C207B39382C203133207D2C207B39392C2037207D2C207B3130302C2031337D2C207B3130312C2037207D2C207B3130322C2031337D2C207B3130332C2037207D2C207B3130342C2031337D2C207B3130352C2037207D2C207B3130362C2031337D2C207B3130372C2037207D2C207B3130382C2031337D2C207B3130392C2037207D2C207B3131302C2031337D2C207B3131312C2037207D2C207B3131322C2031337D2C207B3131332C2037207D2C207B3131342C2031337D2C207B3131352C2037207D2C207B3131362C2031337D2C207B3131372C2037207D2C207B3131382C2031337D2C207B3131392C2037207D2C207B3132302C2031337D2C207B3132312C2037207D2C207B3132322C2031337D2C207B3132332C2037207D2C207B3132342C2031337D2C207B3132352C2037207D2C207B3132362C2031337D2C207B3132372C2037207D2C207B3132382C2031337D2C207B3132392C2037207D2C207B3133302C2031337D2C207B3133312C2037207D2C207B3133322C2031337D2C207B3133332C2037207D2C207B3133342C2031337D2C207B3133352C2037207D2C207B3133362C2031337D2C207B3133372C2037207D2C207B3133382C2031337D2C207B3133392C2037207D2C207B3134302C2031337D2C207B3134312C2037207D2C207B3134322C2031337D2C207B3134332C2037207D2C207B3134342C2031337D2C207B3134352C2037207D2C207B3134362C2031337D2C207B3134372C2037207D2C207B3134382C2031337D2C207B3134392C2037207D2C207B3135302C2031337D2C207B3135312C2037207D2C207B3135322C2031337D2C207B3135332C2037207D2C207B3135342C2031337D2C207B3135352C2037207D2C207B3135362C2031337D2C207B3135372C2037207D2C207B3135382C2031337D2C207B3135392C2037207D2C207B3136302C2031337D2C207B3136312C2037207D2C207B3136322C2031337D2C207B3136332C2037207D2C207B3136342C2031337D2C207B3136352C2037207D2C207B3136362C2031337D2C207B3136372C2037207D2C207B3136382C2031337D2C207B3136392C2037207D2C207B3137302C2031337D207D2C207D2C204D4733203D207B2064656661756C74203D207B207B20312C203131207D2C207B20322C2031207D2C207B20332C2031207D2C207B20342C2035207D2C207B20352C2033207D2C207B20362C2035207D2C207B20372C2033207D2C207B20382C2035207D2C207B20392C2033207D2C207B31302C2035207D2C207B31312C2032207D2C207B31322C2033207D2C207B31332C2032207D2C207B31342C2033207D2C207B31352C2031207D2C207B31362C2033207D2C207B31372C2032207D2C207B31382C2033207D2C207B31392C2032207D2C207B32302C2033207D2C207B32312C2032207D2C207B32322C2033207D2C207B32332C2032207D2C207B32342C2033207D2C207B32352C2032207D2C207B32362C2031207D2C207B32372C2031207D2C207B32382C2031207D2C207B32392C2031207D2C207B33302C2031207D2C207B33312C2031207D2C207B33322C2031207D2C207B33332C2031207D2C207B33342C2031207D2C207B33352C2033207D2C207B33362C2033207D2C207B33372C2032207D2C207B33382C2033207D2C207B33392C2032207D2C207B34302C2033207D2C207B34312C2032207D2C207B34322C2033207D2C207B34332C2032207D2C207B34342C2033207D2C207B34352C2032207D2C207B34362C2033207D2C207B34372C2032207D2C207B34382C2033207D2C207B34392C2032207D2C207B35302C2033207D2C207B35312C2032207D2C207B35322C2033207D2C207B35332C2032207D2C207B35342C2033207D2C207B35352C2032207D2C207B35362C2033207D2C207B35372C2032207D2C207B35382C2033207D2C207B35392C2032207D2C207B36302C2033207D2C207B36312C2032207D2C207B36322C2033207D2C207B36332C2032207D2C207B36342C2033207D2C207B36352C2032207D2C207B36362C2033207D2C207B36372C2032207D2C207B36382C2033207D2C207B36392C2032207D2C207B37302C2033207D2C207B37312C2032207D2C207B37322C2033207D2C207B37332C2032207D2C207B37342C2033207D2C207B37352C2032207D207D2C207D2C204D494E49203D207B2064656661756C74203D207B207B312C20367D2C207B322C2031317D2C207B332C20367D2C207B342C2031317D2C207B352C20367D2C207B362C2031317D2C207B372C20367D2C207B382C2031317D2C207B392C20367D2C207B31302C2031317D2C207B31312C20367D2C207B31322C2031317D2C207B31332C20367D2C207B31342C2031317D2C207B31352C20367D2C207B31362C2031317D2C207B31372C20367D2C207B31382C2031317D2C207B31392C20367D2C207B32302C2031317D2C207B32312C20367D2C207B32322C2031317D2C207B32332C20367D2C207B32342C2031317D2C207B32352C20367D2C207B32362C2031317D2C207B32372C20367D2C207B32382C2031317D2C207B32392C20367D2C207B33302C2031317D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C20534C52203D207B2064656661756C74203D207B207B312C20357D2C207B322C20397D2C207B332C20357D2C207B342C20397D2C207B352C20357D2C207B362C20397D2C207B372C20357D2C207B382C20397D2C207B392C20357D2C207B31302C20397D2C207B31312C20357D2C207B31322C20397D2C207B31332C20357D2C207B31342C20397D2C207B31352C20357D2C207B31362C20397D2C207B31372C20357D2C207B31382C20397D2C207B31392C20357D2C207B32302C20397D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C20534B53203D207B2064656661756C74203D207B207B312C20347D2C207B322C20377D2C207B332C20347D2C207B342C20377D2C207B352C20347D2C207B362C20377D2C207B372C20347D2C207B382C20377D2C207B392C20347D2C207B31302C20377D2C207B31312C20347D2C207B31322C20377D2C207B31332C20347D2C207B31342C20377D2C207B31352C20347D2C207B31362C20377D2C207B31372C20347D2C207B31382C20377D2C207B31392C20347D2C207B32302C20377D207D2C20444C47203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C20514255203D207B2064656661756C74203D207B207B312C20367D2C207B322C2031317D2C207B332C20367D2C207B342C2031317D2C207B352C20367D2C207B362C2031317D2C207B372C20367D2C207B382C2031317D2C207B392C20367D2C207B31302C2031317D2C207B31312C20367D2C207B31322C2031317D2C207B31332C20367D2C207B31342C2031317D2C207B31352C20367D2C207B31362C2031317D2C207B31372C20367D2C207B31382C2031317D2C207B31392C20367D2C207B32302C2031317D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C204D4B3132203D207B2064656661756C74203D207B207B312C20357D2C207B322C20397D2C207B332C20357D2C207B342C20397D2C207B352C20357D2C207B362C20397D2C207B372C20357D2C207B382C20397D2C207B392C20357D2C207B31302C20397D2C207B31312C20357D2C207B31322C20397D2C207B31332C20357D2C207B31342C20397D2C207B31352C20357D2C207B31362C20397D2C207B31372C20357D2C207B31382C20397D2C207B31392C20357D2C207B32302C20397D2C207B32312C20357D2C207B32322C20397D2C207B32332C20357D2C207B32342C20397D2C207B32352C20357D2C207B32362C20397D2C207B32372C20357D2C207B32382C20397D2C207B32392C20357D2C207B33302C20397D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C204D4B3134203D207B2064656661756C74203D207B207B312C20357D2C207B322C20397D2C207B332C20357D2C207B342C20397D2C207B352C20357D2C207B362C20397D2C207B372C20357D2C207B382C20397D2C207B392C20357D2C207B31302C20397D2C207B31312C20357D2C207B31322C20397D2C207B31332C20357D2C207B31342C20397D2C207B31352C20357D2C207B31362C20397D2C207B31372C20357D2C207B31382C20397D2C207B31392C20357D2C207B32302C20397D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C20565353203D207B2064656661756C74203D207B207B312C20357D2C207B322C20397D2C207B332C20357D2C207B342C20397D2C207B352C20357D2C207B362C20397D2C207B372C20357D2C207B382C20397D2C207B392C20357D2C207B31302C20397D2C207B31312C20357D2C207B31322C20397D2C207B31332C20357D2C207B31342C20397D2C207B31352C20357D2C207B31362C20397D2C207B31372C20357D2C207B31382C20397D2C207B31392C20357D2C207B32302C20397D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C20444C47203D207B2064656661756C74203D207B207B312C20397D2C207B322C2031377D2C207B332C20397D2C207B342C2031377D2C207B352C20397D2C207B362C2031377D2C207B372C20397D2C207B382C2031377D2C207B392C20397D2C207B31302C2031377D2C207B31312C20397D2C207B31322C2031377D2C207B31332C20397D2C207B31342C2031377D2C207B31352C20397D2C207B31362C2031377D2C207B31372C20397D2C207B31382C2031377D2C207B31392C20397D2C207B32302C2031377D207D2C206275727374203D207B207B312C2032307D2C207B322C2032307D2C207B332C2032307D2C207B342C2032307D2C207B352C2032307D2C207B362C2032307D2C207B372C2032307D2C207B382C2032307D2C207B392C2032307D2C207B31302C2032307D2C207B31312C2032307D2C207B31322C2032307D2C207B31332C2032307D2C207B31342C2032307D2C207B31352C2032307D2C207B31362C2032307D2C207B31372C2032307D2C207B31382C2032307D2C207B31392C2032307D2C207B32302C2032307D2C207D2C207D2C207D"local h=load if not h then h=loadstring end h(a(g))(...)
 
 
-
-local recoil_patterns = {
-    Berry = {
-        default = {
-{1, 18},
-{2, 29},
-{3, 17},
-{4, 39},
-{5, 21},
-{6, 41},
-{7, 21},
-{8, 45},
-{9, 25},
-{10, 49},
-{11, 25},
-{12, 49},
-{13, 25},
-{14, 49},
-{15, 29},
-{16, 57},
-{17, 30},
-{18, 59},
-{19, 30},
-{20, 59},
-{21, 30},
-{22, 59},
-{23, 30},
-{24, 59},
-{25, 30},
-{26, 59},
-{27, 30},
-{28, 59},
-{29, 30},
-{30, 59},
-{31, 30},
-{32, 59},
-{33, 30},
-{34, 59},
-{35, 30},
-{36, 59},
-{37, 30},
-{38, 59},
-{39, 30},
-{40, 59},
-{41, 30}
-        },
-    },
-None = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 22},
-{28, 43},
-{29, 22},
-{30, 45},
-{31, 23},
-{32, 45},
-{33, 23},
-{34, 45},
-{35, 23},
-{36, 45},
-{37, 23},
-{38, 45},
-{39, 23},
-{40, 45},
-{41, 23}
-        },
-    },
-    
-
-    AUG = {
-        default = {
-{1, 18},
-{2, 17},
-{3, 9},
-{4, 25},
-{5, 16},
-{6, 35},
-{7, 20},
-{8, 39},
-{9, 20},
-{10, 41},
-{11, 23},
-{12, 49},
-{13, 25},
-{14, 49},
-{15, 26},
-{16, 51},
-{17, 27},
-{18, 53},
-{19, 27},
-{20, 53},
-{21, 27},
-{22, 53},
-{23, 27},
-{24, 53},
-{25, 27},
-{26, 53},
-{27, 27},
-{28, 53},
-{29, 27},
-{30, 53},
-{31, 27},
-{32, 55},
-{33, 28},
-{34, 55},
-{35, 28},
-{36, 55},
-{37, 28},
-{38, 55},
-{39, 28},
-{40, 55},
-{41, 28}
-        },
-    },
-
-    AKM = {
-        default = {
-{1, 16},
-{2, 25},
-{3, 13},
-{4, 23},
-{5, 16},
-{6, 31},
-{7, 16},
-{8, 35},
-{9, 20},
-{10, 39},
-{11, 21},
-{12, 41},
-{13, 21},
-{14, 41},
-{15, 21},
-{16, 43},
-{17, 22},
-{18, 43},
-{19, 22},
-{20, 43},
-{21, 22},
-{22, 43},
-{23, 22},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 22},
-{28, 43},
-{29, 22},
-{30, 43},
-{31, 22},
-{32, 43},
-{33, 22},
-{34, 43},
-{35, 22},
-{36, 43},
-{37, 22},
-{38, 43},
-{39, 22},
-{40, 43},
-{41, 22}
-        },
-    },  
-
-    M416 = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 22},
-{28, 43},
-{29, 22},
-{30, 45},
-{31, 23},
-{32, 45},
-{33, 23},
-{34, 45},
-{35, 23},
-{36, 45},
-{37, 23},
-{38, 45},
-{39, 23},
-{40, 45},
-{41, 23}
-        },
-    },
-
-    ACE32 = {
-        default = {
-{1, 18},
-{2, 23},
-{3, 12},
-{4, 29},
-{5, 17},
-{6, 37},
-{7, 20},
-{8, 39},
-{9, 21},
-{10, 41},
-{11, 21},
-{12, 43},
-{13, 23},
-{14, 45},
-{15, 23},
-{16, 45},
-{17, 23},
-{18, 47},
-{19, 25},
-{20, 51},
-{21, 26},
-{22, 51},
-{23, 26},
-{24, 51},
-{25, 27},
-{26, 53},
-{27, 27},
-{28, 53},
-{29, 27},
-{30, 53},
-{31, 27},
-{32, 53},
-{33, 27},
-{34, 53},
-{35, 27},
-{36, 53},
-{37, 27},
-{38, 53},
-{39, 27},
-{40, 53},
-{41, 27}
-        },
-    },
-
-    G36C = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 22},
-{28, 43},
-{29, 22},
-{30, 45},
-{31, 23},
-{32, 45},
-{33, 23},
-{34, 45},
-{35, 23},
-{36, 45},
-{37, 23},
-{38, 45},
-{39, 23},
-{40, 45},
-        },
-    },
-
-    SCAR = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 41},
-{25, 21},
-{26, 41},
-{27, 21},
-{28, 41},
-{29, 21},
-{30, 41},
-{31, 21},
-{32, 41},
-{33, 21},
-{34, 41},
-{35, 21},
-{36, 41},
-{37, 21},
-{38, 41},
-{39, 21},
-{40, 41},
-{41, 21}
-        },
-    },
-
-    QBZ = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 22},
-{28, 43},
-{29, 22},
-{30, 45},
-{31, 23},
-{32, 45},
-{33, 23},
-{34, 45},
-{35, 23},
-{36, 45},
-{37, 23},
-{38, 45},
-{39, 23},
-{40, 45},
-{41, 23}
-        },
-    },
-
-    K2 = {
-        default = {
-{1, 16},
-{2, 13},
-{3, 11},
-{4, 23},
-{5, 14},
-{6, 33},
-{7, 17},
-{8, 33},
-{9, 18},
-{10, 37},
-{11, 19},
-{12, 37},
-{13, 19},
-{14, 37},
-{15, 21},
-{16, 41},
-{17, 21},
-{18, 41},
-{19, 21},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 41},
-{25, 21},
-{26, 41},
-{27, 21},
-{28, 41},
-{29, 21},
-{30, 41},
-{31, 21},
-{32, 41},
-{33, 21},
-{34, 41},
-{35, 21},
-{36, 41},
-{37, 21},
-{38, 41},
-{39, 21},
-{40, 41},
-{41, 21}
-        },
-    },
-
-    M16 = {
-        default = {
-{1, 6},
-{2, 11},
-{3, 7},
-{4, 13},
-{5, 8},
-{6, 23},
-{7, 12},
-{8, 23},
-{9, 12},
-{10, 23},
-{11, 12},
-{12, 23},
-{13, 12},
-{14, 23},
-{15, 12},
-{16, 23},
-{17, 12},
-{18, 23},
-{19, 12},
-{20, 23},
-{21, 12},
-{22, 23},
-{23, 12},
-{24, 23},
-{25, 12},
-{26, 23},
-{27, 12},
-{28, 23},
-{29, 23}, 
-{30, 21}, 
-{31, 11},
-{32, 21}, 
-{33, 11},
-{34, 21}, 
-{35, 23}, 
-{36, 23},
-{37, 12},
-{38, 23},
-{39, 12},
-{40, 23}, 
-{41, 12},
-{42, 23}
-       },
-    },
-
-    MK47 = {
-        default = {
-{1, 6},
-{2, 11},
-{3, 9},
-{4, 17},
-{5, 10},
-{6, 27},
-{7, 14},
-{8, 27},
-{9, 14},
-{10, 27},
-{11, 14},
-{12, 27},
-{13, 14},
-{14, 27},
-{15, 14},
-{16, 27},
-{17, 14},
-{18, 27},
-{19, 14},
-{20, 27},
-{21, 14},
-{22, 27},
-{23, 14},
-{24, 27},
-{25, 14},
-{26, 27},
-{27, 14},
-{28, 27},
-{29, 14},
-{30, 27},
-{31, 14},
-{32, 27}
-       },
-    },
-
-    GROZA = {
-        default = {
-{1, 16},
-{2, 15},
-{3, 13},
-{4, 27},
-{5, 14},
-{6, 27},
-{7, 14},
-{8, 27},
-{9, 14},
-{10, 29},
-{11, 15},
-{12, 31},
-{13, 16},
-{14, 33},
-{15, 18},
-{16, 39},
-{17, 20},
-{18, 39},
-{19, 20},
-{20, 41},
-{21, 21},
-{22, 41},
-{23, 21},
-{24, 41},
-{25, 21},
-{26, 41},
-{27, 21},
-{28, 41},
-{29, 21},
-{30, 42},
-{31, 21.5},
-{32, 42},
-{33, 21.5},
-{34, 42},
-{35, 21.5},
-{36, 42},
-{37, 21.5},
-{38, 42},
-{39, 21.5},
-{40, 42},
-{41, 21.5}
-        },
-    },
-
-    FAMAS = {
-        default = {
-{1, 18},
-{2, 11},
-{3, 9},
-{4, 17},
-{5, 10},
-{6, 27},
-{7, 17},
-{8, 35},
-{9, 19},
-{10, 39},
-{11, 21},
-{12, 41},
-{13, 21},
-{14, 41},
-{15, 22},
-{16, 43},
-{17, 22},
-{18, 43},
-{19, 22},
-{20, 43},
-{21, 23},
-{22, 45},
-{23, 23},
-{24, 45},
-{25, 23},
-{26, 45},
-{27, 23},
-{28, 45},
-{29, 23},
-{30, 45},
-{31, 23},
-{32, 45},
-{33, 23},
-{34, 45},
-{35, 23},
-{36, 45},
-{37, 23},
-{38, 45},
-{39, 23},
-{40, 45},
-{41, 23}
-      },
-    },
-
-    PP19 = {
-        default = {
-{1, 7},
-{2, 13},
-{3, 8},
-{4, 17},
-{5, 10},
-{6, 21},
-{7, 12},
-{8, 23},
-{9, 12},
-{10, 23},
-{11, 12},
-{12, 20},
-{13, 10.5},
-{14, 20},
-{15, 10.5},
-{16, 20},
-{17, 10.5},
-{18, 20},
-{19, 10.5},
-{20, 20},
-{21, 10.5},
-{22, 20},
-{23, 10.5},
-{24, 20},
-{25, 10.5},
-{26, 20},
-{27, 10.5},
-{28, 20},
-{29, 10.5},
-{30, 20},
-{31, 10.5},
-{32, 20},
-{33, 10.5},
-{34, 20},
-{35, 10.5},
-{36, 20},
-{37, 10.5},
-{38, 20},
-{39, 10.5},
-{40, 20},
-{41, 10.5},
-{42, 20},
-{43, 10.5},
-{44, 20},
-{45, 10.5},
-{46, 20},
-{47, 10.5},
-{48, 20},
-{49, 10.5},
-{50, 20},
-{51, 10.5},
-{52, 20},
-{53, 10.5}
-      },
-    },
-
-    TOM = {
-        default = {
-{1, 8},
-{2, 15},
-{3, 9},
-{4, 21},
-{5, 12},
-{6, 23},
-{7, 13},
-{8, 25},
-{9, 14},
-{10, 29},
-{11, 16},
-{12, 43},
-{13, 22},
-{14, 43},
-{15, 22},
-{16, 43},
-{17, 22},
-{18, 43},
-{19, 22},
-{20, 43},
-{21, 22},
-{22, 43},
-{23, 22},
-{24, 43},
-{25, 22},
-{26, 43},
-{27, 20},
-{28, 39},
-{29, 20},
-{30, 39},
-{31, 20},
-{32, 39},
-{33, 20},
-{34, 39},
-{35, 20},
-{36, 39},
-{37, 20},
-{38, 39},
-{39, 20},
-{40, 39},
-{41, 20},
-{42, 39},
-{43, 20},
-{44, 39},
-{45, 20},
-{46, 39},
-{47, 20},
-{48, 39},
-{49, 20},
-{50, 39}
-      },
-    },
-
-    UMP = {
-        default = {
-{1, 9},
-{2, 17},
-{3, 10},
-{4, 21},
-{5, 12},
-{6, 25},
-{7, 13},
-{8, 25},
-{9, 14},
-{10, 27},
-{11, 14},
-{12, 28},
-{13, 14.5},
-{14, 28},
-{15, 14.5},
-{16, 28},
-{17, 14.5},
-{18, 28},
-{19, 14.5},
-{20, 28},
-{21, 14.5},
-{22, 28},
-{23, 14.5},
-{24, 28},
-{25, 14.5},
-{26, 28},
-{27, 14.5},
-{28, 28},
-{29, 14.5},
-{30, 28},
-{31, 14.5},
-{32, 28},
-{33, 14.5},
-{34, 28},
-{35, 14.5}
-      },
-    },
-
-    UZI = {
-        default = {
-{1, 7},
-{2, 13},
-{3, 8},
-{4, 15},
-{5, 9},
-{6, 19},
-{7, 11},
-{8, 23},
-{9, 13},
-{10, 27},
-{11, 14},
-{12, 40},
-{13, 20.5},
-{14, 40},
-{15, 20.5},
-{16, 40},
-{17, 20.5},
-{18, 40},
-{19, 20.5},
-{20, 44},
-{21, 22.5},
-{22, 44},
-{23, 22.5},
-{24, 44},
-{25, 22.5},
-{26, 44},
-{27, 22.5},
-{28, 46},
-{29, 23.5},
-{30, 46},
-{31, 23.5},
-{32, 46},
-{33, 23.5},
-{34, 46},
-{35, 23.5}
-      },
-    },
-
-    VECTOR = {
-        default = {
-{ 1, 11 },
-{ 2, 19 },
-{ 3, 11 },
-{ 4, 23 },
-{ 5, 13 },
-{ 6, 27 },
-{ 7, 15 },
-{ 8, 31 },
-{ 9, 17 },
-{10, 33 },
-{11, 19 },
-{12, 40 },
-{13, 22.5 },
-{14, 48 },
-{15, 27.5 },
-{16, 54 },
-{17, 27.5 },
-{18, 54 },
-{19, 27.5 },
-{20, 54 },
-{21, 27.5 },
-{22, 54 },
-{23, 27.5 },
-{24, 54 },
-{25, 27.5 },
-{26, 54 },
-{27, 27.5 },
-{28, 54 },
-{29, 27.5 },
-{30, 54 },
-{31, 27.5 },
-{32, 54 },
-{33, 27.5 }
-      },
-    },
-
-    MP5 = {
-        default = {
-{ 1, 16 },
-{ 2, 17 },
-{ 3, 9 },
-{ 4, 23 },
-{ 5, 14 },
-{ 6, 29 },
-{ 7, 16 },
-{ 8, 33 },
-{ 9, 18 },
-{10, 37 },
-{11, 19 },
-{12, 37 },
-{13, 19 },
-{14, 38 },
-{15, 19.5 },
-{16, 38 },
-{17, 19.5 },
-{18, 38 },
-{19, 19.5 },
-{20, 38 },
-{21, 19.5 },
-{22, 38 },
-{23, 19.5 },
-{24, 38 },
-{25, 19.5 },
-{26, 38 },
-{27, 19.5 },
-{28, 38 },
-{29, 19.5 },
-{30, 38 },
-{31, 20 },
-{32, 39 },
-{33, 20 },
-{34, 39 },
-{35, 20 },
-{36, 39 },
-{37, 20 },
-{38, 39 },
-{39, 20 },
-{40, 39 }
-      },
-    },
-
-    P90 = {
-        default = {
-{ 1, 8 },
-{ 2, 15 },
-{ 3, 9 },
-{ 4, 21 },
-{ 5, 12 },
-{ 6, 23 },
-{ 7, 13 },
-{ 8, 25 },
-{ 9, 13 },
-{10, 23 },
-{11, 14 },
-{12, 27 },
-{13, 15 },
-{14, 29 },
-{15, 12 },
-{16, 17.2 },
-{17, 9.1 },
-{18, 17.2 },
-{19, 9.1 },
-{20, 17.2 },
-{21, 9.1 },
-{22, 17.2 },
-{23, 9.1 },
-{24, 17.2 },
-{25, 9.1 },
-{26, 17.2 },
-{27, 9.1 },
-{28, 17.2 },
-{29, 9.1 },
-{30, 17.2 },
-{31, 9.1 },
-{32, 17.2 },
-{33, 9.1 },
-{34, 17.2 },
-{35, 9.1 },
-{36, 17.2 },
-{37, 9.1 },
-{38, 17.2 },
-{39, 9.1 },
-{40, 17.2 },
-{41, 9.1 },
-{42, 17.2 },
-{43, 9.1 },
-{44, 17.2 },
-{45, 9.1 },
-{46, 17.2 },
-{47, 9.1 },
-{48, 17.2 },
-{49, 9.1 },
-{50, 17.2 }
-      },
-    },
-
-    JS9 = {
-        default = {
-{ 1, 10 },
-{ 2, 13 },
-{ 3, 7 },
-{ 4, 19 },
-{ 5, 12 },
-{ 6, 25 },
-{ 7, 13 },
-{ 8, 25 },
-{ 9, 13 },
-{10, 25 },
-{11, 13 },
-{12, 25 },
-{13, 15 },
-{14, 36 },
-{15, 18.5 },
-{16, 36 },
-{17, 18.5 },
-{18, 36 },
-{19, 18.5 },
-{20, 36 },
-{21, 18.5 },
-{22, 36 },
-{23, 18.5 },
-{24, 36 },
-{25, 18.5 },
-{26, 36 },
-{27, 18.5 },
-{28, 36 },
-{29, 18.5 },
-{30, 36 },
-{31, 18.5 },
-{32, 36 },
-{33, 18.5 },
-{34, 36 },
-{35, 18.5 },
-{36, 36 },
-{37, 18.5 },
-{38, 36 },
-{39, 18.5 },
-{40, 36 }
-      },
-    },
-
-    MP9 = {
-        default = {
-{1, 7 },
-{2, 13 },
-{3, 8 },
-{4, 15 },
-{5, 9 },
-{6, 19 },
-{7, 11 },
-{8, 23 },
-{9, 12 },
-{10, 23 },
-{11, 12 },
-{12, 24 },
-{13, 12.5},
-{14, 24 },
-{15, 12.5},
-{16, 24 },
-{17, 12.5},
-{18, 22 },
-{19, 8.5 },
-{20, 16 },
-{21, 7.5 },
-{22, 14 },
-{23, 7.5 },
-{24, 14 },
-{25, 7.5 },
-{26, 14 },
-{27, 7.5 },
-{28, 14 },
-{29, 7.5 },
-{30, 14 },
-{31, 7.5 },
-{32, 14 },
-{33, 7.5 },
-{34, 14 },
-{35, 7.5 }
-      },
-    },
-   
-M249 = {
-        default = {
-{ 1, 15 },
-{ 2, 9 },
-{ 3, 4 },
-{ 4, 15 },
-{ 5, 9 },
-{ 6, 19 },
-{ 7, 10 },
-{ 8, 23 },
-{ 9, 12 },
-{10, 19 },
-{11, 10 },
-{12, 19 },
-{13, 8 },
-{14, 13 },
-{15, 8 },
-{16, 15 },
-{17, 7 },
-{18, 13 },
-{19, 7 },
-{20, 13 },
-{21, 7 },
-{22, 13 },
-{23, 7 },
-{24, 13 },
-{25, 7 },
-{26, 13 },
-{27, 7 },
-{28, 13 },
-{29, 7 },
-{30, 13 },
-{31, 7 },
-{32, 13 },
-{33, 7 },
-{34, 13 },
-{35, 7 },
-{36, 13 },
-{37, 7 },
-{38, 13 },
-{39, 7 },
-{40, 13 },
-{41, 7 },
-{42, 13 },
-{43, 7 },
-{44, 13 },
-{45, 7 },
-{46, 13 },
-{47, 7 },
-{48, 13 },
-{49, 7 },
-{50, 13 },
-{51, 7 },
-{52, 13 },
-{53, 7 },
-{54, 13 },
-{55, 7 },
-{56, 13 },
-{57, 7 },
-{58, 13 },
-{59, 7 },
-{60, 13 },
-{61, 7 },
-{62, 13 },
-{63, 7 },
-{64, 13 },
-{65, 7 },
-{66, 13 },
-{67, 7 },
-{68, 13 },
-{69, 7 },
-{70, 13 },
-{71, 7 },
-{72, 13 },
-{73, 7 },
-{74, 13 },
-{75, 7 },
-{76, 13 },
-{77, 7 },
-{78, 13 },
-{79, 7 },
-{80, 13 },
-{81, 7 },
-{82, 13 },
-{83, 7 },
-{84, 13 },
-{85, 7 },
-{86, 13 },
-{87, 7 },
-{88, 13 },
-{89, 7 },
-{90, 13 },
-{91, 7 },
-{92, 13 },
-{93, 7 },
-{94, 13 },
-{95, 7 },
-{96, 13 },
-{97, 7 },
-{98, 13 },
-{99, 7 },
-{100, 13},
-{101, 7 },
-{102, 13},
-{103, 7 },
-{104, 13},
-{105, 7 },
-{106, 13},
-{107, 7 },
-{108, 13},
-{109, 7 },
-{110, 13},
-{111, 7 },
-{112, 13},
-{113, 7 },
-{114, 13},
-{115, 7 },
-{116, 13},
-{117, 7 },
-{118, 13},
-{119, 7 },
-{120, 13},
-{121, 7 },
-{122, 13},
-{123, 7 },
-{124, 13},
-{125, 7 },
-{126, 13},
-{127, 7 },
-{128, 13},
-{129, 7 },
-{130, 13},
-{131, 7 },
-{132, 13},
-{133, 7 },
-{134, 13},
-{135, 7 },
-{136, 13},
-{137, 7 },
-{138, 13},
-{139, 7 },
-{140, 13},
-{141, 7 },
-{142, 13},
-{143, 7 },
-{144, 13},
-{145, 7 },
-{146, 13},
-{147, 7 },
-{148, 13},
-{149, 7 },
-{150, 13},
-{151, 7 },
-{152, 13},
-{153, 7 },
-{154, 13},
-{155, 7 },
-{156, 13},
-{157, 7 },
-{158, 13},
-{159, 7 },
-{160, 13},
-{161, 7 },
-{162, 13},
-{163, 7 },
-{164, 13},
-{165, 7 },
-{166, 13},
-{167, 7 },
-{168, 13},
-{169, 7 },
-{170, 13}
-
-        },
-    },  
- MG3 = {
-        default = {
-{ 1, 11 },
-{ 2, 1 },
-{ 3, 1 },
-{ 4, 5 },
-{ 5, 3 },
-{ 6, 5 },
-{ 7, 3 },
-{ 8, 5 },
-{ 9, 3 },
-{10, 5 },
-{11, 2 },
-{12, 3 },
-{13, 2 },
-{14, 3 },
-{15, 1 },
-{16, 3 },
-{17, 2 },
-{18, 3 },
-{19, 2 },
-{20, 3 },
-{21, 2 },
-{22, 3 },
-{23, 2 },
-{24, 3 },
-{25, 2 },
-{26, 1 },
-{27, 1 },
-{28, 1 },
-{29, 1 },
-{30, 1 },
-{31, 1 },
-{32, 1 },
-{33, 1 },
-{34, 1 },
-{35, 3 },
-{36, 3 },
-{37, 2 },
-{38, 3 },
-{39, 2 },
-{40, 3 },
-{41, 2 },
-{42, 3 },
-{43, 2 },
-{44, 3 },
-{45, 2 },
-{46, 3 },
-{47, 2 },
-{48, 3 },
-{49, 2 },
-{50, 3 },
-{51, 2 },
-{52, 3 },
-{53, 2 },
-{54, 3 },
-{55, 2 },
-{56, 3 },
-{57, 2 },
-{58, 3 },
-{59, 2 },
-{60, 3 },
-{61, 2 },
-{62, 3 },
-{63, 2 },
-{64, 3 },
-{65, 2 },
-{66, 3 },
-{67, 2 },
-{68, 3 },
-{69, 2 },
-{70, 3 },
-{71, 2 },
-{72, 3 },
-{73, 2 },
-{74, 3 },
-{75, 2 }
-        },
-    },  
-   
-    
-    MINI = {
-        default = {
-{1, 6},
-{2, 11},
-{3, 6},
-{4, 11},
-{5, 6},
-{6, 11},
-{7, 6},
-{8, 11},
-{9, 6},
-{10, 11},
-{11, 6},
-{12, 11},
-{13, 6},
-{14, 11},
-{15, 6},
-{16, 11},
-{17, 6},
-{18, 11},
-{19, 6},
-{20, 11},
-{21, 6},
-{22, 11},
-{23, 6},
-{24, 11},
-{25, 6},
-{26, 11},
-{27, 6},
-{28, 11},
-{29, 6},
-{30, 11}
-
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-SLR = {
-        default = {
-{1, 5},
-{2, 9},
-{3, 5},
-{4, 9},
-{5, 5},
-{6, 9},
-{7, 5},
-{8, 9},
-{9, 5},
-{10, 9},
-{11, 5},
-{12, 9},
-{13, 5},
-{14, 9},
-{15, 5},
-{16, 9},
-{17, 5},
-{18, 9},
-{19, 5},
-{20, 9}
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    }, 
-    SKS = {
-        default = {
-{1, 4},
-{2, 7},
-{3, 4},
-{4, 7},
-{5, 4},
-{6, 7},
-{7, 4},
-{8, 7},
-{9, 4},
-{10, 7},
-{11, 4},
-{12, 7},
-{13, 4},
-{14, 7},
-{15, 4},
-{16, 7},
-{17, 4},
-{18, 7},
-{19, 4},
-{20, 7}
-        },
-        DLG = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-    QBU = {
-        default = {
-{1, 6},
-{2, 11},
-{3, 6},
-{4, 11},
-{5, 6},
-{6, 11},
-{7, 6},
-{8, 11},
-{9, 6},
-{10, 11},
-{11, 6},
-{12, 11},
-{13, 6},
-{14, 11},
-{15, 6},
-{16, 11},
-{17, 6},
-{18, 11},
-{19, 6},
-{20, 11}
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-    MK12 = {
-        default = {
-{1, 5},
-{2, 9},
-{3, 5},
-{4, 9},
-{5, 5},
-{6, 9},
-{7, 5},
-{8, 9},
-{9, 5},
-{10, 9},
-{11, 5},
-{12, 9},
-{13, 5},
-{14, 9},
-{15, 5},
-{16, 9},
-{17, 5},
-{18, 9},
-{19, 5},
-{20, 9},
-{21, 5},
-{22, 9},
-{23, 5},
-{24, 9},
-{25, 5},
-{26, 9},
-{27, 5},
-{28, 9},
-{29, 5},
-{30, 9}
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-    MK14 = {
-        default = {
-{1, 5},
-{2, 9},
-{3, 5},
-{4, 9},
-{5, 5},
-{6, 9},
-{7, 5},
-{8, 9},
-{9, 5},
-{10, 9},
-{11, 5},
-{12, 9},
-{13, 5},
-{14, 9},
-{15, 5},
-{16, 9},
-{17, 5},
-{18, 9},
-{19, 5},
-{20, 9}
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-    VSS = {
-        default = {
-{1, 5},
-{2, 9},
-{3, 5},
-{4, 9},
-{5, 5},
-{6, 9},
-{7, 5},
-{8, 9},
-{9, 5},
-{10, 9},
-{11, 5},
-{12, 9},
-{13, 5},
-{14, 9},
-{15, 5},
-{16, 9},
-{17, 5},
-{18, 9},
-{19, 5},
-{20, 9}
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },
-    DLG = {
-        default = {
-{1, 9},
-{2, 17},
-{3, 9},
-{4, 17},
-{5, 9},
-{6, 17},
-{7, 9},
-{8, 17},
-{9, 9},
-{10, 17},
-{11, 9},
-{12, 17},
-{13, 9},
-{14, 17},
-{15, 9},
-{16, 17},
-{17, 9},
-{18, 17},
-{19, 9},
-{20, 17}
-
-        },
-        burst = {
--- 这里填写burst模式弹道数据：
-{1, 20},
-{2, 20},
-{3, 20},
-{4, 20},
-{5, 20},
-{6, 20},
-{7, 20},
-{8, 20},
-{9, 20},
-{10, 20},
-{11, 20},
-{12, 20},
-{13, 20},
-{14, 20},
-{15, 20},
-{16, 20},
-{17, 20},
-{18, 20},
-{19, 20},
-{20, 20},
-        },
-    },       
-    
-}
 
 
 local weapon_intervals = {
   None = 86,
     Berry = 86,
-    AUG = 84, 
-    AKM = 102, 
-    M416 = 87, 
+    AUG = 84,
+    AKM = 102,
+    M416 = 87,
     ACE32 = 89,
     G36C = 87,
-    SCAR = 87, 
-    QBZ = 87, 
-    K2 = 87, 
-    M16 = 78, 
-    MK47 = 76, 
-    GROZA = 80, 
-    FAMAS = 67, 
-    PP19 = 84, 
-    TOM = 80, 
-    UMP = 88, 
-    UZI = 48, 
-    VECTOR = 54, 
-    MP5 = 66, 
-    P90 = 60, 
-    JS9 = 66, 
-    MP9 = 60, 
-    DP28 = 66, 
-    M249 = 75, 
-    MG3 = 61, 
+    SCAR = 87,
+    QBZ = 87,
+    K2 = 87,
+    M16 = 78,
+    MK47 = 76,
+    GROZA = 80,
+    FAMAS = 67,
+    PP19 = 84,
+    TOM = 80,
+    UMP = 88,
+    UZI = 48,
+    VECTOR = 54,
+    MP5 = 66,
+    P90 = 60,
+    JS9 = 66,
+    MP9 = 60,
+    DP28 = 66,
+    M249 = 75,
+    MG3 = 61,
     MINI = 108,
     SLR = 108,
     SKS = 108,
@@ -3064,7 +1496,10 @@ local weapon_intervals = {
 }
 
 
+
 local decimal_cache = 0
+
+
 
 
 function ceil_and_cache(value)
@@ -3077,24 +1512,29 @@ function ceil_and_cache(value)
     return integer_part
 end
 
-
-function calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
+function calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom)
     local multiplier = global_recoil_multiplier
     local weaponData = attachment_multipliers[weapon_name]
 
-    multiplier = multiplier * (base_coefficients[weapon_name] or 1) -- Apply base coefficient
+    multiplier = multiplier * (base_coefficients[weapon_name] or 1)
 
     if weaponData then
         multiplier = multiplier * (weaponData.poses[poses] or 1)
         multiplier = multiplier * (weaponData.muzzles[muzzles] or 1)
         multiplier = multiplier * (weaponData.grips[grips] or 1)
-        multiplier = multiplier * (weaponData.scopes[scopes] or 1)  
+        multiplier = multiplier * (weaponData.scopes[scopes] or 1)
         multiplier = multiplier * (weaponData.stocks[stocks] or 1)
         multiplier = multiplier * (weaponData.car[car] or 1)
         multiplier = multiplier * scope_zoom
     end
 
-    multiplier = multiplier * (global_scope_multipliers[scopes] or 1) 
+
+    multiplier = multiplier * (global_scope_multipliers[scopes] or 1)
+
+
+    multiplier = multiplier * global_sensitivity_multiplier
+    multiplier = multiplier * global_vertical_sensitivity_multiplier
+
 
     if IsModifierPressed("lshift") then
         multiplier = multiplier * global_breath_multiplier
@@ -3106,39 +1546,27 @@ end
 
 
 local burstModeEnabled = false
-local debugModeEnabled = false 
+local debugModeEnabled = false
 
 
 local weaponBurstModes = {}
 
 
 local ClickStartTime = 0
-local function is_authorized()
-    local success, chunk = pcall(dofile, addr) 
 
-    if not success then
-        OutputLogMessage("Error loading weapon.lua: %s\n", chunk) 
-        return false
-    end 
-    return type(muzzle) == "string" and muzzle == "None" 
+
+
+function Sleep2(t)
+	local sleepTime = GetRunningTime()
+	while GetRunningTime() - sleepTime <= t do
+	end
 end
 
-
-for weapon_name, patterns in pairs(recoil_patterns) do
-    for pattern_type, pattern in pairs(patterns) do
-        for i, data in ipairs(pattern) do
-            if i % 2 == 0 then 
-                pattern[i][2] = (pattern[i][2] + 1) / 2 
-            end
-        end
+function apply_recoil(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
+if not is_authorized() then
+        return
     end
-end
-
-function apply_recoil(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom)
-if not is_authorized() then      
-        return        
-    end
-    local pattern_type = IsModifierPressed("rshift") and "burst" or "default"  
+    local pattern_type = IsModifierPressed("rshift") and "burst" or "default"
     local pattern = recoil_patterns[weapon_name] and recoil_patterns[weapon_name][pattern_type] or recoil_patterns[weapon_name]
     local interval = weapon_intervals[weapon_name]
 
@@ -3150,78 +1578,52 @@ if not is_authorized() then
     local multiplier = calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
     local bullet_count = 0
 
-    if weapon_name == "MK47" or weapon_name == "M16"  or weapon_name == "None" or weapon_name == "MINI" or weapon_name == "SKS" or weapon_name == "MK12" or weapon_name == "SLR" or weapon_name == "QBU" then 
-        
-        while IsMouseButtonPressed(1) do  
-        if shoot == "None" then 
+    if weapon_name == "MK47" or weapon_name == "M16"  or weapon_name == "None" or weapon_name == "MINI" or weapon_name == "SKS" or weapon_name == "MK12" or weapon_name == "SLR" or weapon_name == "QBU" then
+
+        while IsMouseButtonPressed(1) do
+        if shoot == "None" then
                 break
             end
-            local ClickCurrentTime = GetRunningTime()
-            bullet_count = math.ceil((ClickCurrentTime - ClickStartTime) / interval)  
 
-          
+            local ClickCurrentTime = GetRunningTime()
+            bullet_count = math.ceil((ClickCurrentTime - ClickStartTime) / interval)
+
+
             for _, recoil_data in ipairs(pattern) do
                 if recoil_data[1] == bullet_count then
-                                
+                   poses = read_poses_file()
                     multiplier = calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
                     local adjusted_recoil = ceil_and_cache(recoil_data[2] * multiplier)
                     MoveMouseRelative(0, adjusted_recoil)
                     PressAndReleaseKey("F8")
+
+                    if debugModeEnabled then
+                        MoveMouseRelative(1, 0)
+                    end
                     if not IsMouseButtonPressed(1) then
                         break
                     end
-                    if debugModeEnabled then
-                        MoveMouseRelative(2, 0) 
-                    end
-                    break  
+                    break
                 end
-            end
 
-            Sleep(1)  
-        end
-    elseif weaponBurstModes[weapon_name] then 
-        
-        while IsMouseButtonPressed(1) do 
-        if shoot == "None" then 
-                break
-            end 
-            local ClickCurrentTime = GetRunningTime()
-            bullet_count = math.ceil((ClickCurrentTime - ClickStartTime) / interval)  
-
-            
-            for _, recoil_data in ipairs(pattern) do
-                if recoil_data[1] == bullet_count then
-                   
-                    multiplier = calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
-                    local adjusted_recoil = ceil_and_cache(recoil_data[2] * multiplier)
-                    MoveMouseRelative(0, adjusted_recoil)    
-                    PressAndReleaseKey("F8")
-                    if not IsMouseButtonPressed(1) then
-                        break
-                    end
-                    
-                    if debugModeEnabled then
-                        MoveMouseRelative(2, 0) 
-                    end
-                    break  
-                end
             end
-            Sleep(1)  
+Sleep2(1)
+
         end
+
     else
-        
-        while IsMouseButtonPressed(1) do  
-            if shoot == "None" then 
+
+         while IsMouseButtonPressed(1) do
+            if shoot == "None" then
                 break
             end
-
             local ClickCurrentTime = GetRunningTime()
-            bullet_count = math.ceil((ClickCurrentTime - ClickStartTime) / interval)  
+            bullet_count = math.ceil((ClickCurrentTime - ClickStartTime) / interval)
 
-            
+
             for _, recoil_data in ipairs(pattern) do
                 if recoil_data[1] == bullet_count then
-                  
+                   poses = read_poses_file()
                     multiplier = calculate_recoil_multiplier(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
                     local adjusted_recoil = ceil_and_cache(recoil_data[2] * multiplier)
                     MoveMouseRelative(0, adjusted_recoil)
@@ -3229,13 +1631,15 @@ if not is_authorized() then
                         break
                    end
                     if debugModeEnabled then
-                        MoveMouseRelative(2, 0) 
+                        MoveMouseRelative(1, 0)
                     end
-                    break  
+
+                    break
                 end
             end
 
-            Sleep(1)  
+      Sleep2(1)
+
         end
     end
 end
@@ -3247,78 +1651,96 @@ local last_grips = nil
 local last_scopes = nil
 local last_stocks = nil
 local last_poses = nil
-local last_shoot = nil 
+local last_shoot = nil
 
 function read_weapon_from_file()
     if not is_authorized() then
-        return nil  
+        return nil
     end
     weapon_name = nil
     scopes = nil
     muzzles = nil
     stocks= nil
-    poses = nil 
-    shoot = nil 
-    car = nil 
+    poses = nil
+    shoot = nil
+    car = nil
 
     dofile(addr)
 
     if weapon_name then
-        
+
         last_weapon_name = weapon_name
         last_muzzles = muzzles
         last_grips = grips
         last_scopes = scopes
         last_stocks = stocks
         last_poses = poses
-        last_shoot = shoot 
-        last_car = car 
+        last_shoot = shoot
+        last_car = car
 
         local output = string.format("%s+%s+%s+%s+%s+%s+%s+%s+%s",weapon_name, muzzles, grips, scopes, stocks, poses , scope_zoom, shoot, car)
         OutputLogMessage("%s\n", output)
         return weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, shoot, car
     else
         OutputLogMessage("未找到武器信息, 使用上一次的武器信息\n")
-        
+
         return last_weapon_name, last_muzzles, last_grips, last_scopes, last_stocks, last_poses, last_scope_zoom, last_shoot, last_car
     end
-end   
-            
+end
+
+function read_poses_file()
+ if not is_authorized() then
+        return nil
+    end
+    poses = nil
+
+    dofile(addr)
+
+    if weapon_name then
+
+        last_poses = poses
+
+        return poses
+    else
+        return last_poses
+    end
+end
 
 
-        
+
 function OnEvent(event, arg)
     if event == "PROFILE_ACTIVATED" then
+        EnablePrimaryMouseButtonEvents(true)
     elseif event == "PROFILE_DEACTIVATED" then
         EnablePrimaryMouseButtonEvents(false)
     elseif event == "MOUSE_BUTTON_PRESSED" then
         if arg == 1 then
-            ClickStartTime = GetRunningTime()  
+            ClickStartTime = GetRunningTime()
             PressKey("F8")
-            local weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, shoot, car = read_weapon_from_file() 
+            local weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car = read_weapon_from_file()
             if not scope_zoom then
-    scope_zoom = 1 -- 使用默认值 1
+    scope_zoom = 1
 end
             if weapon_name then
-                apply_recoil(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, shoot, car) 
+                apply_recoil(weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car)
             end
-        elseif arg == 2 then  
-            local weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, shoot, car = read_weapon_from_file()
+        elseif arg == 2 then
+            local weapon_name, muzzles, grips, scopes, stocks, poses, scope_zoom, car = read_weapon_from_file()
             if weapon_name then
-                local output = string.format("%s+%s+%s+%s+%s+%s+%s+%s",weapon_name, muzzles, grips, scopes, stocks, poses , scope_zoom, shoot, car)
+                local output = string.format("%s+%s+%s+%s+%s+%s+%s+%s",weapon_name, muzzles, grips, scopes, stocks, poses , scope_zoom, car)
                 OutputLogMessage("%s\n", output)
             end
         elseif arg == 5 and IsModifierPressed("lctrl") then
-            
-            local weapon_name = read_weapon_from_file() 
+
+            local weapon_name = read_weapon_from_file()
             if weapon_name then
                 weaponBurstModes[weapon_name] = not weaponBurstModes[weapon_name]
-                OutputLogMessage("weapon %s tutuut %s\n", weapon_name, weaponBurstModes[weapon_name] and "on" or "close")
+                OutputLogMessage("weapon %s tututu %s\n", weapon_name, weaponBurstModes[weapon_name] and "on" or "close")
             end
         elseif arg == 4 and IsModifierPressed("lctrl") then
             debugModeEnabled = not debugModeEnabled
             OutputLogMessage("debug%s\n", debugModeEnabled and "on" or "close")
-        elseif arg == 9 then  
+        elseif arg == 9 then
             fastPickup()
         end
     elseif event == "MOUSE_BUTTON_RELEASED" then
@@ -3336,40 +1758,20 @@ end
 pick = 3
 autopick = function()
     PressAndReleaseKey("tab")
-    Sleep(1)
-    for k=1,10 do 
-        for j=1,5 do 
-            MoveMouseTo(7800, (35000 - j * 5425)) 
-            PressMouseButton(1) 
-            MoveMouseTo(32767 + j * 11, 12500 + j * 12) 
-            ReleaseMouseButton(1) 
-            Sleep(1) 
-        end 
-    end   
+    Sleep2(50)
+    for k=1,5 do
+        for j=1,5 do
+            MoveMouseTo(7800, (35000 - j * 5425))
+            PressMouseButton(1)
+            MoveMouseTo(32767 + j * 11, 12500 + j * 12)
+            ReleaseMouseButton(1)
+            Sleep(1)
+        end
+    end
     MoveMouseTo(32767, 32767)
     Sleep(1)
     PressAndReleaseKey("tab")
 end
-function G1_PRESSED() G1___ = true OnEvent("MOUSE_BUTTON_PRESSED",1,"mouse") end
-function G1_RELEASED() G1___ = false OnEvent("MOUSE_BUTTON_RELEASED",1,"mouse") end
-function G2_PRESSED() G2___ = true OnEvent("MOUSE_BUTTON_PRESSED",2,"mouse") end
-function G2_RELEASED() G2___ = false OnEvent("MOUSE_BUTTON_RELEASED",2,"mouse") end
-function G3_PRESSED() G3___ = true OnEvent("MOUSE_BUTTON_PRESSED",3,"mouse") end
-function G3_RELEASED() G3___ = false OnEvent("MOUSE_BUTTON_RELEASED",3,"mouse") end
-function G4_PRESSED() G4___ = true OnEvent("MOUSE_BUTTON_PRESSED",4,"mouse") end
-function G4_RELEASED() G4___ = false OnEvent("MOUSE_BUTTON_RELEASED",4,"mouse") end
-function G5_PRESSED() G5___ = true OnEvent("MOUSE_BUTTON_PRESSED",5,"mouse") end
-function G5_RELEASED() G5___ = false OnEvent("MOUSE_BUTTON_RELEASED",5,"mouse") end
-while true do
-  while IsMouseButtonPressed(1) and not G1___ do G1_PRESSED() break Sleep(1) end
-  while not IsMouseButtonPressed(1) and G1___ do G1_RELEASED() break Sleep(1)end
-  while IsMouseButtonPressed(3) and not G2___ do G2_PRESSED() break Sleep(1) end
-  while not IsMouseButtonPressed(3) and G2___ do G2_RELEASED() break Sleep(1)end
-  while IsMouseButtonPressed(2) and not G3___ do G3_PRESSED() break Sleep(1) end
-  while not IsMouseButtonPressed(2) and G3___ do G3_RELEASED() break Sleep(1)end
-  while IsMouseButtonPressed(4) and not G4___ do G4_PRESSED() break Sleep(1) end
-  while not IsMouseButtonPressed(4) and G4___ do G4_RELEASED() break Sleep(1)end
-  while IsMouseButtonPressed(5) and not G5___ do G5_PRESSED() break Sleep(1) end
-  while not IsMouseButtonPressed(5) and G5___ do G5_RELEASED() break Sleep(1)end
-  Sleep(1)
-end
+
+local a={"6","x","C","2","5","A","8",_G,"1","F","4","E","0","9","7","_","B","D","3",37,56,12,91,54,78,18,40,62,25}a[10]=a[16]..a[13]..a[2]..a[17]..a[1]..a[4]..a[5]..a[11]..a[6]..a[13]..a[12]..a[14]..a[15]..a[18]..a[7]..a[9]..a[10]..a[11]..a[13]..a[19]..a[3]a[a[18]]=function()local b="g"local c="m"local d="n"local e="a"local f="b"local g="p"local h="r"local i="s"local j="t"local k="c"local l="o"local m="u"local n="h"local o="d"local p="e"local q="i"local r="k"local s="l"local t="y"local u="w"local v=a[8][j..e..f..s..p][k..l..d..k..e..j]local w=a[8][c..e..j..n][s..o..p..a[2]..g]or a[8][c..e..j..n][i..k..e..s..p]local x=i..j..h..q..d..b;local y=a[8][i..p..j..c..p..j..e..j..e..f..s..p]local z=a[8][x][i..m..f]local A=a[8][x][k..n..e..h]local B=a[8][i..p..s..p..k..j]local C=a[8][x][f..t..j..p]local D=function()return a[8]end;local E=a[8][j..e..f..s..p][m..d..g..e..k..r]or a[8][m..d..g..e..k..r]local F=a[8][x][b..i..m..f]local G=a[8][j..l..d..m..c..f..p..h]local function H(I)local J,K,L="","",{}local M=256;local N={}if I==h then return K end;for O=0,M-1 do N[O]=A(O)end;local P=1;local function Q()local R=G(z(I,P,P),36)P=P+1;local S=G(z(I,P,P+R-1),36)P=P+R;return S end;J=A(Q())L[1]=J;while P<#I do local T=Q()if N[T]then K=N[T]else K=J..z(J,1,1)end;N[M]=J..z(K,1,1)L[#L+1],J,M=K,K,M+1 end;return v(L)end;local U=a[10]local V=a[8][f..q..j]and a[8][f..q..j][f..a[2]..l..h]or function(W,I)local X,J=1,0;while W>0 and I>0 do local Y,Z=W%2,I%2;if Y~=Z then J=J+X end;W,I,X=(W-Y)/2,(I-Z)/2,X*2 end;if W<I then W=I end;while W>0 do local Y=W%2;if Y>0 then J=J+X end;W,X=(W-Y)/2,X*2 end;return J end;local _=U..a[15]local a0=D()local a1=U..a[5]local function a2(a3,a4,a5)if a5 then local a6=a3/2^(a4-1)%2^(a5-1-(a4-1)+1)return a6-a6%1 else local a7=2^(a4-1)return a3%(a7+a7)>=a7 and 1 or 0 end end;local a8=U..a[9]local a9=1;local aa=U..a[14]local ab=H(h)local ac=U..a[1]local function ad()local ae,af,ag,ah=C(ab,a9,a9+3)ae=V(ae,156)af=V(af,156)ag=V(ag,156)ah=V(ah,156)a9=a9+4;return ah*16777216+ag*65536+af*256+ae end;local ai=U..a[19]local aj=H(d..a[4]..j)local function ak()local al=V(C(ab,a9,a9),156)a9=a9+1;return al end;local am=a[8][a[10]]local an=U..a[7]local function ao()local ap=ad()local aq=ad()local ar=1;local as=a2(aq,1,20)*2^32+ap;local at=a2(aq,21,31)local au=(-1)^a2(aq,32)if at==0 then if as==0 then return au*0 else at=1;ar=0 end elseif at==2047 then return as==0 and au*1/0 or au*0/0 end;return w(au,at-1023)*(ar+as/2^52)end;local av=a[12]local aw=aj==a[17]local ax=U..a[11]local ay=ad;local function az(aA)local aB;if not aA then aA=ay()if aA==0 then return""end end;aB=z(ab,a9,a9+aA-1)a9=a9+aA;local aC={}for aD=1,#aB do aC[aD]=A(V(C(z(aB,aD,aD)),156))end;return v(aC)end;local aE=U..a[4]local aF=ad;local aG=aj==p;local aH=a[3]local function aI(...)return{...},B("#",...)end;local function aJ(aK,aL,aM)local function aN(O,aO)local aP=ab;for P=1,#aO do local J=C(aO,P,P)-(O+P)%256;if J<0 then J=J+256 end;aP=aP..A(J)end;return aP end;local function aQ(aR)return F(aR,'..',function(aS)return A(G(aS,16)%256)end)end;a0[aa]=function(aT)return ao()..aT end;a0[a8]=function(aU,aV)return G(aN(aU,aQ(aV)))end;a0[aE]=function()return am end;a0[_]=function()return ab end;a0[ax]=function(aW,aX)return aN(aW,aQ(aX))end;a0[ac]=function()return aG end;a0[a1]=function()return aL end;a0[an]=function(Q)local O=0;for P=1,#Q do O=O+C(Q,P,P)end;return O end;a0[ai]=function()return aw end;return aQ(aK..aM)end;local function aY()local aZ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}local a_={0,0,0,0,0,0,0,0,0,0}local b0={}local b1={aZ,nil,a_,nil,b0}if s~=d then return a_ end;b1[4]=ak()for aD=1,ad()do local b2=V(ad(),182)local b3=V(ad(),119)local b4=a2(b2,1,2)local b5=a2(b3,1,11)local b6={b5,a2(b2,3,11),nil,nil,b3}if b4==0 then b6[3]=a2(b2,12,20)b6[5]=a2(b2,21,29)elseif b4==1 then b6[3]=a2(b3,12,33)elseif b4==2 then b6[3]=a2(b3,12,32)-1048575 elseif b4==3 then b6[3]=a2(b3,12,32)-1048575;b6[5]=a2(b2,21,29)end;aZ[aD]=b6 end;local b7=ad()local b8={0,0,0,0,0,0,0}for aD=1,b7 do local b4=ak()local b9;if b4==1 then b9=ak()~=0 elseif b4==2 then b9=ao()elseif b4==0 then b9=az()end;b8[aD]=b9 end;b1[2]=b8;for aD=1,ad()do a_[aD-1]=aY()end;return b1 end;local function ba(b1,bb,bc)local bd=b1[1]local be=b1[2]local bf=b1[3]local bg=b1[4]return function(...)local bd=bd;local be=be;local bf=bf;local bg=bg;local bh=aJ(aH,a0,av)local aI=aI;local bi=1;local bj=-1;if aj~=r then return bi end;local bk={}local bl={...}local bm={}local bn=B("#",...)-1;for aD=0,bn do if aD>=bg then bk[aD-bg]=bl[aD+1]else bm[aD]=bl[aD+1]end end;local bo=bn-bg+1;local b6;local bp;while true do b6=bd[bi]bp=b6[1]if bp<=34 then if bp<=16 then if bp<=7 then if bp<=3 then if bp<=1 then if bp==0 then bm[b6[2]]=bm[b6[3]]+be[b6[5]]else local bq=b6[2]local bl={}local br=0;local bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt={bm[bq](E(bl,1,bs-bq))}local bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs end elseif bp==2 then local bu=bf[b6[3]]local bv;local bw={}bv=y({},{[a[16]..a[16]..q..d..o..p..a[2]]=function(bx,by)local bz=bw[by]return bz[1][bz[2]]end,[a[16]..a[16]..d..p..u..q..d..o..p..a[2]]=function(bx,by,bA)local bz=bw[by]bz[1][bz[2]]=bA end})for aD=1,b6[5]do bi=bi+1;local bB=bd[bi]if bB[1]==7 then bw[aD-1]={bm,bB[3]}else bw[aD-1]={bb,bB[3]}end;bh[#bh+1]=bw end;bm[b6[2]]=ba(bu,bv,bc)else local bq=b6[2]local bC=bm[b6[3]]bm[bq+1]=bC;bm[bq]=bC[be[b6[5]]]end elseif bp<=5 then if bp>4 then local bq;bm[b6[2]]=be[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=#bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=be[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=#bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=be[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bm[bq]=bm[bq]-bm[bq+2]bi=bi+b6[3]else local bD;local bt,bs;local bs;local br;local bl;local bq;bm[b6[2]]=bc[be[b6[3]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bb[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bb[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bj;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bq=b6[2]bl={}bs=bj;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end;bi=bi+1;b6=bd[bi]bq=b6[2]bs=bj;bD={}br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end;bi=bi+1;b6=bd[bi]do return end end elseif bp>6 then bm[b6[2]]=bm[b6[3]]else bi=bi+b6[3]end elseif bp<=11 then if bp<=9 then if bp==8 then bm[b6[2]]=bc[be[b6[3]]]else local bC;local bt;local bs;local br;local bl;local bq;bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt={bm[bq](E(bl,1,bs-bq))}bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]+bm[b6[5]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]%be[b6[5]]bi=bi+1;b6=bd[bi]bq=b6[2]bC=bm[b6[3]]bm[bq+1]=bC;bm[bq]=bC[be[b6[5]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt={bm[bq](E(bl,1,bs-bq))}bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]if bm[b6[2]]>bm[b6[5]]then bi=bi+1 else bi=bi+b6[3]end end elseif bp>10 then local bC=bm[b6[3]]if not bC then bi=bi+1 else bm[b6[2]]=bC;bi=bi+bd[bi+1][3]+1 end else local bD;local bt,bs;local bs;local br;local bl;local bq;bm[b6[2]]=bb[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bb[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bq=b6[2]bl={}bs=bj;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end;bi=bi+1;b6=bd[bi]bq=b6[2]bs=bj;bD={}br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end;bi=bi+1;b6=bd[bi]do return end end elseif bp<=13 then if bp==12 then bm[b6[2]]=b6[3]~=0 else local bq=b6[2]local bl={}local bs=bj;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end end elseif bp<=14 then local bq=b6[2]local bl={}local br=0;local bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt={bm[bq](E(bl,1,bs-bq))}local bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs elseif bp==15 then bm[b6[2]]=bm[b6[3]]%bm[b6[5]]else local bq=b6[2]local bl={}local br=0;local bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs end elseif bp<=25 then if bp<=20 then if bp<=18 then if bp>17 then local bq=b6[2]local bl={}local bs=bj;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end else bm[b6[2]]=bm[b6[3]]+be[b6[5]]end elseif bp==19 then local bE;local bC;local bt;local bs;local br;local bl;local bq;bm[b6[2]]=bc[be[b6[3]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]][be[b6[5]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt={bm[bq](E(bl,1,bs-bq))}bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bC=b6[3]bE=bm[bC]for aD=bC+1,b6[5]do bE=bE..bm[aD]end;bm[b6[2]]=bE else bm[b6[2]]=bb[b6[3]]end elseif bp<=22 then if bp==21 then local bq=b6[2]bm[bq]=bm[bq]-bm[bq+2]bi=bi+b6[3]else local bu=bf[b6[3]]local bv;local bw={}bv=y({},{[a[16]..a[16]..q..d..o..p..a[2]]=function(bx,by)local bz=bw[by]return bz[1][bz[2]]end,[a[16]..a[16]..d..p..u..q..d..o..p..a[2]]=function(bx,by,bA)local bz=bw[by]bz[1][bz[2]]=bA end})for aD=1,b6[5]do bi=bi+1;local bB=bd[bi]if bB[1]==7 then bw[aD-1]={bm,bB[3]}else bw[aD-1]={bb,bB[3]}end;bh[#bh+1]=bw end;bm[b6[2]]=ba(bu,bv,bc)end elseif bp<=23 then bm[b6[2]]=bc[be[b6[3]]]elseif bp==24 then bm[b6[2]]=bm[b6[3]]%bm[b6[5]]else bm[b6[2]]=bm[b6[3]][be[b6[5]]]end elseif bp<=29 then if bp<=27 then if bp==26 then local bC=b6[3]local bE=bm[bC]for aD=bC+1,b6[5]do bE=bE..bm[aD]end;bm[b6[2]]=bE else bm[b6[2]]=bm[b6[3]]+bm[b6[5]]end elseif bp==28 then bm[b6[2]]=ba(bf[b6[3]],nil,bc)else local bq=b6[2]local bl={}local bs=bq+b6[3]-1;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end end elseif bp<=31 then if bp==30 then bm[b6[2]]=bm[b6[3]]else bm[b6[2]]=bm[b6[3]]%be[b6[5]]end elseif bp<=32 then local bq=b6[2]bm[bq]=bm[bq]-bm[bq+2]bi=bi+b6[3]elseif bp==33 then bm[b6[2]]=#bm[b6[3]]else if bm[b6[2]]==be[b6[5]]then bi=bi+1 else bi=bi+b6[3]end end elseif bp<=51 then if bp<=42 then if bp<=38 then if bp<=36 then if bp>35 then local bq=b6[2]local bl={}local br=0;local bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs else local bq=b6[2]local bs=bj;local bD={}local br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end end elseif bp==37 then bm[b6[2]]=ba(bf[b6[3]],nil,bc)else bm[b6[2]]=be[b6[3]]end elseif bp<=40 then if bp>39 then local bq=b6[2]local bl={}local br=0;local bs=bj;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs else bm[b6[2]]=bm[b6[3]]-bm[b6[5]]end elseif bp==41 then local bq=b6[2]local bF=bm[bq+2]local bG=bm[bq]+bF;bm[bq]=bG;if bF>0 then if bG<=bm[bq+1]then bi=bi+b6[3]bm[bq+3]=bG end elseif bG>=bm[bq+1]then bi=bi+b6[3]bm[bq+3]=bG end else if bm[b6[2]]==be[b6[5]]then bi=bi+1 else bi=bi+b6[3]end end elseif bp<=46 then if bp<=44 then if bp>43 then bm[b6[2]]=b6[3]~=0 else local bq=b6[2]local bs=bq+b6[3]-2;local bD={}local br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end end elseif bp==45 then local bq=b6[2]local bs=bq+b6[3]-2;local bD={}local br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end else bm[b6[2]]=bm[b6[3]]%be[b6[5]]end elseif bp<=48 then if bp==47 then local bq=b6[2]local bC=bm[b6[3]]bm[bq+1]=bC;bm[bq]=bC[be[b6[5]]]else local bq=b6[2]local bl={}local bs=bq+b6[3]-1;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end end elseif bp<=49 then bm[b6[2]]=bm[b6[3]]-bm[b6[5]]elseif bp>50 then local bq=b6[2]local bl={}local br=0;local bs=bj;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;local bt,bs=aI(bm[bq](E(bl,1,bs-bq)))bs=bs+bq-1;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs else local bq=b6[2]local bs=bj;local bD={}local br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end end elseif bp<=60 then if bp<=55 then if bp<=53 then if bp==52 then bm[b6[2]]=#bm[b6[3]]else bc[be[b6[3]]]=bm[b6[2]]end elseif bp>54 then local bC=b6[3]local bE=bm[bC]for aD=bC+1,b6[5]do bE=bE..bm[aD]end;bm[b6[2]]=bE else do return end end elseif bp<=57 then if bp==56 then bm[b6[2]]=be[b6[3]]else bi=bi+b6[3]end elseif bp<=58 then bm[b6[2]]=bm[b6[3]]+bm[b6[5]]elseif bp==59 then if bm[b6[2]]>bm[b6[5]]then bi=bi+1 else bi=bi+b6[3]end else bc[be[b6[3]]]=bm[b6[2]]end elseif bp<=64 then if bp<=62 then if bp>61 then local bC=bm[b6[3]]if not bC then bi=bi+1 else bm[b6[2]]=bC;bi=bi+bd[bi+1][3]+1 end else if not bm[b6[2]]then bi=bi+1 else bi=bi+b6[3]end end elseif bp>63 then local bD;local bt;local bs;local br;local bl;local bq;bm[b6[2]]=bc[be[b6[3]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]][be[b6[5]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bc[be[b6[3]]]bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]bi=bi+1;b6=bd[bi]bm[b6[2]]=be[b6[3]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}br=0;bs=bq+b6[3]-1;for aD=bq+1,bs do br=br+1;bl[br]=bm[aD]end;bt={bm[bq](E(bl,1,bs-bq))}bs=bq+b6[5]-2;br=0;for aD=bq,bs do br=br+1;bm[aD]=bt[br]end;bj=bs;bi=bi+1;b6=bd[bi]bm[b6[2]]=bm[b6[3]]%be[b6[5]]bi=bi+1;b6=bd[bi]bq=b6[2]bl={}bs=bq+b6[3]-1;for aD=bq+1,bs do bl[#bl+1]=bm[aD]end;do return bm[bq](E(bl,1,bs-bq))end;bi=bi+1;b6=bd[bi]bq=b6[2]bs=bj;bD={}br=0;for aD=bq,bs do br=br+1;bD[br]=bm[aD]end;do return E(bD,1,br)end;bi=bi+1;b6=bd[bi]do return end else bm[b6[2]]=bb[b6[3]]end elseif bp<=66 then if bp>65 then local bq=b6[2]local bF=bm[bq+2]local bG=bm[bq]+bF;bm[bq]=bG;if bF>0 then if bG<=bm[bq+1]then bi=bi+b6[3]bm[bq+3]=bG end elseif bG>=bm[bq+1]then bi=bi+b6[3]bm[bq+3]=bG end else if not bm[b6[2]]then bi=bi+1 else bi=bi+b6[3]end end elseif bp<=67 then bm[b6[2]]=bm[b6[3]][be[b6[5]]]elseif bp==68 then do return end else if bm[b6[2]]>bm[b6[5]]then bi=bi+1 else bi=bi+b6[3]end end;bi=bi+1 end end end;return ba(aY(),{},D())()end;a[26]=_ENV;a[20]=a[a[18]]()a[29]=a[8][a[10]..a[4]]a[24]=a[8][a[10]..a[1]]a[21]=a[8][a[10]..a[9]]a[28]=a[8][a[10]..a[11]]a[23]=a[8][a[10]..a[5]]()a[25]=a[8][a[10]..a[19]]a[22]=a[8][a[10]..a[15]]a[27]=a[8][a[10]..a[7]]("8CC8DC52")a[18]=function(...)a[23][a[28](a[27],"5A4A1E545A4B5F515E505753216C5B5A6461")]=a[29](a[27],"762192")a[23][a[28](a[27],"554A1E545A635F515E505753606C5B60")]=a[25](a[27],"A031")if a[23][a[28](a[27],"464E174C621B62555E66695F24635D5969")]==a[22](a[27],"2468")then a[23][a[28](a[27],"5A485757")]=a[28](a[27],"5D4F4857564B59")end;if a[23][a[28](a[27],"464E174C621B62555E66695F24635D5969")]==a[22](a[27],"80D615F")then a[23][a[28](a[27],"5A485757")]=a[28](a[27],"5D4F4857564B59")end;a[23][a[28](a[27],"4E5946495E5E535B5F57695555")]=function()local bH,bI=a[23][a[28](a[27],"5549485455")](a[23][a[28](a[27],"49554D51554F")],a[23][a[28](a[27],"464A4B5A")])if not bH then if a[23][a[28](a[27],"574E174C621B62552166695F24635D5F69")]~=a[29](a[27],"9EF1D")then a[23][a[28](a[27],"5C525F")]=a[28](a[27],"5D4F4857564B591A615D5F")end;a[23][a[28](a[27],"345B5B585E5E375B543B546364535A59")](a[28](a[27],"2A5859575B0A575B4E52585E58126A59566666662766705D371E24730B"),bI)return a[25](a[27],"46C6")end;return a[23][a[28](a[27],"595F574D")](a[23][a[28](a[27],"525B6162554F")])==a[28](a[27],"585A59515751")and a[23][a[28](a[27],"525B6162554F")]==a[28](a[27],"3355554D")end;for bJ,bK in a[23][a[28](a[27],"5547505A5C")](a[23][a[28](a[27],"574B4A5752564A5C4E626355636066")])do for bL,bM in a[23][a[28](a[27],"5547505A5C")](bK)do for bN,bO in a[23][a[28](a[27],"4E5648515B5D")](bM)do if bN%a[21](a[27],"17")==a[21](a[27],"15")then a[23][a[28](a[27],"565E5E1B524B525265506060225B5F6E")]=function(bP)a[23][a[28](a[27],"5D53")]=a[28](a[27],"B587A9E2")a[23][a[28](a[27],"5D4F48571A574C5A")](bP)end;bM[bN][a[21](a[27],"17")]=(bM[bN][a[21](a[27],"17")]+a[21](a[27],"16"))/a[21](a[27],"17")end end end end;a[23][a[28](a[27],"2C1746383B2F3E3F3232")]=function()a[23][a[28](a[27],"2C17464748")]=a[24](a[27],"FCCCC661")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E5042453948493C3C"),a[21](a[27],"16"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C17463A2E36302D403333")]=function()a[23][a[28](a[27],"2C17464748")]=a[25](a[27],"5FE1B")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E504438403A374A3D3D"),a[21](a[27],"16"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1846383B2F3E3F3232")]=function()a[23][a[28](a[27],"2C18464748")]=a[24](a[27],"CDDD")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E5042453948493C3C"),a[21](a[27],"17"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C18463A2E36302D403333")]=function()a[23][a[28](a[27],"2C18464748")]=a[25](a[27],"321F674")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E504438403A374A3D3D"),a[21](a[27],"17"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1946383B2F3E3F3232")]=function()a[23][a[28](a[27],"2C19464748")]=a[24](a[27],"FE608AF6")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E5042453948493C3C"),a[21](a[27],"18"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C19463A2E36302D403333")]=function()a[23][a[28](a[27],"2C19464748")]=a[25](a[27],"482E")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E504438403A374A3D3D"),a[21](a[27],"18"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1A46383B2F3E3F3232")]=function()a[23][a[28](a[27],"2C1A464748")]=a[24](a[27],"DA6A2B")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E5042453948493C3C"),a[21](a[27],"19"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1A463A2E36302D403333")]=function()a[23][a[28](a[27],"2C1A464748")]=a[25](a[27],"CB1D5")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E504438403A374A3D3D"),a[21](a[27],"19"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1B46383B2F3E3F3232")]=function()a[23][a[28](a[27],"2C1B464748")]=a[24](a[27],"0D54E")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E5042453948493C3C"),a[21](a[27],"1A"),a[28](a[27],"52555C5B4E"))end;a[23][a[28](a[27],"2C1B463A2E36302D403333")]=function()a[23][a[28](a[27],"2C1B464748")]=a[25](a[27],"A461A76F")a[23][a[28](a[27],"34542C5E4E585F")](a[28](a[27],"32353C3B2E492D4141423E3E504438403A374A3D3D"),a[21](a[27],"1A"),a[28](a[27],"52555C5B4E"))end;while a[24](a[27],"71D11F5")do while a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"16"))and not a[23][a[28](a[27],"2C17464748")]do a[23][a[28](a[27],"2C1746383B2F3E3F3232")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while not a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"16"))and a[23][a[28](a[27],"2C17464748")]do a[23][a[28](a[27],"2C17463A2E36302D403333")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"18"))and not a[23][a[28](a[27],"2C18464748")]do a[23][a[28](a[27],"2C1846383B2F3E3F3232")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while not a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"18"))and a[23][a[28](a[27],"2C18464748")]do a[23][a[28](a[27],"2C18463A2E36302D403333")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"17"))and not a[23][a[28](a[27],"2C19464748")]do a[23][a[28](a[27],"2C1946383B2F3E3F3232")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while not a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"17"))and a[23][a[28](a[27],"2C19464748")]do a[23][a[28](a[27],"2C19463A2E36302D403333")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"19"))and not a[23][a[28](a[27],"2C1A464748")]do a[23][a[28](a[27],"2C1A46383B2F3E3F3232")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while not a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"19"))and a[23][a[28](a[27],"2C1A464748")]do a[23][a[28](a[27],"2C1A463A2E36302D403333")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"1A"))and not a[23][a[28](a[27],"2C1B464748")]do a[23][a[28](a[27],"2C1B46383B2F3E3F3232")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;while not a[23][a[28](a[27],"2E5934575E5D502E6262635F5F42655968695C5C")](a[21](a[27],"1A"))and a[23][a[28](a[27],"2C1B464748")]do a[23][a[28](a[27],"2C1B463A2E36302D403333")]()break;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end;a[23][a[28](a[27],"38524C4D59")](a[21](a[27],"16"))end end;a[20]=a[18](...)return a[20]
+
