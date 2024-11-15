@@ -165,8 +165,7 @@ function read_weapon_from_file()
     local weapon_name = nil
     dofile(file_address)
     weapon_name = weapon
-
-
+    OutputLogMessage("当前武器: %s, 倍镜: %.2f, 枪口: %.2f, 握把: %.2f, 枪托: %.2f\n", weapon_name, scope, muzzle, grip, stock)
     return weapon_name, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil
 end
 

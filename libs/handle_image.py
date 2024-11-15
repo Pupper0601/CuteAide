@@ -3,8 +3,10 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
+# demo3.py
 import cv2
 import numpy as np
+import pyautogui
 from skimage.metrics import structural_similarity as ssim
 
 
@@ -14,7 +16,11 @@ class ReadImage:
         读取图片, 并对图片进行预处理
         :param image: 图片路径
         """
-        self.image = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+        if isinstance(image, str):
+            image = cv2.imread(image)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        self.image = np.array(image)
+        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
         self.binary = None  # 二值化图像
         self.pyramid = None # 图像金字塔
         self.adaptive_binarize_image()
@@ -23,7 +29,7 @@ class ReadImage:
     def preprocess_image(self):
         # 高斯模糊去噪
         blurred_image = cv2.GaussianBlur(self.image, (3, 3), 0)
-        return blurred_image
+        return cv2.cvtColor(blurred_image, cv2.COLOR_BGR2GRAY)
 
     def adaptive_binarize_image(self,block_size=5, C=2):
         # 应用自适应二值化
@@ -42,14 +48,14 @@ class ReadImage:
 
 # 对比图片相似度
 class ContrastImage:
-    def __init__(self,source_name, source_img, temp_img_path):
+    def __init__(self,source_name, source_img, temp_img):
         """
         :param source_name: 图片名称
         :param source_img: 预处理后的源图
-        :param temp_img_path: 截图路径
+        :param temp_img: 截图
         """
         self.source_img = source_img
-        self.temp_img = ReadImage(temp_img_path)
+        self.temp_img = ReadImage(temp_img)
         self.source_name = source_name
         self.result = self.img_list()   # 对比结果, [name, ssim, hist]
 
@@ -83,31 +89,30 @@ class ContrastImage:
 def current_equipment(category, temp_image):
     gun_data = []
 
-    #  遍历文件夹下所有图片
+    # 遍历文件夹下所有图片
     for key, value in category.items():
         mod_name = ContrastImage(key, value, temp_image).result
-        if len(mod_name) > 0:
+        if mod_name:
             gun_data.append(mod_name)
-    if len(gun_data) == 0:
-        gun_data.append([temp_image.split('/')[-1].split('_')[0]+ "_none", 1.0, 1.0])
 
-    gun_nane = ''
-    ss = 0
-    hs = 0
-    for i in gun_data:
-        if i[1] >= ss and i[2] >= hs:
-            gun_nane = i[0]
-            ss = i[1]
-            hs = i[2]
+    if not gun_data:
+        gun_data.append([temp_image.split('/')[-1].split('_')[0] + "_none", 1.0, 1.0])
 
-    return gun_nane
+    gun_name, ss, hs = '', 0, 0
+    for name, ssim_score, hist_score in gun_data:
+        if ssim_score >= ss and hist_score >= hs:
+            gun_name, ss, hs = name, ssim_score, hist_score
+
+    return gun_name
 
 
 if __name__ == '__main__':
 
-    temp_img = ReadImage('source')
+    temp_img = ReadImage(r'F:\Object\GitHub\CuteAide\basic\1920_1080\scopes\x6.png')
+    t = [temp_img.binary, temp_img.pyramid]
+    screenshot = pyautogui.screenshot(region=(1607, 343, 45, 24))
+    contrast = ContrastImage('source',t,screenshot)
+    print(contrast.result)
 
-    contrast = ContrastImage('source',source_img, temp_img)
-    print(contrast.contrast())
 
 

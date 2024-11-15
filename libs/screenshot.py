@@ -12,19 +12,17 @@ from tools.paths import project_path
 from tools.log import logger
 
 
-def screen_capture(region, name):
+def screen_capture(region):
     #  截取区域的屏幕截图并将其保存到save_path
     img = pyautogui.screenshot(region=region)
-    save_path = project_path() + "/temps/" + name
-    img.save(save_path)
-    return save_path    # 返回保存路径
+    return img    # 返回保存路径
 
 def get_inventory():
     # 获取背包信息的屏幕截图
     inventory_place = CACHE["config"]["regions"]["inventory"]
-    temp_path= screen_capture(inventory_place, "inventory.png")
+    temp_img= screen_capture(inventory_place)
 
-    res = ContrastImage("inventory", CACHE["inventory"]["ku"], temp_path).result  # 比较背包信息
+    res = ContrastImage("inventory", CACHE["inventory"]["ku"], temp_img).result  # 比较背包信息
 
     if len(res) > 0:
         logger.info(f"当前背包 ---> 打开状态")
@@ -42,7 +40,7 @@ def gun_screenshots():
 
         for key, value in gun_sites['regions'].items():
             if key not in ["inventory", "car", "pose"]:
-                paths_dict[key] = screen_capture(value, key + ".png")
+                paths_dict[key] = screen_capture(value)
 
         logger.info("装备获取图截取 ---> 完成")
         return paths_dict   # {文件名: 路径, ...}
@@ -53,9 +51,9 @@ def gun_screenshots():
 def get_car():
     # 获取车辆信息的屏幕截图
     car_place = CACHE["config"]["regions"]["car"]
-    temp_path = screen_capture(car_place, "car.png")
+    temp_img = screen_capture(car_place)
 
-    res = ContrastImage("car", CACHE["car"]["car"], temp_path).result  # 比较车辆信息
+    res = ContrastImage("car", CACHE["car"]["car"], temp_img).result  # 比较车辆信息
 
     if len(res) > 0:
         global_variable.in_car = "yes"
@@ -65,5 +63,5 @@ def get_car():
 
 if __name__ == '__main__':
     # 示例用法
-    screen_capture([0, 0, 100, 100], "test.png")
-    print(gun_screenshots())
+    get_inventory()
+    print(get_inventory())
