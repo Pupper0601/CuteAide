@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import time
 
 # demo3.py
 import cv2
 import numpy as np
 import pyautogui
 from skimage.metrics import structural_similarity as ssim
+
 
 
 class ReadImage:
@@ -19,8 +21,7 @@ class ReadImage:
         if isinstance(image, str):
             image = cv2.imread(image)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        self.image = np.array(image)
-        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+        self.image = image
         self.binary = None  # 二值化图像
         self.pyramid = None # 图像金字塔
         self.adaptive_binarize_image()
@@ -102,7 +103,6 @@ def current_equipment(name,category, temp_image):
     for name, ssim_score, hist_score in gun_data:
         if ssim_score >= ss and hist_score >= hs:
             gun_name, ss, hs = name, ssim_score, hist_score
-
     return gun_name
 
 

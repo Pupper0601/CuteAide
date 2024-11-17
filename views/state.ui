@@ -17,34 +17,34 @@
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>70</x>
       <y>80</y>
-      <width>600</width>
-      <height>30</height>
+      <width>800</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>600</width>
-      <height>30</height>
+      <width>800</width>
+      <height>25</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>600</width>
-      <height>30</height>
+      <width>800</width>
+      <height>25</height>
      </size>
     </property>
     <property name="styleSheet">
      <string notr="true">#widget{
-	border: 1px solid rgb(214,214,214);
-	background-color: rgba(235, 235, 235, 143);
+	border: 1px solid rgba(214,214,214, 50);
+	background-color: rgba(235, 235, 235, 50);
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 }
 QPushButton{
 	color: rgb(255, 38, 0);
-	font: 700 10pt;
+	font: 700 10pt &quot;YouSheYuFeiTeJianKangTi&quot;;
 }
 Line{
 	border: 1px solid rgb(255, 255, 255);
@@ -125,6 +125,7 @@ Line{
           </property>
           <property name="font">
            <font>
+            <family>YouSheYuFeiTeJianKangTi</family>
             <pointsize>10</pointsize>
             <italic>false</italic>
             <bold>true</bold>
@@ -205,7 +206,7 @@ Line{
       <widget class="QFrame" name="frame_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>4</horstretch>
+         <horstretch>5</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>

@@ -1,8 +1,6 @@
-import time
+import sys
 from functools import wraps
-from pathlib import Path
 import loguru
-from tools.paths import project_path as paths
 
 
 # 单例类的装饰器
@@ -30,28 +28,14 @@ def singleton_class_decorator(cls):
 @singleton_class_decorator
 class Logger:
     def __init__(self):
-        self.clear_log_file()
         self.logger_add()
 
     @staticmethod
-    def clear_log_file():
-        log_file_path = paths() + "./logs.log"
-        with open(log_file_path, 'w', encoding='utf-8') as log_file:
-            log_file.truncate(0)
-
-    @staticmethod
     def logger_add():
+        loguru.logger.remove()  # 移除默认的 sink
         loguru.logger.add(
-            # 水槽，分流器，可以用来输入路径
-            sink= paths() + "./logs.log",
-            # 日志创建周期
-            rotation='00:00',
-            # 保存
-            retention='1 day',
-            # 文件的压缩格式
-            compression='zip',
-            # 编码格式
-            encoding="utf-8",
+            # # 输出到控制台
+            sink=sys.stdout,
             # 具有使日志记录调用非阻塞的优点
             enqueue=True
         )

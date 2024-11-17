@@ -26,10 +26,8 @@ local function is_authorized()
 end
 
 -- 计算后坐力
-function calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,
-                                      global_lshift,global_recoil, global_vertical, global_magnifying_power)
-    calculation_results = scope * muzzle * grip * stock * posture_state * alone_factor *
-            global_recoil*global_vertical*global_magnifying_power
+function calculate_influencing_factor(car, posture_state, in_car, global_lshift, coefficient)
+    calculation_results = coefficient * posture_state
     if in_car == "yes" then   -- 在车上
         calculation_results = calculation_results * car
     end
@@ -43,9 +41,7 @@ end
 local start_shooting_time = 0 -- 开始射击时间
 
 -- 开始压枪
-function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in_car, guns_trajectory,
-                       weapon_intervals,shooting_state,opening_method,continuous_clicks,alone_factor, global_lshift,
-                       global_recoil, global_vertical, global_magnifying_power)
+function pressure_grab(weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
     if not is_authorized() then
         return
     end
@@ -57,103 +53,45 @@ function pressure_grab(weapon, scope, muzzle, grip, stock, car,posture_state, in
 
     local _trajectory = guns_trajectory -- 枪械轨迹
     local _intervals = weapon_intervals  -- 武器间隔
-    local total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil, global_vertical, global_magnifying_power)    -- 总系数
+    local total_coefficient = calculate_influencing_factor(car, posture_state, in_car, global_lshift, coefficient)    -- 总系数
 
     local _number_bullets = 0   -- 子弹数
 
-    local _special_weapon = {MK47=true, M16A4=true, MINI14=true, SKS=true, MK12=true, ZDZT=true,QBU=true}  -- 特殊武器
-    OutputLogMessage("当前武器: %s ,  --->>  影响因子为: %.2f\n", weapon, total_coefficient)
-    if _special_weapon[weapon] then
-        while IsMouseButtonPressed(1) do
-            local current_click_time = GetRunningTime() -- 当前点击时间
-            _number_bullets = math.ceil((current_click_time - start_shooting_time) / _intervals)  -- 子弹数
+    local _special_weapon = {MK47=true, M16A4=true, MINI14=true, SKS=true, MK12=true, ZDZT=true, QBU=true}  -- 特殊武器
+    OutputLogMessage("当前武器: %s ,  --->> 影响因子为: %.2f\n", weapon, total_coefficient)
 
-            if shooting_state == "stop" then    -- 停止射击
+    local function handle_recoil()
+        for _, recoil_data in ipairs(_trajectory) do
+            if recoil_data[1] == _number_bullets then
+                local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
+
+                MoveMouseRelative(0, adjusted_recoil)
+                if not IsMouseButtonPressed(1) then
+                    break
+                end
                 break
             end
-
-            if opening_method == "click" then   -- 点击开镜
-                if continuous_clicks == "open" then
-                    enable_mouse_events = false  -- 禁用鼠标事件
-                    for _,recoil_data in ipairs(_trajectory) do
-                        if recoil_data[1] == _number_bullets then
-                            total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil, global_vertical, global_magnifying_power)
-
-                            local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-                            MoveMouseRelative(0, adjusted_recoil)
-                            if not IsMouseButtonPressed(1) then
-                                break
-                            end
-                            break
-                        end
-                    end
-                    enable_mouse_events = true  -- 启用鼠标事件
-                end
-            elseif opening_method == "long_press" then  -- 长按开镜
-                if IsMouseButtonPressed(3) or IsMouseButtonPressed(4) then
-                    if continuous_clicks == "open" then
-                        enable_mouse_events = false  -- 禁用鼠标事件
-                        for _,recoil_data in ipairs(_trajectory) do
-                            if recoil_data[1] == _number_bullets then
-                                total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor, global_lshift,global_recoil, global_vertical, global_magnifying_power)
-                                local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-
-                                MoveMouseRelative(0, adjusted_recoil)
-
-                                if not IsMouseButtonPressed(1) then
-                                    break
-                                end
-                                break
-                            end
-                        end
-                        enable_mouse_events = true  -- 启用鼠标事件
-                    end
-                end
-            end
-            Sleep(1)
         end
-    else
-        while IsMouseButtonPressed(1) do
-            if shooting_state == "stop" then    -- 停止射击
-                break
-            end
+    end
 
-            local current_click_time = GetRunningTime() -- 当前点击时间
-            _number_bullets = math.ceil((current_click_time - start_shooting_time) / _intervals)  -- 子弹数
+    while IsMouseButtonPressed(1) do
+        local current_click_time = GetRunningTime() -- 当前点击时间
+        _number_bullets = math.ceil((current_click_time - start_shooting_time) / _intervals)  -- 子弹���
 
-            if opening_method == "click" then   -- 点击开镜
-                for _,recoil_data in ipairs(_trajectory) do
-                    if recoil_data[1] == _number_bullets then
-                        total_coefficient = calculate_influencing_factor(scope, muzzle, grip, stock, car, posture_state, in_car, alone_factor,global_lshift,global_recoil, global_vertical, global_magnifying_power)
-
-                        local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-                        MoveMouseRelative(0, adjusted_recoil)
-                        if not IsMouseButtonPressed(1) then
-                            break
-                        end
-                        break
-                    end
-                end
-                Sleep(1)
-
-            elseif opening_method == "long_press" then  -- 长按开镜
-                if IsMouseButtonPressed(3) or IsMouseButtonPressed(4) then
-                    for _,recoil_data in ipairs(_trajectory) do
-                        if recoil_data[1] == _number_bullets then
-                            total_coefficient = calculate_influencing_factor()
-                            local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-
-                            MoveMouseRelative(0, adjusted_recoil)
-                            if not IsMouseButtonPressed(1) then
-                                break
-                            end
-                            break
-                        end
-                    end
-                end
-            end
-            Sleep(1)
+        if shooting_state == "stop" then    -- 停止射击
+            break
         end
+
+        if opening_method == "click" then   -- 点击开镜
+            enable_mouse_events = false  -- 禁用鼠标事件
+            handle_recoil()
+            enable_mouse_events = true  -- 启用鼠标事件
+        elseif opening_method == "long_press" and (IsMouseButtonPressed(3) or IsMouseButtonPressed(4)) then  -- 长按开镜
+            enable_mouse_events = false  -- 禁用鼠标事件
+            handle_recoil()
+            enable_mouse_events = true  -- 启用鼠标事件
+        end
+        Sleep(1)
     end
 end
 
@@ -162,12 +100,13 @@ function read_weapon_from_file()
     if not is_authorized() then
         return
     end
-    local weapon_name = nil
+
+    weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method,
+    global_lshift, coefficient = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil
+
     dofile(file_address)
-    weapon_name = weapon
-    OutputLogMessage("当前武器: %s, 倍镜: %.2f, 枪口: %.2f, 握把: %.2f, 枪托: %.2f\n", weapon_name, scope, muzzle, grip, stock)
-    return weapon_name, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals,
-    shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil,global_vertical, global_magnifying_power
+
+    return weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient
 end
 
 
@@ -176,11 +115,9 @@ function event_handing(event, key)
     if event == "mouse_button_down" then
         if key == 1 then
             start_shooting_time = GetRunningTime()
-            local weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory, weapon_intervals,
-            shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift, global_recoil, global_vertical, global_magnifying_power = read_weapon_from_file()
-            pressure_grab(weapon, scope, muzzle, grip, stock, car, posture_state, in_car, guns_trajectory,
-                    weapon_intervals, shooting_state, opening_method, continuous_clicks, alone_factor, global_lshift,
-                    global_recoil, global_vertical, global_magnifying_power)
+            local weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient = read_weapon_from_file()
+
+            pressure_grab(weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
         elseif key == 2 then
             OutputLogMessage("右键按下\n")
         end

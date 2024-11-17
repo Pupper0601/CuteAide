@@ -10,6 +10,7 @@ from pynput import mouse
 from libs.global_variable import global_variable
 
 from libs.gun_info import GetGunInfo
+from libs.pressure import Pressure
 from tools.active_window import get_active_window_info
 from tools.log import logger
 from pynput.mouse import Button
@@ -30,9 +31,9 @@ class MouseListen(Thread):
     def on_click(self, x,y, button, pressed):
         if get_active_window_info():
         # if True:
-            if pressed and global_variable.enable_mouse_recognition:
+            if not pressed and global_variable.enable_mouse_recognition:
                 self.parent.update_way("识别中......")
-                if button == Button.left or button == Button.right:
+                if button == Button.right:
                     GetGunInfo()
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     self.parent.update_way("识别完成")

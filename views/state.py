@@ -27,18 +27,18 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.widget = QWidget(self.centralwidget)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(130, 80, 600, 30))
-        self.widget.setMinimumSize(QSize(600, 30))
-        self.widget.setMaximumSize(QSize(600, 30))
+        self.widget.setGeometry(QRect(70, 80, 800, 25))
+        self.widget.setMinimumSize(QSize(800, 25))
+        self.widget.setMaximumSize(QSize(800, 25))
         self.widget.setStyleSheet(u"#widget{\n"
-"	border: 1px solid rgb(214,214,214);\n"
-"	background-color: rgba(235, 235, 235, 143);\n"
+"	border: 1px solid rgba(214,214,214, 50);\n"
+"	background-color: rgba(235, 235, 235, 50);\n"
 "	border-bottom-left-radius: 15px;\n"
 "	border-bottom-right-radius: 15px;\n"
 "}\n"
 "QPushButton{\n"
 "	color: rgb(255, 38, 0);\n"
-"	font: 700 10pt;\n"
+"	font: 700 10pt \"YouSheYuFeiTeJianKangTi\";\n"
 "}\n"
 "Line{\n"
 "	border: 1px solid rgb(255, 255, 255);\n"
@@ -76,6 +76,7 @@ class Ui_MainWindow(object):
         sizePolicy1.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
         self.pushButton.setSizePolicy(sizePolicy1)
         font = QFont()
+        font.setFamilies([u"YouSheYuFeiTeJianKangTi"])
         font.setPointSize(10)
         font.setBold(True)
         font.setItalic(False)
@@ -120,7 +121,7 @@ class Ui_MainWindow(object):
         self.frame_2 = QFrame(self.widget)
         self.frame_2.setObjectName(u"frame_2")
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(4)
+        sizePolicy2.setHorizontalStretch(5)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
         self.frame_2.setSizePolicy(sizePolicy2)

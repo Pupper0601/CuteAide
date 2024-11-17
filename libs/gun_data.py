@@ -4,7 +4,7 @@
 # @Email  : pupper.cheng@gmail.com
 
 
-global_recoil = 0.70   # 全局后坐力
+global_recoil = 3.0   # 全局后坐力
 
 global_lshift = 1   # 全局屏息系数
 

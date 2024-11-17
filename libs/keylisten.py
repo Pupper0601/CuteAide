@@ -11,7 +11,7 @@ from pynput.keyboard import Key
 
 from libs.global_variable import global_variable
 from libs.gun_info import GetGunInfo
-from libs.screenshot import get_car
+from libs.screenshot import get_car, get_inventory, screen_capture_full
 from tools.active_window import get_active_window_info
 
 from tools.log import logger
@@ -38,20 +38,19 @@ class KeyListen(Thread, QObject):
         if get_active_window_info():
         # if True:
             if keys == "tab":  # 监听到按键 'tab'
-                if global_variable.enable_key_recognition:
-                    time.sleep(0.3) # 等待0.5秒, 等待背包打开
-                    GetGunInfo()  # 更新枪械信息
-                    global_variable.enable_mouse_recognition = False    # 关闭鼠标识别
+                time.sleep(0)
+                screen_capture_full()
+                if get_inventory():
+                    if global_variable.shooting_state == "fired":
+                        global_variable.shooting_state = "stop"
+                        self.parent.state_win.update_state_shooting_state()
+                    global_variable.enable_mouse_recognition = True    # 关闭鼠标识别
+                    GetGunInfo()  # 持续更新枪械信息
+                    self.parent.update_home_gun_info(global_variable.weapon_information)
                 else:
-                    GetGunInfo()  # 更新枪械信息
-                    global_variable.enable_key_recognition = True
-                self.parent.update_home_gun_info(global_variable.weapon_information)
-                global_variable.enable_mouse_recognition = False
-                global_variable.shooting_state = "stop"
-                self.parent.state_win.update_state_shooting_state()
+                    global_variable.enable_mouse_recognition = False
             elif keys == "esc":  # 监听到按键 'esc'
                 global_variable.enable_mouse_recognition = False
-                global_variable.enable_key_recognition = True
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
             elif keys in ["1", "!"]:

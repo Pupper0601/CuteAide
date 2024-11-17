@@ -6,8 +6,8 @@
 import sys
 
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QCursor, QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtGui import QColor, QCursor, QIcon, QPalette
+from PySide6.QtWidgets import QApplication, QGraphicsBlurEffect, QLabel, QMainWindow, QVBoxLayout, QWidget
 
 from libs.global_variable import global_variable
 from libs.home.state_win import StateMainWin
@@ -29,6 +29,7 @@ class HomeMainWin(QMainWindow):
         #隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
+
         self.state_win = StateMainWin()  # 初始化 state_win
         self.key_listener = None
         self.mouse_listener = None
@@ -114,7 +115,7 @@ class HomeMainWin(QMainWindow):
             self.ui.label_15.setText(f"{_gun_info['gun_2']['stock'][0]}")
 
             self.state_win.update_state_gun_info()
-            logger.info("枪械信息更新完成")
+            logger.info("更新 home 窗口枪械信息完成")
             self.update_way("识别完成")
         else:
             logger.info("未识别到枪械信息, 请重新识别")

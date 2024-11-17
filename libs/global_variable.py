@@ -12,6 +12,8 @@ THREAD_POOL = ThreadPoolExecutor()
 
 CACHE = ImageCache().source_data
 
+global_screenshot = None
+
 # enable_mouse_recognition = False
 # enable_key_recognition = True
 # weapon_information = {} # 武器信息
@@ -31,11 +33,14 @@ class Observable:
         self._last_notify_time = 0
         self._notify_lock = threading.Lock()
         self._timer = None
+        self._auto_update_enabled = True  # 添加标志位
 
     def add_observer(self, observer):
         self._observers.append(observer)
 
     def notify_observers(self):
+        if not self._auto_update_enabled:
+            return
         with self._notify_lock:
             if self._timer:
                 self._timer.cancel()
@@ -53,7 +58,7 @@ class GlobalVariable(Observable):
     def __init__(self):
         super().__init__()
         self._enable_mouse_recognition = False
-        self._enable_key_recognition = True
+        self._enable_key_recognition = False
         self._weapon_information = {}
         self._posture_state_button = "c"
         self._in_car = "no"
@@ -63,6 +68,7 @@ class GlobalVariable(Observable):
         self._continuous_clicks = "close"
         self._current_weapon_information = {}
         self._fire_weapon = "1"
+        self._global_screenshot = None
 
     @property
     def enable_mouse_recognition(self):
@@ -151,6 +157,14 @@ class GlobalVariable(Observable):
     @fire_weapon.setter
     def fire_weapon(self, value):
         self._fire_weapon = value
+
+    @property
+    def global_screenshot(self):
+        return self._global_screenshot
+
+    @global_screenshot.setter
+    def global_screenshot(self, value):
+        self._global_screenshot = value
 
 global_variable = GlobalVariable()
 

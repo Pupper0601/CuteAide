@@ -4,7 +4,7 @@
 # @Email  : pupper.cheng@gmail.com
 from pathlib import Path
 
-from paths import path_conn
+from tools.paths import path_conn
 
 
 def read_file(file_name: str) -> str:

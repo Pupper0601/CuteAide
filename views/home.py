@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(618, 423)
+        icon = QIcon()
+        icon.addFile(u":/images/resource/images/log.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setAnimated(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -75,9 +78,9 @@ class Ui_MainWindow(object):
         self.pushButton_5.setStyleSheet(u"#pushButton_5{\n"
 "	border: none;\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u":/icon/resource/icon/versrion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_5.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icon/resource/icon/versrion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_5.setIcon(icon1)
         self.pushButton_5.setAutoDefault(False)
         self.pushButton_5.setFlat(False)
 
@@ -152,9 +155,9 @@ class Ui_MainWindow(object):
 "	background-color:rgb(4, 51, 255);\n"
 "}\n"
 "")
-        icon1 = QIcon()
-        icon1.addFile(u":/icon/resource/icon/minimize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_4.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/icon/resource/icon/minimize.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_4.setIcon(icon2)
         self.pushButton_4.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_6.addWidget(self.pushButton_4)
@@ -170,9 +173,9 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "	background-color:rgb(4, 51, 255);\n"
 "}")
-        icon2 = QIcon()
-        icon2.addFile(u":/icon/resource/icon/close.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_3.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/icon/resource/icon/close.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_3.setIcon(icon3)
         self.pushButton_3.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_6.addWidget(self.pushButton_3)
@@ -234,9 +237,9 @@ class Ui_MainWindow(object):
 "	font: 700 16pt rgb(255, 147, 0);\n"
 "	color: rgb(255, 147, 0);\n"
 "}")
-        icon3 = QIcon()
-        icon3.addFile(u":/icon/resource/icon/Tips.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_9.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/icon/resource/icon/Tips.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_9.setIcon(icon4)
 
         self.horizontalLayout_21.addWidget(self.pushButton_9)
 
@@ -425,9 +428,9 @@ class Ui_MainWindow(object):
         sizePolicy9.setVerticalStretch(0)
         sizePolicy9.setHeightForWidth(self.radioButton.sizePolicy().hasHeightForWidth())
         self.radioButton.setSizePolicy(sizePolicy9)
-        icon4 = QIcon()
-        icon4.addFile(u":/icon/resource/icon/mouse.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.radioButton.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/icon/resource/icon/mouse.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.radioButton.setIcon(icon5)
         self.radioButton.setIconSize(QSize(20, 20))
         self.radioButton.setChecked(True)
 
@@ -472,9 +475,9 @@ class Ui_MainWindow(object):
         self.radioButton_3.setObjectName(u"radioButton_3")
         sizePolicy9.setHeightForWidth(self.radioButton_3.sizePolicy().hasHeightForWidth())
         self.radioButton_3.setSizePolicy(sizePolicy9)
-        icon5 = QIcon()
-        icon5.addFile(u":/icon/resource/icon/keyboard.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.radioButton_3.setIcon(icon5)
+        icon6 = QIcon()
+        icon6.addFile(u":/icon/resource/icon/keyboard.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.radioButton_3.setIcon(icon6)
         self.radioButton_3.setIconSize(QSize(20, 20))
         self.radioButton_3.setChecked(True)
 
@@ -524,9 +527,9 @@ class Ui_MainWindow(object):
         self.checkBox.setObjectName(u"checkBox")
         sizePolicy9.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
         self.checkBox.setSizePolicy(sizePolicy9)
-        icon6 = QIcon()
-        icon6.addFile(u":/icon/resource/icon/time.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.checkBox.setIcon(icon6)
+        icon7 = QIcon()
+        icon7.addFile(u":/icon/resource/icon/time.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.checkBox.setIcon(icon7)
         self.checkBox.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_17.addWidget(self.checkBox)
@@ -539,9 +542,9 @@ class Ui_MainWindow(object):
         self.checkBox_2.setObjectName(u"checkBox_2")
         sizePolicy9.setHeightForWidth(self.checkBox_2.sizePolicy().hasHeightForWidth())
         self.checkBox_2.setSizePolicy(sizePolicy9)
-        icon7 = QIcon()
-        icon7.addFile(u":/icon/resource/icon/floating.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.checkBox_2.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/icon/resource/icon/floating.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.checkBox_2.setIcon(icon8)
         self.checkBox_2.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_17.addWidget(self.checkBox_2)
@@ -590,9 +593,9 @@ class Ui_MainWindow(object):
 "	color: rgb(0,0,0);\n"
 "}\n"
 "")
-        icon8 = QIcon()
-        icon8.addFile(u":/icon/resource/icon/start.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_2.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/icon/resource/icon/start.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_2.setIcon(icon9)
         self.pushButton_2.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_9.addWidget(self.pushButton_2)
@@ -613,6 +616,7 @@ class Ui_MainWindow(object):
         self.frame_21.setStyleSheet(u"#frame_21{\n"
 "	border: none;\n"
 "	border-radius: 10px;\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
 "}")
         self.frame_21.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_21.setFrameShadow(QFrame.Shadow.Raised)
@@ -625,6 +629,7 @@ class Ui_MainWindow(object):
         self.textBrowser.setStyleSheet(u"#textBrowser{\n"
 "	border: 1px solid rgb(214, 214, 214);\n"
 "	border-radius: 10px;\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
 "}")
 
         self.horizontalLayout_18.addWidget(self.textBrowser)
@@ -689,9 +694,9 @@ class Ui_MainWindow(object):
 "	color: rgb(255, 255, 255);\n"
 "	letter-spacing: 2px;\n"
 "}")
-        icon9 = QIcon()
-        icon9.addFile(u":/icon/resource/icon/now.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton.setIcon(icon9)
+        icon10 = QIcon()
+        icon10.addFile(u":/icon/resource/icon/now.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton.setIcon(icon10)
         self.pushButton.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_11.addWidget(self.pushButton)
@@ -995,6 +1000,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setContentsMargins(2, 2, 2, 2)
         self.frame_25 = QFrame(self.frame_7)
         self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.frame_25.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_25.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_20 = QHBoxLayout(self.frame_25)

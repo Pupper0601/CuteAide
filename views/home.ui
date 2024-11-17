@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resource.qrc">
+    <normaloff>:/images/resource/images/log.png</normaloff>:/images/resource/images/log.png</iconset>
+  </property>
   <property name="animated">
    <bool>false</bool>
   </property>
@@ -1347,6 +1351,7 @@ QPushButton:hover{
               <string notr="true">#frame_21{
 	border: none;
 	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0);
 }</string>
              </property>
              <property name="frameShape">
@@ -1377,6 +1382,7 @@ QPushButton:hover{
                  <string notr="true">#textBrowser{
 	border: 1px solid rgb(214, 214, 214);
 	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0);
 }</string>
                 </property>
                 <property name="html">
@@ -2232,6 +2238,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
               </property>
               <item>
                <widget class="QFrame" name="frame_25">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
                 <property name="frameShape">
                  <enum>QFrame::Shape::StyledPanel</enum>
                 </property>

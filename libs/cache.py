@@ -29,6 +29,7 @@ class ImageCache:
             self._read_inventory()
             self._read_shoot()
             self._read_poses()
+            self._read_position()
             logger.info('源图缓存初始化完成')
 
     def _read_images(self, category):
@@ -77,6 +78,10 @@ class ImageCache:
     def _read_poses(self):
         # 读取姿势图片
         self._read_images('poses')
+
+    def _read_position(self):
+        # 读取姿势图片
+        self._read_images('position')
 
     def _read_config(self):
         config_path= self.basic_path / 'config.json'

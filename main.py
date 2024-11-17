@@ -1,5 +1,6 @@
 import sys
 
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow
 from libs.login.login_win import LoginMainWin
 from libs.home.home_win import HomeMainWin
@@ -26,5 +27,6 @@ class MainWin(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("resource/images/log.png"))  # 设置应用图标
     window = MainWin()
     sys.exit(app.exec())
