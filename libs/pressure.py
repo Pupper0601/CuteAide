@@ -9,6 +9,7 @@ from libs.global_variable import global_variable
 from libs.global_variable import THREAD_POOL
 from tools.files import read_file
 from tools.log import logger
+from tools.paths import path_conn
 
 
 class Pressure:
@@ -91,7 +92,7 @@ class Pressure:
             return _factor_data
 
     def write_dict_to_lua_file(self):
-        paths = r"F:\Object\GitHub\CuteAide\output.lua"
+        paths = path_conn("/output.lua")
         with open(paths, 'w', encoding='utf-8') as file:
             file.truncate(0)    # 清空文件内容
             _gun_info = self.get_component_factor()
