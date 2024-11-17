@@ -65,36 +65,43 @@ class HomeMainWin(QMainWindow):
     # 开始识别压枪
     def start_gun(self):
         text = self.ui.pushButton_2.text()
-        if text == " 开始识别压枪":
-            self.ui.pushButton_2.setText(" 暂停识别压枪")
-            self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/stop.png")))
-            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(255,85,"
-                                               "0);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                               "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
-                                               "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
+        if self.ui.label_4.text() == "已适配":
+            if text == " 开始识别压枪":
+                self.ui.pushButton_2.setText(" 暂停识别压枪")
+                self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/stop.png")))
+                self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(255,85,"
+                                                   "0);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
+                                                   "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
+                                                   "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
 
-            self.key_listener = KeyListen(self) # 启动键盘监听器并传递 self 作为父对象
-            self.key_listener.start()
+                self.key_listener = KeyListen(self) # 启动键盘监听器并传递 self 作为父对象
+                self.key_listener.start()
 
-            self.mouse_listener = MouseListen(self)  # 启动鼠标监听器并传递 self 作为父对象
-            self.mouse_listener.start()
+                self.mouse_listener = MouseListen(self)  # 启动鼠标监听器并传递 self 作为父对象
+                self.mouse_listener.start()
 
+            else:
+                self.ui.pushButton_2.setText(" 开始识别压枪")
+                self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/start.png")))
+                self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(71,157,"
+                                                   "168);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
+                                                   "rgb(71,157,168);letter-spacing: 1px;}#pushButton_2:hover{"
+                                                   "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
+                if self.key_listener:
+                    self.key_listener.stop_event.set()  # 停止延时任务
+                    self.key_listener.stop_listener()
+                    self.key_listener = None
+
+                if self.mouse_listener:  # 停止鼠标监听器
+                    self.mouse_listener.stop_event.set()
+                    self.mouse_listener.stop_listener()
+                    self.mouse_listener = None
         else:
-            self.ui.pushButton_2.setText(" 开始识别压枪")
-            self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/start.png")))
-            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(71,157,"
-                                               "168);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                               "rgb(71,157,168);letter-spacing: 1px;}#pushButton_2:hover{"
-                                               "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
-            if self.key_listener:
-                self.key_listener.stop_event.set()  # 停止延时任务
-                self.key_listener.stop_listener()
-                self.key_listener = None
-
-            if self.mouse_listener:  # 停止鼠标监听器
-                self.mouse_listener.stop_event.set()
-                self.mouse_listener.stop_listener()
-                self.mouse_listener = None
+            self.ui.pushButton_2.setText(" 未适配分辨率, 无法识别压枪")
+            self.ui.pushButton_2.setIcon(QIcon())
+            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 14pt ;background-color: rgb(255,48,"
+                                               "48);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
+                                               "rgb(255,48,48);letter-spacing: 1px;}")
 
 
     def update_home_gun_info(self, _gun_info):

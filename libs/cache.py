@@ -90,8 +90,8 @@ class ImageCache:
             self.source_data['config'] = self.config
 
 
-
-if __name__ == '__main__':
-    print(ImageCache().source_data)
-    print(ImageCache().source_data)
-    print(ImageCache().source_data)
+#
+# if __name__ == '__main__':
+#     print(ImageCache().source_data)
+#     print(ImageCache().source_data)
+#     print(ImageCache().source_data)

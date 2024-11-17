@@ -4,13 +4,12 @@
 # @Email  : pupper.cheng@gmail.com
 import threading
 
-from libs.cache import ImageCache
 from concurrent.futures import ThreadPoolExecutor
 
 # 创建一个全局的线程池
 THREAD_POOL = ThreadPoolExecutor()
 
-CACHE = ImageCache().source_data
+CACHE = None
 
 global_screenshot = None
 
