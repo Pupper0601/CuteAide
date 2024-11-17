@@ -30,3 +30,6 @@ def get_active_window_info():
     except psutil.NoSuchProcess:
         global_variable.shooting_state = "stop"
         return False
+
+if __name__ == '__main__':
+    print(get_active_window_info())

@@ -5,15 +5,12 @@
 import time
 
 import cv2
-import dxcam
 import mss
 import numpy as np
-import pyautogui
 
 from libs.global_variable import global_screenshot, global_variable
 from libs.global_variable import CACHE, THREAD_POOL
 from libs.handle_image import ContrastImage
-from tools.paths import project_path
 from tools.log import logger
 
 

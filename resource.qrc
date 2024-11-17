@@ -4,7 +4,7 @@
     <file>resource/images/login_bg.png</file>
   </qresource>
   <qresource prefix="ttf">
-    <file>resource/ttf/YouSheYuFeiTeJianKangTi-2.ttf</file>
+    <file>resource/ttf/YouSheYuFeiTeJianKangTi.ttf</file>
   </qresource>
   <qresource prefix="icon">
     <file>resource/icon/minimize.png</file>

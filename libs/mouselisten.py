@@ -10,7 +10,7 @@ from pynput import mouse
 from libs.global_variable import global_variable
 
 from libs.gun_info import GetGunInfo
-from libs.pressure import Pressure
+from libs.screenshot import screen_capture_full
 from tools.active_window import get_active_window_info
 from tools.log import logger
 from pynput.mouse import Button
@@ -32,8 +32,10 @@ class MouseListen(Thread):
         if get_active_window_info():
         # if True:
             if not pressed and global_variable.enable_mouse_recognition:
-                self.parent.update_way("识别中......")
                 if button == Button.right:
+                    time.sleep(0.3)
+                    screen_capture_full()
+                    self.parent.update_way("识别中......")
                     GetGunInfo()
                     self.parent.update_home_gun_info(global_variable.weapon_information)
                     self.parent.update_way("识别完成")

@@ -7,7 +7,6 @@ import time
 # demo3.py
 import cv2
 import numpy as np
-import pyautogui
 from skimage.metrics import structural_similarity as ssim
 
 
@@ -110,7 +109,6 @@ if __name__ == '__main__':
 
     temp_img = ReadImage(r'F:\Object\GitHub\CuteAide\basic\1920_1080\scopes\x6.png')
     t = [temp_img.binary, temp_img.pyramid]
-    screenshot = pyautogui.screenshot(region=(1607, 343, 45, 24))
     contrast = ContrastImage('source',t,screenshot)
     print(contrast.result)
 
