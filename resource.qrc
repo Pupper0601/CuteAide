@@ -7,6 +7,7 @@
     <file>resource/ttf/YouSheYuFeiTeJianKangTi.ttf</file>
   </qresource>
   <qresource prefix="icon">
+    <file>resource/icon/qq.png</file>
     <file>resource/icon/minimize.png</file>
     <file>resource/icon/close.png</file>
     <file>resource/icon/Tips.png</file>

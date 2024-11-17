@@ -5,9 +5,10 @@
 
 import sys
 
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QColor, QCursor, QIcon, QPalette
-from PySide6.QtWidgets import QApplication, QGraphicsBlurEffect, QLabel, QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtCore import QUrl, Qt
+from PySide6.QtGui import QColor, QCursor, QDesktopServices, QIcon, QPalette
+from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest
+from PySide6.QtWidgets import QApplication, QGraphicsBlurEffect, QLabel, QMainWindow, QMessageBox, QVBoxLayout, QWidget
 
 from libs.global_variable import global_variable
 from libs.home.state_win import StateMainWin
@@ -44,6 +45,7 @@ class HomeMainWin(QMainWindow):
         self.ui.radioButton_4.clicked.connect(self.update_posture_buttons)
         self.ui.radioButton.clicked.connect(self.update_mouse_gun)
         self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
+        self.ui.pushButton_11.clicked.connect(self._click_qq_group)
 
     # 设置屏幕分辨率
     def resolution(self):
@@ -157,6 +159,23 @@ class HomeMainWin(QMainWindow):
             self.ui.radioButton.setIcon(QIcon())
             self.ui.radioButton_2.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
             global_variable.opening_method = "long_press"
+
+    def _click_qq_group(self):
+        # 发送 GET 请求
+        url = QUrl(
+            'https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_from=webapi&authKey=IN7xudayhxrku/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
+        QDesktopServices.openUrl(url)
+
+        clipboard = QApplication.clipboard() # 复制内容到剪切板
+        clipboard.setText("679556431")
+
+        # 提示复制成功
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setText("QQ群号已复制到剪切板")
+        msg_box.setWindowTitle("提示")
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec()
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):
