@@ -38,19 +38,16 @@ class KeyListen(Thread, QObject):
         if get_active_window_info():
         # if True:
             if keys == "tab":  # 监听到按键 'tab'
-                time.sleep(0)
-                screen_capture_full()
-                if get_inventory():
-                    if global_variable.shooting_state == "fired":
-                        global_variable.shooting_state = "stop"
-                        self.parent.state_win.update_state_shooting_state()
-                    global_variable.enable_mouse_recognition = True    # 关闭鼠标识别
-                    GetGunInfo()  # 持续更新枪械信息
-                    self.parent.update_home_gun_info(global_variable.weapon_information)
+                if global_variable.enable_key_recognition:
+                    time.sleep(0.3)
+                    self._get_gun_information()
                 else:
-                    global_variable.enable_mouse_recognition = False
+                    self._get_gun_information()
+                    global_variable.enable_key_recognition = True
+
             elif keys == "esc":  # 监听到按键 'esc'
                 global_variable.enable_mouse_recognition = False
+                global_variable.enable_key_recognition = True
                 global_variable.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
             elif keys in ["1", "!"]:
@@ -64,6 +61,20 @@ class KeyListen(Thread, QObject):
                 self.parent.state_win.update_posture(keys)
             elif keys in ['F', 'f']:
                 get_car()
+
+    def _get_gun_information(self):
+        screen_capture_full()
+        if get_inventory():
+            if global_variable.shooting_state == "fired":
+                global_variable.shooting_state = "stop"
+                self.parent.state_win.update_state_shooting_state()
+            global_variable.enable_mouse_recognition = True  # 关闭鼠标识别
+            global_variable.enable_key_recognition = False
+            GetGunInfo()  # 持续更新枪械信息
+            self.parent.update_home_gun_info(global_variable.weapon_information)
+        else:
+            global_variable.enable_mouse_recognition = False
+
 
     def _update_weapon_state(self, primary_gun, secondary_gun, keys):
         if len(global_variable.weapon_information) > 0:

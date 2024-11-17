@@ -58,7 +58,7 @@ class GlobalVariable(Observable):
     def __init__(self):
         super().__init__()
         self._enable_mouse_recognition = False
-        self._enable_key_recognition = False
+        self._enable_key_recognition = True
         self._weapon_information = {}
         self._posture_state_button = "c"
         self._in_car = "no"
