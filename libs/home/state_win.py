@@ -21,6 +21,11 @@ class StateMainWin(QMainWindow):
         #隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Tool) # 窗口置顶, 无任务栏图标
         self.setAttribute(Qt.WA_TranslucentBackground)  # 设置窗口透明
+
+        # 设置鼠标穿透
+        self.setWindowFlags(self.windowFlags() | Qt.WindowTransparentForInput)
+        self.setAttribute(Qt.WA_TransparentForMouseEvents)
+
         self.move_to_top_center()
         self.posture = 0
 

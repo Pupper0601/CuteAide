@@ -23,10 +23,9 @@ class MainWin(QMainWindow):
             self.login_win.close()
 
 
+app = QApplication(sys.argv)
+app.setWindowIcon(QIcon("resource/images/log.png"))  # 设置应用图标
+window = MainWin()
+sys.exit(app.exec())
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("resource/images/log.png"))  # 设置应用图标
-    window = MainWin()
-    sys.exit(app.exec())
