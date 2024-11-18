@@ -6,19 +6,17 @@
 import sys
 
 from PySide6.QtCore import QUrl, Qt
-from PySide6.QtGui import QColor, QCursor, QDesktopServices, QIcon, QPalette
-from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest
-from PySide6.QtWidgets import QApplication, QGraphicsBlurEffect, QLabel, QMainWindow, QMessageBox, QVBoxLayout, QWidget
+from PySide6.QtGui import QCursor, QDesktopServices, QIcon
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
-from libs.global_variable import global_variable
+from libs.global_variable import GDV
 from libs.home.state_win import StateMainWin
+from libs.keylisten import KeyListen
 from libs.mouselisten import MouseListen
 from tools.log import logger
-from views.home import Ui_MainWindow as home_ui
-
 from tools.paths import path_conn
+from views.home import Ui_MainWindow as home_ui
 from .resolution_state import resolution
-from libs.keylisten import KeyListen
 
 
 class HomeMainWin(QMainWindow):
@@ -27,7 +25,7 @@ class HomeMainWin(QMainWindow):
         self.ui = home_ui()
         self.ui.setupUi(self)
         self.setWindowTitle("CuteAide")
-        #隐藏窗口边框
+        # 隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -76,7 +74,7 @@ class HomeMainWin(QMainWindow):
                                                    "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
                                                    "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
 
-                self.key_listener = KeyListen(self) # 启动键盘监听器并传递 self 作为父对象
+                self.key_listener = KeyListen(self)  # 启动键盘监听器并传递 self 作为父对象
                 self.key_listener.start()
 
                 self.mouse_listener = MouseListen(self)  # 启动鼠标监听器并传递 self 作为父对象
@@ -104,7 +102,6 @@ class HomeMainWin(QMainWindow):
             self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 14pt ;background-color: rgb(255,48,"
                                                "48);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
                                                "rgb(255,48,48);letter-spacing: 1px;}")
-
 
     def update_home_gun_info(self, _gun_info):
         # 更新枪械信息
@@ -140,12 +137,12 @@ class HomeMainWin(QMainWindow):
 
     def update_posture_buttons(self):
         # 判断当前选中的姿势
-        if self.ui.radioButton_3.isChecked():   # C 键 下蹲
-            global_variable.posture_state_button = "c"
+        if self.ui.radioButton_3.isChecked():  # C 键 下蹲
+            GDV.posture_state_button = "c"
             self.ui.radioButton_4.setIcon(QIcon())
             self.ui.radioButton_3.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
-        elif self.ui.radioButton_4.isChecked(): # ctrl 键 下蹲
-            global_variable.posture_state_button = "ctrl"
+        elif self.ui.radioButton_4.isChecked():  # ctrl 键 下蹲
+            GDV.posture_state_button = "ctrl"
             self.ui.radioButton_3.setIcon(QIcon())
             self.ui.radioButton_4.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
 
@@ -154,19 +151,20 @@ class HomeMainWin(QMainWindow):
         if self.ui.radioButton.isChecked():
             self.ui.radioButton_2.setIcon(QIcon())
             self.ui.radioButton.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
-            global_variable.opening_method = "click"
+            GDV.opening_method = "click"
         elif self.ui.radioButton_2.isChecked():
             self.ui.radioButton.setIcon(QIcon())
             self.ui.radioButton_2.setIcon(QIcon(path_conn("/resource/icon/mouse.png")))
-            global_variable.opening_method = "long_press"
+            GDV.opening_method = "long_press"
 
     def _click_qq_group(self):
         # 发送 GET 请求
         url = QUrl(
-            'https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_from=webapi&authKey=IN7xudayhxrku/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
+            'https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_from=webapi&authKey'
+            '=IN7xudayhxrku/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
         QDesktopServices.openUrl(url)
 
-        clipboard = QApplication.clipboard() # 复制内容到剪切板
+        clipboard = QApplication.clipboard()  # 复制内容到剪切板
         clipboard.setText("679556431")
 
         # 提示复制成功
@@ -200,4 +198,3 @@ if __name__ == '__main__':
     window = HomeMainWin()
     window.show()
     sys.exit(app.exec())
-

@@ -15,6 +15,12 @@ function ceil_and_cache(value)
     return integer_part
 end
 
+function Sleep2(t)
+    local sleepTime = GetRunningTime()
+    while GetRunningTime() - sleepTime <= t do
+    end
+end
+
 -- 判断是否授权
 local function is_authorized()
     local success, chunk = pcall(dofile, file_address)
@@ -26,8 +32,8 @@ local function is_authorized()
 end
 
 -- 计算后坐力
-function calculate_influencing_factor(car, posture_state, in_car, global_lshift, coefficient)
-    calculation_results = coefficient * posture_state
+function calculate_influencing_factor(car, in_car, global_lshift, coefficient)
+    calculation_results = coefficient
     if in_car == "yes" then
         -- 在车上
         calculation_results = calculation_results * car
@@ -43,7 +49,7 @@ end
 local start_shooting_time = 0 -- 开始射击时间
 
 -- 开始压枪
-function pressure_grab(weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
+function pressure_grab(weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
     if not is_authorized() then
         return
     end
@@ -53,14 +59,20 @@ function pressure_grab(weapon, car, posture_state, in_car, guns_trajectory, weap
         return
     end
 
-    local _trajectory = guns_trajectory -- 枪械轨迹
+    for i, data in ipairs(guns_trajectory) do
+        if i % 2 == 0 then
+            guns_trajectory[i][2] = (guns_trajectory[i][2] + 1) / 2
+        end
+    end
+
+    local _trajectory = guns_trajectory-- 枪械轨迹
     local _intervals = weapon_intervals  -- 武器间隔
-    local total_coefficient = calculate_influencing_factor(car, posture_state, in_car, global_lshift, coefficient)    -- 总系数
+    local total_coefficient = calculate_influencing_factor(car, in_car, global_lshift, coefficient)    -- 总系数
 
     local _number_bullets = 0   -- 子弹数
 
     local _special_weapon = { MK47 = true, M16A4 = true, MINI14 = true, SKS = true, MK12 = true, ZDZT = true, QBU = true }  -- 特殊武器
-    OutputLogMessage("当前武器: %s ,  --->> 影响因子为: %.2f\n", weapon, total_coefficient)
+    OutputLogMessage("当前武器: %s ,  --->> 影响因子为: %.4f\n", weapon, total_coefficient)
 
     local function handle_recoil()
         for _, recoil_data in ipairs(_trajectory) do
@@ -107,12 +119,12 @@ function read_weapon_from_file()
         return
     end
 
-    weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method,
-    global_lshift, coefficient = nil, nil, nil, nil, nil, nil, nil, nil, nil, nil
+    weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method,
+    global_lshift, coefficient = nil, nil, nil, nil, nil, nil, nil, nil, nil
 
     dofile(file_address)
 
-    return weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient
+    return weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient
 end
 
 
@@ -125,9 +137,9 @@ function event_handing(event, key)
     elseif event == "mouse_button_down" then
         if key == 1 then
             start_shooting_time = GetRunningTime()
-            local weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient = read_weapon_from_file()
+            local weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient = read_weapon_from_file()
 
-            pressure_grab(weapon, car, posture_state, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
+            pressure_grab(weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
         elseif key == 2 then
             OutputLogMessage("武器数据更新完成\n")
         end

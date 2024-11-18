@@ -7,12 +7,11 @@ from pathlib import Path
 
 from libs.handle_image import ReadImage
 from libs.monitor import get_monitor_info
-from tools.paths import path_conn
 from tools.log import logger
+from tools.paths import path_conn
 
 monitor = get_monitor_info()
 
-# 定义全局变量
 
 class ImageCache:
     def __init__(self):
@@ -31,17 +30,18 @@ class ImageCache:
             self._read_poses()
             self._read_position()
             logger.info('源图缓存初始化完成')
+        CACHE = self.source_data
 
     def _read_images(self, category):
         # 读取指定类别的图片
-        category_path = self.basic_path / category  #   获取文件夹路径
+        category_path = self.basic_path / category  # 获取文件夹路径
         image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff'}
         images = {}
-        for file in category_path.iterdir():    #   遍历文件夹
-            if file.suffix.lower() in image_extensions: #   判断是否是图片
-                data = ReadImage(str(file))    #   读取图片
-                images[file.stem] = [data.binary, data.pyramid]   #  将图片数据存入字典
-        self.source_data[category] = images   #   将图片字典存入全局变量
+        for file in category_path.iterdir():  # 遍历文件夹
+            if file.suffix.lower() in image_extensions:  # 判断是否是图片
+                data = ReadImage(str(file))  # 读取图片
+                images[file.stem] = [data.binary, data.pyramid]  # 将图片数据存入字典
+        self.source_data[category] = images  # 将图片字典存入全局变量
 
     def _read_weapons(self):
         # 读取武器图片
@@ -84,11 +84,10 @@ class ImageCache:
         self._read_images('position')
 
     def _read_config(self):
-        config_path= self.basic_path / 'config.json'
+        config_path = self.basic_path / 'config.json'
         with open(config_path, 'r', encoding='utf-8') as file:
             self.config = json.load(file)
             self.source_data['config'] = self.config
-
 
 #
 # if __name__ == '__main__':

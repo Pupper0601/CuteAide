@@ -124,7 +124,7 @@
 }</string>
              </property>
              <property name="text">
-              <string>v0.01 测试版</string>
+              <string>v0.23 免费版</string>
              </property>
              <property name="icon">
               <iconset resource="../resource.qrc">
@@ -1144,6 +1144,9 @@ QPushButton:hover{
               </item>
               <item>
                <widget class="QCheckBox" name="checkBox">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>1</horstretch>
@@ -1162,6 +1165,12 @@ QPushButton:hover{
                   <width>20</width>
                   <height>20</height>
                  </size>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

@@ -3,17 +3,16 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 import time
+from threading import Event, Thread
 
-from threading import Thread, Event
 from pynput import mouse
+from pynput.mouse import Button
 
-from libs.global_variable import global_variable
-
+from libs.global_variable import GDV
 from libs.gun_info import GetGunInfo
 from libs.screenshot import screen_capture_full
 from tools.active_window import get_active_window_info
 from tools.log import logger
-from pynput.mouse import Button
 
 
 class MouseListen(Thread):
@@ -28,16 +27,16 @@ class MouseListen(Thread):
         self.listener.start()
         logger.info("监听鼠标线程启动")
 
-    def on_click(self, x,y, button, pressed):
+    def on_click(self, x, y, button, pressed):
         if get_active_window_info():
-        # if True:
-            if not pressed and global_variable.enable_mouse_recognition:
+            # if True:
+            if not pressed and GDV.enable_mouse_recognition:
                 if button == Button.right:
                     time.sleep(0.3)
                     screen_capture_full()
                     self.parent.update_way("识别中......")
                     GetGunInfo()
-                    self.parent.update_home_gun_info(global_variable.weapon_information)
+                    self.parent.update_home_gun_info(GDV.weapon_information)
                     self.parent.update_way("识别完成")
 
     def stop_listener(self):
