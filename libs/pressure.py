@@ -2,14 +2,12 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-import importlib
 import json
+from pathlib import Path
 
-from libs.global_variable import global_variable
-from libs.global_variable import THREAD_POOL
+from libs.global_variable import THREAD_POOL, global_variable
 from tools.files import read_file
 from tools.log import logger
-from tools.paths import path_conn
 
 
 class Pressure:
@@ -19,33 +17,32 @@ class Pressure:
 
     @staticmethod
     def get_component_factor():
-
         _gun_data = json.loads(read_file("/gun_data.json"))
 
         _factor_data = {}
-        _calculate_coefficient = 1.0
-
-        gun_data = importlib.reload(importlib.import_module('libs.gun_data'))   # 重新加载 gun_data 模块以确保获取最新数据
         current_weapon_info = global_variable.current_weapon_information
-        # {'weapon': ['SKS', 'SKS'], 'scope': ['6倍镜', 'x6'], 'muzzle': ['消音器', 'xiaoyin-b'],'grip'  : ['轻型握把', 'qingxin'], 'stock': ['托腮板', 'tosaiban']}
+        # {'weapon': ['SKS', 'SKS'], 'scope': ['6倍镜', 'x6'], 'muzzle': ['消音器', 'xiaoyin-b'],'grip'  : ['轻型握把',
+        # 'qingxin'], 'stock': ['托腮板', 'tosaiban']}
 
         if current_weapon_info:
             _weapon_name = current_weapon_info["weapon"][1]
             # 获取当前武器名称
             _factor_data["weapon"] = _weapon_name
 
-            if _weapon_name in gun_data.component_factor.keys():
-                _factors = gun_data.component_factor[_weapon_name]
+            # 获取当前武器的配件系数
+            _components = _gun_data.component_factor
+            if _weapon_name in _components.keys():
+                _factors = _components[_weapon_name]
 
                 for key, value in current_weapon_info.items():  # 'scope',  ['红点瞄准镜', 'hongdian']
                     if key != "weapon":
                         try:
                             if key == "scope":
-                                _calculate_coefficient *= gun_data.global_magnifying_power[value[1]]
-                            _calculate_coefficient *= _factors[key][value[1]]
+                                _factor_data["magnifying_power"] = _gun_data.global_magnifying_power[value[1]]
+                            _gun_data[key] = _factors[key][value[1]]
                         except KeyError:
                             logger.error(f"配件系数中没有找到对应的配件: {value[1]}")
-                            _calculate_coefficient *= 1.0
+                            _gun_data[key] = 1.0
 
                 _factor_data["car"] = _factors["car"]["car"]
                 # 获取当前姿态
@@ -74,28 +71,61 @@ class Pressure:
 
             # 获取当前武器基础系数
             if _weapon_name in _gun_data["alone_factor"].keys():
-                _calculate_coefficient *= _gun_data["alone_factor"][_weapon_name]
+                _factor_data["alone_factor"] = _gun_data["alone_factor"][_weapon_name]
             else:
-                _calculate_coefficient *= 1.0
+                _factor_data["alone_factor"] = 1.0
 
             # 获取全局 shift 系数
             _factor_data["global_lshift"] = _gun_data["global_lshift"]
 
             # 获取全局后坐力系数
-            _calculate_coefficient *= _gun_data["global_recoil"]
+            _factor_data["global_recoil"] = _gun_data["global_recoil"]
 
             # 获取垂直后坐力
-            _calculate_coefficient *= _gun_data["global_vertical"]
-
-            _factor_data["coefficient"] = _calculate_coefficient
+            _factor_data["global_vertical"] = _gun_data["global_vertical"]
 
             return _factor_data
 
+    def calculate_factors(self):
+        _effect_data = self.get_component_factor()
+
+        coefficient = 1.0
+        coefficient *= _effect_data["posture_state"]  # 姿态系数
+        coefficient *= _effect_data["scope"]  # 瞄准镜系数
+        coefficient *= _effect_data["muzzle"]  # 枪口系数
+        coefficient *= _effect_data["grip"]  # 握把系数
+        coefficient *= _effect_data["stock"]  # 枪托系数
+        coefficient *= _effect_data["global_recoil"]  # 全局后坐力系数
+        coefficient *= _effect_data["alone_factor"]  # 武器基础系数
+        coefficient *= _effect_data["magnifying_power"]  # 瞄准镜倍数
+        coefficient *= _effect_data["global_vertical"]  # 垂直后坐力
+
+        del _effect_data["posture_state"]  # 删除字典中的姿态系数
+        del _effect_data["scope"]
+        del _effect_data["muzzle"]
+        del _effect_data["grip"]
+        del _effect_data["stock"]
+        del _effect_data["global_recoil"]
+        del _effect_data["alone_factor"]
+        del _effect_data["magnifying_power"]
+        del _effect_data["global_vertical"]
+
+        _effect_data["coefficient"] = coefficient
+
+        return _effect_data
+
     def write_dict_to_lua_file(self):
-        paths = path_conn("/output.lua")
-        with open(paths, 'w', encoding='utf-8') as file:
-            file.truncate(0)    # 清空文件内容
-            _gun_info = self.get_component_factor()
+        file_path = "C:/CuteAide/output.lua"
+        path = Path(file_path)
+        if not path.is_file():
+            # 如果文件夹不存在，则创建
+            path.parent.mkdir(parents=True, exist_ok=True)
+            # 创建文件
+            path.touch()
+
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.truncate(0)  # 清空文件内容
+            _gun_info = self.calculate_factors()
             if _gun_info is not None:
                 for key, value in self.get_component_factor().items():
                     if isinstance(value, str):
@@ -109,10 +139,6 @@ class Pressure:
 
 
 if __name__ == '__main__':
-    a = {'weapon': ['Beryl M762', 'M762'], 'scope': ['红点瞄准镜', 'hongdian'], 'muzzle': ['后座补偿器', 'buchang-b'], 'grip': ['垂直握把', 'chuizhi'], 'stock': ['无枪托', 'stock_none']}
+    a = {'weapon': ['Beryl M762', 'M762'], 'scope': ['红点瞄准镜', 'hongdian'], 'muzzle': ['后座补偿器', 'buchang-b'],
+         'grip'  : ['垂直握把', 'chuizhi'], 'stock': ['无枪托', 'stock_none']}
     # p = Pressure(a)
-
-
-
-
-
