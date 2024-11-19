@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['main.py', 'gun_data.json', 'resource_rc.py'],
+    ['main.py', 'gun_data.json', 'resource_rc.py', common.py],
     pathex=['F:/Object/GitHub/CuteAide'],
     binaries=[],
     datas=[

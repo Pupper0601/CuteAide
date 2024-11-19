@@ -66,7 +66,7 @@ class KeyListen(Thread, QObject):
             if GDV.shooting_state == "fired":
                 GDV.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-            GDV.enable_mouse_recognition = True  # 关闭鼠标识别
+            GDV.enable_mouse_recognition = False  # 关闭鼠标识别
             GDV.enable_key_recognition = False
             GetGunInfo()  # 持续更新枪械信息
             self.parent.update_home_gun_info(GDV.weapon_information)

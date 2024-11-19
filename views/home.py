@@ -524,12 +524,15 @@ class Ui_MainWindow(object):
 
         self.checkBox = QCheckBox(self.frame_6)
         self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setEnabled(False)
         sizePolicy9.setHeightForWidth(self.checkBox.sizePolicy().hasHeightForWidth())
         self.checkBox.setSizePolicy(sizePolicy9)
         icon7 = QIcon()
         icon7.addFile(u":/icon/resource/icon/time.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.checkBox.setIcon(icon7)
         self.checkBox.setIconSize(QSize(20, 20))
+        self.checkBox.setCheckable(True)
+        self.checkBox.setChecked(False)
 
         self.horizontalLayout_17.addWidget(self.checkBox)
 
@@ -1085,7 +1088,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"v0.01 \u6d4b\u8bd5\u7248", None))
+        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"v0.23 \u514d\u8d39\u7248", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"CuteAide", None))
         self.pushButton_4.setText("")
         self.pushButton_3.setText("")

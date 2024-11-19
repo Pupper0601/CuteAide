@@ -1,38 +1,7 @@
-EnablePrimaryMouseButtonEvents(true)
-
-local file_address = "C:/CuteAide/output.lua"
-
-local decimal_cache = 0 -- 用于缓存小数部分，以便在下一次调用时使用
-
--- 以下是向上取整并缓存小数部分的函数
-function ceil_and_cache(value)
-    local integer_part = math.floor(value)
-    decimal_cache = decimal_cache + value - integer_part
-    if decimal_cache >= 1 then
-        integer_part = integer_part + 1
-        decimal_cache = decimal_cache - 1
-    end
-    return integer_part
-end
-
-function Sleep2(t)
-    local sleepTime = GetRunningTime()
-    while GetRunningTime() - sleepTime <= t do
-    end
-end
-
--- 判断是否授权
-local function is_authorized()
-    local success, chunk = pcall(dofile, file_address)
-    if not success then
-        OutputLogMessage("读取文件报错 weapon.lua: %s\n", chunk)
-        return false
-    end
-    return true
-end
+dofile("C:/CuteAide/output.lua")
 
 -- 计算后坐力
-function calculate_influencing_factor(car, in_car, global_lshift, coefficient)
+function calculate_influencing_factor()
     calculation_results = coefficient
     if in_car == "yes" then
         -- 在车上
@@ -46,247 +15,169 @@ function calculate_influencing_factor(car, in_car, global_lshift, coefficient)
     return calculation_results
 end
 
-local start_shooting_time = 0 -- 开始射击时间
+local debug = true
 
 -- 开始压枪
-function pressure_grab(weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
-    if not is_authorized() then
+Auto_Down = function()
+    ClearLog()
+    if coefficient == "none" then
+        OutputLogMessage("当前武器不支持压枪: %s\n", weapon)
         return
     end
-
     if weapon == nil or weapon == "weapon_none" then
         OutputLogMessage("请先读取武器参数或当前武器为 weapon_none \n")
         return
     end
 
-    for i, data in ipairs(guns_trajectory) do
-        if i % 2 == 0 then
-            guns_trajectory[i][2] = (guns_trajectory[i][2] + 1) / 2
-        end
-    end
-
-    local _trajectory = guns_trajectory-- 枪械轨迹
-    local _intervals = weapon_intervals  -- 武器间隔
-    local total_coefficient = calculate_influencing_factor(car, in_car, global_lshift, coefficient)    -- 总系数
-
     local _number_bullets = 0   -- 子弹数
+    local nowTime = GetRunningTime()
 
-    local _special_weapon = { MK47 = true, M16A4 = true, MINI14 = true, SKS = true, MK12 = true, ZDZT = true, QBU = true }  -- 特殊武器
-    OutputLogMessage("当前武器: %s ,  --->> 影响因子为: %.4f\n", weapon, total_coefficient)
+    while IsMouseButtonPressed(1) do
+        if shooting_state == "stop" then
+            break
+        end
 
-    local function handle_recoil()
-        for _, recoil_data in ipairs(_trajectory) do
+        _number_bullets = math.ceil((GetRunningTime() - nowTime) / weapon_intervals)  -- 子弹数
+
+        for _, recoil_data in ipairs(guns_trajectory) do
             if recoil_data[1] == _number_bullets then
-                local adjusted_recoil = ceil_and_cache(recoil_data[2] * total_coefficient)
-
+                local adjusted_recoil = math.floor(recoil_data[2] * calculate_influencing_factor())  -- 调整后的后坐力
+                OutputLogMessage("当前子弹数: %s, 后坐力: %s, 系数: %s, 下压像素: %s\n", _number_bullets, recoil_data[2], calculate_influencing_factor(), adjusted_recoil)
                 MoveMouseRelative(0, adjusted_recoil)
                 if not IsMouseButtonPressed(1) then
                     break
                 end
-                break
+                if debug then
+                    MoveMouseRelative(1, 0)
+                end
+                Sleep(weapon_intervals - 20)
             end
-        end
-    end
-
-    while IsMouseButtonPressed(1) do
-        local current_click_time = GetRunningTime() -- 当前点击时间
-        _number_bullets = math.ceil((current_click_time - start_shooting_time) / _intervals)  -- 子弹���
-
-        if shooting_state == "stop" then
-            -- 停止射击
-            break
-        end
-
-        if opening_method == "click" then
-            -- 点击开镜
-            enable_mouse_events = false  -- 禁用鼠标事件
-            handle_recoil()
-            enable_mouse_events = true  -- 启用鼠标事件
-            Sleep2(1)
-        elseif opening_method == "long_press" and (IsMouseButtonPressed(3) or IsMouseButtonPressed(4)) then
-            -- 长按开镜
-            enable_mouse_events = false  -- 禁用鼠标事件
-            handle_recoil()
-            enable_mouse_events = true  -- 启用鼠标事件
-            Sleep2(1)
         end
     end
 end
 
--- 从文件中读取武器
-function read_weapon_from_file()
-    if not is_authorized() then
-        return
+delay = function(wait)
+    -- 延迟函数
+    local nowTime = GetRunningTime()    -- 获取当前时间
+    while GetRunningTime() - nowTime <= wait do
+        -- 当前时间减去开始时间小于等于延迟时间
     end
-
-    weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method,
-    global_lshift, coefficient = nil, nil, nil, nil, nil, nil, nil, nil, nil
-
-    dofile(file_address)
-
-    return weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient
 end
 
 
 -- 事件处理
-function event_handing(event, key)
-    if event == "PROFILE_ACTIVATED" then
-        EnablePrimaryMouseButtonEvents(true)
-    elseif event == "PROFILE_DEACTIVATED" then
-        EnablePrimaryMouseButtonEvents(false)
-    elseif event == "mouse_button_down" then
-        if key == 1 then
-            start_shooting_time = GetRunningTime()
-            local weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient = read_weapon_from_file()
+function OnEvent(event, key)
+    dofile("C:/CuteAide/output.lua")
 
-            pressure_grab(weapon, car, in_car, guns_trajectory, weapon_intervals, shooting_state, opening_method, global_lshift, coefficient)
-        elseif key == 2 then
-            OutputLogMessage("武器数据更新完成\n")
-        end
-    elseif event == "mouse_button_up" then
-        if key == 1 then
-            MoveMouseRelative(0, 0)
+    if event == "MOUSE_BUTTON_PRESSED" and key == 1 then
+
+        if opening_method == "click" then
+            -- 点击开镜
+            delay(27)
+            Auto_Down()
+        elseif opening_method == "long_press" and IsMouseButtonPressed(3) then
+            -- 长按开镜
+            delay(27)
+            Auto_Down()
         end
     end
-    if (event == "mouse_button_down" and key == pick and IsModifierPressed("lctrl")) then
-        -- 如果事件是MOUSE_BUTTON_PRESSED并且参数是pick并且按下了左ctrl键
-        auto_pick()  -- 自动拾取
-    end
 end
 
-pick = 3    -- 拾取
+ClearLog()
+OutputLogMessage("%s", "运行成功\n")
+EnablePrimaryMouseButtonEvents(true)
+math.randomseed(GetDate("%H%M%S"):reverse())
 
-auto_pick = function()
-    -- 自动拾取
-    PressAndReleaseKey("tab")
-    Sleep(50)
-    for k = 1, 10 do
-        for j = 1, 5 do
-            MoveMouseTo(7800, (35000 - j * 5425))
-            PressMouseButton(1)
-            MoveMouseTo(32767 + j * 11, 12500 + j * 12)
-            ReleaseMouseButton(1)
-            Sleep(1)
-        end
-    end
-    MoveMouseTo(32767, 32767)
-    Sleep(1)
-    PressAndReleaseKey("tab")
+function G1_PRESSED()
+    G1___ = true
+    OnEvent("MOUSE_BUTTON_PRESSED", 1, "mouse")
 end
-
-local enable_mouse_events = true
-
-function g1_down()
-    if enable_mouse_events then
-        g1___ = true
-        event_handing("mouse_button_down", 1, "mouse")
-    end
+function G1_RELEASED()
+    G1___ = false
+    OnEvent("MOUSE_BUTTON_RELEASED", 1, "mouse")
 end
-function g1_up()
-    if enable_mouse_events then
-        g1___ = false
-        event_handing("mouse_button_up", 1, "mouse")
-    end
+function G2_PRESSED()
+    G2___ = true
+    OnEvent("MOUSE_BUTTON_PRESSED", 2, "mouse")
 end
-function g2_down()
-    if enable_mouse_events then
-        g2___ = true
-        event_handing("mouse_button_down", 2, "mouse")
-    end
+function G2_RELEASED()
+    G2___ = false
+    OnEvent("MOUSE_BUTTON_RELEASED", 2, "mouse")
 end
-function g2_up()
-    if enable_mouse_events then
-        g2___ = false
-        event_handing("mouse_button_up", 2, "mouse")
-    end
+function G3_PRESSED()
+    G3___ = true
+    OnEvent("MOUSE_BUTTON_PRESSED", 3, "mouse")
 end
-function g3_down()
-    if enable_mouse_events then
-        g3___ = true
-        event_handing("mouse_button_down", 3, "mouse")
-    end
+function G3_RELEASED()
+    G3___ = false
+    OnEvent("MOUSE_BUTTON_RELEASED", 3, "mouse")
 end
-function g3_up()
-    if enable_mouse_events then
-        g3___ = false
-        event_handing("mouse_button_up", 3, "mouse")
-    end
+function G4_PRESSED()
+    G4___ = true
+    OnEvent("MOUSE_BUTTON_PRESSED", 4, "mouse")
 end
-function g4_down()
-    if enable_mouse_events then
-        g4___ = true
-        event_handing("mouse_button_down", 4, "mouse")
-    end
+function G4_RELEASED()
+    G4___ = false
+    OnEvent("MOUSE_BUTTON_RELEASED", 4, "mouse")
 end
-function g4_up()
-    if enable_mouse_events then
-        g4___ = false
-        event_handing("mouse_button_up", 4, "mouse")
-    end
+function G5_PRESSED()
+    G5___ = true
+    OnEvent("MOUSE_BUTTON_PRESSED", 5, "mouse")
 end
-function g5_down()
-    if enable_mouse_events then
-        g5___ = true
-        event_handing("mouse_button_down", 5, "mouse")
-    end
+function G5_RELEASED()
+    G5___ = false
+    OnEvent("MOUSE_BUTTON_RELEASED", 5, "mouse")
 end
-function g5_up()
-    if enable_mouse_events then
-        g5___ = false
-        event_handing("mouse_button_up", 5, "mouse")
-    end
-end
-
 while true do
-    while IsMouseButtonPressed(1) and not g1___ do
-        g1_down()
+    while IsMouseButtonPressed(1) and not G1___ do
+        G1_PRESSED()
         break
         Sleep(1)
     end
-    while not IsMouseButtonPressed(1) and g1___ do
-        g1_up()
+    while not IsMouseButtonPressed(1) and G1___ do
+        G1_RELEASED()
         break
         Sleep(1)
     end
-    while IsMouseButtonPressed(3) and not g2___ do
-        g2_down()
+    while IsMouseButtonPressed(3) and not G2___ do
+        G2_PRESSED()
         break
         Sleep(1)
     end
-    while not IsMouseButtonPressed(3) and g2___ do
-        g2_up()
+    while not IsMouseButtonPressed(3) and G2___ do
+        G2_RELEASED()
         break
         Sleep(1)
     end
-    while IsMouseButtonPressed(2) and not g3___ do
-        g3_down()
+    while IsMouseButtonPressed(2) and not G3___ do
+        G3_PRESSED()
         break
         Sleep(1)
     end
-    while not IsMouseButtonPressed(2) and g3___ do
-        g3_up()
+    while not IsMouseButtonPressed(2) and G3___ do
+        G3_RELEASED()
         break
         Sleep(1)
     end
-    while IsMouseButtonPressed(4) and not g4___ do
-        g4_down()
+    while IsMouseButtonPressed(4) and not G4___ do
+        G4_PRESSED()
         break
         Sleep(1)
     end
-    while not IsMouseButtonPressed(4) and g4___ do
-        g4_up()
+    while not IsMouseButtonPressed(4) and G4___ do
+        G4_RELEASED()
         break
         Sleep(1)
     end
-    while IsMouseButtonPressed(5) and not g5___ do
-        g5_down()
+    while IsMouseButtonPressed(5) and not G5___ do
+        G5_PRESSED()
         break
         Sleep(1)
     end
-    while not IsMouseButtonPressed(5) and g5___ do
-        g5_up()
+    while not IsMouseButtonPressed(5) and G5___ do
+        G5_RELEASED()
         break
         Sleep(1)
     end
-    Sleep(10)
+    Sleep(1)
 end

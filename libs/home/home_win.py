@@ -9,6 +9,7 @@ from PySide6.QtCore import QUrl, Qt
 from PySide6.QtGui import QCursor, QDesktopServices, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
+from common import version
 from libs.global_variable import GDV
 from libs.home.state_win import StateMainWin
 from libs.keylisten import KeyListen
@@ -37,6 +38,7 @@ class HomeMainWin(QMainWindow):
     # 初始化槽函数
     def init_slot(self):
         self.resolution()
+        self.ui.pushButton_5.setText(version)
         self.ui.checkBox_2.stateChanged.connect(self.state_show)
         self.ui.pushButton_2.clicked.connect(self.start_gun)
         self.ui.radioButton_3.clicked.connect(self.update_posture_buttons)

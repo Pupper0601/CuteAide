@@ -48,20 +48,22 @@ class Pressure:
                 # 获取当前姿态
                 _factor_data["posture_state"] = _factors["pose"][GDV.posture_state]
 
+                # 获取当前武器基础系数
+                if _weapon_name in _gun_data["alone_factor"].keys():
+                    _factor_data["alone_factor"] = _gun_data["alone_factor"][_weapon_name]
+
+                # 获取当前武器射击间隔
+                if _weapon_name in _gun_data["weapon_intervals"].keys():
+                    _factor_data["weapon_intervals"] = _gun_data["weapon_intervals"][_weapon_name]
+
+                # 获取当前武器弹道
+                if _weapon_name in _gun_data["guns_trajectory"].keys():
+                    _factor_data["guns_trajectory"] = _gun_data["guns_trajectory"][_weapon_name]["default"]
+            else:
+                _factor_data["no_gun"] = True
+
             # 获取是否上车
             _factor_data["in_car"] = GDV.in_car
-
-            # 获取当前武器弹道
-            if _weapon_name in _gun_data["guns_trajectory"].keys():
-                _factor_data["guns_trajectory"] = _gun_data["guns_trajectory"][_weapon_name]["default"]
-            else:
-                _factor_data["guns_trajectory"] = _gun_data["guns_trajectory"]["weapon_none"]["default"]
-
-            # 获取当前武器射击间隔
-            if _weapon_name in _gun_data["weapon_intervals"].keys():
-                _factor_data["weapon_intervals"] = _gun_data["weapon_intervals"][_weapon_name]
-            else:
-                _factor_data["weapon_intervals"] = _gun_data["weapon_intervals"]["weapon_none"]
 
             # 获取武器射击状态
             _factor_data["shooting_state"] = GDV.shooting_state
@@ -69,50 +71,44 @@ class Pressure:
             # 开镜方式
             _factor_data["opening_method"] = GDV.opening_method
 
-            # 获取当前武器基础系数
-            if _weapon_name in _gun_data["alone_factor"].keys():
-                _factor_data["alone_factor"] = _gun_data["alone_factor"][_weapon_name]
-            else:
-                _factor_data["alone_factor"] = 1.0
-
             # 获取全局 shift 系数
             _factor_data["global_lshift"] = _gun_data["global_lshift"]
 
             # 获取全局后坐力系数
             _factor_data["global_recoil"] = _gun_data["global_recoil"]
 
-            # 获取垂直后坐力
-            _factor_data["global_vertical"] = _gun_data["global_vertical"]
             logger.info(f"当前武器: {_factor_data}")
             return _factor_data
 
     def calculate_factors(self):
         _effect_data = self.get_component_factor()
         if _effect_data is not None:
-            coefficient = 1.0
-            coefficient *= _effect_data["posture_state"]  # 姿态系数
-            coefficient *= _effect_data["scope"]  # 瞄准镜系数
-            coefficient *= _effect_data["muzzle"]  # 枪口系数
-            coefficient *= _effect_data["grip"]  # 握把系数
-            coefficient *= _effect_data["stock"]  # 枪托系数
-            coefficient *= _effect_data["global_recoil"]  # 全局后坐力系数
-            coefficient *= _effect_data["alone_factor"]  # 武器基础系数
-            coefficient *= _effect_data["magnifying_power"]  # 瞄准镜倍数
-            coefficient *= _effect_data["global_vertical"]  # 垂直后坐力
+            if not _effect_data.get("no_gun"):
+                coefficient = 1.0
+                coefficient *= _effect_data["posture_state"]  # 姿态系数
+                coefficient *= _effect_data["scope"]  # 瞄准镜系数
+                coefficient *= _effect_data["muzzle"]  # 枪口系数
+                coefficient *= _effect_data["grip"]  # 握把系数
+                coefficient *= _effect_data["stock"]  # 枪托系数
+                coefficient *= _effect_data["global_recoil"]  # 全局后坐力系数
+                coefficient *= _effect_data["alone_factor"]  # 武器基础系数
+                coefficient *= _effect_data["magnifying_power"]  # 瞄准镜倍数
 
-            del _effect_data["posture_state"]  # 删除字典中的姿态系数
-            del _effect_data["scope"]
-            del _effect_data["muzzle"]
-            del _effect_data["grip"]
-            del _effect_data["stock"]
-            del _effect_data["global_recoil"]
-            del _effect_data["alone_factor"]
-            del _effect_data["magnifying_power"]
-            del _effect_data["global_vertical"]
+                del _effect_data["posture_state"]  # 删除字典中的姿态系数
+                del _effect_data["scope"]
+                del _effect_data["muzzle"]
+                del _effect_data["grip"]
+                del _effect_data["stock"]
+                del _effect_data["global_recoil"]
+                del _effect_data["alone_factor"]
+                del _effect_data["magnifying_power"]
 
-            _effect_data["coefficient"] = coefficient
+                _effect_data["coefficient"] = coefficient
 
-            return _effect_data
+                return _effect_data
+            else:
+                _effect_data["coefficient"] = "none"
+                return _effect_data
 
     def write_dict_to_lua_file(self):
         file_path = "C:/CuteAide/output.lua"
