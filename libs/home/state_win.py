@@ -85,6 +85,16 @@ class StateMainWin(QMainWindow):
             else:
                 self.ui.pushButton_12.setText(posture_map[key][0])
                 GDV.posture_state = posture_map[key][2]
+        elif key in posture_map and key == "z":
+            if posture == posture_map[key][0]:
+                self.ui.pushButton_12.setText(posture_map[key][1])
+                GDV.posture_state = posture_map[key][3]
+            else:
+                self.ui.pushButton_12.setText(posture_map[key][0])
+                GDV.posture_state = posture_map[key][2]
+        elif key in posture_map and key == "space":
+            self.ui.pushButton_12.setText(posture_map[key][0])
+            GDV.posture_state = posture_map[key][2]
 
     def update_state_shooting_state(self):
         # 更新射击状态

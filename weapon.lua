@@ -1,7 +1,8 @@
-dofile("C:/CuteAide/output.lua")
+address = "C:/CuteAide/output.lua"
 
 -- 计算后坐力
 function calculate_influencing_factor()
+    dofile(address)
     calculation_results = coefficient
     if in_car == "yes" then
         -- 在车上
@@ -19,6 +20,7 @@ local debug = true
 
 -- 开始压枪
 Auto_Down = function()
+    dofile(address)
     ClearLog()
     if coefficient == "none" then
         OutputLogMessage("当前武器不支持压枪: %s\n", weapon)
@@ -67,7 +69,7 @@ end
 
 -- 事件处理
 function OnEvent(event, key)
-    dofile("C:/CuteAide/output.lua")
+    dofile(address)
 
     if event == "MOUSE_BUTTON_PRESSED" and key == 1 then
 
