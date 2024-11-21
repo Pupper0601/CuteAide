@@ -98,7 +98,7 @@ class GlobalVariable(Observable):
 
     @posture_state_button.setter
     def posture_state_button(self, value):
-        self._enable_key_recognition = value
+        self._posture_state_button = value
 
     @property
     def in_car(self):

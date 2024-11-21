@@ -73,11 +73,10 @@ class StateMainWin(QMainWindow):
         posture = self.ui.pushButton_12.text()
         posture_map = {
             "c"    : ("蹲姿", "站姿", "squat", "stand"),
-            "ctrl" : ("蹲姿", "站姿", "squat", "stand"),
+            "ctrl_l" : ("蹲姿", "站姿", "squat", "stand"),
             "z"    : ("卧姿", "站姿", "crawl", "stand"),
             "space": ("站姿", "站姿", "stand", "stand")
         }
-
         if key in posture_map and GDV.posture_state_button == key:
             if posture == posture_map[key][0]:
                 self.ui.pushButton_12.setText(posture_map[key][1])

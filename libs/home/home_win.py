@@ -144,7 +144,7 @@ class HomeMainWin(QMainWindow):
             self.ui.radioButton_4.setIcon(QIcon())
             self.ui.radioButton_3.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
         elif self.ui.radioButton_4.isChecked():  # ctrl 键 下蹲
-            GDV.posture_state_button = "ctrl"
+            GDV.posture_state_button = "ctrl_l"
             self.ui.radioButton_3.setIcon(QIcon())
             self.ui.radioButton_4.setIcon(QIcon(path_conn("/resource/icon/keyboard.png")))
 

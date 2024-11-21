@@ -31,17 +31,12 @@ Auto_Down = function()
         return
     end
 
-    --decimal_cache = 0
-    --
-    --function ceil_and_cache(value)
-    --    integer_part = math.floor(value)
-    --    decimal_cache = decimal_cache + value - integer_part
-    --    if decimal_cache >= 1 then
-    --        integer_part = integer_part + 1
-    --        decimal_cache = decimal_cache - 1
-    --    end
-    --    return integer_part
-    --end
+    -- 特殊武器
+    _weapons = {ZDZT = true,MINI14 = true,SKS = true,VSS = true,QBU = true,MK14 = true,MK12 = true,DLGNF = true,M16A4 = true,MK47 = true}
+    if _weapons[weapon] then
+        OutputLogMessage("当前武器不支持压枪: %s\n", weapon)
+        return
+    end
 
     _number_bullets = 0   -- 子弹数
     nowTime = GetRunningTime()
@@ -53,7 +48,6 @@ Auto_Down = function()
         end
 
         _number_bullets = math.ceil((GetRunningTime() - nowTime) / weapon_intervals)  -- 子弹数
-
         for _, recoil_data in ipairs(guns_trajectory) do
             if recoil_data[1] == _number_bullets then
                 adjusted_recoil = math.floor(recoil_data[2] * calculate_influencing_factor())  -- 调整后的后坐力
@@ -71,7 +65,7 @@ Auto_Down = function()
                 if debug then
                     MoveMouseRelative(1, 0)
                 end
-                Sleep(10)
+                Sleep(1)
             end
         end
     end
