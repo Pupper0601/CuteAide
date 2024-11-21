@@ -16,7 +16,7 @@ function calculate_influencing_factor()
     return calculation_results
 end
 
-local debug = true
+local debug = false
 
 -- 开始压枪
 Auto_Down = function()
@@ -31,8 +31,21 @@ Auto_Down = function()
         return
     end
 
-    local _number_bullets = 0   -- 子弹数
-    local nowTime = GetRunningTime()
+    --decimal_cache = 0
+    --
+    --function ceil_and_cache(value)
+    --    integer_part = math.floor(value)
+    --    decimal_cache = decimal_cache + value - integer_part
+    --    if decimal_cache >= 1 then
+    --        integer_part = integer_part + 1
+    --        decimal_cache = decimal_cache - 1
+    --    end
+    --    return integer_part
+    --end
+
+    _number_bullets = 0   -- 子弹数
+    nowTime = GetRunningTime()
+    last_logged_bullet = 0  -- 记录最后输出的子弹数
 
     while IsMouseButtonPressed(1) do
         if shooting_state == "stop" then
@@ -43,8 +56,14 @@ Auto_Down = function()
 
         for _, recoil_data in ipairs(guns_trajectory) do
             if recoil_data[1] == _number_bullets then
-                local adjusted_recoil = math.floor(recoil_data[2] * calculate_influencing_factor())  -- 调整后的后坐力
-                OutputLogMessage("当前子弹数: %s, 后坐力: %s, 系数: %s, 下压像素: %s\n", _number_bullets, recoil_data[2], calculate_influencing_factor(), adjusted_recoil)
+                adjusted_recoil = math.floor(recoil_data[2] * calculate_influencing_factor())  -- 调整后的后坐力
+                -- 只在新子弹发射时输出日志
+                if _number_bullets > last_logged_bullet then
+                    OutputLogMessage("当前子弹数: %s, 后坐力: %s, 系数: %s, 下压像素: %s\n",
+                                     _number_bullets, recoil_data[2],
+                                     calculate_influencing_factor(), adjusted_recoil)
+                    last_logged_bullet = _number_bullets  -- 更新最后输出的子弹数
+                end
                 MoveMouseRelative(0, adjusted_recoil)
                 if not IsMouseButtonPressed(1) then
                     break
@@ -52,7 +71,7 @@ Auto_Down = function()
                 if debug then
                     MoveMouseRelative(1, 0)
                 end
-                Sleep(weapon_intervals - 20)
+                Sleep(10)
             end
         end
     end

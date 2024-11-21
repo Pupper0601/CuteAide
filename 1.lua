@@ -31,7 +31,7 @@ Auto_Down = function()
     if (Ballistic == true and IsMouseButtonPressed(1)) then
         ClearLog()
     end
-    local nowTime = GetRunningTime()
+
     local bulletIndex = 0   -- 子弹数
     for i = 1, #Gun.bullet do
         while IsMouseButtonPressed(1) and bulletIndex <= Gun.bullet[i] do

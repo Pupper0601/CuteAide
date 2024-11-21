@@ -128,7 +128,8 @@ class Pressure:
                         file.write(f"{key} = '{value}'\n")
                     elif isinstance(value, list):
                         if key == "guns_trajectory":
-                            formatted_list = ", ".join([f"{{{i + 1}, {v}}}" for i, v in enumerate(value)])
+                            formatted_list = ", ".join([f"{{{list(item.keys())[0]}, {list(item.values())[0]}}}" for
+                                                        item in value])
                             file.write(f"{key} = {{{formatted_list}}}\n")
                     else:
                         file.write(f"{key} = {value}\n")
