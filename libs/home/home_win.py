@@ -10,7 +10,7 @@ from PySide6.QtGui import QCursor, QDesktopServices, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from common import version
-from libs.global_variable import GDV
+from libs.global_variable import GDV, THREAD_POOL
 from libs.home.state_win import StateMainWin
 from libs.keylisten import KeyListen
 from libs.mouselisten import MouseListen
@@ -76,11 +76,7 @@ class HomeMainWin(QMainWindow):
                                                    "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
                                                    "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
 
-                self.key_listener = KeyListen(self)  # 启动键盘监听器并传递 self 作为父对象
-                self.key_listener.start()
-
-                self.mouse_listener = MouseListen(self)  # 启动鼠标监听器并传递 self 作为父对象
-                self.mouse_listener.start()
+                self.start_listeners()  # 启动键盘、键盘监听器
 
             else:
                 self.ui.pushButton_2.setText(" 开始识别压枪")
@@ -89,15 +85,7 @@ class HomeMainWin(QMainWindow):
                                                    "168);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
                                                    "rgb(71,157,168);letter-spacing: 1px;}#pushButton_2:hover{"
                                                    "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
-                if self.key_listener:
-                    self.key_listener.stop_event.set()  # 停止延时任务
-                    self.key_listener.stop_listener()
-                    self.key_listener = None
-
-                if self.mouse_listener:  # 停止鼠标监听器
-                    self.mouse_listener.stop_event.set()
-                    self.mouse_listener.stop_listener()
-                    self.mouse_listener = None
+                self.stop_listeners()  # 停止键盘、键盘监听器
         else:
             self.ui.pushButton_2.setText(" 未适配分辨率, 无法识别压枪")
             self.ui.pushButton_2.setIcon(QIcon())
@@ -106,6 +94,10 @@ class HomeMainWin(QMainWindow):
                                                "rgb(255,48,48);letter-spacing: 1px;}")
 
     def update_home_gun_info(self, _gun_info):
+        # 将更新枪械信息的任务提交到线程池中
+        THREAD_POOL.submit(self._update_home_gun_info_task, _gun_info)
+
+    def _update_home_gun_info_task(self, _gun_info):
         # 更新枪械信息
         if len(_gun_info) > 0:
             # 在这里添加显示枪械信息的代码，例如更新UI组件
@@ -176,6 +168,24 @@ class HomeMainWin(QMainWindow):
         msg_box.setWindowTitle("提示")
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec()
+
+    def start_listeners(self):
+        self.key_listener = KeyListen(self)  # 启动键盘监听器并传递 self 作为父对象
+        self.key_listener.start()
+
+        self.mouse_listener = MouseListen(self)  # 启动鼠标监听器并传递 self 作为父对象
+        self.mouse_listener.start()
+
+    def stop_listeners(self):
+        if self.key_listener:
+            self.key_listener.stop_event.set()  # 停止延时任务
+            self.key_listener.stop_listener()
+            self.key_listener = None
+
+        if self.mouse_listener:  # 停止鼠标监听器
+            self.mouse_listener.stop_event.set()
+            self.mouse_listener.stop_listener()
+            self.mouse_listener = None
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):

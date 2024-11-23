@@ -2,6 +2,7 @@
 # # -*- coding: utf-8 -*-
 # # @Author : Pupper
 # # @Email  : pupper.cheng@gmail.com
+import time
 
 import cv2
 import mss
@@ -66,6 +67,53 @@ def get_car():
         GDV.in_car = "yes"
     else:
         GDV.in_car = "no"
+
+def get_shooting_state():
+    # 获取射击状态
+    time.sleep(0.5) # 等待0.5秒, 等待画面加载完成
+    screen_capture_full()   # 截取整个屏幕的屏幕截图
+    shooting_state_place = GDV.CACHE["config"]["shooting_state"]
+    for key, value in shooting_state_place.items():
+        temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
+        if check_near_white_pixels(temp_img):
+            if GDV.shooting_state == "stop":
+                GDV.shooting_state = "fired"
+            return key
+        elif check_near_red_pixels(temp_img):
+            if GDV.shooting_state == "fired":
+                GDV.shooting_state = "stop"
+            return key
+    if GDV.shooting_state == "fired":
+        GDV.shooting_state = "stop"
+    return "0"
+
+def check_near_white_pixels(image):
+    # 检查图像中是否有连续10个像素的颜色接近于白色
+    white_threshold = 200  # 定义接近白色的阈值
+    for row in image:
+        count = 0
+        for pixel in row:
+            if all(channel >= white_threshold for channel in pixel):
+                count += 1
+                if count == 10:
+                    return True
+            else:
+                count = 0
+    return False
+
+def check_near_red_pixels(image):
+    # 检查图像中是否有连续10个像素的颜色接近于红色
+    red_threshold = 210  # 定义接近红色的阈值
+    for row in image:
+        count = 0
+        for pixel in row:
+            if pixel[2] >= red_threshold and pixel[0] < red_threshold and pixel[1] < red_threshold:
+                count += 1
+                if count == 10:
+                    return True
+            else:
+                count = 0
+    return False
 
 
 if __name__ == '__main__':

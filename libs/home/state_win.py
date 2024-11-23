@@ -36,37 +36,34 @@ class StateMainWin(QMainWindow):
         frame_geometry.moveTop(-80)  # 将窗口移动到屏幕顶部
         self.move(frame_geometry.topLeft())
 
-    def update_state_gun_info(self, gun_key=0):
+    def update_state_gun_info(self, gun_key="0"):
         _num = self.ui.pushButton_11.text()
         _guns = GDV.weapon_information
         _gun_info = None
-        _gun_key = 0
-
-        if gun_key == 0:
-            gun_key = "1" if _num == "1" else "2"
-            if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
-                _gun_info = _guns[f"gun_{gun_key}"]
-                self.ui.pushButton_11.setText(gun_key)
-                _gun_key = gun_key
+        if len(_guns) > 0:
+            if gun_key == "0":
+                if _guns[f"gun_{_num}"]["weapon"][1] != "weapon_none":
+                    _gun_info = _guns[f"gun_{_num}"]
+                    self.ui.pushButton_11.setText(_num)
+                else:
+                    _gun_info = _guns[f"gun_{ '2' if _num == '1' else '1'}"]
+                    self.ui.pushButton_11.setText('2' if _num == '1' else '1')
             else:
-                other_gun_key = "2" if gun_key == "1" else "1"
-                if _guns[f"gun_{other_gun_key}"]["weapon"][1] != "weapon_none":
-                    _gun_info = _guns[f"gun_{other_gun_key}"]
-                    self.ui.pushButton_11.setText(other_gun_key)
-                    _gun_key = gun_key
-        else:
-            _gun_info = _guns.get(f"gun_{gun_key}")
-            self.ui.pushButton_11.setText(gun_key)
-            _gun_key = gun_key
-        logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
-        GDV.current_weapon_information = _gun_info
-        GDV.fire_weapon = _gun_key
-        if _gun_info is not None:
-            self.ui.pushButton_2.setText(_gun_info["weapon"][0])
-            self.ui.pushButton_3.setText(_gun_info["scope"][0])
-            self.ui.pushButton_4.setText(_gun_info["muzzle"][0])
-            self.ui.pushButton_5.setText(_gun_info["grip"][0])
-            self.ui.pushButton_6.setText(_gun_info["stock"][0])
+                if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
+                    _gun_info = _guns[f"gun_{gun_key}"]
+                    self.ui.pushButton_11.setText(gun_key)
+                else:
+                    _gun_info = _guns[f"gun_{'2' if gun_key == '1' else '1'}"]
+                    self.ui.pushButton_11.setText('2' if gun_key == '1' else '1')
+
+            logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
+            GDV.current_weapon_information = _gun_info
+            if _gun_info is not None:
+                self.ui.pushButton_2.setText(_gun_info["weapon"][0])
+                self.ui.pushButton_3.setText(_gun_info["scope"][0])
+                self.ui.pushButton_4.setText(_gun_info["muzzle"][0])
+                self.ui.pushButton_5.setText(_gun_info["grip"][0])
+                self.ui.pushButton_6.setText(_gun_info["stock"][0])
 
     def update_posture(self, key):
         # 更新姿势
@@ -98,10 +95,13 @@ class StateMainWin(QMainWindow):
     def update_state_shooting_state(self):
         # 更新射击状态
         _state = GDV.shooting_state
+        _text = self.ui.pushButton_9.text()
         if _state == "fired":
-            self.ui.pushButton_9.setText("压枪")
+            if _text == "暂停":
+                self.ui.pushButton_9.setText("压枪")
         else:
-            self.ui.pushButton_9.setText("暂停")
+            if _text == "压枪":
+                self.ui.pushButton_9.setText("暂停")
 
 
 if __name__ == '__main__':

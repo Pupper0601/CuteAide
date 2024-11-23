@@ -9,9 +9,9 @@ from PySide6.QtCore import QObject
 from pynput import keyboard
 from pynput.keyboard import Key
 
-from libs.global_variable import GDV
+from libs.global_variable import GDV, THREAD_POOL
 from libs.gun_info import GetGunInfo
-from libs.screenshot import get_car, get_inventory, screen_capture_full
+from libs.screenshot import get_car, get_inventory, get_shooting_state, screen_capture_full
 from tools.active_window import get_active_window_info
 from tools.log import logger
 
@@ -36,53 +36,49 @@ class KeyListen(Thread, QObject):
         if get_active_window_info():
             # if True:
             if keys == "tab":  # 监听到按键 'tab'
-                if GDV.enable_key_recognition:
+                if GDV.enable_key_recognition:  # 如果键盘识别背包开启
                     time.sleep(0.3)
                     self._get_gun_information()
                 else:
                     self._get_gun_information()
                     GDV.enable_key_recognition = True
+                    self._shooting_state()  # 获取射击状态
 
             elif keys == "esc":  # 监听到按键 'esc'
                 GDV.enable_mouse_recognition = False
                 GDV.enable_key_recognition = True
+                self._shooting_state()
+
+            elif keys in ["1", "!","2", "@","3", "4", "#", "$", "x", "X", "5", "%", "m", "M"]:
                 GDV.shooting_state = "stop"
-                self.parent.state_win.update_state_shooting_state()
-            elif keys in ["1", "!"]:
-                self._update_weapon_state("gun_1", "gun_2", keys)
-            elif keys in ["2", "@"]:
-                self._update_weapon_state("gun_2", "gun_1", keys)
-            elif keys in ["3", "4", "#", "$", "x", "X", "5", "%"]:
-                GDV.shooting_state = "stop"
-                self.parent.state_win.update_state_shooting_state()
+                self._shooting_state()
+
             elif keys in ['z', "Z", 'c', "C", 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
+
             elif keys in ['F', 'f']:
                 get_car()
 
     def _get_gun_information(self):
+        # 获取枪械信息
         screen_capture_full()
         if get_inventory():
             if GDV.shooting_state == "fired":
                 GDV.shooting_state = "stop"
                 self.parent.state_win.update_state_shooting_state()
-            GDV.enable_mouse_recognition = False  # 关闭鼠标识别
+            GDV.enable_mouse_recognition = True  # 关闭鼠标识别
             GDV.enable_key_recognition = False
             GetGunInfo()  # 持续更新枪械信息
             self.parent.update_home_gun_info(GDV.weapon_information)
         else:
             GDV.enable_mouse_recognition = False
 
-    def _update_weapon_state(self, primary_gun, secondary_gun, keys):
-        if len(GDV.weapon_information) > 0:
-            if GDV.weapon_information[primary_gun]["weapon"][1] != "weapon_none":
-                self.parent.state_win.update_state_gun_info(keys)
-                self.parent.update_home_current_gun(keys)
-            elif GDV.weapon_information[secondary_gun]["weapon"][1] != "weapon_none":
-                self.parent.state_win.update_state_gun_info("2" if primary_gun == "gun_1" else "1")
-                self.parent.update_home_current_gun("2" if primary_gun == "gun_1" else "1")
-            GDV.shooting_state = "fired"
-            self.parent.state_win.update_state_shooting_state()
+    def _shooting_state(self):  # 获取射击状态
+        key = THREAD_POOL.submit(get_shooting_state).result()
+        logger.info(f"当前射击状态: {key}")
+        self.parent.state_win.update_state_shooting_state() # 更新射击状态
+        self.parent.update_home_current_gun(key)  # 更新当前枪械
+        self.parent.state_win.update_state_gun_info(key)    # 更新 state_win 枪械信息
 
     def stop_listener(self):
         if self.listener:

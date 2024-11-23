@@ -3,7 +3,7 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
-version = "v0.30 免费版"
+version = "v0.31 免费版"
 
 notice = """
 登录成功! \n
