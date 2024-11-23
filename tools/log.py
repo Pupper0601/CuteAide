@@ -36,6 +36,7 @@ class Logger:
     def logger_add():
         loguru.logger.add(
             sink= paths() + "./logs.log",
+            level="ERROR",
             rotation='00:00',
             retention='1 day',
             compression='zip',

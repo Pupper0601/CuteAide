@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-
+import os
 import sys
 
 from PySide6.QtCore import QUrl, Qt
@@ -10,15 +10,15 @@ from PySide6.QtGui import QCursor, QDesktopServices, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from common import version
+from libs.cache import ImageCache
 from libs.global_variable import GDV, THREAD_POOL
 from libs.home.state_win import StateMainWin
 from libs.keylisten import KeyListen
+from libs.monitor import get_monitor_info
 from libs.mouselisten import MouseListen
 from tools.log import logger
 from tools.paths import path_conn
 from views.home import Ui_MainWindow as home_ui
-from .resolution_state import resolution
-
 
 class HomeMainWin(QMainWindow):
     def __init__(self):
@@ -49,9 +49,10 @@ class HomeMainWin(QMainWindow):
 
     # 设置屏幕分辨率
     def resolution(self):
-        _info = resolution()
-        self.ui.label_2.setText(f"{_info['resolution']}")
-        self.ui.label_4.setText(_info['state'])
+        GDV.CACHE = ImageCache().source_data
+        reso = get_monitor_info()
+        self.ui.label_2.setText(f" {reso['width']}x{reso['height']}")
+        self.ui.label_4.setText("已适配")
 
     # 更新识别状态
     def update_way(self, text):
@@ -67,31 +68,24 @@ class HomeMainWin(QMainWindow):
     # 开始识别压枪
     def start_gun(self):
         text = self.ui.pushButton_2.text()
-        if self.ui.label_4.text() == "已适配":
-            if text == " 开始识别压枪":
-                self.ui.pushButton_2.setText(" 暂停识别压枪")
-                self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/stop.png")))
-                self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(255,85,"
-                                                   "0);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                                   "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
-                                                   "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
+        if text == " 开始识别压枪":
+            self.ui.pushButton_2.setText(" 暂停识别压枪")
+            self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/stop.png")))
+            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(255,85,"
+                                               "0);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
+                                               "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
+                                               "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
 
-                self.start_listeners()  # 启动键盘、键盘监听器
+            self.start_listeners()  # 启动键盘、键盘监听器
 
-            else:
-                self.ui.pushButton_2.setText(" 开始识别压枪")
-                self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/start.png")))
-                self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(71,157,"
-                                                   "168);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                                   "rgb(71,157,168);letter-spacing: 1px;}#pushButton_2:hover{"
-                                                   "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
-                self.stop_listeners()  # 停止键盘、键盘监听器
         else:
-            self.ui.pushButton_2.setText(" 未适配分辨率, 无法识别压枪")
-            self.ui.pushButton_2.setIcon(QIcon())
-            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 14pt ;background-color: rgb(255,48,"
-                                               "48);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                               "rgb(255,48,48);letter-spacing: 1px;}")
+            self.ui.pushButton_2.setText(" 开始识别压枪")
+            self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/start.png")))
+            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(71,157,"
+                                               "168);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
+                                               "rgb(71,157,168);letter-spacing: 1px;}#pushButton_2:hover{"
+                                               "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
+            self.stop_listeners()  # 停止键盘、键盘监听器
 
     def update_home_gun_info(self, _gun_info):
         # 将更新枪械信息的任务提交到线程池中
@@ -186,6 +180,17 @@ class HomeMainWin(QMainWindow):
             self.mouse_listener.stop_event.set()
             self.mouse_listener.stop_listener()
             self.mouse_listener = None
+
+    def closeEvent(self, event):
+        file_path = "C:/CuteAide/output.lua"
+        try:
+            # 尝试删除 output.lua 文件
+            os.remove(file_path)
+        except OSError:
+            # 如果无法删除，则清空文件内容
+            with open(file_path, 'w') as file:
+                file.write('')
+        event.accept()
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):

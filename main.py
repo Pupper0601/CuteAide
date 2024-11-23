@@ -12,6 +12,7 @@ class MainWin(QMainWindow):
         super().__init__()
         self.login_win = LoginMainWin()
         self.login_win.show()
+        self.home_win = HomeMainWin()
         self.init_slot()
 
     def init_slot(self):
@@ -20,7 +21,6 @@ class MainWin(QMainWindow):
     def show_home(self):
         if self.login_win.login_flow():
             self.show_message_box()
-            self.home_win = HomeMainWin()
             self.home_win.show()
             self.login_win.close()
 

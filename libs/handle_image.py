@@ -104,10 +104,3 @@ def current_equipment(name, category, temp_image):
         if ssim_score >= ss and hist_score >= hs:
             gun_name, ss, hs = name, ssim_score, hist_score
     return gun_name
-
-# if __name__ == '__main__':
-#
-#     temp_img = ReadImage(r'F:\Object\GitHub\CuteAide\basic\1920_1080\scopes\x6.png')
-#     t = [temp_img.binary, temp_img.pyramid]
-#     contrast = ContrastImage('source',t,screenshot)
-#     print(contrast.result)

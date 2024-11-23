@@ -51,7 +51,3 @@ def get_monitor_info():
                                   'height': data['Monitor'][3] - data['Monitor'][1]}
                     return resolution
     return resolution
-
-if __name__ == '__main__':
-    print(get_monitor_info())
-    print(get_monitor_info())

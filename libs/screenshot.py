@@ -17,10 +17,21 @@ def screen_capture_full():
     # 截取整个屏幕的屏幕截图
     with mss.mss() as sct:
         monitor = sct.monitors[1]  # 获取主显示器的分辨率
-        captured_frame = sct.grab(monitor)
+        captured_frame = sct.grab(monitor)  # 截取整个屏幕的屏幕截图
         full_frame = np.array(captured_frame)
         full_frame = cv2.cvtColor(full_frame, cv2.COLOR_BGRA2BGR)
-        GDV.global_screenshot = full_frame
+
+        # 获取当前分辨率
+        current_resolution = (full_frame.shape[1], full_frame.shape[0])
+        target_resolution = (1920, 1080)
+
+        # 如果当前分辨率不是1920x1080，则进行转换
+        if current_resolution != target_resolution:
+            resized_frame = cv2.resize(full_frame, target_resolution, interpolation=cv2.INTER_AREA)
+        else:
+            resized_frame = full_frame
+
+        GDV.global_screenshot = resized_frame
 
 
 def extract_region(full_frame, region):
@@ -70,22 +81,25 @@ def get_car():
 
 def get_shooting_state():
     # 获取射击状态
-    time.sleep(0.5) # 等待0.5秒, 等待画面加载完成
-    screen_capture_full()   # 截取整个屏幕的屏幕截图
-    shooting_state_place = GDV.CACHE["config"]["shooting_state"]
-    for key, value in shooting_state_place.items():
-        temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
-        if check_near_white_pixels(temp_img):
-            if GDV.shooting_state == "stop":
-                GDV.shooting_state = "fired"
-            return key
-        elif check_near_red_pixels(temp_img):
-            if GDV.shooting_state == "fired":
-                GDV.shooting_state = "stop"
-            return key
-    if GDV.shooting_state == "fired":
-        GDV.shooting_state = "stop"
-    return "0"
+    i = 3
+    while i > 0:
+        i -= 1
+        time.sleep(0.1)
+        screen_capture_full()   # 截取整个屏幕的屏幕截图
+        shooting_state_place = GDV.CACHE["config"]["shooting_state"]
+        for key, value in shooting_state_place.items():
+            temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
+            if check_near_white_pixels(temp_img):
+                if GDV.shooting_state == "stop":
+                    GDV.shooting_state = "fired"
+                return key
+            elif check_near_red_pixels(temp_img):
+                if GDV.shooting_state == "fired":
+                    GDV.shooting_state = "stop"
+                return key
+        if GDV.shooting_state == "fired":
+            GDV.shooting_state = "stop"
+        return "0"
 
 def check_near_white_pixels(image):
     # 检查图像中是否有连续10个像素的颜色接近于白色

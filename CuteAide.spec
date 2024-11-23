@@ -6,10 +6,12 @@ a = Analysis(
     pathex=['F:/Object/GitHub/CuteAide'],
     binaries=[],
     datas=[
-        ('F:/Object/GitHub/CuteAide/libs/*', 'libs'),
-        ('F:/Object/GitHub/CuteAide/resource/*', 'resources'),
-        ('F:/Object/GitHub/CuteAide/tools/*', 'tools'),
-        ('F:/Object/GitHub/CuteAide/views/*', 'views'),
+        ('F:/Object/GitHub/CuteAide/basic/', 'basic'),
+        ('F:/Object/GitHub/CuteAide/resource/', 'resource'),
+        ('F:/Object/GitHub/CuteAide/libs/', 'libs'),
+
+        ('F:/Object/GitHub/CuteAide/tools/', 'tools'),
+        ('F:/Object/GitHub/CuteAide/views/', 'views'),
     ],
     hiddenimports=[],
     hookspath=[],

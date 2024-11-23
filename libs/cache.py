@@ -6,17 +6,16 @@ import json
 from pathlib import Path
 
 from libs.handle_image import ReadImage
-from libs.monitor import get_monitor_info
 from tools.log import logger
 from tools.paths import path_conn
-
-monitor = get_monitor_info()
+from libs.global_variable import GDV
 
 
 class ImageCache:
     def __init__(self):
         self.source_data = {}
-        self.basic_path = Path(path_conn(f"/basic/{monitor['width']}_{monitor['height']}"))
+        self.basic_path = Path(path_conn('/basic'))
+
         if len(self.source_data) == 0:
             self._read_weapons()
             self._read_scopes()
@@ -30,7 +29,7 @@ class ImageCache:
             self._read_poses()
             self._read_position()
             logger.info('源图缓存初始化完成')
-        CACHE = self.source_data
+        GDV.CACHE = self.source_data
 
     def _read_images(self, category):
         # 读取指定类别的图片
@@ -88,9 +87,3 @@ class ImageCache:
         with open(config_path, 'r', encoding='utf-8') as file:
             self.config = json.load(file)
             self.source_data['config'] = self.config
-
-#
-# if __name__ == '__main__':
-#     print(ImageCache().source_data)
-#     print(ImageCache().source_data)
-#     print(ImageCache().source_data)
