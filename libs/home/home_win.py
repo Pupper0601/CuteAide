@@ -114,7 +114,10 @@ class HomeMainWin(QMainWindow):
         else:
             logger.info("未识别到枪械信息, 请重新识别")
 
-    def update_home_current_gun(self, gun_key):
+    def update_home_current_gun(self):
+        THREAD_POOL.submit(self._update_home_current_gun_task, GDV.fire_weapon)
+
+    def _update_home_current_gun_task(self, gun_key):
         # 更新当前枪械
         if gun_key == "1":
             self.ui.pushButton.setIcon(QIcon(path_conn("/resource/icon/now.png")))

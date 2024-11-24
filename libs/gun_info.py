@@ -10,7 +10,11 @@ from libs.screenshot import extract_region, get_gun_position
 from tools.log import logger
 
 
-class GetGunInfo:
+def GetGunInfo():
+    THREAD_POOL.submit(_GetGunInfo)
+
+
+class _GetGunInfo:
     def __init__(self):
         start_time = time.time()
         self.get_gun()

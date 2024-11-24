@@ -11,7 +11,7 @@ from pynput.mouse import Button
 
 from libs.global_variable import GDV
 from libs.gun_info import GetGunInfo
-from libs.screenshot import screen_capture_full
+from libs.screenshot import get_inventory, screen_capture_full
 from tools.active_window import get_active_window_info
 from tools.log import logger
 
@@ -30,14 +30,14 @@ class MouseListen(Thread, QObject):
         logger.info("监听鼠标线程启动")
 
     def on_click(self, x, y, button, pressed):
-        if get_active_window_info():
-            # if True:
-            if not pressed and GDV.enable_mouse_recognition:
-                if button == Button.right:
-                    time.sleep(0.2)
-                    screen_capture_full()
-                    GetGunInfo()
-                    self.parent.update_home_gun_info(GDV.weapon_information)
+        if GDV.enable_mouse_recognition and not pressed and button == Button.right:
+            if get_active_window_info() and get_inventory():
+                time.sleep(0.3)
+                screen_capture_full()
+                GetGunInfo()
+                self.parent.update_home_gun_info(GDV.weapon_information)
+            else:
+                GDV.enable_mouse_recognition = False
 
     def stop_listener(self):
         if self.listener:

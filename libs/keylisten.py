@@ -32,15 +32,22 @@ class KeyListen(Thread, QObject):
 
     def on_pressed(self, keys):
         # 监听按键
-        keys = str(keys.name if isinstance(keys, Key) else keys.char)
+        keys = str(keys.name if isinstance(keys, Key) else keys.char).lower()
         if get_active_window_info():
-            # if True:
+            # 定义替换字典
+            replace_dict = {
+                "!": "1",
+                "@": "2",
+                "#": "3",
+                "$": "4",
+                "%": "5"
+            }
+            keys = replace_dict.get(keys, keys)
             if keys == "tab":  # 监听到按键 'tab'
                 if GDV.enable_key_recognition:  # 如果键盘识别背包开启
                     time.sleep(0.3)
                     self._get_gun_information()
                 else:
-                    self._get_gun_information()
                     GDV.enable_key_recognition = True
                     self._shooting_state()  # 获取射击状态
 
@@ -49,14 +56,18 @@ class KeyListen(Thread, QObject):
                 GDV.enable_key_recognition = True
                 self._shooting_state()
 
-            elif keys in ["1", "!","2", "@","3", "4", "#", "$", "x", "X", "5", "%", "m", "M"]:
-                GDV.shooting_state = "stop"
+            elif keys in ["1","2"]:
+                self.parent.state_win.update_state_gun_info(keys)  # 更新 state_win 枪械信息
+                self._shooting_state()
+                self.parent.update_home_current_gun()  # 更新当前枪械
+
+            elif keys in ["3", "4","x", "5", "m"]:
                 self._shooting_state()
 
-            elif keys in ['z', "Z", 'c', "C", 'ctrl_l', 'space']:
+            elif keys in ['z', 'c', 'ctrl_l', 'space']:
                 self.parent.state_win.update_posture(keys)
 
-            elif keys in ['F', 'f']:
+            elif keys in ['f']:
                 get_car()
 
     def _get_gun_information(self):
@@ -74,11 +85,8 @@ class KeyListen(Thread, QObject):
             GDV.enable_mouse_recognition = False
 
     def _shooting_state(self):  # 获取射击状态
-        key = THREAD_POOL.submit(get_shooting_state).result()
-        logger.info(f"当前射击状态: {key}")
+        THREAD_POOL.submit(get_shooting_state).result()
         self.parent.state_win.update_state_shooting_state() # 更新射击状态
-        self.parent.update_home_current_gun(key)  # 更新当前枪械
-        self.parent.state_win.update_state_gun_info(key)    # 更新 state_win 枪械信息
 
     def stop_listener(self):
         if self.listener:

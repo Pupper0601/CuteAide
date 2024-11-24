@@ -6,7 +6,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from libs.global_variable import GDV
+from libs.global_variable import GDV, THREAD_POOL
 from tools.log import logger
 from views.state import Ui_MainWindow as state_ui
 
@@ -36,25 +36,31 @@ class StateMainWin(QMainWindow):
         frame_geometry.moveTop(-80)  # 将窗口移动到屏幕顶部
         self.move(frame_geometry.topLeft())
 
-    def update_state_gun_info(self, gun_key="0"):
+    def update_state_gun_info(self, keys="0"):
+        THREAD_POOL.submit(self._update_state_gun_info_task, keys)
+
+    def _update_state_gun_info_task(self, key: str):
         _num = self.ui.pushButton_11.text()
         _guns = GDV.weapon_information
         _gun_info = None
         if len(_guns) > 0:
-            if gun_key == "0":
-                if _guns[f"gun_{_num}"]["weapon"][1] != "weapon_none":
-                    _gun_info = _guns[f"gun_{_num}"]
-                    self.ui.pushButton_11.setText(_num)
-                else:
-                    _gun_info = _guns[f"gun_{ '2' if _num == '1' else '1'}"]
-                    self.ui.pushButton_11.setText('2' if _num == '1' else '1')
+            if key == "0":
+                gun_key = _num
             else:
-                if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
-                    _gun_info = _guns[f"gun_{gun_key}"]
-                    self.ui.pushButton_11.setText(gun_key)
-                else:
-                    _gun_info = _guns[f"gun_{'2' if gun_key == '1' else '1'}"]
-                    self.ui.pushButton_11.setText('2' if gun_key == '1' else '1')
+                gun_key = key
+
+            if _guns[f"gun_{gun_key}"]["weapon"][1] != "weapon_none":
+                _gun_info = _guns[f"gun_{gun_key}"]
+                self.ui.pushButton_11.setText(gun_key)
+                GDV.fire_weapon = gun_key
+            elif _guns[f"gun_{'2' if gun_key == '1' else '1'}"]["weapon"][1] != "weapon_none":
+                _gun_info = _guns[f"gun_{'2' if gun_key == '1' else '1'}"]
+                self.ui.pushButton_11.setText('2' if gun_key == '1' else '1')
+                GDV.fire_weapon = '2' if gun_key == '1' else '1'
+            else:
+                _gun_info = _guns["gun_1"]
+                self.ui.pushButton_11.setText('1')
+                GDV.fire_weapon = "1"
 
             logger.info(f"更新 state_win 窗口枪械信息: {_gun_info}")
             GDV.current_weapon_information = _gun_info
@@ -66,6 +72,9 @@ class StateMainWin(QMainWindow):
                 self.ui.pushButton_6.setText(_gun_info["stock"][0])
 
     def update_posture(self, key):
+        THREAD_POOL.submit(self._update_posture_task, key)
+
+    def _update_posture_task(self, key):
         # 更新姿势
         posture = self.ui.pushButton_12.text()
         posture_map = {
@@ -74,25 +83,24 @@ class StateMainWin(QMainWindow):
             "z"    : ("卧姿", "站姿", "crawl", "stand"),
             "space": ("站姿", "站姿", "stand", "stand")
         }
-        if key in posture_map and GDV.posture_state_button == key:
-            if posture == posture_map[key][0]:
-                self.ui.pushButton_12.setText(posture_map[key][1])
-                GDV.posture_state = posture_map[key][3]
-            else:
-                self.ui.pushButton_12.setText(posture_map[key][0])
-                GDV.posture_state = posture_map[key][2]
-        elif key in posture_map and key == "z":
-            if posture == posture_map[key][0]:
-                self.ui.pushButton_12.setText(posture_map[key][1])
-                GDV.posture_state = posture_map[key][3]
-            else:
-                self.ui.pushButton_12.setText(posture_map[key][0])
-                GDV.posture_state = posture_map[key][2]
-        elif key in posture_map and key == "space":
-            self.ui.pushButton_12.setText(posture_map[key][0])
-            GDV.posture_state = posture_map[key][2]
+        if key in posture_map:
+            if GDV.posture_state_button == key.lower() or key.lower() == "z":
+                if posture == posture_map[key][0]:
+                    self.ui.pushButton_12.setText(posture_map[key][1])
+                    GDV.posture_state = posture_map[key][3]
+                else:
+                    self.ui.pushButton_12.setText(posture_map[key][0])
+                    GDV.posture_state = posture_map[key][2]
+
+            elif key == "space":
+                if posture != posture_map[key][0]:
+                    self.ui.pushButton_12.setText(posture_map[key][1])
+                    GDV.posture_state = posture_map[key][3]
 
     def update_state_shooting_state(self):
+        THREAD_POOL.submit(self._update_state_shooting_state_task)
+
+    def _update_state_shooting_state_task(self):
         # 更新射击状态
         _state = GDV.shooting_state
         _text = self.ui.pushButton_9.text()

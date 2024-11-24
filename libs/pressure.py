@@ -21,8 +21,6 @@ class Pressure:
 
         _factor_data = {}
         current_weapon_info = GDV.current_weapon_information
-        # {'weapon': ['SKS', 'SKS'], 'scope': ['6倍镜', 'x6'], 'muzzle': ['消音器', 'xiaoyin-b'],'grip'  : ['轻型握把',
-        # 'qingxin'], 'stock': ['托腮板', 'tosaiban']}
 
         if current_weapon_info:
             _weapon_name = current_weapon_info["weapon"][1]

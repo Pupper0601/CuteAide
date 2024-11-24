@@ -8,10 +8,9 @@ import cv2
 import mss
 import numpy as np
 
-from libs.global_variable import GDV
+from libs.global_variable import GDV, THREAD_POOL
 from libs.handle_image import ContrastImage
 from tools.log import logger
-
 
 def screen_capture_full():
     # 截取整个屏幕的屏幕截图
@@ -46,6 +45,7 @@ def extract_region(full_frame, region):
 
 def get_inventory():
     # 获取背包信息的屏幕截图
+    screen_capture_full()  # 截取整个屏幕的屏幕截图
     inventory_place = GDV.CACHE["config"]["regions"]["inventory"]
     temp_img = extract_region(GDV.global_screenshot, inventory_place)
 
@@ -53,8 +53,12 @@ def get_inventory():
 
     if len(res) > 0:
         logger.info(f"当前背包 ---> 打开状态")
+        GDV.enable_mouse_recognition = True
+        GDV.enable_key_recognition = False
         return True
     logger.info(f"当前不是背包界面, 无法识别")
+    GDV.enable_key_recognition = True
+    GDV.enable_mouse_recognition = False
     return False
 
 
@@ -81,25 +85,24 @@ def get_car():
 
 def get_shooting_state():
     # 获取射击状态
-    i = 3
-    while i > 0:
-        i -= 1
-        time.sleep(0.1)
-        screen_capture_full()   # 截取整个屏幕的屏幕截图
-        shooting_state_place = GDV.CACHE["config"]["shooting_state"]
-        for key, value in shooting_state_place.items():
-            temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
-            if check_near_white_pixels(temp_img):
-                if GDV.shooting_state == "stop":
-                    GDV.shooting_state = "fired"
-                return key
-            elif check_near_red_pixels(temp_img):
-                if GDV.shooting_state == "fired":
-                    GDV.shooting_state = "stop"
-                return key
+    time.sleep(0.5)
+    screen_capture_full()   # 截取整个屏幕的屏幕截图
+    shooting_state_place = GDV.CACHE["config"]["shooting_state"]
+    for key, value in shooting_state_place.items():
+        if GDV.global_screenshot is None:
+            screen_capture_full()
+        temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
+        if check_near_white_pixels(temp_img):   # 检查图像中是否有连续10个像素的颜色接近于白色
+            if GDV.shooting_state == "stop":
+                GDV.shooting_state = "fired"
+                break
+        elif check_near_red_pixels(temp_img):   # 检查图像中是否有连续10个像素的颜色接近于红色
+            if GDV.shooting_state == "fired":
+                GDV.shooting_state = "stop"
+                break
+    else:
         if GDV.shooting_state == "fired":
             GDV.shooting_state = "stop"
-        return "0"
 
 def check_near_white_pixels(image):
     # 检查图像中是否有连续10个像素的颜色接近于白色
@@ -121,7 +124,7 @@ def check_near_red_pixels(image):
     for row in image:
         count = 0
         for pixel in row:
-            if pixel[2] >= red_threshold and pixel[0] < red_threshold and pixel[1] < red_threshold:
+            if pixel[2] >= red_threshold > pixel[0] and pixel[1] < red_threshold:
                 count += 1
                 if count == 10:
                     return True
