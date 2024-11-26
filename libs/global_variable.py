@@ -29,7 +29,7 @@ class Observable:
         with self._notify_lock:
             if self._timer:
                 self._timer.cancel()
-            self._timer = threading.Timer(0.5, self._execute_notify)
+            self._timer = threading.Timer(0.1, self._execute_notify)
             self._timer.start()
 
     def _execute_notify(self):

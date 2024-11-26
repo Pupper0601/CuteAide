@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
+    <width>633</width>
     <height>435</height>
    </rect>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::TabShape::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="widget" native="true">
@@ -86,6 +92,9 @@
         </property>
         <item>
          <widget class="QLabel" name="label">
+          <property name="whatsThis">
+           <string>请输入</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">#label{
 	border-top-left-radius: 20px;
@@ -279,6 +288,9 @@ QPushButton:hover{
             <height>16777215</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请输入6~30位密码&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">#frame_5{
 	border: none;
@@ -387,11 +399,20 @@ QPushButton:hover{
            </property>
            <item>
             <widget class="QFrame" name="frame_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>1</verstretch>
+              </sizepolicy>
+             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="toolTip">
+              <string>请输入6~30位密码</string>
              </property>
              <property name="styleSheet">
               <string notr="true">#frame_7{
@@ -429,12 +450,12 @@ QPushButton:hover{
 }</string>
                 </property>
                 <property name="text">
-                 <string>账号:</string>
+                 <string>邮箱:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit">
+               <widget class="QLineEdit" name="username">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -455,27 +476,38 @@ QPushButton:hover{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-	font: 12pt;
+	font: 10pt;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
 	padding-left: 5px;
 	padding-right: 5px;
-	letter-spacing: 2px;
 }
 
 QLineEdit:focus{
-	border:3px solid rgb(44,169,225);
+	border:1px solid rgb(44,169,225);
 }</string>
                 </property>
                 <property name="text">
                  <string/>
                 </property>
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::EchoMode::Normal</enum>
+                </property>
+                <property name="dragEnabled">
+                 <bool>false</bool>
+                </property>
                 <property name="placeholderText">
-                 <string>请输入用户名</string>
+                 <string>请输入正确的邮箱</string>
                 </property>
                 <property name="cursorMoveStyle">
-                 <enum>Qt::CursorMoveStyle::LogicalMoveStyle</enum>
+                 <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -550,7 +582,7 @@ border: none;
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_2">
+               <widget class="QLineEdit" name="password">
                 <property name="minimumSize">
                  <size>
                   <width>186</width>
@@ -563,32 +595,44 @@ border: none;
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-	font: 12pt;
+	font: 10pt;
 	background:rgba(253,253,253,1);
 	border:1px solid rgb(0, 0, 0);
 	border-radius:5px;
 padding-left: 5px;
 	padding-right: 5px;
-letter-spacing: 3px;
+letter-spacing: 1px;
 }
 
 QLineEdit:focus{
-	border:3px solid rgb(44,169,225);
+	border:1px solid rgb(44,169,225);
 }</string>
                 </property>
+                <property name="inputMask">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
                 <property name="echoMode">
-                 <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+                 <enum>QLineEdit::EchoMode::Password</enum>
                 </property>
                 <property name="dragEnabled">
                  <bool>false</bool>
                 </property>
                 <property name="placeholderText">
-                 <string>请输入密码</string>
+                 <string>请输入6~20位密码</string>
+                </property>
+                <property name="cursorMoveStyle">
+                 <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
                 </property>
                 <property name="clearButtonEnabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -600,113 +644,6 @@ QLineEdit:focus{
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>0</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_11">
-             <property name="styleSheet">
-              <string notr="true">#frame_11{
-	border: none;
-}</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_8">
-              <property name="spacing">
-               <number>6</number>
-              </property>
-              <property name="leftMargin">
-               <number>12</number>
-              </property>
-              <property name="topMargin">
-               <number>12</number>
-              </property>
-              <property name="rightMargin">
-               <number>12</number>
-              </property>
-              <property name="bottomMargin">
-               <number>12</number>
-              </property>
-              <item>
-               <spacer name="horizontalSpacer_13">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>1</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_5">
-                <property name="styleSheet">
-                 <string notr="true">#label_5{
-border: none;
-	font: 700 16pt;
-	letter-spacing: 2px;
-
-}</string>
-                </property>
-                <property name="text">
-                 <string>邮箱:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_3">
-                <property name="minimumSize">
-                 <size>
-                  <width>186</width>
-                  <height>25</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>186</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QLineEdit{
-	font: 12pt;
-	background:rgba(253,253,253,1);
-	border:1px solid rgb(0, 0, 0);
-	border-radius:5px;
-padding-left: 5px;
-	padding-right: 5px;
-letter-spacing: 2px;
-}
-
-QLineEdit:focus{
-	border:3px solid rgb(44,169,225);
-}</string>
-                </property>
-                <property name="placeholderText">
-                 <string>请输入邮箱</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_15">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>1</width>
                   <height>20</height>
                  </size>
                 </property>
@@ -791,10 +728,10 @@ QLineEdit:focus{
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <property name="topMargin">
-               <number>20</number>
+               <number>12</number>
               </property>
               <property name="bottomMargin">
-               <number>20</number>
+               <number>9</number>
               </property>
               <item>
                <spacer name="horizontalSpacer_3">
@@ -887,6 +824,9 @@ QLineEdit:focus{
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <property name="bottomMargin">
+            <number>13</number>
+           </property>
            <item>
             <spacer name="horizontalSpacer_11">
              <property name="orientation">
@@ -923,7 +863,10 @@ QLineEdit:focus{
 }</string>
              </property>
              <property name="text">
-              <string>提示: 目前没啥用, 直接点击登录即可.</string>
+              <string>提示:
+  1.账号系统已开启, 请牢记邮箱密码!
+  2.直接输入邮箱密码即可注册;
+  3.基础功能不影响使用.</string>
              </property>
              <property name="scaledContents">
               <bool>false</bool>

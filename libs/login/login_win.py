@@ -4,10 +4,13 @@
 # @Email  : pupper.cheng@gmail.com
 import os
 
-from PySide6.QtGui import QCursor, QFont, QFontDatabase, Qt
+from PySide6.QtCore import QRegularExpression
+from PySide6.QtGui import QCursor, QFont, QFontDatabase, QRegularExpressionValidator, Qt
 from PySide6.QtWidgets import QMainWindow
 
+from tools.files import read_file
 from views.login import Ui_MainWindow as login_ui
+from libs.login.logins import Login
 
 
 class LoginMainWin(QMainWindow):
@@ -21,13 +24,31 @@ class LoginMainWin(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
+        regex = QRegularExpression(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+        validator = QRegularExpressionValidator(regex)
+        self.login_ui.username.setValidator(validator)
+        self.login_ui.password.setValidator(validator)
+
+        self.login_text()   # 读取登录信息
+
     def login_flow(self):
-        login_data = {}
-        login_data['username'] = self.login_ui.lineEdit.text().strip()
-        login_data['password'] = self.login_ui.lineEdit_2.text().strip()
-        login_data['email'] = self.login_ui.lineEdit_3.text().strip()
-        login_data['check_box'] = self.login_ui.checkBox.isChecked()
-        return True
+        username = self.login_ui.username.text()
+        password = self.login_ui.password.text()
+        record_password = self.login_ui.checkBox.isChecked()
+        _res = Login(username, password, record_password).login()
+        if _res["code"] == "101":
+            return True
+        else:
+            return _res["message"]
+
+    def login_text(self):
+        _user = read_file("login_info.txt")
+        if _user:
+            _user = _user.split(",")
+            if _user[2] == "True":
+                self.login_ui.username.setText(_user[0])
+                self.login_ui.password.setText(_user[1])
+                self.login_ui.checkBox.setChecked(_user[2] == "True")
 
 
     # ----------- 窗口拖动 -----------

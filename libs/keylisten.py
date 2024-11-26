@@ -49,6 +49,7 @@ class KeyListen(Thread, QObject):
                     self._get_gun_information()
                 else:
                     GDV.enable_key_recognition = True
+                    time.sleep(0.3)
                     self._shooting_state()  # 获取射击状态
 
             elif keys == "esc":  # 监听到按键 'esc'
@@ -84,8 +85,10 @@ class KeyListen(Thread, QObject):
         else:
             GDV.enable_mouse_recognition = False
 
+
+
     def _shooting_state(self):  # 获取射击状态
-        THREAD_POOL.submit(get_shooting_state).result()
+        get_shooting_state()
         self.parent.state_win.update_state_shooting_state() # 更新射击状态
 
     def stop_listener(self):

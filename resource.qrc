@@ -7,6 +7,10 @@
     <file>resource/ttf/YouSheYuFeiTeJianKangTi.ttf</file>
   </qresource>
   <qresource prefix="icon">
+    <file>resource/icon/error.png</file>
+    <file>resource/icon/success.png</file>
+    <file>resource/icon/vip_1.png</file>
+    <file>resource/icon/vip.png</file>
     <file>resource/icon/qq.png</file>
     <file>resource/icon/minimize.png</file>
     <file>resource/icon/close.png</file>

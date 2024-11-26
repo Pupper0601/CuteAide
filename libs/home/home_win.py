@@ -45,14 +45,13 @@ class HomeMainWin(QMainWindow):
         self.ui.radioButton_4.clicked.connect(self.update_posture_buttons)
         self.ui.radioButton.clicked.connect(self.update_mouse_gun)
         self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
-        self.ui.pushButton_11.clicked.connect(self._click_qq_group)
+        self.ui.pushButton_12.clicked.connect(self._click_qq_group)
 
     # 设置屏幕分辨率
     def resolution(self):
         GDV.CACHE = ImageCache().source_data
         reso = get_monitor_info()
         self.ui.label_2.setText(f" {reso['width']}x{reso['height']}")
-        self.ui.label_4.setText("已适配")
 
     # 更新识别状态
     def update_way(self, text):
@@ -163,6 +162,8 @@ class HomeMainWin(QMainWindow):
         msg_box.setIcon(QMessageBox.Information)
         msg_box.setText("QQ群号已复制到剪切板")
         msg_box.setWindowTitle("提示")
+        msg_box.setStyleSheet("padding: 10px;")
+        msg_box.setWindowIcon(QIcon("/resource/icon/success.png"))
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec()
 

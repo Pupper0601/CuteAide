@@ -3,6 +3,8 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 import json
+import os
+import sys
 from pathlib import Path
 
 from libs.global_variable import GDV, THREAD_POOL
@@ -17,7 +19,15 @@ class Pressure:
 
     @staticmethod
     def get_component_factor():
-        _gun_data = json.loads(read_file("/gun_data.json"))
+        try:
+            _path = str(Path(sys.argv[0]).parent).split("CuteAide")[0] + "CuteAide"
+            _path = _path.replace("\\", "/")
+            _path += '/gun_data.json'
+            logger.info(f"当前路径: {_path}")
+            with open(_path, 'r') as file:
+                _gun_data = json.load(file)
+        except FileNotFoundError as e:
+            logger.error(f"读取 gun_data.json 文件报错: {e}")
 
         _factor_data = {}
         current_weapon_info = GDV.current_weapon_information
@@ -131,6 +141,7 @@ class Pressure:
                             file.write(f"{key} = {{{formatted_list}}}\n")
                     else:
                         file.write(f"{key} = {value}\n")
+                logger.info(f"写入文件成功: {file_path}")
 
 
 if __name__ == '__main__':

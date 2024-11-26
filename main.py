@@ -1,5 +1,7 @@
 import sys
 
+from PySide6.QtGui import QIcon
+from PySide6.QtLocation import QPlaceIcon
 from PySide6.QtWidgets import QApplication, QDialog, QLabel, QMainWindow, QPushButton, QVBoxLayout
 
 from common import notice
@@ -19,17 +21,22 @@ class MainWin(QMainWindow):
         self.login_win.login_ui.login_button.clicked.connect(self.show_home)
 
     def show_home(self):
-        if self.login_win.login_flow():
-            self.show_message_box()
+        _res = self.login_win.login_flow()
+        if _res is True:
+            self.show_message_box(notice, "提示", "resource/icon/success.png")
             self.home_win.show()
             self.login_win.close()
+        else:
+            self.show_message_box(_res, "错误", "resource/icon/error.png")
 
-    def show_message_box(self):
+    def show_message_box(self, info,title, icon):
         dialog = QDialog(self)
-        dialog.setWindowTitle("提示")
+        dialog.setWindowTitle(title)
+        dialog.setStyleSheet("padding: 10px;")
+        dialog.setWindowIcon(QIcon(icon))
         layout = QVBoxLayout()
 
-        label = QLabel(notice)
+        label = QLabel(info)
         layout.addWidget(label)
 
         button = QPushButton("确定")

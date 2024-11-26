@@ -17,14 +17,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QTabWidget, QVBoxLayout,
+    QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(631, 435)
+        MainWindow.resize(633, 435)
+        MainWindow.setMouseTracking(True)
+        MainWindow.setTabShape(QTabWidget.TabShape.Rounded)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.widget = QWidget(self.centralwidget)
@@ -195,6 +198,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_7 = QFrame(self.frame_6)
         self.frame_7.setObjectName(u"frame_7")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(1)
+        sizePolicy3.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
+        self.frame_7.setSizePolicy(sizePolicy3)
         self.frame_7.setMaximumSize(QSize(16777215, 16777215))
         self.frame_7.setStyleSheet(u"#frame_7{\n"
 "	border: none;\n"
@@ -218,31 +226,34 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.label_2)
 
-        self.lineEdit = QLineEdit(self.frame_7)
-        self.lineEdit.setObjectName(u"lineEdit")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
-        self.lineEdit.setSizePolicy(sizePolicy3)
-        self.lineEdit.setMinimumSize(QSize(186, 25))
-        self.lineEdit.setMaximumSize(QSize(186, 16777215))
-        self.lineEdit.setStyleSheet(u"QLineEdit{\n"
-"	font: 12pt;\n"
+        self.username = QLineEdit(self.frame_7)
+        self.username.setObjectName(u"username")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.username.sizePolicy().hasHeightForWidth())
+        self.username.setSizePolicy(sizePolicy4)
+        self.username.setMinimumSize(QSize(186, 25))
+        self.username.setMaximumSize(QSize(186, 16777215))
+        self.username.setStyleSheet(u"QLineEdit{\n"
+"	font: 10pt;\n"
 "	background:rgba(253,253,253,1);\n"
 "	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "	padding-left: 5px;\n"
 "	padding-right: 5px;\n"
-"	letter-spacing: 2px;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
-"	border:3px solid rgb(44,169,225);\n"
+"	border:1px solid rgb(44,169,225);\n"
 "}")
-        self.lineEdit.setCursorMoveStyle(Qt.CursorMoveStyle.LogicalMoveStyle)
+        self.username.setMaxLength(30)
+        self.username.setEchoMode(QLineEdit.EchoMode.Normal)
+        self.username.setDragEnabled(False)
+        self.username.setCursorMoveStyle(Qt.CursorMoveStyle.VisualMoveStyle)
+        self.username.setClearButtonEnabled(True)
 
-        self.horizontalLayout_4.addWidget(self.lineEdit)
+        self.horizontalLayout_4.addWidget(self.username)
 
         self.horizontalSpacer_7 = QSpacerItem(1, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -278,28 +289,29 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.label_3)
 
-        self.lineEdit_2 = QLineEdit(self.frame_8)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-        self.lineEdit_2.setMinimumSize(QSize(186, 25))
-        self.lineEdit_2.setMaximumSize(QSize(186, 16777215))
-        self.lineEdit_2.setStyleSheet(u"QLineEdit{\n"
-"	font: 12pt;\n"
+        self.password = QLineEdit(self.frame_8)
+        self.password.setObjectName(u"password")
+        self.password.setMinimumSize(QSize(186, 25))
+        self.password.setMaximumSize(QSize(186, 16777215))
+        self.password.setStyleSheet(u"QLineEdit{\n"
+"	font: 10pt;\n"
 "	background:rgba(253,253,253,1);\n"
 "	border:1px solid rgb(0, 0, 0);\n"
 "	border-radius:5px;\n"
 "padding-left: 5px;\n"
 "	padding-right: 5px;\n"
-"letter-spacing: 3px;\n"
+"letter-spacing: 1px;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
-"	border:3px solid rgb(44,169,225);\n"
+"	border:1px solid rgb(44,169,225);\n"
 "}")
-        self.lineEdit_2.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
-        self.lineEdit_2.setDragEnabled(False)
-        self.lineEdit_2.setClearButtonEnabled(False)
+        self.password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.password.setDragEnabled(False)
+        self.password.setCursorMoveStyle(Qt.CursorMoveStyle.VisualMoveStyle)
+        self.password.setClearButtonEnabled(True)
 
-        self.horizontalLayout_5.addWidget(self.lineEdit_2)
+        self.horizontalLayout_5.addWidget(self.password)
 
         self.horizontalSpacer_8 = QSpacerItem(0, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -307,59 +319,6 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_2.addWidget(self.frame_8)
-
-        self.frame_11 = QFrame(self.frame_6)
-        self.frame_11.setObjectName(u"frame_11")
-        self.frame_11.setStyleSheet(u"#frame_11{\n"
-"	border: none;\n"
-"}")
-        self.frame_11.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_11.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_8 = QHBoxLayout(self.frame_11)
-        self.horizontalLayout_8.setSpacing(6)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(12, 12, 12, 12)
-        self.horizontalSpacer_13 = QSpacerItem(1, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_13)
-
-        self.label_5 = QLabel(self.frame_11)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setStyleSheet(u"#label_5{\n"
-"border: none;\n"
-"	font: 700 16pt;\n"
-"	letter-spacing: 2px;\n"
-"\n"
-"}")
-
-        self.horizontalLayout_8.addWidget(self.label_5)
-
-        self.lineEdit_3 = QLineEdit(self.frame_11)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
-        self.lineEdit_3.setMinimumSize(QSize(186, 25))
-        self.lineEdit_3.setMaximumSize(QSize(186, 16777215))
-        self.lineEdit_3.setStyleSheet(u"QLineEdit{\n"
-"	font: 12pt;\n"
-"	background:rgba(253,253,253,1);\n"
-"	border:1px solid rgb(0, 0, 0);\n"
-"	border-radius:5px;\n"
-"padding-left: 5px;\n"
-"	padding-right: 5px;\n"
-"letter-spacing: 2px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus{\n"
-"	border:3px solid rgb(44,169,225);\n"
-"}")
-
-        self.horizontalLayout_8.addWidget(self.lineEdit_3)
-
-        self.horizontalSpacer_15 = QSpacerItem(1, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_15)
-
-
-        self.verticalLayout_2.addWidget(self.frame_11)
 
         self.frame = QFrame(self.frame_6)
         self.frame.setObjectName(u"frame")
@@ -396,7 +355,7 @@ class Ui_MainWindow(object):
         self.frame_9.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_6 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(-1, 20, -1, 20)
+        self.horizontalLayout_6.setContentsMargins(-1, 12, -1, 9)
         self.horizontalSpacer_3 = QSpacerItem(21, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_3)
@@ -447,6 +406,7 @@ class Ui_MainWindow(object):
         self.frame_10.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_10)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(-1, -1, -1, 13)
         self.horizontalSpacer_11 = QSpacerItem(1, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_11)
@@ -487,19 +447,34 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+#if QT_CONFIG(whatsthis)
+        self.label.setWhatsThis(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165", None))
+#endif // QT_CONFIG(whatsthis)
         self.label.setText("")
         self.pushButton_2.setText("")
         self.pushButton_3.setText("")
+#if QT_CONFIG(tooltip)
+        self.frame_5.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>\u8bf7\u8f93\u51656~30\u4f4d\u5bc6\u7801</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"CuteAide", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u8d26\u53f7:", None))
-        self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u7528\u6237\u540d", None))
+#if QT_CONFIG(tooltip)
+        self.frame_7.setToolTip(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u51656~30\u4f4d\u5bc6\u7801", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u90ae\u7bb1:", None))
+        self.username.setText("")
+        self.username.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u6b63\u786e\u7684\u90ae\u7bb1", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801:", None))
-        self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u5bc6\u7801", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u90ae\u7bb1:", None))
-        self.lineEdit_3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u90ae\u7bb1", None))
+#if QT_CONFIG(statustip)
+        self.password.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+        self.password.setInputMask("")
+        self.password.setText("")
+        self.password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u51656~20\u4f4d\u5bc6\u7801", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u8bb0\u5f55\u8d26\u53f7", None))
         self.login_button.setText(QCoreApplication.translate("MainWindow", u"\u767b\u5f55/\u6ce8\u518c", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u793a: \u76ee\u524d\u6ca1\u5565\u7528, \u76f4\u63a5\u70b9\u51fb\u767b\u5f55\u5373\u53ef.", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u793a:\n"
+"  1.\u8d26\u53f7\u7cfb\u7edf\u5df2\u5f00\u542f, \u8bf7\u7262\u8bb0\u90ae\u7bb1\u5bc6\u7801!\n"
+"  2.\u76f4\u63a5\u8f93\u5165\u90ae\u7bb1\u5bc6\u7801\u5373\u53ef\u6ce8\u518c;\n"
+"  3.\u57fa\u7840\u529f\u80fd\u4e0d\u5f71\u54cd\u4f7f\u7528.", None))
     # retranslateUi
 

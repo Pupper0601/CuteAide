@@ -32,7 +32,6 @@ class MouseListen(Thread, QObject):
     def on_click(self, x, y, button, pressed):
         if GDV.enable_mouse_recognition and not pressed and button == Button.right:
             if get_active_window_info() and get_inventory():
-                time.sleep(0.3)
                 screen_capture_full()
                 GetGunInfo()
                 self.parent.update_home_gun_info(GDV.weapon_information)

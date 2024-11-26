@@ -88,21 +88,22 @@ def get_shooting_state():
     time.sleep(0.5)
     screen_capture_full()   # 截取整个屏幕的屏幕截图
     shooting_state_place = GDV.CACHE["config"]["shooting_state"]
+    is_any_fired = False  # 标志变量，表示是否有开火状态
+
     for key, value in shooting_state_place.items():
-        if GDV.global_screenshot is None:
-            screen_capture_full()
         temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
         if check_near_white_pixels(temp_img):   # 检查图像中是否有连续10个像素的颜色接近于白色
-            if GDV.shooting_state == "stop":
-                GDV.shooting_state = "fired"
-                break
-        elif check_near_red_pixels(temp_img):   # 检查图像中是否有连续10个像素的颜色接近于红色
-            if GDV.shooting_state == "fired":
-                GDV.shooting_state = "stop"
-                break
-    else:
-        if GDV.shooting_state == "fired":
-            GDV.shooting_state = "stop"
+            is_any_fired = True  # 有开火状态
+            GDV.shooting_state = "fired"
+            logger.info(f"射击状态 ---> 开火")
+            logger.info(f"当前射击状态: {GDV.shooting_state}")
+
+    # 如果没有任何开火状态，设置为stop
+    if not is_any_fired:
+        GDV.shooting_state = "stop"
+        logger.info(f"射击状态 ---> 停止")
+        logger.info(f"当前射击状态: {GDV.shooting_state}")
+
 
 def check_near_white_pixels(image):
     # 检查图像中是否有连续10个像素的颜色接近于白色
@@ -112,26 +113,11 @@ def check_near_white_pixels(image):
         for pixel in row:
             if all(channel >= white_threshold for channel in pixel):
                 count += 1
-                if count == 10:
+                if count == 50:
                     return True
             else:
                 count = 0
     return False
-
-def check_near_red_pixels(image):
-    # 检查图像中是否有连续10个像素的颜色接近于红色
-    red_threshold = 210  # 定义接近红色的阈值
-    for row in image:
-        count = 0
-        for pixel in row:
-            if pixel[2] >= red_threshold > pixel[0] and pixel[1] < red_threshold:
-                count += 1
-                if count == 10:
-                    return True
-            else:
-                count = 0
-    return False
-
 
 if __name__ == '__main__':
     # 示例用法
