@@ -70,9 +70,9 @@ class HomeMainWin(QMainWindow):
         if text == " 开始识别压枪":
             self.ui.pushButton_2.setText(" 暂停识别压枪")
             self.ui.pushButton_2.setIcon(QIcon(path_conn("/resource/icon/stop.png")))
-            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(255,85,"
+            self.ui.pushButton_2.setStyleSheet("#pushButton_2{font: 700 20pt ;background-color: rgb(0,128,"
                                                "0);color: rgb(255,255,255);border-radius: 10px;border: 3px solid "
-                                               "rgb(255,85,0);letter-spacing: 1px;}#pushButton_2:hover{"
+                                               "rgb(0,128,0);letter-spacing: 1px;}#pushButton_2:hover{"
                                                "background-color: rgb(255,255,255);color: rgb(0,0,0);}")
 
             self.start_listeners()  # 启动键盘、键盘监听器
@@ -163,7 +163,7 @@ class HomeMainWin(QMainWindow):
         msg_box.setText("QQ群号已复制到剪切板")
         msg_box.setWindowTitle("提示")
         msg_box.setStyleSheet("padding: 10px;")
-        msg_box.setWindowIcon(QIcon("/resource/icon/success.png"))
+        msg_box.setWindowIcon(QIcon(path_conn("/resource/icon/success.png")))
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec()
 

@@ -7,6 +7,7 @@ from PySide6.QtWidgets import QApplication, QDialog, QLabel, QMainWindow, QPushB
 from common import notice
 from libs.home.home_win import HomeMainWin
 from libs.login.login_win import LoginMainWin
+from tools.paths import path_conn
 
 
 class MainWin(QMainWindow):
@@ -23,11 +24,11 @@ class MainWin(QMainWindow):
     def show_home(self):
         _res = self.login_win.login_flow()
         if _res is True:
-            self.show_message_box(notice, "提示", "resource/icon/success.png")
+            self.show_message_box(notice, "提示", path_conn("resource/icon/success.png"))
             self.home_win.show()
             self.login_win.close()
         else:
-            self.show_message_box(_res, "错误", "resource/icon/error.png")
+            self.show_message_box(_res, "错误", path_conn("resource/icon/error.png"))
 
     def show_message_box(self, info,title, icon):
         dialog = QDialog(self)

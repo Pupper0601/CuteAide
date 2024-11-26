@@ -172,6 +172,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_7 = QPushButton(self.frame_17)
         self.pushButton_7.setObjectName(u"pushButton_7")
+        self.pushButton_7.setEnabled(False)
         self.pushButton_7.setMinimumSize(QSize(90, 28))
         self.pushButton_7.setMaximumSize(QSize(90, 16777215))
         self.pushButton_7.setStyleSheet(u"#pushButton_7{\n"
@@ -639,11 +640,12 @@ class Ui_MainWindow(object):
 
         self.pushButton_11 = QPushButton(self.frame_21)
         self.pushButton_11.setObjectName(u"pushButton_11")
+        self.pushButton_11.setEnabled(False)
         sizePolicy9.setHeightForWidth(self.pushButton_11.sizePolicy().hasHeightForWidth())
         self.pushButton_11.setSizePolicy(sizePolicy9)
         self.pushButton_11.setMinimumSize(QSize(0, 46))
         self.pushButton_11.setStyleSheet(u"#pushButton_11{\n"
-"	font: 700 20pt ;\n"
+"	font: 700 18pt ;\n"
 "	background-color: rgb(255, 97, 6);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -1113,7 +1115,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"v0.23", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"VIP\u5012\u8ba1\u65f6:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"365\u5929", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u975eVIP", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"CuteAide", None))
         self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u" VIP\u8d2d\u4e70", None))
         self.pushButton_4.setText("")
