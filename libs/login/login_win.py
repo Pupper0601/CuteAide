@@ -9,6 +9,7 @@ from PySide6.QtCore import QRegularExpression
 from PySide6.QtGui import QCursor, QRegularExpressionValidator, Qt
 from PySide6.QtWidgets import QMainWindow
 
+from tools.log import logger
 from views.login import Ui_MainWindow as login_ui
 from libs.login.logins import Login
 
@@ -36,6 +37,7 @@ class LoginMainWin(QMainWindow):
         password = self.login_ui.password.text()
         record_password = self.login_ui.checkBox.isChecked()
         _res = Login(username, password, record_password).login()
+        logger.info(f"登录结果: {_res}")
         if _res["code"] == "101":
             return True
         else:
@@ -43,6 +45,12 @@ class LoginMainWin(QMainWindow):
 
     def login_text(self):
         _file_path = "C:/CuteAide/login_info.txt"
+
+        path = Path(_file_path)  # 创建文件
+        if not path.is_file():  # 如果文件不存在, 则创建文件
+            path.parent.mkdir(parents=True, exist_ok=True)  # 创建文件夹
+            path.touch()  # 创建文件
+
         if Path(_file_path).exists():
             with open(_file_path, 'r') as f:
                 _user = f.read()

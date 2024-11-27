@@ -3,6 +3,7 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 import re
+from pathlib import Path
 
 from requests import request
 
@@ -34,18 +35,25 @@ class Login:
         return True
 
     def login(self):
+
+        _file_path = "C:/CuteAide/login_info.txt"
+
+        path = Path(_file_path)  # 创建文件
+        if not path.is_file():  # 如果文件不存在, 则创建文件
+            path.parent.mkdir(parents=True, exist_ok=True)  # 创建文件夹
+            path.touch()  # 创建文件
+
         if self.is_valid_email() and self.is_valid_password():
             _url = "http://119.45.236.69:9527/login"
             _data = {"username": self.username, "password": self.password}
             if self.is_password:
-                file_name = f"C:/CuteAide/login_info.txt"
+
                 content = f"{self.username},{self.password},{self.is_password}"
-                with open(file_name, 'w+') as f:
+                with open(_file_path, 'w+') as f:
                     f.write(content)
             else:
-                file_name = f"C:/CuteAide/login_info.txt"
                 content = f"{self.username},{self.password},False"
-                with open(file_name, 'w+') as f:
+                with open(_file_path, 'w+') as f:
                     f.write(content)
             return request("POST", _url, json=_data).json()
         else:

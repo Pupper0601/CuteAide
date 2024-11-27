@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 from functools import wraps
 from pathlib import Path
@@ -15,6 +16,12 @@ def singleton_class_decorator(cls):
             _instance[cls] = cls(*args, **kwargs)
         return _instance[cls]
     return wrapper_class
+
+def log_path():
+    _path = str(Path(sys.argv[0]).parent)
+    _path = _path.replace("\\", "/")
+    _path += '/logs.log'
+    return _path
 
 
 @singleton_class_decorator
@@ -35,7 +42,7 @@ class Logger:
     @staticmethod
     def logger_add():
         loguru.logger.add(
-            sink= paths() + "./logs.log",
+            sink= log_path(),
             level="ERROR",
             rotation='00:00',
             retention='1 day',
@@ -52,4 +59,5 @@ logger = Logger().get_logger
 
 
 if __name__ == '__main__':
-    logger.info("测试日志")
+    # logger.info("测试日志")
+    print(log_path())

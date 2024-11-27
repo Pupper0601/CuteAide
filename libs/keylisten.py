@@ -24,9 +24,10 @@ class KeyListen(Thread, QObject):
         self.listener = None
         self.stop_event = Event()
         self.parent = parent  # 保存父对象
+        self.key_states = {}  # 添加字典来记录每个键的状态
 
     def run(self):
-        self.listener = keyboard.Listener(on_press=self.on_pressed)
+        self.listener = keyboard.Listener(on_press=self.on_pressed,on_release=self.on_released)
         self.listener.start()
         logger.info("监听键盘线程启动")
 
@@ -43,38 +44,44 @@ class KeyListen(Thread, QObject):
                 "%": "5"
             }
             keys = replace_dict.get(keys, keys)
-            if keys == "tab":  # 监听到按键 'tab'
-                if GDV.enable_key_recognition:  # 如果键盘识别背包开启
-                    self._get_gun_information()
-                else:
+            if keys not in self.key_states or not self.key_states[keys]:  # 检查键的状态
+                self.key_states[keys] = True  # 设置键的状态为按下
+                if keys == "tab":  # 监听到按键 'tab'
+                    if GDV.enable_key_recognition:  # 如果键盘识别背包开启
+                        self._get_gun_information()
+                    else:
+                        GDV.enable_key_recognition = True
+                        self._shooting_state()
+
+                elif keys == "esc":  # 监听到按键 'esc'
+                    GDV.enable_mouse_recognition = False
                     GDV.enable_key_recognition = True
                     self._shooting_state()
 
-            elif keys == "esc":  # 监听到按键 'esc'
-                GDV.enable_mouse_recognition = False
-                GDV.enable_key_recognition = True
-                self._shooting_state()
+                elif keys in ["1","2"]:
+                    _gun = GDV.current_weapon_information
+                    if len(_gun) > 0 and _gun["weapon"][1] != "weapon_none":
+                        if GDV.shooting_state == "stop":
+                            GDV.shooting_state = "fired"
+                    else:
+                        if GDV.shooting_state == "fired":
+                            GDV.shooting_state = "stop"
+                    self.parent.state_win.update_state_gun_info(keys)  # 更新 state_win 枪械信息
+                    self.parent.state_win.update_state_shooting()
+                    self.parent.update_home_current_gun()  # 更新当前枪械
 
-            elif keys in ["1","2"]:
-                _gun = GDV.current_weapon_information
-                if len(_gun) > 0 and _gun["weapon"][1] != "weapon_none":
-                    if GDV.shooting_state == "stop":
-                        GDV.shooting_state = "fired"
-                else:
-                    if GDV.shooting_state == "fired":
-                        GDV.shooting_state = "stop"
-                self.parent.state_win.update_state_gun_info(keys)  # 更新 state_win 枪械信息
-                self.parent.state_win.update_state_shooting()
-                self.parent.update_home_current_gun()  # 更新当前枪械
+                elif keys in ["3", "4","x", "5", "m"]:
+                    self._shooting_state()
 
-            elif keys in ["3", "4","x", "5", "m"]:
-                self._shooting_state()
+                elif keys in ['z', 'c', 'ctrl_l', 'space']:
+                    self.parent.state_win.update_posture(keys)
 
-            elif keys in ['z', 'c', 'ctrl_l', 'space']:
-                self.parent.state_win.update_posture(keys)
+                elif keys in ['f']:
+                    get_car()
 
-            elif keys in ['f']:
-                get_car()
+    def on_released(self, keys):
+        keys = str(keys.name if isinstance(keys, Key) else keys.char).lower()
+        self.key_states[keys] = False  # 重置键的状态
 
     def _get_gun_information(self):
         # 获取枪械信息

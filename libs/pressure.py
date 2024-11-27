@@ -39,8 +39,8 @@ class Pressure:
 
     @staticmethod
     def get_component_factor():
-        _gun_data = get_gun_data()
-
+        # _gun_data = get_gun_data()
+        _gun_data = json.loads(read_file("/gun_data.json"))
         _factor_data = {}
         current_weapon_info = GDV.current_weapon_information
 
@@ -140,10 +140,10 @@ class Pressure:
             GDV.output_gun_info = _gun_info
 
         file_path = "C:/CuteAide/output.lua"
-        path = Path(file_path)
-        if not path.is_file():
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.touch()
+        path = Path(file_path)  # 创建文件
+        if not path.is_file():  # 如果文件不存在, 则创建文件
+            path.parent.mkdir(parents=True, exist_ok=True)  # 创建文件夹
+            path.touch()    # 创建文件
 
         with open(file_path, 'w', encoding='utf-8') as file:
             file.truncate(0)  # 清空文件内容
