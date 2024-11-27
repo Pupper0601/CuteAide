@@ -38,9 +38,15 @@ class Login:
             _url = "http://119.45.236.69:9527/login"
             _data = {"username": self.username, "password": self.password}
             if self.is_password:
-                write_file("login_info.txt", f"{self.username},{self.password},{self.is_password}")
+                file_name = f"C:/CuteAide/login_info.txt"
+                content = f"{self.username},{self.password},{self.is_password}"
+                with open(file_name, 'w+') as f:
+                    f.write(content)
             else:
-                write_file("login_info.txt", f"{self.username},{self.password},False")
+                file_name = f"C:/CuteAide/login_info.txt"
+                content = f"{self.username},{self.password},False"
+                with open(file_name, 'w+') as f:
+                    f.write(content)
             return request("POST", _url, json=_data).json()
         else:
             return {"code": "401", "message": "邮箱或密码错误"}

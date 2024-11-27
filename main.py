@@ -1,7 +1,6 @@
 import sys
 
 from PySide6.QtGui import QIcon
-from PySide6.QtLocation import QPlaceIcon
 from PySide6.QtWidgets import QApplication, QDialog, QLabel, QMainWindow, QPushButton, QVBoxLayout
 
 from common import notice

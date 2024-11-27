@@ -11,7 +11,7 @@ from tools.log import logger
 
 
 def GetGunInfo():
-    THREAD_POOL.submit(_GetGunInfo)
+    THREAD_POOL.submit(_GetGunInfo).result()
 
 
 class _GetGunInfo:
@@ -45,6 +45,7 @@ class _GetGunInfo:
                                                extract_region(_full_frame, _position[
                                                    "stock_1"]))}
             results_1 = {key: future.result() for key, future in futures_1.items()}
+            logger.info(f"results_1: {results_1}")
 
             gun_1["weapon"] = results_1["weapon_1"]
             gun_1["scope"] = results_1["scope_1"]
@@ -71,6 +72,7 @@ class _GetGunInfo:
             }
 
             results_2 = {key: future.result() for key, future in futures_2.items()}
+            logger.info(f"results_2: {results_2}")
 
             gun_2["weapon"] = results_2["weapon_2"]
             gun_2["scope"] = results_2["scope_2"]
@@ -94,6 +96,7 @@ class _GetGunInfo:
                      "stock" : ["无枪托", "stock_none"]}
 
         GDV.weapon_information = {"gun_1": gun_1, "gun_2": gun_2}
+        logger.info(f"GDV.weapon_information: {GDV.weapon_information}")
 
         # {'gun_1': {'weapon': ['自动装填步枪', 'ZDZT'], 'scope': ['6倍镜', 'x6'], 'muzzle': ['无枪口', 'muzzle_none'],
         #            'grip'  : ['无握把', 'grip_none'], 'stock': ['托腮板', 'tosaiban']},

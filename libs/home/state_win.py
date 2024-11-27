@@ -97,7 +97,10 @@ class StateMainWin(QMainWindow):
                     self.ui.pushButton_12.setText(posture_map[key][1])
                     GDV.posture_state = posture_map[key][3]
 
-    def update_state_shooting_state(self):
+    def update_state_shooting(self):
+        THREAD_POOL.submit(self._update_state_shooting_task)
+
+    def _update_state_shooting_task(self):
         # 更新射击状态
         _state = GDV.shooting_state
         _text = self.ui.pushButton_9.text()

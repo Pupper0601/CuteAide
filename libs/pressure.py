@@ -11,23 +11,35 @@ from libs.global_variable import GDV, THREAD_POOL
 from tools.files import read_file
 from tools.log import logger
 
+gun_data_factor = None
 
-class Pressure:
-    def __init__(self):
-        # self.s = weapon_info
-        THREAD_POOL.submit(self.write_dict_to_lua_file())
 
-    @staticmethod
-    def get_component_factor():
+def get_gun_data():
+    global gun_data_factor
+    if gun_data_factor is None:
         try:
-            _path = str(Path(sys.argv[0]).parent).split("CuteAide")[0] + "CuteAide"
+            _path = str(Path(sys.argv[0]).parent)
             _path = _path.replace("\\", "/")
             _path += '/gun_data.json'
             logger.info(f"当前路径: {_path}")
             with open(_path, 'r') as file:
-                _gun_data = json.load(file)
+                gun_data_factor = json.load(file)
+                logger.info("读取 gun_data.json 文件成功")
+                return gun_data_factor
         except FileNotFoundError as e:
             logger.error(f"读取 gun_data.json 文件报错: {e}")
+    else:
+        return gun_data_factor
+
+
+class Pressure:
+    def __init__(self):
+        # self.s = weapon_info
+        THREAD_POOL.submit(self.write_dict_to_lua_file)
+
+    @staticmethod
+    def get_component_factor():
+        _gun_data = get_gun_data()
 
         _factor_data = {}
         current_weapon_info = GDV.current_weapon_information
@@ -119,17 +131,22 @@ class Pressure:
                 return _effect_data
 
     def write_dict_to_lua_file(self):
+        _gun_info = self.calculate_factors()
+
+        if _gun_info == GDV.output_gun_info:
+            logger.info("枪械信息没有更新, 不写入文件")
+            return
+        else:
+            GDV.output_gun_info = _gun_info
+
         file_path = "C:/CuteAide/output.lua"
         path = Path(file_path)
         if not path.is_file():
-            # 如果文件夹不存在，则创建
             path.parent.mkdir(parents=True, exist_ok=True)
-            # 创建文件
             path.touch()
 
         with open(file_path, 'w', encoding='utf-8') as file:
             file.truncate(0)  # 清空文件内容
-            _gun_info = self.calculate_factors()
             if _gun_info is not None:
                 for key, value in _gun_info.items():
                     if isinstance(value, str):

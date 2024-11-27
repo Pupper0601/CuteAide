@@ -15,6 +15,7 @@ from tools.log import logger
 def screen_capture_full():
     # 截取整个屏幕的屏幕截图
     with mss.mss() as sct:
+        start_time = time.time()
         monitor = sct.monitors[1]  # 获取主显示器的分辨率
         captured_frame = sct.grab(monitor)  # 截取整个屏幕的屏幕截图
         full_frame = np.array(captured_frame)
@@ -32,6 +33,7 @@ def screen_capture_full():
 
         GDV.global_screenshot = resized_frame
 
+        logger.info(f"截取整个屏幕的屏幕截图耗时: {time.time() - start_time:.2f}秒")
 
 def extract_region(full_frame, region):
     # 从整个屏幕截图中提取指定区域
@@ -41,7 +43,6 @@ def extract_region(full_frame, region):
         logger.error("截取的图像为空")
         return None
     return cropped_frame
-
 
 def get_inventory():
     # 获取背包信息的屏幕截图
@@ -63,6 +64,7 @@ def get_inventory():
 
 
 def get_gun_position(gun_position):
+    # 获取枪械位置
     _position = GDV.CACHE["config"]["position"]
     _temp_img = extract_region(GDV.global_screenshot, _position[gun_position])
     res = ContrastImage(f"position_{gun_position}", GDV.CACHE["position"][gun_position], _temp_img).result
@@ -85,25 +87,16 @@ def get_car():
 
 def get_shooting_state():
     # 获取射击状态
-    time.sleep(0.5)
     screen_capture_full()   # 截取整个屏幕的屏幕截图
     shooting_state_place = GDV.CACHE["config"]["shooting_state"]
-    is_any_fired = False  # 标志变量，表示是否有开火状态
 
     for key, value in shooting_state_place.items():
         temp_img = extract_region(GDV.global_screenshot, value) # 从整个屏幕截图中提取指定区域
         if check_near_white_pixels(temp_img):   # 检查图像中是否有连续10个像素的颜色接近于白色
-            is_any_fired = True  # 有开火状态
             GDV.shooting_state = "fired"
-            logger.info(f"射击状态 ---> 开火")
-            logger.info(f"当前射击状态: {GDV.shooting_state}")
-
-    # 如果没有任何开火状态，设置为stop
-    if not is_any_fired:
-        GDV.shooting_state = "stop"
-        logger.info(f"射击状态 ---> 停止")
-        logger.info(f"当前射击状态: {GDV.shooting_state}")
-
+            logger.info(f"当前射击状态 --->>> 开火, {GDV.shooting_state}")
+            return True
+    return False
 
 def check_near_white_pixels(image):
     # 检查图像中是否有连续10个像素的颜色接近于白色

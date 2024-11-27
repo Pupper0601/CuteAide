@@ -2,12 +2,18 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
+import json
+import sys
 import threading
 
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+from queue import Queue
+
+from tools.log import logger
 
 # 创建一个全局的线程池
-THREAD_POOL = ThreadPoolExecutor()
+THREAD_POOL = ThreadPoolExecutor(20)
 
 global_screenshot = None
 
@@ -15,29 +21,36 @@ global_screenshot = None
 class Observable:
     def __init__(self):
         self._observers = []
-        self._last_notify_time = 0
-        self._notify_lock = threading.Lock()
         self._timer = None
-        self._auto_update_enabled = True  # 添加标志位
+        self._auto_update_enabled = True
+        self._pressure_queue = Queue()  # 压力队列
+        threading.Thread(target=self._process_pressure_queue, daemon=True).start()
 
     def add_observer(self, observer):
+        # 添加观察者
         self._observers.append(observer)
 
     def notify_observers(self):
+        # 通知观察者
         if not self._auto_update_enabled:
             return
-        with self._notify_lock:
-            if self._timer:
-                self._timer.cancel()
-            self._timer = threading.Timer(0.1, self._execute_notify)
-            self._timer.start()
+        if self._timer:
+            self._timer.cancel()
+        self._timer = threading.Timer(0.1, self._execute_notify)
+        self._timer.start()
 
     def _execute_notify(self):
-        with self._notify_lock:
-            for observer in self._observers:
-                observer.update()
+        # 执行通知
+        for observer in self._observers:
+            observer.update()
+        self._pressure_queue.put(None)  # 用于通知压力处理器
+
+    def _process_pressure_queue(self):
+        # 处理压力队列
+        while True:
+            self._pressure_queue.get()  # 等待新任务
             from libs.pressure import Pressure
-            Pressure()
+            Pressure()  # 处理压力写入
 
 
 class GlobalVariable(Observable):
@@ -56,6 +69,7 @@ class GlobalVariable(Observable):
         self._current_weapon_information = {}
         self._fire_weapon = "1"
         self._global_screenshot = None
+        self._output_gun_info = None
 
     @property
     def CACHE(self):
@@ -160,6 +174,14 @@ class GlobalVariable(Observable):
     @global_screenshot.setter
     def global_screenshot(self, value):
         self._global_screenshot = value
+
+    @property
+    def output_gun_info(self):
+        return self._output_gun_info
+
+    @output_gun_info.setter
+    def output_gun_info(self, value):
+        self._output_gun_info = value
 
 
 GDV = GlobalVariable()  # 全局动态变量

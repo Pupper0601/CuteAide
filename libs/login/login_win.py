@@ -3,12 +3,12 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 import os
+from pathlib import Path
 
 from PySide6.QtCore import QRegularExpression
-from PySide6.QtGui import QCursor, QFont, QFontDatabase, QRegularExpressionValidator, Qt
+from PySide6.QtGui import QCursor, QRegularExpressionValidator, Qt
 from PySide6.QtWidgets import QMainWindow
 
-from tools.files import read_file
 from views.login import Ui_MainWindow as login_ui
 from libs.login.logins import Login
 
@@ -42,7 +42,12 @@ class LoginMainWin(QMainWindow):
             return _res["message"]
 
     def login_text(self):
-        _user = read_file("login_info.txt")
+        _file_path = "C:/CuteAide/login_info.txt"
+        if Path(_file_path).exists():
+            with open(_file_path, 'r') as f:
+                _user = f.read()
+        else:
+            return
         if _user:
             _user = _user.split(",")
             if _user[2] == "True":
