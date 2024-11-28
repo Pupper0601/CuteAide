@@ -25,6 +25,7 @@ class KeyListen(Thread, QObject):
         self.stop_event = Event()
         self.parent = parent  # 保存父对象
         self.key_states = {}  # 添加字典来记录每个键的状态
+        self._button_status = True
 
     def run(self):
         self.listener = keyboard.Listener(on_press=self.on_pressed,on_release=self.on_released)
@@ -70,7 +71,17 @@ class KeyListen(Thread, QObject):
                     self.parent.state_win.update_state_shooting()
                     self.parent.update_home_current_gun()  # 更新当前枪械
 
-                elif keys in ["3", "4","x", "5", "m"]:
+                elif keys in ["x", "m"]:
+                    if self._button_status:
+                        if GDV.shooting_state == "fired":
+                            GDV.shooting_state = "stop"
+                            self.parent.state_win.update_state_shooting()
+                            self._button_status = False
+                    else:
+                        self._shooting_state()
+                        self._button_status = True
+
+                elif keys in ["3", "4", "5"]:
                     self._shooting_state()
 
                 elif keys in ['z', 'c', 'ctrl_l', 'space']:
@@ -85,10 +96,12 @@ class KeyListen(Thread, QObject):
 
     def _get_gun_information(self):
         # 获取枪械信息
-        count = 5
-        while count > 0:
-            logger.info(f"第 {6 - count} 次获取枪械信息")
-            count -= 1
+        start_time = time.time()
+        _time = 0
+        count = 0
+        while _time <= 1:
+            count += 1
+            logger.info(f"第 {count} 次获取枪械信息")
             if get_inventory() and (get_gun_position("1") or get_gun_position("2")):
                 if GDV.shooting_state == "fired":
                     GDV.shooting_state = "stop"
@@ -98,7 +111,7 @@ class KeyListen(Thread, QObject):
                 GetGunInfo()  # 持续更新枪械信息
                 self.parent.update_home_gun_info(GDV.weapon_information)
                 break
-            time.sleep(0.05)
+            _time = time.time() - start_time
         else:
             GDV.enable_mouse_recognition = False
 
@@ -110,14 +123,17 @@ class KeyListen(Thread, QObject):
         else:
             _gun = GDV.current_weapon_information
             if len(_gun) > 0 and _gun["weapon"][1] != "weapon_none":
-                count = 5
-                while count > 0:
-                    logger.info(f"第 {6 - count} 次获取射击状态")
-                    count -= 1
+                start_time = time.time()
+                _time = 0
+                count = 0
+                while _time <= 1:
+                    count += 1
+                    logger.info(f"第 {count} 次获取射击状态")
                     if get_shooting_state():
                         self.parent.state_win.update_state_shooting()
+                        self._button_status = True
                         break
-                    time.sleep(0.05)
+                    _time = time.time() - start_time
                 else:
                     GDV.shooting_state = "stop"
                     logger.info(f"当前射击状态 --->>> 停止, {GDV.shooting_state}")

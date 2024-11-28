@@ -43,7 +43,7 @@ class Logger:
     def logger_add():
         loguru.logger.add(
             sink= log_path(),
-            level="ERROR",
+            level="INFO",
             rotation='00:00',
             retention='1 day',
             compression='zip',
