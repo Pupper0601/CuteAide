@@ -39,8 +39,8 @@ class Pressure:
 
     @staticmethod
     def get_component_factor():
-        # _gun_data = get_gun_data()
-        _gun_data = json.loads(read_file("/gun_data.json"))
+        _gun_data = get_gun_data()
+        # _gun_data = json.loads(read_file("/gun_data.json"))
         _factor_data = {}
         current_weapon_info = GDV.current_weapon_information
 

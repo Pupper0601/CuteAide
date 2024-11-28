@@ -7,8 +7,6 @@ import sys
 import threading
 
 from concurrent.futures import ThreadPoolExecutor
-from pathlib import Path
-from queue import Queue
 
 from tools.log import logger
 
@@ -21,36 +19,30 @@ global_screenshot = None
 class Observable:
     def __init__(self):
         self._observers = []
+        self._last_notify_time = 0
+        self._notify_lock = threading.Lock()
         self._timer = None
-        self._auto_update_enabled = True
-        self._pressure_queue = Queue()  # 压力队列
-        threading.Thread(target=self._process_pressure_queue, daemon=True).start()
+        self._auto_update_enabled = True  # 添加标志位
 
     def add_observer(self, observer):
-        # 添加观察者
         self._observers.append(observer)
 
     def notify_observers(self):
-        # 通知观察者
         if not self._auto_update_enabled:
             return
-        if self._timer:
-            self._timer.cancel()
-        self._timer = threading.Timer(0.1, self._execute_notify)
-        self._timer.start()
+        with self._notify_lock:
+            if self._timer:
+                self._timer.cancel()
+            self._timer = threading.Timer(0.1, self._execute_notify)
+            self._timer.start()
 
     def _execute_notify(self):
-        # 执行通知
-        for observer in self._observers:
-            observer.update()
-        self._pressure_queue.put(None)  # 用于通知压力处理器
-
-    def _process_pressure_queue(self):
-        # 处理压力队列
-        while True:
-            self._pressure_queue.get()  # 等待新任务
+        with self._notify_lock:
+            for observer in self._observers:
+                observer.update()
             from libs.pressure import Pressure
-            Pressure()  # 处理压力写入
+            logger.info("更新压枪系数 ")
+            Pressure()
 
 
 class GlobalVariable(Observable):
