@@ -9,7 +9,7 @@ from PySide6.QtCore import QObject
 from pynput import keyboard
 from pynput.keyboard import Key
 
-from libs.global_variable import GDV, THREAD_POOL
+from libs.global_variable import GDV
 from libs.gun_info import GetGunInfo
 from libs.screenshot import get_car, get_gun_position, get_inventory, get_shooting_state
 from tools.active_window import get_active_window_info
@@ -28,7 +28,7 @@ class KeyListen(Thread, QObject):
         self._button_status = True
 
     def run(self):
-        self.listener = keyboard.Listener(on_press=self.on_pressed,on_release=self.on_released)
+        self.listener = keyboard.Listener(on_press=self.on_pressed, on_release=self.on_released)
         self.listener.start()
         logger.info("监听键盘线程启动")
 
@@ -59,7 +59,7 @@ class KeyListen(Thread, QObject):
                     GDV.enable_key_recognition = True
                     self._shooting_state()
 
-                elif keys in ["1","2"]:
+                elif keys in ["1", "2"]:
                     _gun = GDV.current_weapon_information
                     if len(_gun) > 0 and _gun["weapon"][1] != "weapon_none":
                         if GDV.shooting_state == "stop":
@@ -106,7 +106,7 @@ class KeyListen(Thread, QObject):
                 if GDV.shooting_state == "fired":
                     GDV.shooting_state = "stop"
                     self.parent.state_win.update_state_shooting()
-                GDV.enable_mouse_recognition = True  # 关闭鼠标识别
+                GDV.enable_mouse_recognition = False  # 关闭鼠标识别
                 GDV.enable_key_recognition = False
                 GetGunInfo()  # 持续更新枪械信息
                 self.parent.update_home_gun_info(GDV.weapon_information)
@@ -137,7 +137,7 @@ class KeyListen(Thread, QObject):
                 else:
                     GDV.shooting_state = "stop"
                     logger.info(f"当前射击状态 --->>> 停止, {GDV.shooting_state}")
-                    self.parent.state_win.update_state_shooting() # 更新射击状态
+                    self.parent.state_win.update_state_shooting()  # 更新射击状态
 
     def stop_listener(self):
         if self.listener:

@@ -22,14 +22,18 @@ class MainWin(QMainWindow):
 
     def show_home(self):
         _res = self.login_win.login_flow()
-        if _res is True:
-            self.show_message_box(notice, "提示", path_conn("resource/icon/success.png"))
-            self.home_win.show()
-            self.login_win.close()
-        else:
-            self.show_message_box(_res, "错误", path_conn("resource/icon/error.png"))
+        self.home_win.show()
+        self.login_win.close()
+        self.show_message_box(notice, "提示", path_conn("resource/icon/success.png"))
 
-    def show_message_box(self, info,title, icon):
+        # if _res is True:
+        #     self.show_message_box(notice, "提示", path_conn("resource/icon/success.png"))
+        #     self.home_win.show()
+        #     self.login_win.close()
+        # else:
+        #     self.show_message_box(_res, "错误", path_conn("resource/icon/error.png"))
+
+    def show_message_box(self, info, title, icon):
         dialog = QDialog(self)
         dialog.setWindowTitle(title)
         dialog.setStyleSheet("padding: 10px;")

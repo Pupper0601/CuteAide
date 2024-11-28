@@ -2,16 +2,13 @@
 # -*- coding: utf-8 -*-
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
-import os
 from pathlib import Path
 
 from PySide6.QtCore import QRegularExpression
 from PySide6.QtGui import QCursor, QRegularExpressionValidator, Qt
 from PySide6.QtWidgets import QMainWindow
 
-from tools.log import logger
 from views.login import Ui_MainWindow as login_ui
-from libs.login.logins import Login
 
 
 class LoginMainWin(QMainWindow):
@@ -21,7 +18,7 @@ class LoginMainWin(QMainWindow):
         self.login_ui.setupUi(self)
         self.setWindowTitle("CuteAide")
 
-        #隐藏窗口边框
+        # 隐藏窗口边框
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -30,18 +27,19 @@ class LoginMainWin(QMainWindow):
         self.login_ui.username.setValidator(validator)
         self.login_ui.password.setValidator(validator)
 
-        self.login_text()   # 读取登录信息
+        self.login_text()  # 读取登录信息
 
     def login_flow(self):
         username = self.login_ui.username.text()
         password = self.login_ui.password.text()
         record_password = self.login_ui.checkBox.isChecked()
-        _res = Login(username, password, record_password).login()
-        logger.info(f"登录结果: {_res}")
-        if _res["code"] == "101":
-            return True
-        else:
-            return _res["message"]
+        return True
+        # _res = Login(username, password, record_password).login()
+        # logger.info(f"登录结果: {_res}")
+        # if _res["code"] == "101":
+        #     return True
+        # else:
+        #     return _res["message"]
 
     def login_text(self):
         _file_path = "C:/CuteAide/login_info.txt"
@@ -62,7 +60,6 @@ class LoginMainWin(QMainWindow):
                 self.login_ui.username.setText(_user[0])
                 self.login_ui.password.setText(_user[1])
                 self.login_ui.checkBox.setChecked(_user[2] == "True")
-
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):
