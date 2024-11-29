@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>656</width>
-    <height>431</height>
+    <width>527</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,9 +37,10 @@
     </property>
     <property name="styleSheet">
      <string notr="true">#widget{
-	background-color: rgb(255, 255, 255);
 	border: 1px solid rgb(194, 194, 194);
 	border-radius: 10px;
+	
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(252,74,26, 255), stop:1 rgba(247,183,51, 255));
 }</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -152,12 +153,12 @@
             <widget class="QLabel" name="label">
              <property name="styleSheet">
               <string notr="true">#label{
-	color: rgb(170, 85, 0);
-	font: 700 10pt;
+	color: rgb(255, 255, 255);
+	font: 700 11pt;
 }</string>
              </property>
              <property name="text">
-              <string>😄感谢大佬的打赏, ☕️有问题可以在群内咨询我🎉</string>
+              <string>感谢大佬的打赏, 有问题可以在群内咨询我</string>
              </property>
             </widget>
            </item>
@@ -280,6 +281,21 @@ QPushButton:hover{
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="spacing">
+            <number>3</number>
+           </property>
+           <property name="leftMargin">
+            <number>3</number>
+           </property>
+           <property name="topMargin">
+            <number>3</number>
+           </property>
+           <property name="rightMargin">
+            <number>3</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
@@ -317,6 +333,21 @@ QPushButton:hover{
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>3</number>
+           </property>
+           <property name="topMargin">
+            <number>3</number>
+           </property>
+           <property name="rightMargin">
+            <number>3</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_3">
              <property name="text">

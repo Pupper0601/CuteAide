@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(656, 431)
+        MainWindow.resize(527, 356)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.widget = QWidget(self.centralwidget)
@@ -33,9 +33,10 @@ class Ui_MainWindow(object):
         self.widget.setMinimumSize(QSize(420, 260))
         self.widget.setMaximumSize(QSize(420, 260))
         self.widget.setStyleSheet(u"#widget{\n"
-"	background-color: rgb(255, 255, 255);\n"
 "	border: 1px solid rgb(194, 194, 194);\n"
 "	border-radius: 10px;\n"
+"	\n"
+"	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(252,74,26, 255), stop:1 rgba(247,183,51, 255));\n"
 "}")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setSpacing(1)
@@ -82,8 +83,8 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.frame_17)
         self.label.setObjectName(u"label")
         self.label.setStyleSheet(u"#label{\n"
-"	color: rgb(170, 85, 0);\n"
-"	font: 700 10pt;\n"
+"	color: rgb(255, 255, 255);\n"
+"	font: 700 11pt;\n"
 "}")
 
         self.horizontalLayout_6.addWidget(self.label)
@@ -143,7 +144,9 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.frame_3)
+        self.horizontalLayout_3.setSpacing(3)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(3, 3, 3, 3)
         self.label_2 = QLabel(self.frame_3)
         self.label_2.setObjectName(u"label_2")
 
@@ -163,7 +166,9 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_4)
+        self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(3, 3, 3, 3)
         self.label_3 = QLabel(self.frame_4)
         self.label_3.setObjectName(u"label_3")
 
@@ -185,7 +190,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\ud83d\ude04\u611f\u8c22\u5927\u4f6c\u7684\u6253\u8d4f, \u2615\ufe0f\u6709\u95ee\u9898\u53ef\u4ee5\u5728\u7fa4\u5185\u54a8\u8be2\u6211\ud83c\udf89", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u611f\u8c22\u5927\u4f6c\u7684\u6253\u8d4f, \u6709\u95ee\u9898\u53ef\u4ee5\u5728\u7fa4\u5185\u54a8\u8be2\u6211", None))
         self.pushButton_3.setText("")
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><img src=\":/img/resource/img/wx.png\"/></p></body></html>", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><img src=\":/img/resource/img/zfb.png\"/></p></body></html>", None))

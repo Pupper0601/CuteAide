@@ -9,9 +9,10 @@ from PySide6.QtCore import QUrl, Qt
 from PySide6.QtGui import QCursor, QDesktopServices, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
-from common import version
+from common import github_url, open_source_tip, qq, version
 from libs.cache import ImageCache
 from libs.global_variable import GDV, THREAD_POOL
+from libs.home.reward_win import RewardMainWin
 from libs.home.state_win import StateMainWin
 from libs.keylisten import KeyListen
 from libs.monitor import get_monitor_info
@@ -19,6 +20,7 @@ from libs.mouselisten import MouseListen
 from tools.log import logger
 from tools.paths import path_conn
 from views.home import Ui_MainWindow as home_ui
+
 
 class HomeMainWin(QMainWindow):
     def __init__(self):
@@ -35,6 +37,8 @@ class HomeMainWin(QMainWindow):
         self.mouse_listener = None
         self.init_slot()
 
+        self.reward_win = RewardMainWin()
+
     # 初始化槽函数
     def init_slot(self):
         self.resolution()
@@ -46,6 +50,9 @@ class HomeMainWin(QMainWindow):
         self.ui.radioButton.clicked.connect(self.update_mouse_gun)
         self.ui.radioButton_2.clicked.connect(self.update_mouse_gun)
         self.ui.pushButton_12.clicked.connect(self._click_qq_group)
+        self.ui.pushButton_11.clicked.connect(self.reward_show)
+        self.ui.pushButton_8.clicked.connect(self.open_github)
+        self.ui.pushButton_7.setText(open_source_tip)
 
     # 设置屏幕分辨率
     def resolution(self):
@@ -149,9 +156,7 @@ class HomeMainWin(QMainWindow):
 
     def _click_qq_group(self):
         # 发送 GET 请求
-        url = QUrl(
-            'https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_from=webapi&authKey'
-            '=IN7xudayhxrku/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
+        url = QUrl(qq)
         QDesktopServices.openUrl(url)
 
         clipboard = QApplication.clipboard()  # 复制内容到剪切板
@@ -185,6 +190,9 @@ class HomeMainWin(QMainWindow):
             self.mouse_listener.stop_listener()
             self.mouse_listener = None
 
+    def reward_show(self):
+        self.reward_win.show()
+
     def closeEvent(self, event):
         file_path = "C:/CuteAide/output.lua"
         try:
@@ -195,6 +203,10 @@ class HomeMainWin(QMainWindow):
             with open(file_path, 'w') as file:
                 file.write('')
         event.accept()
+
+    def open_github(self):
+        url = QUrl(github_url)
+        QDesktopServices.openUrl(url)
 
     # ----------- 窗口拖动 -----------
     def mousePressEvent(self, event):
