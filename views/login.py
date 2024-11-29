@@ -98,7 +98,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.horizontalLayout_9.setContentsMargins(-1, 5, 12, -1)
-        self.horizontalSpacer_16 = QSpacerItem(205, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_9.addItem(self.horizontalSpacer_9)
+
+        self.pushButton_4 = QPushButton(self.frame_4)
+        self.pushButton_4.setObjectName(u"pushButton_4")
+        self.pushButton_4.setStyleSheet(u"#pushButton_4{\n"
+"	border: none;\n"
+"	font: 700 9pt rgb(255, 0, 0);\n"
+"	color: rgb(255, 85, 0);\n"
+"}")
+
+        self.horizontalLayout_9.addWidget(self.pushButton_4)
+
+        self.horizontalSpacer_16 = QSpacerItem(150, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_9.addItem(self.horizontalSpacer_16)
 
@@ -228,6 +242,7 @@ class Ui_MainWindow(object):
 
         self.username = QLineEdit(self.frame_7)
         self.username.setObjectName(u"username")
+        self.username.setEnabled(False)
         sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
@@ -291,6 +306,7 @@ class Ui_MainWindow(object):
 
         self.password = QLineEdit(self.frame_8)
         self.password.setObjectName(u"password")
+        self.password.setEnabled(False)
         self.password.setMinimumSize(QSize(186, 25))
         self.password.setMaximumSize(QSize(186, 16777215))
         self.password.setStyleSheet(u"QLineEdit{\n"
@@ -451,6 +467,7 @@ class Ui_MainWindow(object):
         self.label.setWhatsThis(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165", None))
 #endif // QT_CONFIG(whatsthis)
         self.label.setText("")
+        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"\u9879\u76ee\u5df2\u5f00\u6e90, \u53ef\u81ea\u884c\u4fee\u6539", None))
         self.pushButton_2.setText("")
         self.pushButton_3.setText("")
 #if QT_CONFIG(tooltip)
@@ -473,8 +490,8 @@ class Ui_MainWindow(object):
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u8bb0\u5f55\u8d26\u53f7", None))
         self.login_button.setText(QCoreApplication.translate("MainWindow", u"\u767b\u5f55/\u6ce8\u518c", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u793a:\n"
-"  1.\u8d26\u53f7\u7cfb\u7edf\u5df2\u5f00\u542f, \u8bf7\u7262\u8bb0\u90ae\u7bb1\u5bc6\u7801!\n"
-"  2.\u76f4\u63a5\u8f93\u5165\u90ae\u7bb1\u5bc6\u7801\u5373\u53ef\u6ce8\u518c;\n"
-"  3.\u57fa\u7840\u529f\u80fd\u4e0d\u5f71\u54cd\u4f7f\u7528.", None))
+"  --->> \u76f4\u63a5\u70b9\u51fb\u767b\u5f55\u5373\u53ef\n"
+"  --->> \u76f4\u63a5\u70b9\u51fb\u767b\u5f55\u5373\u53ef\n"
+"  --->> \u76f4\u63a5\u70b9\u51fb\u767b\u5f55\u5373\u53ef", None))
     # retranslateUi
 

@@ -155,29 +155,16 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="label_19">
+            <widget class="QPushButton" name="pushButton_7">
              <property name="styleSheet">
-              <string notr="true">#label_19{
-	font: 700 8pt;
-	color: rgb(141, 141, 141);
+              <string notr="true">#pushButton_7{
+	border: none;
+	color: rgb(0, 170, 0);
+	font: 700 10pt;
 }</string>
              </property>
              <property name="text">
-              <string>VIP倒计时:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="styleSheet">
-              <string notr="true">#label_3{
-	color: rgb(255, 105, 5);
-	font: 700 8pt;
-	
-}</string>
-             </property>
-             <property name="text">
-              <string>非VIP</string>
+              <string>(项目已开源)</string>
              </property>
             </widget>
            </item>
@@ -188,7 +175,7 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>30</width>
+               <width>60</width>
                <height>20</height>
               </size>
              </property>
@@ -328,50 +315,41 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>104</width>
+               <width>60</width>
                <height>11</height>
               </size>
              </property>
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_7">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QPushButton" name="pushButton_8">
              <property name="minimumSize">
               <size>
-               <width>90</width>
-               <height>28</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>90</width>
-               <height>16777215</height>
+               <width>110</width>
+               <height>30</height>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">#pushButton_7{
+              <string notr="true">#pushButton_8{
 	font: 700 10pt;
+	background: rgb(255, 85, 0);
 	color: rgb(255, 255, 255);
-	border: 1px solid rgb(255, 0, 0);
-	background: rgb(255, 0, 0);
-	border-radius: 5px;
 }
 
-#pushButton_7:hover{
-	color: rgb(255, 255, 255);
-	border: 1px solid rgb(255, 92, 16);
-	background: rgb(255, 92, 16);
-}</string>
+#pushButton_8:hover{
+	background-color: rgb(255, 0, 0);
+	border: 3px solid rgb(255, 0, 0);
+	color: rgb(255,255,255);
+	border-radius: 3px;
+}
+</string>
              </property>
              <property name="text">
-              <string> VIP购买</string>
+              <string> Github地址</string>
              </property>
              <property name="icon">
               <iconset resource="../resource.qrc">
-               <normaloff>:/icon/resource/icon/vip.png</normaloff>:/icon/resource/icon/vip.png</iconset>
+               <normaloff>:/icon/resource/icon/github.png</normaloff>:/icon/resource/icon/github.png</iconset>
              </property>
             </widget>
            </item>
@@ -1403,7 +1381,7 @@ QPushButton:hover{
               <item>
                <widget class="QPushButton" name="pushButton_11">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1419,7 +1397,7 @@ QPushButton:hover{
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#pushButton_11{
-	font: 700 18pt ;
+	font: 700 16pt ;
 	background-color: rgb(255, 97, 6);
 	color: rgb(255,255,255);
 	border-radius: 8px;
@@ -1436,11 +1414,11 @@ QPushButton:hover{
 </string>
                 </property>
                 <property name="text">
-                 <string> VIP 高级功能</string>
+                 <string> 请作者喝杯咖啡吧</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../resource.qrc">
-                  <normaloff>:/icon/resource/icon/vip_1.png</normaloff>:/icon/resource/icon/vip_1.png</iconset>
+                  <normaloff>:/icon/resource/icon/dashang.png</normaloff>:/icon/resource/icon/dashang.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>

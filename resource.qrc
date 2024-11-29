@@ -3,10 +3,16 @@
     <file>resource/images/log.png</file>
     <file>resource/images/login_bg.png</file>
   </qresource>
+  <qresource prefix="img">
+    <file>resource/img/wx.png</file>
+    <file>resource/img/zfb.png</file>
+  </qresource>
   <qresource prefix="ttf">
     <file>resource/ttf/YouSheYuFeiTeJianKangTi.ttf</file>
   </qresource>
   <qresource prefix="icon">
+    <file>resource/icon/dashang.png</file>
+    <file>resource/icon/github.png</file>
     <file>resource/icon/error.png</file>
     <file>resource/icon/success.png</file>
     <file>resource/icon/vip_1.png</file>

@@ -27,7 +27,7 @@ class LoginMainWin(QMainWindow):
         self.login_ui.username.setValidator(validator)
         self.login_ui.password.setValidator(validator)
 
-        self.login_text()  # 读取登录信息
+        # self.login_text()  # 读取登录信息
 
     def login_flow(self):
         username = self.login_ui.username.text()

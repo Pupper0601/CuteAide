@@ -89,26 +89,17 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_9)
 
-        self.label_19 = QLabel(self.frame_16)
-        self.label_19.setObjectName(u"label_19")
-        self.label_19.setStyleSheet(u"#label_19{\n"
-"	font: 700 8pt;\n"
-"	color: rgb(141, 141, 141);\n"
+        self.pushButton_7 = QPushButton(self.frame_16)
+        self.pushButton_7.setObjectName(u"pushButton_7")
+        self.pushButton_7.setStyleSheet(u"#pushButton_7{\n"
+"	border: none;\n"
+"	color: rgb(0, 170, 0);\n"
+"	font: 700 10pt;\n"
 "}")
 
-        self.horizontalLayout_7.addWidget(self.label_19)
+        self.horizontalLayout_7.addWidget(self.pushButton_7)
 
-        self.label_3 = QLabel(self.frame_16)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setStyleSheet(u"#label_3{\n"
-"	color: rgb(255, 105, 5);\n"
-"	font: 700 8pt;\n"
-"	\n"
-"}")
-
-        self.horizontalLayout_7.addWidget(self.label_3)
-
-        self.horizontalSpacer_48 = QSpacerItem(30, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_48 = QSpacerItem(60, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_48)
 
@@ -166,33 +157,31 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.horizontalLayout_6.setContentsMargins(5, 5, 5, 5)
-        self.horizontalSpacer_5 = QSpacerItem(104, 11, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(60, 11, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_5)
 
-        self.pushButton_7 = QPushButton(self.frame_17)
-        self.pushButton_7.setObjectName(u"pushButton_7")
-        self.pushButton_7.setEnabled(False)
-        self.pushButton_7.setMinimumSize(QSize(90, 28))
-        self.pushButton_7.setMaximumSize(QSize(90, 16777215))
-        self.pushButton_7.setStyleSheet(u"#pushButton_7{\n"
+        self.pushButton_8 = QPushButton(self.frame_17)
+        self.pushButton_8.setObjectName(u"pushButton_8")
+        self.pushButton_8.setMinimumSize(QSize(110, 30))
+        self.pushButton_8.setStyleSheet(u"#pushButton_8{\n"
 "	font: 700 10pt;\n"
+"	background: rgb(255, 85, 0);\n"
 "	color: rgb(255, 255, 255);\n"
-"	border: 1px solid rgb(255, 0, 0);\n"
-"	background: rgb(255, 0, 0);\n"
-"	border-radius: 5px;\n"
 "}\n"
 "\n"
-"#pushButton_7:hover{\n"
-"	color: rgb(255, 255, 255);\n"
-"	border: 1px solid rgb(255, 92, 16);\n"
-"	background: rgb(255, 92, 16);\n"
-"}")
+"#pushButton_8:hover{\n"
+"	background-color: rgb(255, 0, 0);\n"
+"	border: 3px solid rgb(255, 0, 0);\n"
+"	color: rgb(255,255,255);\n"
+"	border-radius: 3px;\n"
+"}\n"
+"")
         icon2 = QIcon()
-        icon2.addFile(u":/icon/resource/icon/vip.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_7.setIcon(icon2)
+        icon2.addFile(u":/icon/resource/icon/github.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButton_8.setIcon(icon2)
 
-        self.horizontalLayout_6.addWidget(self.pushButton_7)
+        self.horizontalLayout_6.addWidget(self.pushButton_8)
 
         self.horizontalSpacer_47 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -640,12 +629,12 @@ class Ui_MainWindow(object):
 
         self.pushButton_11 = QPushButton(self.frame_21)
         self.pushButton_11.setObjectName(u"pushButton_11")
-        self.pushButton_11.setEnabled(False)
+        self.pushButton_11.setEnabled(True)
         sizePolicy9.setHeightForWidth(self.pushButton_11.sizePolicy().hasHeightForWidth())
         self.pushButton_11.setSizePolicy(sizePolicy9)
         self.pushButton_11.setMinimumSize(QSize(0, 46))
         self.pushButton_11.setStyleSheet(u"#pushButton_11{\n"
-"	font: 700 18pt ;\n"
+"	font: 700 16pt ;\n"
 "	background-color: rgb(255, 97, 6);\n"
 "	color: rgb(255,255,255);\n"
 "	border-radius: 8px;\n"
@@ -661,7 +650,7 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         icon11 = QIcon()
-        icon11.addFile(u":/icon/resource/icon/vip_1.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon11.addFile(u":/icon/resource/icon/dashang.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButton_11.setIcon(icon11)
         self.pushButton_11.setIconSize(QSize(30, 30))
 
@@ -1114,10 +1103,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"v0.23", None))
-        self.label_19.setText(QCoreApplication.translate("MainWindow", u"VIP\u5012\u8ba1\u65f6:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u975eVIP", None))
+        self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u"(\u9879\u76ee\u5df2\u5f00\u6e90)", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"CuteAide", None))
-        self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u" VIP\u8d2d\u4e70", None))
+        self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u" Github\u5730\u5740", None))
         self.pushButton_4.setText("")
         self.pushButton_3.setText("")
         self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u" \u72b6\u6001:", None))
@@ -1131,7 +1119,7 @@ class Ui_MainWindow(object):
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"\u624b\u96f7\u5012\u8ba1\u65f6", None))
         self.checkBox_2.setText(QCoreApplication.translate("MainWindow", u"\u663e\u793a\u60ac\u6d6e\u7a97", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u" \u5f00\u59cb\u8bc6\u522b\u538b\u67aa", None))
-        self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u" VIP \u9ad8\u7ea7\u529f\u80fd", None))
+        self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u" \u8bf7\u4f5c\u8005\u559d\u676f\u5496\u5561\u5427", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u" >>>\u6b66\u5668 1 \u914d\u7f6e<<<", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u6b66\u5668", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u500d\u955c", None))
