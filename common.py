@@ -3,8 +3,6 @@
 # @Author : Pupper
 # @Email  : pupper.cheng@gmail.com
 
-version = "v0.40"
-
 reward_label = "🙏感谢大佬的打赏,😄如有问题可在群内咨询我🎉"
 
 github_url = "https://github.com/Pupper0601/CuteAide"
@@ -13,6 +11,8 @@ qq = ('https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_f
       '/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
 
 open_source_tip = "正在整理开源文档"
+
+version = "v0.42"
 
 notice = """
 登录成功! \n
