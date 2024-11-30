@@ -14,8 +14,8 @@ QQ 交流群：[679556431](https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7
 ## 效果展示
 
 <div style="display: flex;">
-    <img src="resource/img/ui1.png" alt="Image 1" style="width: 50%; margin-right: 10px;"/>
-    <img src="resource/img/ui2.png" alt="Image 2" style="width: 50%;"/>
+    <img src="resource/img/ui1.png" alt="Image 1" style="width: 45%; margin-right: 10px;"/>
+    <img src="resource/img/ui2.png" alt="Image 2" style="width: 45%;"/>
 </div>
 <br/>
 <img src="resource/img/ui3.png" alt="Image 2" style="width: 100%;"/>
@@ -111,8 +111,8 @@ pyinstaller CuteAide.spec
 ## 如果对你有帮助, 请给个 Star ⭐️, 请作者喝杯咖啡 ☕️, 谢谢!
 
 <div style="display: flex;">
-    <img src="resource/img/wx.png" alt="Image 1" style="width: 50%; margin-right: 10px;"/>
-    <img src="resource/img/zfb.png" alt="Image 2" style="width: 50%;"/>
+    <img src="resource/img/wx.png" alt="Image 1" style="width: 45%; margin-right: 10px;"/>
+    <img src="resource/img/zfb.png" alt="Image 2" style="width: 45%;"/>
 </div>
 
 
