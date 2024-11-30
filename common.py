@@ -10,16 +10,16 @@ github_url = "https://github.com/Pupper0601/CuteAide"
 qq = ('https://qm.qq.com/cgi-bin/qm/qr?k=C_li-vF5tFboRacsQm7II86lwsY1P4gg&jump_from=webapi&authKey=IN7xudayhxrku'
       '/cQCHZkluKEZxuPQo2dX3UYei3E/vfGz932L96LV76u17VB4D8f')
 
-open_source_tip = "正在整理开源文档"
+open_source_tip = "项目已开源, 欢迎大家贡献代码"
 
-version = "v0.42"
+version = "v0.45"
 
 notice = """
 登录成功! \n
     欢迎使用 CuteAide 应用程序。\n\n
     
 更新说明: \n
-    1. 项目即将开源, 所有功能都可自行修改;\n
+    1. 项目已经开源, 所有功能都可自行修改;\n
     2. 去除登录系统;\n\n
 
 公告：\n
