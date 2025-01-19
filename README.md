@@ -1,5 +1,10 @@
 <h1 align="center">CuteAide</h1>
 
+> 开源 CuteAide2 版本 https://github.com/Pupper0601/CateAide2
+> CuteAide2 比 1 识别更加合理快速, 稳定性更高
+> CuteAide2 适配了大多数分辨率
+> 更多内容请到 CuteAide2 查看
+
 一个能够自动识别 PUBG 装备、自动压枪的软件, 帮助你更轻松的游戏🎮.
 
 本人由于工作原因, 已无力适配所有设备, 特此将项目开源, 后续仅对自己设备及使用习惯进行优化维护(和我一样的设备可以继续使用), 需要的朋友可以自行下载源码进行二次开发.
